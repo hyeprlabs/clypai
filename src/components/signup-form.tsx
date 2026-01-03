@@ -1,5 +1,12 @@
-import { GalleryVerticalEnd } from "lucide-react";
+"use client"
 
+import { GalleryVerticalEnd, LoaderCircleIcon } from "lucide-react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -7,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
@@ -14,13 +22,60 @@ import {
 
 import { Input } from "@/components/ui/input";
 
+import { toast } from "sonner";
+
+import Link from "next/link";
+
+const formSchema = z.object({
+  email: z.email("Please enter a valid email address."),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters.")
+    .max(64, "Password must be at most 64 characters."),
+  name: z
+    .string()
+    .min(3, "Name must be at least 3 characters.")
+    .max(32, "Name must be at most 32 characters."),
+})
+
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      name: "",
+    },
+  })
+
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    await authClient.signUp.email(
+      {
+        email: data.email,
+        password: data.password,
+        name: data.name,
+        callbackURL: "/dashboard",
+      },
+      {
+        onRequest: () => {
+          // react-hook-form's isSubmitting handles the loading state
+        },
+        onSuccess: () => {
+          toast.success("Account created successfully!")
+        },
+        onError: (error) => {
+          toast.error(error.error.message)
+        },
+      }
+    )
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <form>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
             <a
@@ -34,20 +89,80 @@ export function SignupForm({
             </a>
             <h1 className="text-xl font-bold">Welcome to ClypAI</h1>
             <FieldDescription>
-              Already have an account? <a href="#">Sign in</a>
+              Already have an account? <Link href="/login">Sign in</Link>
             </FieldDescription>
           </div>
+          <Controller
+            name="email"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <Input
+                  {...field}
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  autoComplete="email"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+          <Controller
+            name="password"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <Input
+                  {...field}
+                  id="password"
+                  type="password"
+                  placeholder="Your password"
+                  autoComplete="new-password"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+          <Controller
+            name="name"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <Input
+                  {...field}
+                  id="name"
+                  type="text"
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
           <Field>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-            />
-          </Field>
-          <Field>
-            <Button type="submit">Create Account</Button>
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting && (
+                <LoaderCircleIcon
+                  aria-hidden="true"
+                  className="-ms-1 me-2 animate-spin"
+                  size={16}
+                />
+              )}
+              {form.formState.isSubmitting ? "Creating..." : "Create Account"}
+            </Button>
           </Field>
           <FieldSeparator>Or</FieldSeparator>
           <Field className="grid gap-4 sm:grid-cols-2">
