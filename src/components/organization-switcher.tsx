@@ -28,6 +28,24 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { Skeleton } from "@/components/ui/skeleton";
+
+export function OrganizationSwitcherSkeleton() {
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <SidebarMenuButton size="lg" className="pointer-events-none">
+          <Skeleton className="size-8 rounded-lg" />
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="mt-1 h-3 w-16" />
+          </div>
+        </SidebarMenuButton>
+      </SidebarMenuItem>
+    </SidebarMenu>
+  )
+}
+
 export function OrganizationSwitcher() {
   const { data: session } = authClient.useSession()
   const { data: activeOrganization } = authClient.useActiveOrganization()

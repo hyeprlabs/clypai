@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { Suspense } from "react"
+
 import {
   BookOpen,
   Bot,
@@ -11,10 +13,6 @@ import {
   SquareTerminal,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
-import { OrganizationSwitcher } from "@/components/organization-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -23,7 +21,11 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// This is sample data.
+import { NavMain } from "@/components/nav-main"
+import { NavProjects } from "@/components/nav-projects"
+import { NavUser, NavUserSkeleton } from "@/components/nav-user"
+import { OrganizationSwitcher, OrganizationSwitcherSkeleton } from "@/components/organization-switcher"
+
 const data = {
   navMain: [
     {
@@ -135,14 +137,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <OrganizationSwitcher />
+        <Suspense fallback={<OrganizationSwitcherSkeleton />}>
+          <OrganizationSwitcher />
+        </Suspense>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        <Suspense fallback={<NavUserSkeleton />}>
+          <NavUser />
+        </Suspense>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
