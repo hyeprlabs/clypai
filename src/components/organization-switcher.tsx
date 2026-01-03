@@ -1,7 +1,17 @@
 "use client"
 
-import * as React from "react";
-import { ChevronsUpDown, Plus } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+
+import { 
+  ChevronsUpDown, 
+  Plus 
+} from "lucide-react";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
@@ -9,7 +19,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -19,17 +28,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-export function OrganizationSwitcher({
-  organizations,
-}: {
-  organizations: {
-    name: string
-    logo: React.ElementType
-    plan: string
-  }[]
-}) {
-  const [activeOrganization, setActiveOrganization] = React.useState(organizations[0])
+export function OrganizationSwitcher() {
+  const { data: session } = authClient.useSession()
+  const { data: activeOrganization } = authClient.useActiveOrganization()
+  const { data: organizations = [] } = authClient.useListOrganizations()
 
+  const handleSetActiveOrganization = (organizationId: string) => async () => {
+    await authClient.organization.setActive({ organizationId })
+  }
+
+  if (!session?.user) {
+    return null
+  }
   if (!activeOrganization) {
     return null
   }
@@ -43,12 +53,15 @@ export function OrganizationSwitcher({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeOrganization.logo className="size-4" />
-              </div>
+              <Avatar className="size-8 rounded-lg">
+                <AvatarImage src={activeOrganization.logo || undefined} alt={activeOrganization.name} />
+                <AvatarFallback className="rounded-lg">
+                  {activeOrganization.name.substring(0, 2).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{activeOrganization.name}</span>
-                <span className="truncate text-xs">{activeOrganization.plan}</span>
+                <span className="truncate text-xs">{activeOrganization.metadata?.plan}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -62,17 +75,19 @@ export function OrganizationSwitcher({
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Organizations
             </DropdownMenuLabel>
-            {organizations.map((organization, index) => (
+            {organizations?.map((organization) => (
               <DropdownMenuItem
-                key={organization.name}
-                onClick={() => setActiveOrganization(organization)}
+                key={organization.id}
+                onClick={handleSetActiveOrganization(organization.id)}
                 className="gap-2 p-2"
               >
-                <div className="flex size-6 items-center justify-center rounded-md border">
-                  <organization.logo className="size-3.5 shrink-0" />
-                </div>
+                <Avatar className="size-6 rounded-md">
+                  <AvatarImage src={organization.logo || undefined} alt={organization.name} />
+                  <AvatarFallback className="rounded-md">
+                    {organization.name.substring(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                 {organization.name}
-                <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
@@ -80,7 +95,7 @@ export function OrganizationSwitcher({
               <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
                 <Plus className="size-4" />
               </div>
-              <div className="text-muted-foreground font-medium">Add Organization</div>
+              <div className="text-muted-foreground font-medium">Create Organization</div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

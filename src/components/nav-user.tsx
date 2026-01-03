@@ -36,7 +36,9 @@ import {
 export function NavUser() {
   const { data: session } = authClient.useSession()
 
-  if (!session?.user) return null
+  if (!session?.user) {
+    return null
+  }
 
   const user = session.user
 
