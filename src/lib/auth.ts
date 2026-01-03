@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { username } from "better-auth/plugins";
+import { username, organization } from "better-auth/plugins";
 import { Pool } from "pg";
 
 export const auth = betterAuth({
@@ -7,7 +7,8 @@ export const auth = betterAuth({
     connectionString: process.env.DATABASE_URL,
   }),
   plugins: [
-    username()
+    username(),
+    organization()
   ],
   emailAndPassword: {
     enabled: true,
