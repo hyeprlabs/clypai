@@ -17,7 +17,7 @@ import {
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { OrganizationSwitcher } from "@/components/organization-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -28,7 +28,7 @@ import {
 
 // This is sample data.
 const data = {
-  teams: [
+  organizations: [
     {
       name: "Acme Inc",
       logo: GalleryVerticalEnd,
@@ -155,7 +155,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <OrganizationSwitcher organizations={data.organizations} />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
