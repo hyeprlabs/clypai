@@ -1,6 +1,6 @@
 "use client"
 
-import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, GithubIcon, LoaderCircleIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, Github, LoaderCircleIcon } from "lucide-react";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -100,7 +100,7 @@ export function LoginForm({
               </div>
               <span className="sr-only">ClypAI</span>
             </a>
-            <h1 className="text-xl font-bold">Welcome to ClypAI</h1>
+            <h1 className="text-xl font-bold">Log in to ClypAI</h1>
             <FieldDescription>
               Don&apos;t have an account? <Link href="/signup">Sign up</Link>
             </FieldDescription>
@@ -115,7 +115,7 @@ export function LoginForm({
                   {...field}
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="alan.turing@example.com"
                   autoComplete="email"
                   aria-invalid={fieldState.invalid}
                 />
@@ -199,7 +199,7 @@ export function LoginForm({
                   size={16}
                 />
               )}
-              Login
+              Log In
             </Button>
           </Field>
           <FieldSeparator>Or</FieldSeparator>
@@ -210,7 +210,7 @@ export function LoginForm({
               className="w-full"
               onClick={handleGitHub}
             >
-              <GithubIcon />
+              <Github />
               Continue with Github
             </Button>
           </Field>

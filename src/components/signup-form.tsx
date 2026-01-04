@@ -1,6 +1,6 @@
 "use client"
 
-import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, GithubIcon, LoaderCircleIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, Github, LoaderCircleIcon } from "lucide-react";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,15 +28,15 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 const formSchema = z.object({
+  name: z
+    .string()
+    .min(3, "Name must be at least 3 characters.")
+    .max(32, "Name must be at most 32 characters."),
   email: z.email("Please enter a valid email address."),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters.")
     .max(64, "Password must be at most 64 characters."),
-  name: z
-    .string()
-    .min(3, "Name must be at least 3 characters.")
-    .max(32, "Name must be at most 32 characters."),
 })
 
 export function SignupForm({
@@ -49,9 +49,9 @@ export function SignupForm({
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
-      name: "",
     },
   })
 
@@ -66,9 +66,9 @@ export function SignupForm({
   async function onSubmit(data: z.infer<typeof formSchema>) {
     await authClient.signUp.email(
       {
+        name: data.name,
         email: data.email,
         password: data.password,
-        name: data.name,
         callbackURL: "/dashboard",
       },
       {
@@ -99,11 +99,31 @@ export function SignupForm({
               </div>
               <span className="sr-only">ClypAI</span>
             </a>
-            <h1 className="text-xl font-bold">Welcome to ClypAI</h1>
+            <h1 className="text-xl font-bold">Create a ClypAI Account</h1>
             <FieldDescription>
-              Already have an account? <Link href="/login">Login</Link>
+              Already have an account? <Link href="/login">Log in</Link>
             </FieldDescription>
           </div>
+          <Controller
+            name="name"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <Input
+                  {...field}
+                  id="name"
+                  type="text"
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
           <Controller
             name="email"
             control={form.control}
@@ -114,7 +134,7 @@ export function SignupForm({
                   {...field}
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="alan.turing@example.com"
                   autoComplete="email"
                   aria-invalid={fieldState.invalid}
                 />
@@ -163,26 +183,6 @@ export function SignupForm({
               </Field>
             )}
           />
-          <Controller
-            name="name"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="name">Name</FieldLabel>
-                <Input
-                  {...field}
-                  id="name"
-                  type="text"
-                  placeholder="Your name"
-                  autoComplete="name"
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
           <Field>
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting && (
@@ -192,7 +192,7 @@ export function SignupForm({
                   size={16}
                 />
               )}
-              Sign Up
+              Create Account
             </Button>
           </Field>
           <FieldSeparator>Or</FieldSeparator>
@@ -203,7 +203,7 @@ export function SignupForm({
               className="w-full"
               onClick={handleGitHub}
             >
-              <GithubIcon />
+              <Github />
               Continue with Github
             </Button>
           </Field>
