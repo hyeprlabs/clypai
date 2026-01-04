@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from '@vercel/analytics/next';
 
 const geistSans = Geist({
@@ -17,9 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ClypAI",
-  description: "ClypAI",
-};
+  title: {
+    template: "%s | ClypAI",
+    default: "ClypAI",
+  },
+  description: "#1 AI video clipping & editing tool.",
+}
 
 export default function RootLayout({
   children,
