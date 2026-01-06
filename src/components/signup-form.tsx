@@ -1,14 +1,21 @@
 "use client"
 
-import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, Github, LoaderCircleIcon } from "lucide-react";
 import { useState } from "react";
+
+import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
+
+import { 
+  Eye, 
+  EyeOff,
+  Github, 
+  LoaderCircle
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +34,9 @@ import { toast } from "sonner";
 
 import Link from "next/link";
 
-const formSchema = z.object({
+import { ClypAIWordmark } from "./brand/logos";
+
+const schema = z.object({
   name: z
     .string()
     .min(3, "Name must be at least 3 characters.")
@@ -44,10 +53,15 @@ export function SignupForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const [isGitHubLoading, setIsGitHubLoading] = useState(false);
+  
+  // Toggle password visibility
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState);
+  
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       name: "",
       email: "",
@@ -55,31 +69,53 @@ export function SignupForm({
     },
   })
 
+  // Signup with GitHub
   async function handleGitHub() {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/dashboard",
-      errorCallbackURL: "/signup",
-    })
+    await authClient.signIn.social(
+      {
+        provider: "github",
+        callbackURL: "/overview?provider=github",
+        errorCallbackURL: "/signup",
+      },
+      {
+        onRequest: () => {
+          setIsGitHubLoading(true);
+          console.log("Signing up with GitHub...");
+        },
+        onSuccess: () => {
+          setIsGitHubLoading(false);
+          toast.success("Signed up with GitHub!")
+          console.log("Signed up with GitHub!");
+        },
+        onError: (error) => {
+          setIsGitHubLoading(false);
+          toast.error("Error signing up with GitHub! Please try again.");
+          console.error("Error signing up with GitHub! Error: ", error);
+        },
+      }
+    )
   }
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
+  // Sign up
+  async function handleSignUp(data: z.infer<typeof schema>) {
     await authClient.signUp.email(
       {
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: "/dashboard",
+        callbackURL: "/dashboard"
       },
       {
         onRequest: () => {
-          // react-hook-form's isSubmitting handles the loading state
+          console.log("Signing up user: ", data.email);
         },
         onSuccess: () => {
-          toast.success("Account created successfully!")
+          toast.success("Signed up!")
+          console.log("Signed up! User: ", data.email);
         },
         onError: (error) => {
-          toast.error(error.error.message)
+          toast.error("Error signing up! Please try again.");
+          console.error("Error signing up! Error: ", error);
         },
       }
     )
@@ -87,19 +123,14 @@ export function SignupForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(handleSignUp)}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
-            <a
-              href="#"
-              className="flex flex-col items-center gap-2 font-medium"
-            >
-              <div className="flex size-8 items-center justify-center rounded-md">
-                <GalleryVerticalEnd className="size-6" />
-              </div>
+            <Link href="/">
+              <ClypAIWordmark height={24} />
               <span className="sr-only">ClypAI</span>
-            </a>
-            <h1 className="text-xl font-bold">Create a ClypAI Account</h1>
+            </Link>
+            <h1 className="text-xl font-bold">Create an Account</h1>
             <FieldDescription>
               Already have an account? <Link href="/login">Log in</Link>
             </FieldDescription>
@@ -108,7 +139,7 @@ export function SignupForm({
             name="name"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field className="gap-1" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="name">Name</FieldLabel>
                 <Input
                   {...field}
@@ -128,7 +159,7 @@ export function SignupForm({
             name="email"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field className="gap-1" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   {...field}
@@ -148,7 +179,7 @@ export function SignupForm({
             name="password"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field className="gap-1" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
                 <div className="relative">
                   <Input
@@ -171,9 +202,9 @@ export function SignupForm({
                     type="button"
                   >
                     {isPasswordVisible ? (
-                      <EyeOffIcon aria-hidden="true" size={16} />
+                      <EyeOff aria-hidden="true" size={16} />
                     ) : (
-                      <EyeIcon aria-hidden="true" size={16} />
+                      <Eye aria-hidden="true" size={16} />
                     )}
                   </button>
                 </div>
@@ -186,7 +217,7 @@ export function SignupForm({
           <Field>
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting && (
-                <LoaderCircleIcon
+                <LoaderCircle
                   aria-hidden="true"
                   className="-ms-1 me-2 animate-spin"
                   size={16}
@@ -195,23 +226,22 @@ export function SignupForm({
               Create Account
             </Button>
           </Field>
-          <FieldSeparator>Or</FieldSeparator>
+          <FieldSeparator>OR</FieldSeparator>
           <Field>
-            <Button
-              variant="outline"
-              type="button"
-              className="w-full"
-              onClick={handleGitHub}
-            >
-              <Github />
-              Continue with Github
+            <Button variant="outline" className="w-full" onClick={handleGitHub} disabled={isGitHubLoading}>
+              {isGitHubLoading ? (
+                <LoaderCircle aria-hidden="true" className="-ms-1 me-2 animate-spin" size={16} />
+              ) : (
+                <Github />
+              )}
+              Continue with GitHub
             </Button>
           </Field>
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <Link href="/terms-of-service">Terms of Service</Link>{" "}
-        and <Link href="/privacy-policy">Privacy Policy</Link>.
+        By signing up, you agree to our <Link href="/legal/terms-of-service">Terms of Service</Link>{" "}
+        and <Link href="/legal/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   )

@@ -1,14 +1,21 @@
 "use client"
 
-import { EyeIcon, EyeOffIcon, GalleryVerticalEnd, Github, LoaderCircleIcon } from "lucide-react";
 import { useState } from "react";
+
+import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
+
+import { 
+  Eye, 
+  EyeOff,
+  Github, 
+  LoaderCircle 
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -31,7 +38,9 @@ import { toast } from "sonner";
 
 import Link from "next/link";
 
-const formSchema = z.object({
+import { ClypAIWordmark } from "./brand/logos";
+
+const schema = z.object({
   email: z.email("Please enter a valid email address."),
   password: z
     .string()
@@ -44,11 +53,16 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  // Toggle password visibility
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const [isGitHubLoading, setIsGitHubLoading] = useState(false);
+
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState);
+  
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       email: "",
       password: "",
@@ -56,31 +70,53 @@ export function LoginForm({
     },
   })
 
+  // Login with GitHub
   async function handleGitHub() {
-    await authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/dashboard",
-      errorCallbackURL: "/login",
-    })
+    await authClient.signIn.social(
+      {
+        provider: "github",
+        callbackURL: "/overview?provider=github",
+        errorCallbackURL: "/login",
+      },
+      {
+        onRequest: () => {
+          setIsGitHubLoading(true);
+          console.log("Logging in with GitHub...");
+        },
+        onSuccess: () => {
+          setIsGitHubLoading(false);
+          toast.success("Logged in with GitHub!")
+          console.log("Logged in with GitHub!");
+        },
+        onError: (error) => {
+          setIsGitHubLoading(false);
+          toast.error("Error logging in with GitHub! Please try again.");
+          console.error("Error logging in with GitHub! Error: ", error);
+        },
+      }
+    )
   }
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
+  // Sign in
+  async function handleSignIn(data: z.infer<typeof schema>) {
     await authClient.signIn.email(
       {
         email: data.email,
         password: data.password,
-        callbackURL: "/dashboard",
         rememberMe: data.rememberMe,
+        callbackURL: "/dashboard"
       },
       {
         onRequest: () => {
-          // react-hook-form's isSubmitting handles the loading state
+          console.log("Logging in user: ", data.email);
         },
         onSuccess: () => {
-          toast.success("Logged in successfully!")
+          toast.success("Logged in!")
+          console.log("Logged in! User: ", data.email);
         },
         onError: (error) => {
-          toast.error(error.error.message)
+          toast.error("Error logging in! Please try again.");
+          console.error("Error logging in! Error: ", error);
         },
       }
     )
@@ -88,19 +124,14 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(handleSignIn)}>
         <FieldGroup>
           <div className="flex flex-col items-center gap-2 text-center">
-            <a
-              href="#"
-              className="flex flex-col items-center gap-2 font-medium"
-            >
-              <div className="flex size-8 items-center justify-center rounded-md">
-                <GalleryVerticalEnd className="size-6" />
-              </div>
+            <Link href="/">
+              <ClypAIWordmark height={24} />
               <span className="sr-only">ClypAI</span>
-            </a>
-            <h1 className="text-xl font-bold">Log in to ClypAI</h1>
+            </Link>
+            <h1 className="text-xl font-bold">Log in to your Account</h1>
             <FieldDescription>
               Don&apos;t have an account? <Link href="/signup">Sign up</Link>
             </FieldDescription>
@@ -109,7 +140,7 @@ export function LoginForm({
             name="email"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field className="gap-1" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   {...field}
@@ -129,7 +160,7 @@ export function LoginForm({
             name="password"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
+              <Field className="gap-1" data-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
                 <div className="relative">
                   <Input
@@ -152,9 +183,9 @@ export function LoginForm({
                     type="button"
                   >
                     {isPasswordVisible ? (
-                      <EyeOffIcon aria-hidden="true" size={16} />
+                      <EyeOff aria-hidden="true" size={16} />
                     ) : (
-                      <EyeIcon aria-hidden="true" size={16} />
+                      <Eye aria-hidden="true" size={16} />
                     )}
                   </button>
                 </div>
@@ -183,9 +214,9 @@ export function LoginForm({
                       Remember me
                     </Label>
                   </div>
-                  <a className="text-sm underline-offset-4 hover:underline" href="#">
+                  <Link className="text-sm underline-offset-4 hover:underline" href="/forgot-password">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </Field>
             )}
@@ -193,7 +224,7 @@ export function LoginForm({
           <Field>
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting && (
-                <LoaderCircleIcon
+                <LoaderCircle
                   aria-hidden="true"
                   className="-ms-1 me-2 animate-spin"
                   size={16}
@@ -202,23 +233,22 @@ export function LoginForm({
               Log In
             </Button>
           </Field>
-          <FieldSeparator>Or</FieldSeparator>
+          <FieldSeparator>OR</FieldSeparator>
           <Field>
-            <Button
-              variant="outline"
-              type="button"
-              className="w-full"
-              onClick={handleGitHub}
-            >
-              <Github />
-              Continue with Github
+            <Button variant="outline" className="w-full" onClick={handleGitHub} disabled={isGitHubLoading}>
+              {isGitHubLoading ? (
+                <LoaderCircle aria-hidden="true" className="-ms-1 me-2 animate-spin" size={16} />
+              ) : (
+                <Github />
+              )}
+              Continue with GitHub
             </Button>
           </Field>
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <Link href="/terms-of-service">Terms of Service</Link>{" "}
-        and <Link href="/privacy-policy">Privacy Policy</Link>.
+        By logging in, you agree to our <Link href="/legal/terms-of-service">Terms of Service</Link>{" "}
+        and <Link href="/legal/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   )

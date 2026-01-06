@@ -30,6 +30,8 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { CreateOrganizationDialogDrawer } from "@/components/create-organization-dialog-drawer";
+
 export function OrganizationSwitcherSkeleton() {
   return (
     <SidebarMenu>
@@ -109,12 +111,14 @@ export function OrganizationSwitcher() {
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2">
-              <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                <Plus className="size-4" />
-              </div>
-              <div className="text-muted-foreground font-medium">Create Organization</div>
-            </DropdownMenuItem>
+            <CreateOrganizationDialogDrawer>
+              <DropdownMenuItem className="gap-2 p-2" onSelect={e => e.preventDefault()}>
+                <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                  <Plus className="size-4" />
+                </div>
+                <div className="text-muted-foreground font-medium">Create Organization</div>
+              </DropdownMenuItem>
+            </CreateOrganizationDialogDrawer>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
