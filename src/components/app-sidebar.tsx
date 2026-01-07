@@ -1,17 +1,17 @@
 "use client"
 
-import * as React from "react"
-import { Suspense } from "react"
+import * as React from "react";
+import { Suspense } from "react";
 
 import {
-  BookOpen,
+  Home,
+  Folder,
+  BarChart4,
   Bot,
-  Frame,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react"
+  Palette,
+  Network,
+  Settings,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -19,116 +19,49 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser, NavUserSkeleton } from "@/components/nav-user"
-import { OrganizationSwitcher, OrganizationSwitcherSkeleton } from "@/components/organization-switcher"
+import { NavMain } from "@/components/nav-main";
+import { OrganizationSwitcher, OrganizationSwitcherSkeleton } from "@/components/organization-switcher";
+import { SidebarOptInForm } from "@/components/sidebar-opt-in-form";
+import { NavUser, NavUserSkeleton } from "@/components/nav-user";
 
 const data = {
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
+      title: "Overview",
+      url: "/overview",
+      icon: Home,
     },
     {
-      title: "Models",
-      url: "#",
+      title: "Projects",
+      url: "/projects",
+      icon: Folder,
+    },
+    {
+      title: "Metrics",
+      url: "/metrics",
+      icon: BarChart4,
+    },
+    {
+      title: "Workers",
+      url: "/workers",
       icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
+      title: "Brand Kits",
+      url: "/brand-kits",
+      icon: Palette,
+    },
+    {
+      title: "Connections",
+      url: "/connections",
+      icon: Network,
     },
     {
       title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      url: "/settings",
+      icon: Settings,
     },
   ],
 }
@@ -143,9 +76,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
+        <div className="p-1">
+          <SidebarOptInForm />
+        </div>
         <Suspense fallback={<NavUserSkeleton />}>
           <NavUser />
         </Suspense>
