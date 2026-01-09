@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { username, organization } from "better-auth/plugins";
+import { username, organization, admin } from "better-auth/plugins";
 import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
@@ -33,7 +33,8 @@ export const auth = betterAuth({
         portal(),
         usage()
       ],
-    })
+    }),
+    admin()
   ],
   emailAndPassword: {
     enabled: true,

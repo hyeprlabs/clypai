@@ -1,29 +1,73 @@
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
+"use client"
+
+import { usePathname } from "next/navigation";
+
+import React from "react";
+
+import { Home, Crown } from "lucide-react";
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+import { Separator } from "@/components/ui/separator";
+
+import { SidebarTrigger } from "@/components/ui/sidebar";
+
+import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
+  const segments = usePathname().split("/").filter(Boolean)
+
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
-      <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
+    <header className="flex h-16 shrink-0 items-center gap-2">
+      <div className="flex items-center gap-2 px-4">
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"
-          className="mx-2 data-[orientation=vertical]:h-4"
+          className="mr-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Documents</h1>
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
-            <a
-              href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="dark:text-foreground"
-            >
-              GitHub
-            </a>
-          </Button>
-        </div>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/overview">
+                <Home aria-hidden="true" size={16} />
+                <span className="sr-only">Overview</span>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            {segments.map((segment, index) => (
+              <React.Fragment key={index}>
+                <BreadcrumbItem>
+                  {index === segments.length - 1 ? (
+                    <BreadcrumbPage className="capitalize">
+                      {segment}
+                    </BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink
+                      href={`/${segments.slice(0, index + 1).join("/")}`}
+                      className="capitalize"
+                    >
+                      {segment}
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+                {index < segments.length - 1 && <BreadcrumbSeparator />}
+              </React.Fragment>
+            ))}
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <div className="flex ml-auto gap-2 px-4">
+        <Button size="sm" variant="outline">
+          <Crown className="text-blue-500" />
+          Upgrade to Pro
+        </Button>
       </div>
     </header>
   )

@@ -1,13 +1,68 @@
 import { NextRequest, NextResponse } from "next/server";
+import { get } from "@vercel/edge-config";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
-export async function proxy(request: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: await headers()
-  })
+// Auth Pages
+const authPages = [
+  "/login",
+  "/signup",
+]
 
-  if(!session) {
+// Dashboard Pages
+const dashboardPages = [
+  "/admin",
+  "/overview",
+  "/brand-kits",
+  "/connections",
+  "/create",
+  "/metrics",
+  "/profile",
+  "/projects",
+  "/settings",
+  "/workers",
+];
+
+export async function proxy(request: NextRequest) {
+
+  const pathname = request.nextUrl.pathname;
+  const session = await auth.api.getSession({headers: await headers()});
+
+  if (!process.env.EDGE_CONFIG) {
+    console.warn("EDGE_CONFIG .env variable is not set.");
+    return NextResponse.next();
+  }
+  
+  const isComingSoonMode = await get<boolean>("clypai-is-coming-soon-mode");
+  const isMaintenanceMode = await get<boolean>("clypai-is-maintenance-mode");
+
+  const isAdmin = session?.user?.role === "admin";
+
+  if (!isAdmin) {
+    if (isMaintenanceMode && pathname !== "/maintenance") {
+      request.nextUrl.pathname = "/maintenance";
+      console.log("Mode Active: Maintenance!");
+      return NextResponse.rewrite(request.nextUrl);
+    }
+    
+    if (isComingSoonMode && pathname !== "/coming-soon") {
+      request.nextUrl.pathname = "/coming-soon";
+      console.log("Mode Active: Coming Soon!");
+      return NextResponse.rewrite(request.nextUrl);
+    }
+  }
+
+  const isAuthPage = authPages.some(page => pathname.startsWith(page));
+
+  if (session && isAuthPage) {
+    console.log("Redirecting to /overview!");
+    return NextResponse.redirect(new URL("/overview", request.url));
+  }
+
+  const isDashboardPage = dashboardPages.some(page => pathname.startsWith(page));
+
+  if (!session && isDashboardPage) {
+    console.log("Redirecting to /login!");
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -15,5 +70,14 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/admin",
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt
+     * - Static assets (images, etc.)
+     */
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
 };
