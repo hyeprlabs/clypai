@@ -3,6 +3,7 @@ import { username, organization, admin } from "better-auth/plugins";
 import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
+import { waitlist } from "better-auth-waitlist";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
@@ -34,7 +35,29 @@ export const auth = betterAuth({
         usage()
       ],
     }),
-    admin()
+    admin(),
+    waitlist({
+      enabled: true,
+      maximumWaitlistParticipants: 1000,
+      disableSignInAndSignUp: true,
+      rateLimit: {
+        maxAttempts: 5,
+        windowMs: 10 * 60 * 1000,  // 10 minutes
+        max: 10,
+      },
+      validateEntry: async ({ email, additionalData }) => {
+        // Custom business logic
+        return email.includes("admin") || additionalData?.priority === "high";
+      },
+      onStatusChange: async (entry) => {
+        // Send notification emails
+        console.log(`Entry ${entry.id} status changed to ${entry.status}`);
+      },
+      onJoinRequest: async ({ request }) => {
+        // Handle new join requests
+        console.log(`New request from ${request.email}`);
+      },
+    }),
   ],
   emailAndPassword: {
     enabled: true,

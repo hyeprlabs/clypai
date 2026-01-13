@@ -80,6 +80,12 @@ importers:
       better-auth:
         specifier: ^1.4.10
         version: 1.4.10(@prisma/client@5.22.0)(better-sqlite3@12.5.0)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      better-auth-waitlist:
+        specifier: ^3.0.1
+        version: 3.0.1(better-auth@1.4.10(@prisma/client@5.22.0)(better-sqlite3@12.5.0)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))
+      botid:
+        specifier: ^1.5.10
+        version: 1.5.10(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -104,6 +110,9 @@ importers:
       react:
         specifier: 19.2.3
         version: 19.2.3
+      react-countdown:
+        specifier: ^2.3.6
+        version: 2.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
@@ -113,6 +122,9 @@ importers:
       react-hotkeys-hook:
         specifier: ^5.2.1
         version: 5.2.1(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      resend:
+        specifier: ^6.7.0
+        version: 6.7.0
       slug:
         specifier: ^11.0.1
         version: 11.0.1
@@ -2502,6 +2514,12 @@ packages:
     resolution: {integrity: sha512-Mij6Lij93pTAIsSYy5cyBQ975Qh9uLEc5rwGTpomiZeXZL9yIS6uORJakb3ScHgfs0serMMfIbXzokPMuEiRyw==}
     hasBin: true
 
+  better-auth-waitlist@3.0.1:
+    resolution: {integrity: sha512-M6SbxZeVJVuD76TQbwNlionZFI1rkWRlR5RoMNUDvgDrHFa55/xwNGpQ/IdwjtoZ2RzEqKqWw+xMECuVUqbsXQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      better-auth: ^1.3.4
+
   better-auth@1.4.10:
     resolution: {integrity: sha512-0kqwEBJLe8eyFzbUspRG/htOriCf9uMLlnpe34dlIJGdmDfPuQISd4shShvUrvIVhPxsY1dSTXdXPLpqISYOYg==}
     peerDependencies:
@@ -2578,6 +2596,17 @@ packages:
 
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
+
+  botid@1.5.10:
+    resolution: {integrity: sha512-hhgty1u0CxozqTqLbTQMtYBwmWdzWZTAsBCvN7/qhkN3fM7MlXacmmcMoyc0f+vV+U6RRoLYdlo32td+PhJyew==}
+    peerDependencies:
+      next: '*'
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      next:
+        optional: true
+      react:
+        optional: true
 
   bowser@2.13.1:
     resolution: {integrity: sha512-OHawaAbjwx6rqICCKgSG0SAnT05bzd7ppyKLVUITZpANBaaMFBAsaNkto3LoQ31tyFP5kNujE8Cdx85G9VzOkw==}
@@ -4152,6 +4181,12 @@ packages:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
 
+  react-countdown@2.3.6:
+    resolution: {integrity: sha512-ZfX6S08Hb6x6W6eCn1hMDvxPICI/T30fd+gaeVTCR/2cGZ2WJ3f26e4ImNIMX1fHkopJrUdnRpWXP13/D39+gg==}
+    peerDependencies:
+      react: '>= 15'
+      react-dom: '>= 15'
+
   react-day-picker@9.13.0:
     resolution: {integrity: sha512-euzj5Hlq+lOHqI53NiuNhCP8HWgsPf/bBAVijR50hNaY1XwjKjShAnIe8jm8RD2W9IJUvihDIZ+KrmqfFzNhFQ==}
     engines: {node: '>=18'}
@@ -4267,6 +4302,15 @@ packages:
 
   reselect@5.1.1:
     resolution: {integrity: sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==}
+
+  resend@6.7.0:
+    resolution: {integrity: sha512-2ZV0NDZsh4Gh+Nd1hvluZIitmGJ59O4+OxMufymG6Y8uz1Jgt2uS1seSENnkIUlmwg7/dwmfIJC9rAufByz7wA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@react-email/render': '*'
+    peerDependenciesMeta:
+      '@react-email/render':
+        optional: true
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -4523,6 +4567,9 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
+  svix@1.84.1:
+    resolution: {integrity: sha512-K8DPPSZaW/XqXiz1kEyzSHYgmGLnhB43nQCMeKjWGCUpLIpAMMM8kx3rVVOSm6Bo6EHyK1RQLPT4R06skM/MlQ==}
+
   tailwind-merge@3.4.0:
     resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
@@ -4697,6 +4744,10 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
 
   vaul@1.1.2:
     resolution: {integrity: sha512-ZFkClGpWyI2WUQjdLJ/BaGuV6AVQiJ3uELGk3OYtP+B6yCO7Cmn9vPFXVJkRaGkOJu3m8bQMgtyzNHixULceQA==}
@@ -7589,6 +7640,11 @@ snapshots:
 
   baseline-browser-mapping@2.9.12: {}
 
+  better-auth-waitlist@3.0.1(better-auth@1.4.10(@prisma/client@5.22.0)(better-sqlite3@12.5.0)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)):
+    dependencies:
+      better-auth: 1.4.10(@prisma/client@5.22.0)(better-sqlite3@12.5.0)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      zod: 3.25.76
+
   better-auth@1.4.10(@prisma/client@5.22.0)(better-sqlite3@12.5.0)(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(pg@8.16.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       '@better-auth/core': 1.4.10(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.7(zod@4.3.5))(jose@6.1.3)(kysely@0.28.9)(nanostores@1.1.0)
@@ -7637,6 +7693,11 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 3.6.2
     optional: true
+
+  botid@1.5.10(next@16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3):
+    optionalDependencies:
+      next: 16.1.1(@babel/core@7.28.5)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react: 19.2.3
 
   bowser@2.13.1: {}
 
@@ -9336,6 +9397,12 @@ snapshots:
       strip-json-comments: 2.0.1
     optional: true
 
+  react-countdown@2.3.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+    dependencies:
+      prop-types: 15.8.1
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+
   react-day-picker@9.13.0(react@19.2.3):
     dependencies:
       '@date-fns/tz': 1.4.1
@@ -9459,6 +9526,10 @@ snapshots:
       set-function-name: 2.0.2
 
   reselect@5.1.1: {}
+
+  resend@6.7.0:
+    dependencies:
+      svix: 1.84.1
 
   resolve-from@4.0.0: {}
 
@@ -9779,6 +9850,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
+  svix@1.84.1:
+    dependencies:
+      standardwebhooks: 1.0.0
+      uuid: 10.0.0
+
   tailwind-merge@3.4.0: {}
 
   tailwindcss@4.1.18: {}
@@ -9995,6 +10071,8 @@ snapshots:
 
   util-deprecate@1.0.2:
     optional: true
+
+  uuid@10.0.0: {}
 
   vaul@1.1.2(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
