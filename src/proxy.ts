@@ -11,7 +11,6 @@ const authPages = [
 
 // Dashboard Pages
 const dashboardPages = [
-  "/admin",
   "/overview",
   "/brand-kits",
   "/connections",
@@ -32,13 +31,16 @@ export async function proxy(request: NextRequest) {
     console.warn("EDGE_CONFIG .env variable is not set.");
     return NextResponse.next();
   }
-  
-  const isComingSoonMode = await get<boolean>("clypai-is-coming-soon-mode");
-  const isMaintenanceMode = await get<boolean>("clypai-is-maintenance-mode");
+
+  const apps = await get("apps") as { clypai?: { "is-maintenance"?: boolean; "is-coming-soon"?: boolean } } | undefined;
+
+  const isMaintenanceMode = apps?.clypai?.["is-maintenance"];
+  const isComingSoonMode = apps?.clypai?.["is-coming-soon"];
 
   const isAdmin = session?.user?.role === "admin";
+  const isDevelopment = process.env.NODE_ENV === "development";
 
-  if (!isAdmin) {
+  if (!isAdmin && !isDevelopment) {
     if (isMaintenanceMode && pathname !== "/maintenance") {
       request.nextUrl.pathname = "/maintenance";
       console.log("Mode Active: Maintenance!");
@@ -49,6 +51,16 @@ export async function proxy(request: NextRequest) {
       request.nextUrl.pathname = "/coming-soon";
       console.log("Mode Active: Coming Soon!");
       return NextResponse.rewrite(request.nextUrl);
+    }
+
+    if (!isMaintenanceMode && pathname === "/maintenance") {
+      console.log("Redirecting from /maintenance to /!");
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
+    if (!isComingSoonMode && pathname === "/coming-soon") {
+      console.log("Redirecting from /coming-soon to /!");
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 
