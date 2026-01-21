@@ -131,7 +131,7 @@ export function SignupForm({
               <span className="sr-only">ClypAI</span>
             </Link>
             <h1 className="text-xl font-bold">Create an Account</h1>
-            <FieldDescription>
+            <FieldDescription className="font-mono">
               Already have an account? <Link href="/login">Log in</Link>
             </FieldDescription>
           </div>
@@ -239,7 +239,7 @@ export function SignupForm({
           </Field>
         </FieldGroup>
       </form>
-      <FieldDescription className="px-6 text-center">
+      <FieldDescription className="px-6 text-center font-mono">
         By signing up, you agree to our <Link href="/legal/terms-of-service">Terms of Service</Link>{" "}
         and <Link href="/legal/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>

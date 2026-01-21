@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Statsig } from "@/lib/statsig";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import SystemBanner from "@/components/ui/system-banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,8 +50,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SystemBanner
+            text="Development Mode"
+            color="bg-orange-500"
+            size="sm"
+            show={process.env.NODE_ENV === "development"}
+          />
           <Statsig>
+          <NuqsAdapter>
           {children}
+          </NuqsAdapter>
           </Statsig>
           <Toaster />
           <Analytics />
