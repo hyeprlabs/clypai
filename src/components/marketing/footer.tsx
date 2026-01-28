@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { ClypAIWordmark } from "@/components/brand/logos";
 
+import { ThemeToggle } from "@/components/marketing/theme-toggle";
+
 const links = [
   {
     title: "Imprint",
@@ -35,6 +37,9 @@ export function Footer() {
               <span>{link.title}</span>
             </Link>
           ))}
+        </div>
+        <div className="my-8 flex justify-center">
+          <ThemeToggle />
         </div>
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
           <Link

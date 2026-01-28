@@ -1,8 +1,10 @@
 import { withWorkflow } from "workflow/next";
 import { withBotId } from "botid/next/config";
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [
       {
@@ -24,4 +26,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withWorkflow(withBotId(nextConfig));
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+})
+
+export default withWorkflow(withBotId(withMDX(nextConfig)));
