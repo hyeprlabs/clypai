@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import Link from "next/link";
-import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import Image from "next/image";
-import { motion } from "motion/react";
 
-import { WaitlistDialogDrawer } from "@/components/marketing/waitlist-dialog-drawer";
+import { ArrowRight, ArrowRightCircle } from "lucide-react";
+
+import { motion } from "motion/react";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -25,7 +25,7 @@ export default function Page() {
         <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-60 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
       </div>
       <section>
-        <div className="relative pt-24 md:pt-36">
+        <div className="relative pt-16 sm:pt-24 md:pt-36">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function Page() {
             className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"
           />
 
-          <div className="mx-auto max-w-7xl px-6">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
@@ -82,7 +82,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.15 }}
-                className="mx-auto mt-8 max-w-4xl text-balance text-5xl max-md:font-semibold md:text-7xl lg:mt-16 xl:text-[5.25rem] font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1"
+                className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1 px-4 sm:px-0"
               >
                 From Raw Video to Viral Clips in One Click.
               </motion.h1>
@@ -90,7 +90,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.3 }}
-                className="mx-auto mt-8 max-w-xl text-balance text-lg text-muted-foreground font-mono"
+                className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
               >
                 Automate your short-form content. ClypAI finds the hooks, adds
                 captions, and crops for social, cutting your editing time by
@@ -104,14 +104,9 @@ export default function Page() {
                 transition={{ duration: 0.9 }}
                 className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
               >
-                <WaitlistDialogDrawer>
-                  <Button className="rounded-full">
-                    Join the waitlist
-                    <ArrowRightCircle />
-                  </Button>
-                </WaitlistDialogDrawer>
-                <Button variant="ghost" className="rounded-full" asChild>
-                  <Link href="/changelog">Changelog</Link>
+                <Button className="rounded-full cursor-pointer">
+                  Join the waitlist
+                  <ArrowRightCircle className="ml-2" />
                 </Button>
               </motion.div>
             </div>
@@ -123,8 +118,8 @@ export default function Page() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="mask-b-from-55% relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
-              <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+            <div className="mask-b-from-55% relative mt-8 overflow-hidden px-2 sm:px-4 sm:mt-12 md:mt-20">
+              <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-xl sm:rounded-2xl border p-2 sm:p-4 shadow-lg shadow-zinc-950/15 ring-1">
                 <Image
                   className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
                   src="/mail2.webp"

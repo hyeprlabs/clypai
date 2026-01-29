@@ -1,8 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { motion } from "motion/react";
-import { CallToAction } from "@/components/marketing/call-to-action";
+import { cn } from "@/lib/utils";
 import { BackgroundGlow } from "@/components/marketing/background-glow";
+import { PricingSection } from "@/components/marketing/pricing/pricing-section";
+
+const COMING_SOON = true;
 
 export default function Page() {
   return (
@@ -26,7 +30,7 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1"
               >
-                Our Mission: Accessible Video Creation for All
+                Pricing
               </motion.h1>
 
               <motion.p
@@ -35,33 +39,48 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
                 className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
               >
-                We are a team of creators, engineers, and storytellers
-                passionate about the future of video content. We believe that
-                creating compelling short-form video should be accessible to
-                everyone, not just those with professional editing skills and
-                hours to spare. Our mission is to empower creators by automating
-                the tedious parts of video editing, so they can focus on what
-                they do best: telling great stories.
+                Simple, transparent pricing. Start for free and scale as you grow.
+                Choose the plan that fits your needs, from individual creators
+                to large organizations.
               </motion.p>
 
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-                className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
+                className="mx-auto mt-12"
               >
-                ClypAI was born from the idea that technology should simplify
-                creativity, not complicate it. We&apos;re building smart tools that
-                understand content, find the most engaging moments, and prepare
-                them for any social platform with a single click.
-              </motion.p>
+                <motion.div 
+                  initial="rest"
+                  whileHover="hover"
+                  className="relative"
+                >
+                  <div className={cn(COMING_SOON && "blur-sm opacity-50 pointer-events-none select-none grayscale transition-all duration-500")}>
+                    <Suspense>
+                      <PricingSection />
+                    </Suspense>
+                  </div>
+
+                  {COMING_SOON && (
+                    <motion.div
+                      variants={{
+                        rest: { opacity: 0 },
+                        hover: { opacity: 1 },
+                      }}
+                      className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
+                    >
+                      <span className="font-mono text-sm text-muted-foreground">
+                        Coming soon
+                      </span>
+                    </motion.div>
+                  )}
+                </motion.div>
+              </motion.div>
 
             </div>
           </div>
         </div>
       </section>
-
-      <CallToAction />
 
     </main>
   );

@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { Suspense } from "react";
 
+import Link from "next/link";
 import Image from "next/image";
 
 import { getAllPosts } from "@/components/marketing/blog/mdx";
@@ -38,7 +39,9 @@ export default function BlogIndex() {
         </div>
       </header>
 
-      <CategoryTabs />
+      <Suspense>
+        <CategoryTabs />
+      </Suspense>
 
       <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-max gap-6 items-stretch">
         {posts.map((post) => (
