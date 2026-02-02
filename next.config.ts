@@ -9,17 +9,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/x",
-        destination: "https://x.com/clypai",
+        destination: "https://go.hyeprlabs.com/clypai-x",
         permanent: true,
       },
       {
         source: "/instagram",
-        destination: "https://instagram.com/clypai",
+        destination: "https://go.hyeprlabs.com/clypai-instagram",
         permanent: true,
       },
       {
         source: "/tiktok",
-        destination: "https://tiktok.com/@clypai",
+        destination: "https://go.hyeprlabs.com/clypai-tiktok",
         permanent: true,
       },
     ]
