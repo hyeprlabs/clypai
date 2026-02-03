@@ -4,11 +4,14 @@ import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
+import { Resend } from "resend";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
   server: 'sandbox'
 });
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
   database: new Pool({
@@ -50,11 +53,21 @@ export const auth = betterAuth({
         return email.includes("admin") || additionalData?.priority === "high";
       },
       onStatusChange: async (entry) => {
-        // Send notification emails
+        await resend.emails.send({
+          from: "ClypAI <clypai@hyeprlabs.com>",
+          to: entry.email,
+          subject: "ClypAI Waitlist Status Update",
+          text: `Your waitlist status has been updated to: ${entry.status}`
+        });
         console.log(`Entry ${entry.id} status changed to ${entry.status}`);
       },
       onJoinRequest: async ({ request }) => {
-        // Handle new join requests
+        await resend.emails.send({
+          from: "ClypAI <clypai@hyeprlabs.com>",
+          to: request.email,
+          subject: "Your join request to the ClypAI Waitlist",
+          text: "Thank you for joining the ClypAI waitlist! We'll notify you when we're ready to onboard new users."
+        });
         console.log(`New request from ${request.email}`);
       },
     }),

@@ -27,7 +27,7 @@ export function Footer() {
           <ClypAIWordmark height={24} />
         </Link>
 
-        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm font-mono">
+        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm font-mono hidden">
           {links.map((link, index) => (
             <Link
               key={index}
@@ -99,7 +99,7 @@ export function Footer() {
         </div>
         <span className="text-muted-foreground block text-center text-sm font-mono">
           {" "}
-          © {new Date().getFullYear()} Hyepr Labs UG, All rights reserved.
+          © {new Date().getFullYear()} ClypAI, All rights reserved.
         </span>
       </div>
     </footer>

@@ -4,11 +4,7 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 
-import { 
-  Menu,
-  X,
-  ArrowRightCircle
-} from "lucide-react";
+import { Menu, X, ArrowRightCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -19,26 +15,33 @@ import { Button } from "@/components/ui/button";
 import { ClypAIWordmark } from "@/components/brand/logos";
 
 const items = [
-  { 
-    href: "/about", 
-    label: "About" 
+  {
+    href: "/about",
+    label: "About",
   },
-  { 
+  {
     href: "/blog",
     label: "Blog",
   },
-  { 
-    href: "/changelog", 
-    label: "Changelog" 
+  {
+    href: "/changelog",
+    label: "Changelog",
   },
-  { 
-    href: "/why", 
-    label: "Manifesto" 
+  {
+    href: "/why",
+    label: "Manifesto",
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+  },
+  {
+    href: "/pricing",
+    label: "Pricing",
   },
 ];
 
 export const Header = () => {
-
   const [menu, setMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -51,88 +54,143 @@ export const Header = () => {
   }, []);
 
   return (
-    <header>
-      <nav
-        data-state={menu && "active"}
-        className="fixed z-20 w-full"
-      >
+    <header className="fixed top-0 z-50 w-full">
+      <nav data-state={menu ? "active" : "inactive"} className="w-full">
         <div
           className={cn(
-            "mx-auto mt-2 max-w-7xl transition-all duration-300",
-            isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+            "mx-auto px-4 py-2 transition-all duration-300 ease-in-out sm:px-6 sm:py-2.5",
+            "border-b bg-background/95 backdrop-blur-lg",
+            isScrolled
+              ? "lg:mt-2 lg:max-w-6xl lg:rounded-2xl lg:border lg:border-b-0 lg:py-2 lg:px-8"
+              : "lg:mt-2 lg:max-w-7xl lg:border-b-0 lg:bg-transparent lg:backdrop-blur-none lg:px-8 lg:py-3",
           )}
         >
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-            <div className="flex w-full justify-between lg:w-auto">
-              <Link
-                href="/"
-                aria-label="home"
-                className="flex items-center space-x-2"
-              >
-                <ClypAIWordmark height={24} />
-              </Link>
+          <div className="relative flex items-center justify-between">
+            <Link
+              href="/"
+              aria-label="ClypAI"
+              className="flex items-center space-x-2"
+            >
+              <ClypAIWordmark height={24} />
+            </Link>
 
-              <button
-                onClick={() => setMenu(!menu)}
-                aria-label={menu == true ? "Close Menu" : "Open Menu"}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
-              >
-                <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-              </button>
-            </div>
-
-            <div className="absolute inset-0 m-auto hidden size-fit lg:block">
+            {/* Desktop Navigation */}
+            <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:block">
               <NavigationMenu items={items} />
             </div>
 
-            <div className="bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
+            <div className="relative hidden items-center gap-3 lg:flex">
+              <div
+                className={cn(
+                  "flex items-center gap-3 transition-all duration-300 ease-in-out",
+                  isScrolled
+                    ? "pointer-events-none translate-x-1 opacity-0"
+                    : "translate-x-0 opacity-100"
+                )}
+              >
+                <Link href="/login">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full"
+                  >
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button 
+                    size="sm"
+                    className="rounded-full"
+                  >
+                    Sign Up
+                    <ArrowRightCircle className="ml-2" />
+                  </Button>
+                </Link>
+              </div>
+              <div
+                className={cn(
+                  "absolute right-0 transition-all duration-300 ease-in-out",
+                  isScrolled
+                    ? "translate-x-0 opacity-100"
+                    : "pointer-events-none -translate-x-1 opacity-0"
+                )}
+              >
+                <Link href="/signup">
+                  <Button size="sm" className="rounded-full">
+                    Get Started
+                    <ArrowRightCircle className="ml-2" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setMenu(!menu)}
+              aria-label={menu ? "Close Menu" : "Open Menu"}
+              aria-expanded={menu}
+              className="relative p-2 lg:hidden"
+            >
+              <Menu
+                className={cn(
+                  "size-6 transition-all duration-200",
+                  menu && "rotate-180 scale-0 opacity-0",
+                )}
+              />
+              <X
+                className={cn(
+                  "absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 transition-all duration-200",
+                  menu && "rotate-0 scale-100 opacity-100",
+                )}
+              />
+            </button>
+          </div>
+
+          <div
+            className={cn(
+              "mt-4 grid overflow-hidden transition-all duration-300 ease-in-out lg:hidden",
+              menu
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0",
+            )}
+          >
+            <div className="overflow-hidden">
+              <div className="space-y-6 pb-6">
+                <ul className="space-y-4">
                   {items.map((item, index) => (
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                        onClick={() => setMenu(false)}
+                        className="block text-base text-muted-foreground transition-colors duration-150 hover:text-foreground"
                       >
-                        <span>{item.label}</span>
+                        {item.label}
                       </Link>
                     </li>
                   ))}
                 </ul>
-              </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className={cn("rounded-full", isScrolled && "lg:hidden")}
-                >
+
+                <div className="flex flex-col gap-3 pt-4 sm:flex-row">
                   <Link href="/login">
-                    <span>Login</span>
+                    <Button
+                      variant="outline"
+                      disabled
+                      size="sm"
+                      className="w-full rounded-full sm:w-auto"
+                    >
+                      Login
+                    </Button>
                   </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn("rounded-full", isScrolled && "lg:hidden")}
-                >
                   <Link href="/signup">
-                    <span>Sign Up</span>
-                    <ArrowRightCircle className="ml-2" />
+                    <Button
+                      disabled
+                      size="sm"
+                      className="w-full rounded-full sm:w-auto"
+                    >
+                      Sign Up
+                      <ArrowRightCircle className="ml-2" />
+                    </Button>
                   </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className={cn("rounded-full", isScrolled ? "lg:inline-flex" : "hidden")}
-                >
-                  <Link href="/signup">
-                    <span>Get started</span>
-                    <ArrowRightCircle className="ml-2" />
-                  </Link>
-                </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -140,4 +198,4 @@ export const Header = () => {
       </nav>
     </header>
   );
-}
+};
