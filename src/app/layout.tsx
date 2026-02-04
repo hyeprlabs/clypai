@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-
+// Statsig
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Statsig } from "@/lib/statsig";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import SystemBanner from "@/components/ui/system-banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,9 +49,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Statsig>
+          <SystemBanner
+            text="Development Mode"
+            color="bg-orange-500"
+            size="sm"
+            show={false}
+          />
+          <NuqsAdapter>
           {children}
-          </Statsig>
+          </NuqsAdapter>
           <Toaster />
           <Analytics />
           <SpeedInsights />

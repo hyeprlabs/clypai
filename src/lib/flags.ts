@@ -1,8 +1,8 @@
-import { flag } from 'flags/next';
+import { flag } from "flags/next";
  
-export const exampleFlag = flag({
-  key: 'example-flag',
+export const comingSoonFlag = flag({
+  key: 'coming-soon-flag',
   decide() {
-    return Math.random() > 0.5;
+    return true;
   },
 });

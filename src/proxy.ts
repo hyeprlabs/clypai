@@ -38,9 +38,9 @@ export async function proxy(request: NextRequest) {
   const isComingSoonMode = apps?.clypai?.["is-coming-soon"];
 
   const isAdmin = session?.user?.role === "admin";
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isProduction = process.env.NODE_ENV === "production";
 
-  if (!isAdmin && !isDevelopment) {
+  if (!isAdmin && isProduction) {
     if (isMaintenanceMode && pathname !== "/maintenance") {
       request.nextUrl.pathname = "/maintenance";
       console.log("Mode Active: Maintenance!");

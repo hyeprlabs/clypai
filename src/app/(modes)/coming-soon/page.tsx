@@ -1,5 +1,5 @@
 import { ClypAIWordmark } from "@/components/brand/logos";
-import { WaitlistForm } from "@/components/waitlist-form";
+import { WaitlistForm } from "@/components/marketing/waitlist-form";
 
 export default function Page() {
 
