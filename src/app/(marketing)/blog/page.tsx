@@ -1,18 +1,10 @@
+"use client"
+
 import { Suspense } from "react";
 
-import Link from "next/link";
-import Image from "next/image";
-
-import { getAllPosts } from "@/components/marketing/blog/mdx";
+import { motion } from "motion/react";
 
 import { Bell } from "lucide-react";
-
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription
-} from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
 
@@ -20,58 +12,73 @@ import { CategoryTabs } from "@/components/marketing/blog/category-tabs";
 
 import { SearchBlogCommandDialog } from "@/components/marketing/blog/search-blog-command-dialog";
 
-export default function BlogIndex() {
-  const posts = getAllPosts().sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+import { BackgroundGlow } from "@/components/marketing/background-glow";
 
+import { BlogPosts } from "@/components/marketing/blog/blog-posts";
+
+export default function Page() {
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-4 py-32">
-      <header className="mb-3 flex items-center justify-between">
-        <h1 className="effect-font-styling font-serif text-[4rem] md:text-[4.8rem] tracking-[-0.01em] leading-[100%] effect-font-gradient mb-2 pb-3 text-balance">Blog</h1>
+    <main className="overflow-hidden">
 
-        <div className="flex items-center gap-3">
-          <SearchBlogCommandDialog />
-          <Button variant="outline" className="rounded-full" size="sm">
-            <Bell className="text-muted-foreground" />
-            Subscribe
-          </Button>
+      <BackgroundGlow />
+
+      <section>
+        <div className="relative pt-16 sm:pt-24 md:pt-36 pb-12 sm:pb-16 md:pb-24">
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"
+          />
+
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <header className="mb-10 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1"
+              >
+                Blog
+              </motion.h1>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                className="flex items-center gap-3"
+              >
+                <SearchBlogCommandDialog />
+                <Button variant="outline" className="rounded-full" size="sm">
+                  <Bell className="text-muted-foreground mr-2" />
+                  Subscribe
+                </Button>
+              </motion.div>
+            </header>
+
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+              className="mb-10"
+            >
+              <Suspense>
+                <CategoryTabs />
+              </Suspense>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            >
+              <Suspense>
+                <BlogPosts />
+              </Suspense>
+            </motion.div>
+            
+          </div>
         </div>
-      </header>
-
-      <Suspense>
-        <CategoryTabs />
-      </Suspense>
-
-      <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-max gap-6 items-stretch">
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-            <Card className="p-0 bg-linear-to-br from-background to-muted/50 hover:from-muted/50 hover:to-background transition-colors">
-              <CardHeader className="p-3">
-                {post.image && (
-                  <div className="relative aspect-video mb-4 overflow-hidden rounded-lg">
-                    <Image 
-                      src={post.image} 
-                      alt={post.title} 
-                      fill 
-                      className="object-cover"
-                    />
-                  </div>
-                  )}
-                <time className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
-                  {post.date}
-                </time>
-                <CardTitle className="text-3xl font-serif font-normal">
-                  {post.title}
-                </CardTitle>
-                <CardDescription className="text-base line-clamp-2">
-                  {post.description}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-        ))}
-      </div>
+      </section>
     </main>
   );
 }
