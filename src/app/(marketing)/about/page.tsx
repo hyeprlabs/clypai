@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { motion } from "motion/react";
 import { CallToAction } from "@/components/marketing/call-to-action";

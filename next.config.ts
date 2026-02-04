@@ -1,10 +1,9 @@
+import type { NextConfig } from "next";
 import { withWorkflow } from "workflow/next";
 import { withBotId } from "botid/next/config";
-import type { NextConfig } from "next";
-import createMDX from "@next/mdx";
+import { createMDX } from "fumadocs-mdx/next";
 
 const nextConfig: NextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [
       {
@@ -27,7 +26,8 @@ const nextConfig: NextConfig = {
 };
 
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-})
+  // customise the config file path
+  // configPath: "source.config.ts"
+});
 
 export default withWorkflow(withBotId(withMDX(nextConfig)));
