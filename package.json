@@ -34,6 +34,7 @@
     "@statsig/session-replay": "^3.31.2",
     "@statsig/web-analytics": "^3.31.2",
     "@tanstack/react-form": "^1.27.7",
+    "@trigger.dev/sdk": "4.3.3",
     "@types/mdx": "^2.0.13",
     "@types/slug": "^5.0.9",
     "@vercel/analytics": "^1.6.1",
@@ -71,6 +72,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
+    "@trigger.dev/build": "4.3.3",
     "@types/node": "^20.19.30",
     "@types/pg": "^8.16.0",
     "@types/react": "^19.2.8",
