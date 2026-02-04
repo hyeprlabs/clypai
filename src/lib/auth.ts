@@ -6,9 +6,21 @@ import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
 
+if (!process.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL .env variable!");
+}
+
+if (!process.env.POLAR_ACCESS_TOKEN) {
+  throw new Error("Missing POLAR_ACCESS_TOKEN .env variable!");
+}
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("Missing RESEND_API_KEY .env variable!");
+}
+
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
-  server: 'sandbox'
+  server: "sandbox"
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -42,7 +54,7 @@ export const auth = betterAuth({
     waitlist({
       enabled: true,
       maximumWaitlistParticipants: 1000,
-      disableSignInAndSignUp: true,
+      disableSignInAndSignUp: false,
       rateLimit: {
         maxAttempts: 5,
         windowMs: 10 * 60 * 1000,  // 10 minutes
