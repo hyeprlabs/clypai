@@ -90,7 +90,7 @@ export function LoginForm({
         },
         onError: (error) => {
           setIsGitHubLoading(false);
-          toast.error("Error logging in with GitHub! Please try again.");
+          toast.error(error.error.message);
           console.error("Error logging in with GitHub! Error: ", error);
         },
       }
@@ -115,7 +115,7 @@ export function LoginForm({
           console.log("Logged in! User: ", data.email);
         },
         onError: (error) => {
-          toast.error("Error logging in! Please try again.");
+          toast.error(error.error.message);
           console.error("Error logging in! Error: ", error);
         },
       }

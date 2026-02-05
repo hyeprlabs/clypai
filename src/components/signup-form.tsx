@@ -89,7 +89,7 @@ export function SignupForm({
         },
         onError: (error) => {
           setIsGitHubLoading(false);
-          toast.error("Error signing up with GitHub! Please try again.");
+          toast.error(error.error.message);
           console.error("Error signing up with GitHub! Error: ", error);
         },
       }
@@ -114,7 +114,7 @@ export function SignupForm({
           console.log("Signed up! User: ", data.email);
         },
         onError: (error) => {
-          toast.error("Error signing up! Please try again.");
+          toast.error(error.error.message);
           console.error("Error signing up! Error: ", error);
         },
       }
