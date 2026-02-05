@@ -89,7 +89,10 @@ export function SignupForm({
         },
         onError: (error) => {
           setIsGitHubLoading(false);
-          toast.error(error.error.message);
+          const message = error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
+            ? "Sign up disabled. Join Waitlist!"
+            : error.error.message;
+          toast.error(message);
           console.error("Error signing up with GitHub! Error: ", error);
         },
       }
@@ -103,7 +106,7 @@ export function SignupForm({
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: "/dashboard"
+        callbackURL: "/overview"
       },
       {
         onRequest: () => {
@@ -114,7 +117,10 @@ export function SignupForm({
           console.log("Signed up! User: ", data.email);
         },
         onError: (error) => {
-          toast.error(error.error.message);
+          const message = error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
+            ? "Sign up disabled. Join Waitlist!"
+            : error.error.message;
+          toast.error(message);
           console.error("Error signing up! Error: ", error);
         },
       }
