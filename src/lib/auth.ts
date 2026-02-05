@@ -66,25 +66,32 @@ export const auth = betterAuth({
         windowMs: 10 * 60 * 1000,  // 10 minutes
         max: 10,
       },
-      validateEntry: async ({ email, additionalData }) => {
-        // Custom business logic
-        return email.includes("admin") || additionalData?.priority === "high";
-      },
       onStatusChange: async (entry) => {
         await resend.emails.send({
-          from: "ClypAI <clypai@hyeprlabs.com>",
           to: entry.email,
-          subject: "ClypAI Waitlist Status Update",
-          text: `Your waitlist status has been updated to: ${entry.status}`
+          template: {
+            id: "waitlist-status-1",
+            variables: {
+              app_url: "https://clypai.com",
+              email: entry.email,
+              status: entry.status,
+            }
+          }
         });
         console.log(`Entry ${entry.id} status changed to ${entry.status}`);
       },
       onJoinRequest: async ({ request }) => {
         await resend.emails.send({
-          from: "ClypAI <clypai@hyeprlabs.com>",
           to: request.email,
-          subject: "Your join request to the ClypAI Waitlist",
-          text: "Thank you for joining the ClypAI waitlist! We'll notify you when we're ready to onboard new users."
+          template: {
+            id: "waitlist-request",
+            variables: {
+              url: "/status?email=" + encodeURIComponent(request.email),
+              status: request.status,
+              requested_from: request.email,
+              requested_at: request.requestedAt.toISOString(),
+            }
+          }
         });
         console.log(`New request from ${request.email}`);
       },
@@ -94,15 +101,15 @@ export const auth = betterAuth({
     enabled: true,
     disableSignUp: true,
     emailVerification: {
-      sendVerificationEmail: async ({ user, token }: { user: any; token: string }, request: any) => {
+      sendVerificationEmail: async ({ user, token }: { user: any; token: string }) => {
         await resend.emails.send({
           to: user.email,
           template: {
             id: "verification-code",
             variables: {
               token: token,
-              requested_from: request.agent,
-              requested_at: request.time,
+              requested_from: user.email,
+              requested_at: new Date().toISOString(),
             }
           }
         });
