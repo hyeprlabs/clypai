@@ -26,6 +26,7 @@ const polarClient = new Polar({
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
+  appName: "ClypAI",
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
   }),
@@ -86,11 +87,13 @@ export const auth = betterAuth({
   ],
   emailAndPassword: {
     enabled: true,
+    disableSignUp: true,
   },
   socialProviders: {
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      disableSignUp: true,
     },
   },
 });
