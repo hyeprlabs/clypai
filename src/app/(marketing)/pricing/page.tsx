@@ -1,3 +1,5 @@
+"use client"
+
 import { Suspense } from "react";
 import { motion } from "motion/react";
 import { BackgroundGlow } from "@/components/marketing/background-glow";
