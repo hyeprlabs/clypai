@@ -29,6 +29,8 @@ export const auth = betterAuth({
   appName: "ClypAI",
   trustedOrigins: [
 		"https://*.vercel.app",
+    "https://*.clypai.com",
+    "https://*.clyp.ai",
 	],
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -91,6 +93,21 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     disableSignUp: true,
+    emailVerification: {
+      sendVerificationEmail: async ({ user, token }: { user: any; token: string }, request: any) => {
+        await resend.emails.send({
+          to: user.email,
+          template: {
+            id: "verification-code",
+            variables: {
+              token: token,
+              requested_from: request.agent,
+              requested_at: request.time,
+            }
+          }
+        });
+      },
+    },
   },
   socialProviders: {
     github: {
