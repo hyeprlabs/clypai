@@ -6,7 +6,7 @@ import { CircleArrowLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata: Metadata = {
   title: "Login",

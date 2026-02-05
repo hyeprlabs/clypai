@@ -34,7 +34,7 @@ import { toast } from "sonner";
 
 import Link from "next/link";
 
-import { ClypAIWordmark } from "./brand/logos";
+import { ClypAIWordmark } from "../brand/logos";
 
 const schema = z.object({
   name: z
