@@ -37,7 +37,12 @@ export function ConnectionItemDropdown({ connection }: { connection: Connection 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-full text-muted-foreground"
+          aria-label={connection.username}
+        >
           <MoreVerticalIcon />
         </Button>
       </DropdownMenuTrigger>

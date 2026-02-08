@@ -101,7 +101,7 @@ export const auth = betterAuth({
     enabled: true,
     disableSignUp: true,
     emailVerification: {
-      sendVerificationEmail: async ({ user, token }: { user: any; token: string }) => {
+      sendVerificationEmail: async ({ user, token }: { user: { email: string }; token: string }) => {
         await resend.emails.send({
           to: user.email,
           template: {

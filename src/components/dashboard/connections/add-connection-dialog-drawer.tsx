@@ -71,11 +71,11 @@ export default function AddConnectionForm({ platforms, onSuccess }: { platforms:
 
   const platform = platforms.find(p => p.slug === slug);
 
-  async function onSubmit(data: z.infer<typeof schema>) {
+  async function onSubmit() {
     try {
       toast.success(`${platform?.name} connection added!`);
       onSuccess?.();
-    } catch (error) {
+    } catch {
       toast.error("Failed to add connection");
     }
   }
