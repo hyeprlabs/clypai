@@ -36,6 +36,7 @@
     "@statsig/react-bindings": "^3.31.2",
     "@statsig/session-replay": "^3.31.2",
     "@statsig/web-analytics": "^3.31.2",
+    "@supabase/supabase-js": "^2.95.3",
     "@tanstack/react-form": "^1.27.7",
     "@types/mdx": "^2.0.13",
     "@types/slug": "^5.0.9",
