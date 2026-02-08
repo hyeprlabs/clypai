@@ -12,7 +12,7 @@ const sizeClasses: Record<NonNullable<SystemBannerProps["size"]>, string> = {
   lg: "text-base px-4 py-1.5"
 };
 
-export default function SystemBanner({
+export function SystemBanner({
   text = "Development Mode",
   color = "bg-orange-500",
   size = "xs",

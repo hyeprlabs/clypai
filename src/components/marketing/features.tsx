@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import { useState } from "react";
 
 import { Cloud, Cpu, Shield, ChevronRight } from "lucide-react";
@@ -22,11 +23,11 @@ export function Features() {
         <div>
           <div>
             <h2 className="text-balance font-serif text-4xl font-medium">
-              Powerful Features for Modern Teams
+              Powerful clipping fatures
             </h2>
             <p className="text-muted-foreground mb-6 mt-4 text-balance font-mono text-sm">
-              Everything you need to build, connect, and scale your integrations
-              effortlessly.
+              Everything you need to clip, edit, and publish your long-form videos
+              automatically.
             </p>
             <Link href="/why">
               <Button variant="outline" className="rounded-full bg-linear-to-br from-background to-card font-mono">
@@ -46,7 +47,7 @@ export function Features() {
                 <div className="size-3 shrink-0 rounded-full border border-current"></div>
               </div>
               <span className="in-data-[selected=true]:text-shadow-[0.2px_0_0_currentColor]">
-                Seamless Integrations
+                Various Platforms
               </span>
             </button>
             <button
@@ -56,7 +57,7 @@ export function Features() {
             >
               <Cloud className="size-4" />
               <span className="in-data-[selected=true]:text-shadow-[0.2px_0_0_currentColor]">
-                Real-time Sync
+                AI-driven Clipping
               </span>
             </button>
             <button
@@ -66,7 +67,7 @@ export function Features() {
             >
               <Cpu className="size-4" />
               <span className="in-data-[selected=true]:text-shadow-[0.2px_0_0_currentColor]">
-                Developer-first
+                Modern editing
               </span>
             </button>
             <button
@@ -76,7 +77,7 @@ export function Features() {
             >
               <Shield className="size-4" />
               <span className="in-data-[selected=true]:text-shadow-[0.2px_0_0_currentColor]">
-                Enterprise-ready
+                Powerful analytics
               </span>
             </button>
           </div>

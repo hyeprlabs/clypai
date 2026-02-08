@@ -1,13 +1,11 @@
+"use client"
+
 import { Suspense } from "react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
 import { BackgroundGlow } from "@/components/marketing/background-glow";
 import { PricingSection } from "@/components/marketing/pricing/pricing-section";
-import { comingSoonFlag } from "@/lib/flags";
 
-export default async function Page() {
-  const isComingSoon = await comingSoonFlag();
-  
+export default function Page() {
   return (
     <main className="overflow-hidden">
       
@@ -54,25 +52,9 @@ export default async function Page() {
                   whileHover="hover"
                   className="relative"
                 >
-                  <div className={cn(isComingSoon && "blur-sm opacity-50 pointer-events-none select-none grayscale transition-all duration-500")}>
-                    <Suspense>
-                      <PricingSection />
-                    </Suspense>
-                  </div>
-
-                  {isComingSoon && (
-                    <motion.div
-                      variants={{
-                        rest: { opacity: 0 },
-                        hover: { opacity: 1 },
-                      }}
-                      className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none"
-                    >
-                      <span className="font-mono text-sm text-muted-foreground">
-                        Coming soon
-                      </span>
-                    </motion.div>
-                  )}
+                  <Suspense>
+                    <PricingSection />
+                  </Suspense>
                 </motion.div>
               </motion.div>
 

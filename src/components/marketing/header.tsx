@@ -1,4 +1,6 @@
-"use client";
+"use client"
+
+import { authClient } from "@/lib/auth-client";
 
 import { useState, useEffect } from "react";
 
@@ -13,6 +15,8 @@ import { NavigationMenu } from "@/components/marketing/navigation-menu";
 import { Button } from "@/components/ui/button";
 
 import { ClypAIWordmark } from "@/components/brand/logos";
+
+import { UserDropdown } from "@/components/marketing/user-dropdown";
 
 const items = [
   {
@@ -40,6 +44,64 @@ const items = [
     label: "Pricing",
   },
 ];
+
+const HeaderActions = ({ isScrolled }: { isScrolled: boolean }) => {
+  const { data: session } = authClient.useSession();
+
+  if (session?.user) {
+    return (
+      <div className="relative hidden items-center gap-3 lg:flex">
+        <Link href="/overview">
+          <Button size="sm" className="rounded-full">
+            Dashboard
+            <ArrowRightCircle className="ml-2" />
+          </Button>
+        </Link>
+        <UserDropdown />
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative hidden items-center gap-3 lg:flex">
+      <div
+        className={cn(
+          "flex items-center gap-3 transition-all duration-300 ease-in-out",
+          isScrolled
+            ? "pointer-events-none translate-x-1 opacity-0"
+            : "translate-x-0 opacity-100"
+        )}
+      >
+        <Link href="/login">
+          <Button variant="outline" size="sm" className="rounded-full">
+            Login
+          </Button>
+        </Link>
+        <Link href="/signup">
+          <Button size="sm" className="rounded-full">
+            Sign Up
+            <ArrowRightCircle className="ml-2" />
+          </Button>
+        </Link>
+      </div>
+      <div
+        className={cn(
+          "absolute right-0 transition-all duration-300 ease-in-out",
+          isScrolled
+            ? "translate-x-0 opacity-100"
+            : "pointer-events-none -translate-x-1 opacity-0"
+        )}
+      >
+        <Link href="/signup">
+          <Button size="sm" className="rounded-full">
+            Get Started
+            <ArrowRightCircle className="ml-2" />
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export const Header = () => {
   const [menu, setMenu] = useState(false);
@@ -79,50 +141,7 @@ export const Header = () => {
               <NavigationMenu items={items} />
             </div>
 
-            <div className="relative hidden items-center gap-3 lg:flex">
-              <div
-                className={cn(
-                  "flex items-center gap-3 transition-all duration-300 ease-in-out",
-                  isScrolled
-                    ? "pointer-events-none translate-x-1 opacity-0"
-                    : "translate-x-0 opacity-100"
-                )}
-              >
-                <Link href="/login">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="rounded-full"
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button 
-                    size="sm"
-                    className="rounded-full"
-                  >
-                    Sign Up
-                    <ArrowRightCircle className="ml-2" />
-                  </Button>
-                </Link>
-              </div>
-              <div
-                className={cn(
-                  "absolute right-0 transition-all duration-300 ease-in-out",
-                  isScrolled
-                    ? "translate-x-0 opacity-100"
-                    : "pointer-events-none -translate-x-1 opacity-0"
-                )}
-              >
-                <Link href="/signup">
-                  <Button size="sm" className="rounded-full">
-                    Get Started
-                    <ArrowRightCircle className="ml-2" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+            <HeaderActions isScrolled={isScrolled} />
 
             <button
               onClick={() => setMenu(!menu)}

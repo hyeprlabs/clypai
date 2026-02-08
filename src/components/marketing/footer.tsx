@@ -101,6 +101,16 @@ export function Footer() {
           {" "}
           © {new Date().getFullYear()} ClypAI, All rights reserved.
         </span>
+        {(process.env.VERCEL_REGION || process.env.VERCEL_DEPLOYMENT_ID) && (
+          <div className="mt-4 flex flex-col items-center gap-1 text-xs text-muted-foreground/60 font-mono">
+            {process.env.VERCEL_REGION && (
+              <span>Region: {process.env.VERCEL_REGION}</span>
+            )}
+            {process.env.VERCEL_DEPLOYMENT_ID && (
+              <span>Deployment: {process.env.VERCEL_DEPLOYMENT_ID}</span>
+            )}
+          </div>
+        )}
       </div>
     </footer>
   );
