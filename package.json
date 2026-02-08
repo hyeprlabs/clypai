@@ -53,6 +53,7 @@
     "fumadocs-core": "^16.5.0",
     "fumadocs-mdx": "^14.2.6",
     "gray-matter": "^4.0.3",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.562.0",
     "motion": "^12.27.1",
     "next": "16.1.1",
