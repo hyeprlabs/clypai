@@ -28,10 +28,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const auth = betterAuth({
   appName: "ClypAI",
   trustedOrigins: [
-		"https://*.vercel.app",
+	process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+	process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
     "https://*.clypai.com",
     "https://*.clyp.ai",
-	],
+  ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
   }),
