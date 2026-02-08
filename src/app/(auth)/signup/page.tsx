@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Create an ClypAI Account.",
 }
 
-export default function SignupPage() {
+export default function Page() {
   return (
     <div
       className="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10"
@@ -35,5 +35,5 @@ export default function SignupPage() {
         <SignupForm />
       </div>
     </div>
-  )
+  );
 }
