@@ -5,6 +5,7 @@ import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
+import { whitelistFlag } from "@/lib/flags";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Missing DATABASE_URL .env variable!");
@@ -24,6 +25,8 @@ const polarClient = new Polar({
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const isWhitelist = await whitelistFlag();
 
 export const auth = betterAuth({
   appName: "ClypAI",
@@ -61,7 +64,7 @@ export const auth = betterAuth({
     waitlist({
       enabled: true,
       maximumWaitlistParticipants: 1000,
-      disableSignInAndSignUp: false,
+      disableSignInAndSignUp: isWhitelist,
       rateLimit: {
         maxAttempts: 5,
         windowMs: 10 * 60 * 1000,  // 10 minutes
