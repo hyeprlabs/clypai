@@ -16,6 +16,8 @@ import {
 
 import { CallToAction } from "@/components/marketing/call-to-action";
 
+import { generateOGImageUrl } from "@/lib/og-image";
+
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
     slug: page.data.slug,
@@ -34,13 +36,12 @@ export async function generateMetadata({
 
   if (!post) return notFound();
 
-  const ogImageUrl = new URL('/api/og', 
-    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-  );
-  ogImageUrl.searchParams.set('title', post.data.name);
-  ogImageUrl.searchParams.set('author', post.data.author.name);
-  ogImageUrl.searchParams.set('date', post.data.date.toString());
-  ogImageUrl.searchParams.set('tags', post.data.tags.join(','));
+  const ogImageUrl = generateOGImageUrl({
+    title: post.data.name,
+    author: post.data.author.name,
+    date: post.data.date,
+    tags: post.data.tags,
+  });
 
   return {
     title: post.data.name,
@@ -50,7 +51,7 @@ export async function generateMetadata({
       description: post.data.description,
       images: [
         {
-          url: ogImageUrl.toString(),
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: post.data.name,
@@ -61,7 +62,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.data.name,
       description: post.data.description,
-      images: [ogImageUrl.toString()],
+      images: [ogImageUrl],
     },
   };
 }

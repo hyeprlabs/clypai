@@ -10,6 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { useQueryState } from "nuqs";
 
+import { generateOGImagePath } from "@/lib/og-image";
+
 export function BlogPosts() {
   const [category] = useQueryState("category", { defaultValue: "all" });
 
@@ -25,7 +27,12 @@ export function BlogPosts() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
       {posts.map((post) => {
-        const ogImageUrl = `/api/og?title=${encodeURIComponent(post.data.name)}&author=${encodeURIComponent(post.data.author.name)}&date=${encodeURIComponent(post.data.date.toString())}&tags=${encodeURIComponent(post.data.tags.join(','))}`;
+        const ogImageUrl = generateOGImagePath({
+          title: post.data.name,
+          author: post.data.author.name,
+          date: post.data.date,
+          tags: post.data.tags,
+        });
         
         return (
           <Link
