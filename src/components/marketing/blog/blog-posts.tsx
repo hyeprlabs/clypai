@@ -24,38 +24,40 @@ export function BlogPosts() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-      {posts.map((post) => (
-        <Link
-          key={post.data.slug}
-          href={`/blog/${post.data.slug}`}
-          className="group flex flex-col gap-4"
-        >
-          {post.data.image && (
+      {posts.map((post) => {
+        const ogImageUrl = `/api/og?title=${encodeURIComponent(post.data.name)}&author=${encodeURIComponent(post.data.author.name)}&date=${encodeURIComponent(post.data.date.toString())}&tags=${encodeURIComponent(post.data.tags.join(','))}`;
+        
+        return (
+          <Link
+            key={post.data.slug}
+            href={`/blog/${post.data.slug}`}
+            className="group flex flex-col gap-4"
+          >
             <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
               <Image
-                src={post.data.image.src}
-                alt={post.data.image.alt}
+                src={ogImageUrl}
+                alt={post.data.name}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
               />
             </div>
-          )}
-          
-          <div className="space-y-3">
+            
+            <div className="space-y-3">
 
-            <h3 className="text-xl leading-tight">
-              {post.data.name}
-            </h3>
+              <h3 className="text-xl leading-tight">
+                {post.data.name}
+              </h3>
 
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Author author={post.data.author} />
-              <span className="text-xs">·</span>
-              <Time date={post.data.date} />
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Author author={post.data.author} />
+                <span className="text-xs">·</span>
+                <Time date={post.data.date} />
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        );
+      })}
     </div>
   );
 }
