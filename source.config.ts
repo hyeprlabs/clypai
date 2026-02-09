@@ -1,5 +1,10 @@
 import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import lastModified from "fumadocs-mdx/plugins/last-modified";
+import { rehypeCodeDefaultOptions } from 'fumadocs-core/mdx-plugins';
+import remarkGfm from 'remark-gfm';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import * as z from "zod";
 
 export const blog = defineCollections({
@@ -30,4 +35,15 @@ export const blog = defineCollections({
 
 export default defineConfig({
   plugins: [lastModified()],
+  mdxOptions: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+      [rehypePrettyCode, {
+        theme: 'github-dark',
+        keepBackground: false,
+      }],
+    ],
+  },
 });

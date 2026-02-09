@@ -34,9 +34,34 @@ export async function generateMetadata({
 
   if (!post) return notFound();
 
+  // Generate OG image URL
+  const ogImageUrl = `/api/og?title=${encodeURIComponent(post.data.name)}&category=${encodeURIComponent(post.data.category || 'Blog')}&date=${encodeURIComponent(post.data.date.toString())}`;
+
   return {
     title: post.data.name,
     description: post.data.description,
+    openGraph: {
+      title: post.data.name,
+      description: post.data.description,
+      type: 'article',
+      publishedTime: post.data.date.toISOString(),
+      authors: [post.data.author.name],
+      tags: post.data.tags,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.data.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.data.name,
+      description: post.data.description,
+      images: [ogImageUrl],
+    },
   };
 }
 

@@ -124,4 +124,38 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Code highlighting from rehype-pretty-code */
+  pre {
+    overflow-x: auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  pre code {
+    display: grid;
+    counter-reset: line;
+  }
+  
+  code[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 1rem;
+    margin-right: 2rem;
+    text-align: right;
+    color: gray;
+  }
+  
+  [data-line] {
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+  }
+  
+  [data-highlighted-line] {
+    background-color: rgba(200, 200, 255, 0.1);
+    border-left: 2px solid rgb(125, 125, 255);
+    padding-left: calc(0.5rem - 2px);
+  }
 }
