@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
-import "./globals.css";
 
-import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Statsig } from "@/lib/statsig";
+import "@/app/globals.css";
+
+// Metadata
+import { metadata } from "@/app/metadata";
+
+// Providers
+import { Providers } from "@/app/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,13 +24,7 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: "%s | ClypAI",
-    default: "ClypAI",
-  },
-  description: "#1 AI video clipping & editing tool.",
-}
+export { metadata };
 
 export default function RootLayout({
   children,
@@ -42,19 +36,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Statsig>
+        <Providers>
           {children}
-          </Statsig>
-          <Toaster />
-          <Analytics />
-          <SpeedInsights />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

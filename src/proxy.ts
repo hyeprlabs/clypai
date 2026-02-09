@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { get } from "@vercel/edge-config";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import { comingSoonFlag, maintenanceFlag } from "@/lib/flags";
 
 // Auth Pages
 const authPages = [
@@ -32,15 +32,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const apps = await get("apps") as { clypai?: { "is-maintenance"?: boolean; "is-coming-soon"?: boolean } } | undefined;
-
-  const isMaintenanceMode = apps?.clypai?.["is-maintenance"];
-  const isComingSoonMode = apps?.clypai?.["is-coming-soon"];
+  const isMaintenanceMode = await maintenanceFlag();
+  const isComingSoonMode = await comingSoonFlag();
 
   const isAdmin = session?.user?.role === "admin";
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
-  if (!isAdmin && !isDevelopment) {
+  if (!isAdmin && isProduction) {
     if (isMaintenanceMode && pathname !== "/maintenance") {
       request.nextUrl.pathname = "/maintenance";
       console.log("Mode Active: Maintenance!");

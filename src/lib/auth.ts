@@ -4,13 +4,40 @@ import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
+import { Resend } from "resend";
+
+import {
+  sendWaitlistJoinRequestEmail,
+  sendWaitlistStatusChangeEmail,
+} from "@/actions/send";
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL .env variable!");
+}
+
+if (!process.env.POLAR_ACCESS_TOKEN) {
+  throw new Error("Missing POLAR_ACCESS_TOKEN .env variable!");
+}
+
+if (!process.env.RESEND_API_KEY) {
+  throw new Error("Missing RESEND_API_KEY .env variable!");
+}
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
-  server: 'sandbox'
+  server: "sandbox"
 });
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export const auth = betterAuth({
+  appName: "ClypAI",
+  trustedOrigins: [
+	  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+	  process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
+    "https://*.clypai.com",
+    "https://*.clyp.ai",
+  ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
   }),
@@ -39,33 +66,50 @@ export const auth = betterAuth({
     waitlist({
       enabled: true,
       maximumWaitlistParticipants: 1000,
-      disableSignInAndSignUp: true,
+      disableSignInAndSignUp: false,
+      notifications: {
+        enabled: true,
+        onJoin: true,
+        onAccept: true,
+        onReject: true,
+      },
       rateLimit: {
         maxAttempts: 5,
         windowMs: 10 * 60 * 1000,  // 10 minutes
         max: 10,
       },
-      validateEntry: async ({ email, additionalData }) => {
-        // Custom business logic
-        return email.includes("admin") || additionalData?.priority === "high";
-      },
       onStatusChange: async (entry) => {
-        // Send notification emails
-        console.log(`Entry ${entry.id} status changed to ${entry.status}`);
+        await sendWaitlistStatusChangeEmail(entry);
       },
       onJoinRequest: async ({ request }) => {
-        // Handle new join requests
-        console.log(`New request from ${request.email}`);
+        await sendWaitlistJoinRequestEmail(request);
       },
     }),
   ],
   emailAndPassword: {
     enabled: true,
+    disableSignUp: true,
+    emailVerification: {
+      sendVerificationEmail: async ({ user, token }: { user: { email: string }; token: string }) => {
+        await resend.emails.send({
+          to: user.email,
+          template: {
+            id: "verification-code",
+            variables: {
+              token: token,
+              requested_from: user.email,
+              requested_at: new Date().toISOString(),
+            }
+          }
+        });
+      },
+    },
   },
   socialProviders: {
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      disableSignUp: true,
     },
   },
 });
