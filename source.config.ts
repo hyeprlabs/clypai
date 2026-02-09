@@ -27,6 +27,17 @@ export const blog = defineCollections({
   }),
 });
 
+export const legal = defineCollections({
+  type: "doc",
+  dir: "./content/legal",
+  async: true,
+  schema: z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    slug: z.string(),
+  }),
+});
+
 
 export default defineConfig({
   plugins: [lastModified()],
