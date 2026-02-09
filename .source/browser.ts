@@ -25,6 +25,6 @@ const create = browser<typeof Config, import("fumadocs-mdx/runtime/types").Inter
 }>();
 const browserCollections = {
   blog: create.doc("blog", {"launch.mdx": () => import("../content/blog/launch.mdx?collection=blog"), }),
-  legal: create.doc("legal", {"privacy-policy.mdx": () => import("../content/legal/privacy-policy.mdx?collection=legal"), "terms-of-service.mdx": () => import("../content/legal/terms-of-service.mdx?collection=legal"), }),
+  legal: create.doc("legal", {"imprint.mdx": () => import("../content/legal/imprint.mdx?collection=legal"), "privacy-policy.mdx": () => import("../content/legal/privacy-policy.mdx?collection=legal"), "terms-of-service.mdx": () => import("../content/legal/terms-of-service.mdx?collection=legal"), }),
 };
 export default browserCollections;
