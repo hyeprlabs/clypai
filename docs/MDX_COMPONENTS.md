@@ -1,10 +1,10 @@
-# Blog MDX Components Guide
+# Blog MDX Guide
 
-This guide explains how to use the enhanced MDX components available in blog posts.
+This guide explains how to write blog posts using MDX with enhanced formatting powered by remark and rehype plugins.
 
-## Standard Enhanced Components
+## Standard Markdown Features
 
-All standard Markdown elements have been enhanced with better styling:
+All standard Markdown elements are supported with enhanced styling via remark-gfm and rehype plugins:
 
 ### Images
 Images automatically get wrapped in a figure with a caption from the alt text:
@@ -21,125 +21,54 @@ Blockquotes are styled with a quote icon and better formatting:
 ```
 
 ### Code
-Inline code and code blocks have enhanced styling:
+Inline code and code blocks have syntax highlighting via rehype-pretty-code:
 
 ```md
 Inline `code` looks great.
 
 \`\`\`javascript
-// Code blocks have syntax highlighting
+// Code blocks have automatic syntax highlighting
 const greeting = "Hello, world!";
+console.log(greeting);
 \`\`\`
 ```
 
+Code highlighting features:
+- Automatic syntax detection
+- Line numbers (optional)
+- Line highlighting (optional)
+- Dark theme (github-dark)
+
 ### Lists
-Both ordered and unordered lists have custom markers and spacing:
+Both ordered and unordered lists are styled via remark-gfm:
 
 ```md
 - List item 1
 - List item 2
+  - Nested item
 
 1. Numbered item 1
 2. Numbered item 2
+
+- [ ] Task list item (unchecked)
+- [x] Task list item (checked)
 ```
 
 ### Tables
-Tables have bordered styling:
+Tables are fully supported via remark-gfm:
 
 ```md
-| Header 1 | Header 2 |
-|----------|----------|
-| Cell 1   | Cell 2   |
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
 ```
 
-## Custom Components
-
-### Callout Boxes
-
-Use callouts to highlight important information:
-
-```mdx
-<Callout type="info" title="Note">
-This is an informational callout.
-</Callout>
-
-<Callout type="warning" title="Warning">
-Be careful about this!
-</Callout>
-
-<Callout type="error" title="Important">
-This is critical information.
-</Callout>
-
-<Callout type="success" title="Success">
-Great job!
-</Callout>
-
-<Callout type="tip" title="Pro Tip">
-Here's a helpful tip!
-</Callout>
-```
-
-Shorthand versions:
-
-```mdx
-<Note>
-Quick informational note.
-</Note>
-
-<Warning>
-Warning message here.
-</Warning>
-
-<Important>
-Important information.
-</Important>
-
-<Tip>
-Helpful tip!
-</Tip>
-```
-
-### Video Embeds
-
-Embed YouTube or Vimeo videos:
-
-```mdx
-<VideoEmbed 
-  src="https://www.youtube.com/watch?v=VIDEO_ID"
-  title="Video Title"
-  aspectRatio="16/9"
-/>
-```
-
-Supported platforms:
-- YouTube (youtube.com or youtu.be)
-- Vimeo (vimeo.com)
-
-Aspect ratios:
-- `"16/9"` (default, widescreen)
-- `"4/3"` (standard)
-- `"1/1"` (square)
-
-### Tweet Embeds
-
-Embed tweets:
-
-```mdx
-<TweetEmbed tweetId="1234567890" />
-```
-
-## Typography Best Practices
-
-### Headings
-Use proper heading hierarchy:
-- `#` for main sections (H1)
-- `##` for subsections (H2)
-- `###` for sub-subsections (H3)
-- `####` for minor sections (H4)
+### Autolinks
+Headings automatically get anchor links via rehype-slug and rehype-autolink-headings.
 
 ### Links
-External links automatically open in new tabs:
+External links automatically open in new tabs with proper security attributes:
 
 ```md
 [External Link](https://example.com)
@@ -152,7 +81,34 @@ Use bold and italic for emphasis:
 ```md
 **Bold text** for strong emphasis
 *Italic text* for mild emphasis
+~~Strikethrough~~ for removed text
 ```
+
+## OG Images
+
+Blog posts automatically get beautiful OG (Open Graph) images generated for social sharing. These images feature:
+- Dark gradient background
+- Blog post title
+- Category badge
+- Publication date
+- ClypAI branding
+
+The OG images are generated on-the-fly using Vercel's @vercel/og package and don't require manual image creation.
+
+## Typography Best Practices
+
+### Headings
+Use proper heading hierarchy:
+- `#` for main sections (H1)
+- `##` for subsections (H2)
+- `###` for sub-subsections (H3)
+- `####` for minor sections (H4)
+
+All headings automatically get:
+- Scroll margin for better navigation
+- Auto-generated anchor links
+- Serif font styling
+- Proper spacing
 
 ## Example Blog Post Structure
 
@@ -170,17 +126,13 @@ date: 2026-02-09
 tags: ["Tag1", "Tag2", "Tag3"]
 category: "company" # or "product" or "community"
 image:
-  src: "/posts/your-image.png"
+  src: "/posts/placeholder.png" # Not used - OG images generated automatically
   alt: "Image description"
 ---
 
 ## Introduction
 
 Start with a compelling introduction that hooks the reader.
-
-<Note>
-Important context or background information.
-</Note>
 
 ## Main Section
 
@@ -199,18 +151,17 @@ const example = "code";
 console.log(example);
 \`\`\`
 
-### Visual Content
+### Task List
 
-![Image description](/posts/image.png)
+- [x] Completed task
+- [ ] Pending task
 
-<VideoEmbed 
-  src="https://youtube.com/watch?v=..."
-  title="Tutorial Video"
-/>
+### Table
 
-<Tip>
-Pro tip: This is how you do it right!
-</Tip>
+| Feature | Description |
+|---------|-------------|
+| Fast | Lightning quick |
+| Easy | Simple to use |
 
 ## Conclusion
 
@@ -219,28 +170,14 @@ Wrap up your post with key takeaways.
 **Ready to get started?** [Try ClypAI](https://clyp.ai)
 ```
 
-## Component Props Reference
+## Configuration
 
-### Callout
-- `type`: "info" | "warning" | "error" | "success" | "tip" (default: "info")
-- `title`: string (optional)
-- `children`: ReactNode
+The MDX configuration is in `source.config.ts` and includes:
 
-### VideoEmbed
-- `src`: string (required, YouTube or Vimeo URL)
-- `title`: string (optional, default: "Video")
-- `aspectRatio`: "16/9" | "4/3" | "1/1" (optional, default: "16/9")
-- `className`: string (optional)
+- **remark-gfm**: GitHub Flavored Markdown support (tables, task lists, strikethrough)
+- **rehype-slug**: Auto-generate heading IDs
+- **rehype-autolink-headings**: Auto-link headings
+- **rehype-pretty-code**: Syntax highlighting with Shiki
 
-### TweetEmbed
-- `tweetId`: string (required)
-- `className`: string (optional)
-
-## Styling Notes
-
-All components use Tailwind CSS classes and support dark mode automatically. The color scheme adapts based on the user's preference.
-
-Custom components are located in:
-- `/src/components/mdx/callout.tsx`
-- `/src/components/mdx/video-embed.tsx`
-- `/src/mdx-components.tsx` (main MDX component overrides)
+Minimal custom components are defined in:
+- `/src/mdx-components.tsx` (images, blockquotes, links, hr)

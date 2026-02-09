@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OG images are generated dynamically
+/public/posts/*.png
+!/public/posts/getting-started.png
