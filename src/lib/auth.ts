@@ -69,6 +69,12 @@ export const auth = betterAuth({
       enabled: true,
       maximumWaitlistParticipants: 1000,
       disableSignInAndSignUp: false,
+      notifications: {
+        enabled: true,
+        onJoin: true,
+        onAccept: true,
+        onReject: true,
+      },
       rateLimit: {
         maxAttempts: 5,
         windowMs: 10 * 60 * 1000,  // 10 minutes
