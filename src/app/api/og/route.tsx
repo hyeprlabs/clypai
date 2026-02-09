@@ -148,9 +148,7 @@ export async function GET(request: NextRequest) {
               right: '80px',
               fontSize: '32px',
               fontWeight: '700',
-              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-              backgroundClip: 'text',
-              color: 'transparent',
+              color: '#3b82f6',
               display: 'flex',
             }}
           >
