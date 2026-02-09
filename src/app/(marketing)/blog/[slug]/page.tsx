@@ -16,6 +16,8 @@ import {
 
 import { CallToAction } from "@/components/marketing/call-to-action";
 
+import { generateOGImageUrl } from "@/lib/og-image";
+
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
     slug: page.data.slug,
@@ -34,9 +36,34 @@ export async function generateMetadata({
 
   if (!post) return notFound();
 
+  const ogImageUrl = generateOGImageUrl({
+    title: post.data.name,
+    author: post.data.author.name,
+    date: post.data.date,
+    tags: post.data.tags,
+  });
+
   return {
     title: post.data.name,
     description: post.data.description,
+    openGraph: {
+      title: post.data.name,
+      description: post.data.description,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.data.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.data.name,
+      description: post.data.description,
+      images: [ogImageUrl],
+    },
   };
 }
 
