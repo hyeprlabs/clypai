@@ -27,7 +27,7 @@ export function Footer() {
           <ClypAIWordmark height={24} />
         </Link>
 
-        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm font-mono hidden">
+        <div className="my-8 flex flex-wrap justify-center gap-6 text-sm font-mono">
           {links.map((link, index) => (
             <Link
               key={index}

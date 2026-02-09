@@ -1,0 +1,83 @@
+import { legal } from "@/lib/source";
+
+import { notFound } from "next/navigation";
+
+import { Metadata } from "next";
+
+import { BackgroundGlow } from "@/components/marketing/background-glow";
+
+import { CallToAction } from "@/components/marketing/call-to-action";
+
+export async function generateStaticParams() {
+  return legal.getPages().map((page) => ({
+    slug: page.data.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+
+  const { slug } = await params
+
+  const post = legal.getPage([slug]);
+
+  if (!post) return notFound();
+
+  return {
+    title: post.data.name,
+    description: post.data.description,
+  };
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+
+  const post = legal.getPage([slug]);
+
+  if (!post) notFound();
+
+  const { body: MDX } = await post.data.load();
+
+  return (
+    <main className="overflow-hidden">
+
+      <BackgroundGlow />
+      
+      <section>
+        <div className="relative pt-16 sm:pt-24 md:pt-36 pb-12 sm:pb-16 md:pb-24">
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--color-background)_75%)]"
+          />
+
+          <div className="container max-w-3xl mx-auto px-4 sm:px-6">
+
+            <header className="flex flex-col items-center mb-12 text-center">
+              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
+                {post.data.name}
+              </h1>
+              
+              <p className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-sm sm:text-base text-muted-foreground font-mono px-4 sm:px-0">
+                {post.data.description}
+              </p>
+            </header>
+
+            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20">
+              <MDX />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <CallToAction />
+
+    </main>
+  );
+}
