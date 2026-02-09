@@ -51,8 +51,10 @@ pnpm install
 Create a **.env.local** file in the project root and add the required environment variables from **.env.example**!
 
 ```bash
-cp .env.local
+cp .env.example .env.local
 ```
+
+> **Note:** For local development, you can use the placeholder values provided in `.env.example`. The core application and OG image generation will work with these test values. Set real values only when testing authentication, email, or payment features.
 
 ### 4. Start the Development Server
 
