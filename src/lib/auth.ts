@@ -37,6 +37,7 @@ export const auth = betterAuth({
 	  process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
     "https://*.clypai.com",
     "https://*.clyp.ai",
+	"https://clypai.com"
   ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
