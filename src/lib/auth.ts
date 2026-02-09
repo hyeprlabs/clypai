@@ -6,6 +6,11 @@ import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
 
+import {
+  sendWaitlistJoinRequestEmail,
+  sendWaitlistStatusChangeEmail,
+} from "@/actions/send";
+
 if (!process.env.DATABASE_URL) {
   throw new Error("Missing DATABASE_URL .env variable!");
 }
@@ -28,8 +33,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const auth = betterAuth({
   appName: "ClypAI",
   trustedOrigins: [
-	process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
-	process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
+	  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+	  process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
     "https://*.clypai.com",
     "https://*.clyp.ai",
   ].filter(Boolean),
@@ -62,39 +67,22 @@ export const auth = betterAuth({
       enabled: true,
       maximumWaitlistParticipants: 1000,
       disableSignInAndSignUp: false,
+      notifications: {
+        enabled: true,
+        onJoin: true,
+        onAccept: true,
+        onReject: true,
+      },
       rateLimit: {
         maxAttempts: 5,
         windowMs: 10 * 60 * 1000,  // 10 minutes
         max: 10,
       },
       onStatusChange: async (entry) => {
-        await resend.emails.send({
-          to: entry.email,
-          template: {
-            id: "waitlist-status-1",
-            variables: {
-              app_url: "https://clypai.com",
-              email: entry.email,
-              status: entry.status,
-            }
-          }
-        });
-        console.log(`Entry ${entry.id} status changed to ${entry.status}`);
+        await sendWaitlistStatusChangeEmail(entry);
       },
       onJoinRequest: async ({ request }) => {
-        await resend.emails.send({
-          to: request.email,
-          template: {
-            id: "waitlist-request",
-            variables: {
-              url: "/status?email=" + encodeURIComponent(request.email),
-              status: request.status,
-              requested_from: request.email,
-              requested_at: request.requestedAt.toISOString(),
-            }
-          }
-        });
-        console.log(`New request from ${request.email}`);
+        await sendWaitlistJoinRequestEmail(request);
       },
     }),
   ],
