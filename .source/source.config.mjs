@@ -26,10 +26,21 @@ var blog = defineCollections({
     })
   })
 });
+var legal = defineCollections({
+  type: "doc",
+  dir: "./content/legal",
+  async: true,
+  schema: z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    slug: z.string()
+  })
+});
 var source_config_default = defineConfig({
   plugins: [lastModified()]
 });
 export {
   blog,
-  source_config_default as default
+  source_config_default as default,
+  legal
 };
