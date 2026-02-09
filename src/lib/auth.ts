@@ -11,8 +11,6 @@ import {
   sendWaitlistStatusChangeEmail,
 } from "@/actions/send";
 
-import { notification } from "@/actions/discord";
-
 if (!process.env.DATABASE_URL) {
   throw new Error("Missing DATABASE_URL .env variable!");
 }
@@ -85,7 +83,6 @@ export const auth = betterAuth({
       },
       onJoinRequest: async ({ request }) => {
         await sendWaitlistJoinRequestEmail(request);
-        await notification(request);
       },
     }),
   ],
