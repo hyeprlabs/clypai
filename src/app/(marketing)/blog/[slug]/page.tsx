@@ -101,7 +101,7 @@ export default async function Page({
               )}
             </header>
 
-            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20">
+            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20 prose-lg prose-p:leading-8 prose-li:leading-7 prose-headings:tracking-tight prose-a:font-semibold prose-blockquote:font-normal prose-blockquote:not-italic prose-code:font-mono prose-pre:bg-muted/30 prose-pre:border prose-pre:border-border">
               <MDX />
             </article>
           </div>
