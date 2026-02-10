@@ -6,6 +6,7 @@ import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
 import { ulid } from "ulid";
+import { headers } from "next/headers";
 
 import {
   sendWaitlistJoinRequestEmail,
@@ -93,20 +94,28 @@ export const auth = betterAuth({
       create: {
         after: async (user) => {
           const random = ulid().slice(0, 8);
-          await auth.api.createOrganization({
+          const organization = await auth.api.createOrganization({
             body: {
               userId: user.id,
               name: `${user.name}'s Organization`,
               slug: random,
             },
           });
+          if (organization) {
+            await auth.api.setActiveOrganization({
+              body: {
+                organizationId: organization.id,
+              },
+              headers: await headers(),
+            });
+          }
         },
       },
     },
   },
   emailAndPassword: {
     enabled: true,
-    disableSignUp: true,
+    disableSignUp: false,
     emailVerification: {
       sendVerificationEmail: async ({ user, token }: { user: { email: string }; token: string }) => {
         await resend.emails.send({
