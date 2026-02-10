@@ -47,8 +47,8 @@ export function WaitlistForm() {
   }
 
   return (
-    <div className="flex flex-row gap-2">
-      <form id="waitlist" onSubmit={form.handleSubmit(onSubmit)}>
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
+      <form id="waitlist" onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-auto">
         <Controller
           name="email"
           control={form.control}
@@ -79,7 +79,7 @@ export function WaitlistForm() {
       <Button
         type="submit"
         form="waitlist"
-        className="rounded-full group relative disabled:opacity-100"
+        className="w-full rounded-full group relative disabled:opacity-100 sm:w-auto"
         data-loading={form.formState.isSubmitting || undefined}
         disabled={form.formState.isSubmitting}
       >
