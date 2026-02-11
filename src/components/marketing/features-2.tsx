@@ -24,10 +24,10 @@ export function Features() {
     <div className="mx-auto w-full max-w-5xl space-y-8 my-24">
       <div className="mx-auto max-w-md text-balance text-center">
         <h2 className="font-serif text-4xl">
-          Power. Speed. Control.
+          Your Shortcut to the Feed.
         </h2>
         <p className="text-muted-foreground mb-6 mt-4 text-balance font-mono text-sm">
-          Everything you need to build fast, secure, scalable apps.
+          Transform long-form depth into short-form impact instantly. Stop scrubbing, start trending.
         </p>
       </div>
 
@@ -66,7 +66,7 @@ export function FeatureCard({
         {feature.icon}
       </div>
       <h3 className="mt-10 text-sm md:text-base">{feature.title}</h3>
-      <p className="relative z-20 mt-2 font-light text-muted-foreground text-xs">
+      <p className="relative z-20 mt-2 text-muted-foreground text-sm">
         {feature.description}
       </p>
     </div>
@@ -75,33 +75,39 @@ export function FeatureCard({
 
 const features: FeatureType[] = [
   {
-    title: "Faaast",
+    title: "Instant Clips",
     icon: <IconBolt />,
-    description: "It supports an entire helping developers and innovate.",
+    description:
+      "Identify hooks and extract viral potential without scrubbing through hours of footage.",
   },
   {
-    title: "Powerful",
+    title: "Massive Scale",
     icon: <IconCpu />,
-    description: "It supports an entire helping developers and businesses.",
+    description:
+      "Turn a single podcast or stream into a week's worth of engaging social media posts.",
   },
   {
-    title: "Security",
+    title: "Creator Focus",
     icon: <IconFingerprint />,
-    description: "It supports an helping developers businesses.",
+    description:
+      "Remove the grind of editing so you can focus on storytelling and making your voice heard.",
   },
   {
-    title: "Customization",
+    title: "Auto-Captions",
     icon: <IconPencil />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Generate perfect subtitles automatically. No more typing, syncing, or manual transcription.",
   },
   {
-    title: "Control",
+    title: "Smart Reframing",
     icon: <IconAdjustmentsHorizontal />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Automatically reframe your landscape video for vertical screens like TikTok and Reels.",
   },
   {
-    title: "Built for AI",
+    title: "AI Curation",
     icon: <IconSparkles />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Let advanced AI models find the hidden gold nuggets and punchlines in your content.",
   },
 ];
