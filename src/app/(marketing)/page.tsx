@@ -10,7 +10,7 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 
 import { Announcement } from "@/components/marketing/announcement";
 
-import { Features } from "@/components/marketing/features";
+import { Features } from "@/components/marketing/features-2";
 
 import { Platforms } from "@/components/marketing/platforms";
 
