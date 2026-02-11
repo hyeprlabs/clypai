@@ -1,7 +1,8 @@
 // @ts-nocheck
-import { frontmatter as __fd_glob_2 } from "../content/legal/terms-of-service.mdx?collection=legal&only=frontmatter"
-import { frontmatter as __fd_glob_1 } from "../content/legal/privacy-policy.mdx?collection=legal&only=frontmatter"
-import { frontmatter as __fd_glob_0 } from "../content/blog/launch.mdx?collection=blog&only=frontmatter"
+import { frontmatter as __fd_glob_3 } from "../content/legal/terms-of-service.mdx?collection=legal&only=frontmatter"
+import { frontmatter as __fd_glob_2 } from "../content/legal/privacy-policy.mdx?collection=legal&only=frontmatter"
+import { frontmatter as __fd_glob_1 } from "../content/legal/imprint.mdx?collection=legal&only=frontmatter"
+import { frontmatter as __fd_glob_0 } from "../content/blog/introducing-clypai-the-pulse-of-content.mdx?collection=blog&only=frontmatter"
 import { server } from 'fumadocs-mdx/runtime/server';
 import type * as Config from '../source.config';
 
@@ -27,6 +28,6 @@ const create = server<typeof Config, import("fumadocs-mdx/runtime/types").Intern
   }
 }>({"doc":{"passthroughs":["extractedReferences","lastModified"]}});
 
-export const blog = await create.docLazy("blog", "content/blog", {"launch.mdx": __fd_glob_0, }, {"launch.mdx": () => import("../content/blog/launch.mdx?collection=blog"), });
+export const blog = await create.docLazy("blog", "content/blog", {"introducing-clypai-the-pulse-of-content.mdx": __fd_glob_0, }, {"introducing-clypai-the-pulse-of-content.mdx": () => import("../content/blog/introducing-clypai-the-pulse-of-content.mdx?collection=blog"), });
 
-export const legal = await create.docLazy("legal", "content/legal", {"privacy-policy.mdx": __fd_glob_1, "terms-of-service.mdx": __fd_glob_2, }, {"privacy-policy.mdx": () => import("../content/legal/privacy-policy.mdx?collection=legal"), "terms-of-service.mdx": () => import("../content/legal/terms-of-service.mdx?collection=legal"), });
+export const legal = await create.docLazy("legal", "content/legal", {"imprint.mdx": __fd_glob_1, "privacy-policy.mdx": __fd_glob_2, "terms-of-service.mdx": __fd_glob_3, }, {"imprint.mdx": () => import("../content/legal/imprint.mdx?collection=legal"), "privacy-policy.mdx": () => import("../content/legal/privacy-policy.mdx?collection=legal"), "terms-of-service.mdx": () => import("../content/legal/terms-of-service.mdx?collection=legal"), });

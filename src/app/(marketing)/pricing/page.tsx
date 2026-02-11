@@ -1,9 +1,14 @@
 "use client"
 
 import { Suspense } from "react";
+
 import { motion } from "motion/react";
+
 import { BackgroundGlow } from "@/components/marketing/background-glow";
+
 import { PricingSection } from "@/components/marketing/pricing/pricing-section";
+
+import { PricingComparator } from "@/components/marketing/pricing/pricing-comparator";
 
 export default function Page() {
   return (
@@ -54,6 +59,23 @@ export default function Page() {
                 >
                   <Suspense>
                     <PricingSection />
+                  </Suspense>
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                className="mx-auto mt-12"
+              >
+                <motion.div 
+                  initial="rest"
+                  whileHover="hover"
+                  className="relative"
+                >
+                  <Suspense>
+                    <PricingComparator />
                   </Suspense>
                 </motion.div>
               </motion.div>

@@ -1,8 +1,14 @@
+"use client"
+
 import Link from "next/link";
 
 import { ClypAIWordmark } from "@/components/brand/logos";
 
 import { ThemeToggle } from "@/components/marketing/theme-toggle";
+
+import { LegalDropdown } from "@/components/marketing/legal-dropdown";
+
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const links = [
   {
@@ -20,6 +26,8 @@ const links = [
 ]
 
 export function Footer() {
+  const isMobile = useIsMobile();
+
   return (
     <footer className="py-16 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
@@ -28,15 +36,19 @@ export function Footer() {
         </Link>
 
         <div className="my-8 flex flex-wrap justify-center gap-6 text-sm font-mono">
-          {links.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="text-muted-foreground hover:text-primary block duration-150"
-            >
-              <span>{link.title}</span>
-            </Link>
-          ))}
+          {isMobile ? (
+            <LegalDropdown links={links} />
+          ) : (
+            links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-muted-foreground hover:text-primary block duration-150"
+              >
+                <span>{link.title}</span>
+              </Link>
+            ))
+          )}
         </div>
         <div className="my-8 flex justify-center">
           <ThemeToggle />

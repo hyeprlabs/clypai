@@ -18,7 +18,7 @@ type Feature = 'seamless-integrations' | 'real-time-sync' | 'developer-first' | 
 export function Features() {
   const [feature, setFeature] = useState<Feature>('seamless-integrations')
   return (
-    <section className="bg-background @container py-24">
+    <section className="@container bg-background py-24 sm:py-32">
       <div className="@2xl:grid-cols-2 mx-auto grid max-w-3xl gap-6 px-6">
         <div>
           <div>
@@ -30,7 +30,7 @@ export function Features() {
               automatically.
             </p>
             <Link href="/why">
-              <Button variant="outline" className="rounded-full bg-linear-to-br from-background to-card font-mono">
+              <Button variant="outline" className="rounded-full bg-linear-to-br from-background to-card font-mono cursor-pointer">
                 Why ClypAI?
                 <ChevronRight />
               </Button>
