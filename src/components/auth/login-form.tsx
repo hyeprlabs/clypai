@@ -25,10 +25,11 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldSeparator,
 } from "@/components/ui/field";
 
 import { Input } from "@/components/ui/input";
+
+import { Separator } from "@/components/ui/separator";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -38,7 +39,7 @@ import { toast } from "sonner";
 
 import Link from "next/link";
 
-import { ClypAIWordmark } from "../brand/logos";
+import { ClypAIWordmark } from "@/components/brand/logos";
 
 const schema = z.object({
   email: z.email("Please enter a valid email address."),
@@ -222,7 +223,7 @@ export function LoginForm({
             )}
           />
           <Field>
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Button type="submit" className="cursor-pointer" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting && (
                 <LoaderCircle
                   aria-hidden="true"
@@ -233,9 +234,15 @@ export function LoginForm({
               Log In
             </Button>
           </Field>
-          <FieldSeparator>OR</FieldSeparator>
           <Field>
-            <Button variant="outline" className="w-full" onClick={handleGitHub} disabled={isGitHubLoading}>
+            <div className="flex items-center gap-3">
+              <Separator className="flex-1" />
+              <span className="text-sm font-mono text-muted-foreground">OR</span>
+              <Separator className="flex-1" />
+            </div>
+          </Field>
+          <Field>
+            <Button variant="outline" className="w-full cursor-pointer" onClick={handleGitHub} disabled={isGitHubLoading}>
               {isGitHubLoading ? (
                 <LoaderCircle aria-hidden="true" className="-ms-1 me-2 animate-spin" size={16} />
               ) : (

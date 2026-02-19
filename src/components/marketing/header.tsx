@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import Link from "next/link";
 
-import { Menu, X, ArrowRightCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -103,9 +103,49 @@ const HeaderActions = ({ isScrolled }: { isScrolled: boolean }) => {
   );
 };
 
+const MenuButton = ({open, onClick}: {open: boolean; onClick: () => void}) => {
+  return (
+    <Button
+      aria-expanded={open}
+      aria-label={open ? "Close menu" : "Open menu"}
+      className="group lg:hidden rounded-full"
+      onClick={onClick}
+      size="icon"
+      variant="outline"
+    >
+      <svg
+        className="pointer-events-none"
+        fill="none"
+        height={16}
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        width={16}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          className="-translate-y-[7px] origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-315"
+          d="M4 12L20 12"
+        />
+        <path
+          className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+          d="M4 12H20"
+        />
+        <path
+          className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-135"
+          d="M4 12H20"
+        />
+      </svg>
+    </Button>
+  );
+};
+
 export const Header = () => {
   const [menu, setMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: session } = authClient.useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,37 +183,20 @@ export const Header = () => {
 
             <HeaderActions isScrolled={isScrolled} />
 
-            <button
-              onClick={() => setMenu(!menu)}
-              aria-label={menu ? "Close Menu" : "Open Menu"}
-              aria-expanded={menu}
-              className="relative p-2 lg:hidden"
-            >
-              <Menu
-                className={cn(
-                  "size-6 transition-all duration-200",
-                  menu && "rotate-180 scale-0 opacity-0",
-                )}
-              />
-              <X
-                className={cn(
-                  "absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 transition-all duration-200",
-                  menu && "rotate-0 scale-100 opacity-100",
-                )}
-              />
-            </button>
+            <MenuButton open={menu} onClick={() => setMenu(!menu)} />
+
           </div>
 
           <div
             className={cn(
-              "mt-4 grid overflow-hidden transition-all duration-300 ease-in-out lg:hidden",
+              "grid overflow-hidden transition-all duration-300 ease-in-out lg:hidden",
               menu
                 ? "grid-rows-[1fr] opacity-100"
                 : "grid-rows-[0fr] opacity-0",
             )}
           >
             <div className="overflow-hidden">
-              <div className="space-y-6 pb-6">
+              <div className="space-y-6 py-2">
                 <ul className="space-y-4">
                   {items.map((item, index) => (
                     <li key={index}>
@@ -189,27 +212,38 @@ export const Header = () => {
                 </ul>
 
                 <div className="flex flex-col gap-3 pt-4 sm:flex-row">
-                  <Link href="/login">
-                    <Button
-                      variant="outline"
-                      disabled
-                      size="sm"
-                      className="w-full rounded-full sm:w-auto"
-                    >
-                      Login
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button
-                      disabled
-                      size="sm"
-                      className="w-full rounded-full sm:w-auto"
-                    >
-                      Sign Up
-                      <ArrowRightCircle className="ml-2" />
-                    </Button>
-                  </Link>
+                  {session?.user ? (
+                    <Link href="/overview">
+                      <Button
+                        size="sm"
+                        className="w-full rounded-full sm:w-auto"
+                      >
+                        Dashboard
+                      </Button>
+                    </Link>
+                  ) : (
+                    <>
+                      <Link href="/login">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full rounded-full sm:w-auto"
+                        >
+                          Login
+                        </Button>
+                      </Link>
+                      <Link href="/signup">
+                        <Button
+                          size="sm"
+                          className="w-full rounded-full sm:w-auto"
+                        >
+                          Sign Up
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
+
               </div>
             </div>
           </div>

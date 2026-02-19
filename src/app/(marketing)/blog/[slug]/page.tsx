@@ -1,4 +1,4 @@
-import { blog } from "@/lib/source";
+import { blog, getPageImage } from "@/lib/source";
 
 import { notFound } from "next/navigation";
 
@@ -37,6 +37,9 @@ export async function generateMetadata({
   return {
     title: post.data.name,
     description: post.data.description,
+    openGraph: {
+      images: getPageImage(post).url,
+    },
   };
 }
 

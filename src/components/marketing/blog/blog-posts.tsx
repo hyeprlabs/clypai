@@ -33,7 +33,7 @@ export function BlogPosts() {
           {post.data.image && (
             <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
               <Image
-                src={post.data.image.src}
+                src={`/og/blog/${[...post.slugs, 'image.png'].join('/')}`}
                 alt={post.data.image.alt}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

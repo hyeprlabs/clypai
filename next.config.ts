@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         destination: "https://go.hyeprlabs.com/clypai-tiktok",
         permanent: true,
       },
+      {
+        source: "/status",
+        destination: "https://clypai.openstatus.dev/",
+        permanent: true,
+      },
     ]
   },
 };

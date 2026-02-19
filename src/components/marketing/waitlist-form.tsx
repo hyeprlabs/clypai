@@ -4,10 +4,12 @@ import { authClient } from "@/lib/auth-client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import * as z from "zod";
 
 import { Mail, LoaderCircle } from "lucide-react";
+import confetti from "canvas-confetti";
 
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +24,50 @@ const schema = z.object({
   email: z.email(),
 });
 
+// Confetti fireworks
+function ConfettiFireworks({ fire }: { fire: boolean }) {
+  const handleFireworks = () => {
+    const duration = 5 * 1000
+    const animationEnd = Date.now() + duration
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+
+    const randomInRange = (min: number, max: number) =>
+      Math.random() * (max - min) + min
+
+    const interval = window.setInterval(() => {
+      const timeLeft = animationEnd - Date.now()
+
+      if (timeLeft <= 0) {
+        return window.clearInterval(interval)
+      }
+
+      const particleCount = 50 * (timeLeft / duration)
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      })
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      })
+    }, 250)
+  }
+
+  useEffect(() => {
+    if (!fire) {
+      return
+    }
+
+    handleFireworks()
+  }, [fire])
+
+  return <div className="relative" />
+}
+
 export function WaitlistForm() {
+  const [fire, setFire] = useState(false)
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -44,11 +89,14 @@ export function WaitlistForm() {
     console.log(result)
     toast.success(`${result.data.email} requested Waitlist!`)
     form.reset()
+    setFire(true)
+    window.setTimeout(() => setFire(false), 5 * 1000)
   }
 
   return (
-    <div className="flex flex-row gap-2">
-      <form id="waitlist" onSubmit={form.handleSubmit(onSubmit)}>
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
+      <ConfettiFireworks fire={fire} />
+      <form id="waitlist" onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-auto">
         <Controller
           name="email"
           control={form.control}
@@ -79,7 +127,7 @@ export function WaitlistForm() {
       <Button
         type="submit"
         form="waitlist"
-        className="rounded-full group relative disabled:opacity-100"
+        className="w-full rounded-full group relative disabled:opacity-100 sm:w-auto cursor-pointer"
         data-loading={form.formState.isSubmitting || undefined}
         disabled={form.formState.isSubmitting}
       >

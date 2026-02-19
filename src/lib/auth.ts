@@ -5,6 +5,8 @@ import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
+import { ulid } from "ulid";
+import { headers } from "next/headers";
 
 import {
   sendWaitlistJoinRequestEmail,
@@ -37,7 +39,7 @@ export const auth = betterAuth({
 	  process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
     "https://*.clypai.com",
     "https://*.clyp.ai",
-	"https://clypai.com"
+	  "https://clypai.com"
   ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -87,6 +89,30 @@ export const auth = betterAuth({
       },
     }),
   ],
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          const random = ulid().slice(0, 8);
+          const organization = await auth.api.createOrganization({
+            body: {
+              userId: user.id,
+              name: `${user.name}'s Organization`,
+              slug: random,
+            },
+          });
+          if (organization) {
+            await auth.api.setActiveOrganization({
+              body: {
+                organizationId: organization.id,
+              },
+              headers: await headers(),
+            });
+          }
+        },
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     disableSignUp: true,
