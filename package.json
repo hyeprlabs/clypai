@@ -10,6 +10,8 @@
     "email:dev": "email dev"
   },
   "dependencies": {
+    "@c15t/nextjs": "^1.8.3",
+    "@c15t/scripts": "^1.0.1",
     "@daveyplate/better-auth-ui": "^3.3.15",
     "@hookform/resolvers": "^5.2.2",
     "@mdx-js/loader": "^3.1.1",

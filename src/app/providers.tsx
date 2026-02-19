@@ -10,6 +10,7 @@ import { authClient } from "@/lib/auth-client";
 
 // Providers
 import { ThemeProvider } from "@/components/theme-provider";
+import { ConsentManager } from "@/app/consent-manager";
 import { AuthUIProvider } from "@daveyplate/better-auth-ui";
 import { SystemBanner } from "@/components/ui/system-banner";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -27,31 +28,33 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <AuthUIProvider
-        authClient={authClient}
-        navigate={router.push}
-        replace={router.replace}
-        onSessionChange={() => {
-          // Clear router cache (protected routes)
-          router.refresh()
-        }}
-        Link={Link}
-      >
-        <SystemBanner
-          text="Development Mode"
-          color="bg-orange-500"
-          size="sm"
-          show={false}
-        />
-        <NuqsAdapter>
-          {children}
-        </NuqsAdapter>
-        <Toaster
-          position="bottom-center"
-        />
-        <Analytics />
-        <SpeedInsights />
-      </AuthUIProvider>
+      <ConsentManager>
+        <AuthUIProvider
+          authClient={authClient}
+          navigate={router.push}
+          replace={router.replace}
+          onSessionChange={() => {
+            // Clear router cache (protected routes)
+            router.refresh()
+          }}
+          Link={Link}
+        >
+          <SystemBanner
+            text="Development Mode"
+            color="bg-orange-500"
+            size="sm"
+            show={false}
+          />
+          <NuqsAdapter>
+            {children}
+          </NuqsAdapter>
+          <Toaster
+            position="bottom-center"
+          />
+          <Analytics />
+          <SpeedInsights />
+        </AuthUIProvider>
+      </ConsentManager>
     </ThemeProvider>
   );
 }
