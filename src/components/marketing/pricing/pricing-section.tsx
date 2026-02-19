@@ -1,129 +1,119 @@
-"use client";
+"use client"
+
+import Link from "next/link";
+
+import { Check } from "lucide-react";
 
 import { useQueryState } from "nuqs";
+
+import { cn } from "@/lib/utils";
+
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
+import { Card } from "@/components/marketing/pricing/card";
+
 import { FrequencyToggle } from "@/components/marketing/pricing/frequency-toggle";
-import { CheckCircle } from "lucide-react";
 
-interface Plan {
-  name: string;
-  description: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
-  features: string[];
-  popular?: boolean;
-}
-
-const plans: Plan[] = [
+const plans = [
   {
     name: "Free",
-    description: "Perfect for editing individual videos",
-    monthlyPrice: 0,
-    yearlyPrice: 0,
+    description: "Perfect for individuals and small projects.",
+    monthly: 0,
+    yearly: 0,
     features: [
-      "5 videos per month",
-      "720p HD exports",
-      "Basic analytics dashboard",
-      "1 GB cloud storage",
+      "Up to 3 integrations",
+      "1,000 API calls/month",
       "Community support",
-      "Standard templates"
+      "Basic analytics",
     ],
+    cta: "Get Started",
+    highlighted: false,
   },
   {
     name: "Pro",
-    description: "For professional creators and teams",
-    monthlyPrice: 29,
-    yearlyPrice: 290,
+    description: "For growing teams that need more power.",
+    monthly: 29,
+    yearly: 290,
     features: [
-      "Unlimited videos",
-      "4K Ultra HD exports",
-      "Advanced analytics & insights",
-      "100 GB cloud storage",
-      "Custom branding & watermarks",
-      "Priority email support",
-      "Premium templates library",
-      "Team workspace (up to 3)"
+      "Unlimited integrations",
+      "100,000 API calls/month",
+      "Priority support",
+      "Advanced analytics",
+      "Custom webhooks",
+      "Team collaboration",
     ],
-    popular: true,
-  },
-  {
-    name: "Business",
-    description: "For agencies and large organizations",
-    monthlyPrice: 99,
-    yearlyPrice: 990,
-    features: [
-      "Everything in Pro",
-      "Unlimited cloud storage",
-      "24/7 Priority live support",
-      "SSO & SAML integration",
-      "Advanced team collaboration",
-      "Dedicated account manager",
-      "Custom contracts & invoicing",
-      "API access & webhooks"
-    ],
+    cta: "Start Free Trial",
+    highlighted: true,
   },
 ];
 
 export function PricingSection() {
+  const [frequency] = useQueryState("frequency");
+
   return (
-    <section className="container my-20 gap-y-12 flex flex-col items-center">
-      <FrequencyToggle />
-      <div className="grid grid-cols-1 lg:grid-cols-3 w-full max-w-6xl border border-dashed divide-y lg:divide-y-0 lg:divide-x divide-dashed divide-border/60">
-        {plans.map((plan) => (
-          <PricingCard key={plan.name} plan={plan} />
-        ))}
+    <section className="@container py-24">
+      <div className="mx-auto max-w-2xl px-6">
+        <div className="text-center hidden">
+          <h2 className="text-balance text-5xl font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70">
+            Simple, Transparent Pricing
+          </h2>
+          <p className="text-muted-foreground mx-auto mt-4 max-w-md text-balance font-mono">
+            Choose the plan that fits your needs. All plans include a 14-day
+            free trial.
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <FrequencyToggle />
+        </div>
+        <div className="mt-12 grid gap-3 sm:grid-cols-2">
+          {plans.map((plan) => {
+            const price = frequency === "yearly" ? plan.yearly : plan.monthly;
+            const period = frequency === "yearly" ? "/year" : "/month";
+
+            return (
+            <Card
+              key={plan.name}
+              variant={plan.highlighted ? "default" : "mixed"}
+              className={cn(
+                "relative flex flex-col p-6 bg-linear-to-br from-background to-card",
+                plan.highlighted && "ring-primary",
+              )}
+            >
+              <div>
+                <h3 className="text-foreground font-mono text-start">{plan.name}</h3>
+                <p className="text-muted-foreground mt-1 text-sm text-start font-mono">
+                  {plan.description}
+                </p>
+              </div>
+              <div className="mt-6 text-start">
+                <span className="font-serif text-4xl font-medium">
+                  ${price}
+                </span>
+                <span className="text-muted-foreground">{period}</span>
+              </div>
+              <ul className="mt-6 flex-1 space-y-3">
+                {plan.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className="text-muted-foreground flex items-start gap-2 text-sm font-mono"
+                  >
+                    <Check className="text-primary mt-0.5 size-4 shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <Button
+                asChild
+                variant={plan.highlighted ? "default" : "outline"}
+                className="mt-8 w-full"
+              >
+                <Link href="#link">{plan.cta}</Link>
+              </Button>
+            </Card>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function PricingCard({ plan }: { plan: Plan }) {
-  const [frequency] = useQueryState("frequency");
-  const isYearly = frequency === "yearly";
-  const displayPrice = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
-
-  return (
-    <div className="flex flex-col justify-between p-6 md:p-8 dark:bg-[radial-gradient(35%_80%_at_25%_0%,--theme(--color-foreground/.08),transparent)]">
-      <div>
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-xl font-semibold">{plan.name}</span>
-          {plan.popular && (
-            <Badge className="rounded-full bg-blue-500 hover:bg-blue-600 border-none text-white">
-              Popular
-            </Badge>
-          )}
-        </div>
-
-        <div className="mb-2 flex items-baseline gap-2">
-          <span className="text-4xl font-bold">{displayPrice} €</span>
-          <span className="text-muted-foreground text-sm">
-            /{isYearly ? "year" : "month"}
-          </span>
-        </div>
-        <p className="text-muted-foreground text-sm mb-8 items-start flex">
-          {plan.description}
-        </p>
-
-        <ul className="space-y-4 mb-8">
-          {plan.features.map((feature: string, i: number) => (
-            <li
-              key={i}
-              className="flex items-start gap-3 text-sm text-muted-foreground"
-            >
-              <CheckCircle className="size-4 text-primary shrink-0 mt-0.5" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <Button
-        variant={plan.popular ? "default" : "outline"}
-        className="w-full rounded-full"
-      >
-        {plan.monthlyPrice === 0 ? "Get Started" : "Upgrade"}
-      </Button>
-    </div>
   );
 }

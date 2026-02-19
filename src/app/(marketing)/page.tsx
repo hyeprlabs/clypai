@@ -10,7 +10,9 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 
 import { Announcement } from "@/components/marketing/announcement";
 
-import { Features } from "@/components/marketing/features";
+import { Features } from "@/components/marketing/features-2";
+
+import { Platforms } from "@/components/marketing/platforms";
 
 import { WaitlistForm } from "@/components/marketing/waitlist-form";
 
@@ -90,9 +92,9 @@ export default function Page() {
               <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-xl sm:rounded-2xl border p-2 sm:p-4 shadow-lg shadow-zinc-950/15 ring-1">
                 
                 <Image
-                  className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
                   src="/mail2.webp"
                   alt="app screen"
+                  className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
                   width={2700}
                   height={1440}
                 />
@@ -117,16 +119,24 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="py-24 sm:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
-        >
-          <Features />
-        </motion.div>
-      </section>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9 }}
+      >
+        <Features />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9 }}
+      >
+        <Platforms />
+      </motion.div>
+
     </main>
   );
 }
