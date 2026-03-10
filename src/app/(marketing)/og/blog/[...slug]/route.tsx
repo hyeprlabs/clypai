@@ -7,31 +7,86 @@ import { join } from "path";
 export const revalidate = false;
 
 // ---------------------------------------------------------------------------
-// Font helpers
+// Font helpers — next/og (Satori) requires TTF/OTF, NOT WOFF/WOFF2.
+// We use an old MSIE User-Agent when querying Google Fonts so the API returns
+// a stylesheet referencing TTF sources instead of the modern woff2 sources.
 // ---------------------------------------------------------------------------
 
-function getGeistMonoFont(): ArrayBuffer {
-  const buf = readFileSync(join(process.cwd(), "public/fonts/GeistMono.woff2"));
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+/** Module-level cache so fonts are loaded once per warm Lambda/worker. */
+let _geistMonoTTF: ArrayBuffer | null = null;
+let _serifTTF: ArrayBuffer | null = null;
+
+async function fetchTTFFromGoogleFonts(family: string): Promise<ArrayBuffer> {
+  // Old IE UA → Google Fonts responds with TrueType/format('truetype') URLs
+  let css: string;
+  try {
+    const cssRes = await fetch(
+      `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}&display=swap`,
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)",
+        },
+      }
+    );
+    css = await cssRes.text();
+  } catch (err) {
+    throw new Error(
+      `Failed to fetch Google Fonts CSS for "${family}": ${err instanceof Error ? err.message : String(err)}`
+    );
+  }
+
+  // The old-UA stylesheet uses `src: url(...ttf) format('truetype')`
+  const match =
+    css.match(/src:\s*url\(([^)]+\.ttf)\)\s*format\('truetype'\)/i) ??
+    css.match(/src:\s*url\(([^)]+)\)\s*format\('truetype'\)/i) ??
+    css.match(/src:\s*url\(([^)]+\.ttf)\)/i);
+
+  if (!match?.[1]) {
+    const preview = css.slice(0, 200).replace(/\n/g, " ");
+    throw new Error(
+      `No TTF URL found in Google Fonts CSS for "${family}". CSS preview: "${preview}"`
+    );
+  }
+
+  try {
+    const fontRes = await fetch(match[1]);
+    return fontRes.arrayBuffer();
+  } catch (err) {
+    throw new Error(
+      `Failed to download TTF font for "${family}" from ${match[1]}: ${err instanceof Error ? err.message : String(err)}`
+    );
+  }
 }
 
-async function getInstrumentSerifFont(): Promise<ArrayBuffer> {
-  // Try to fetch Instrument Serif from Google Fonts (works on Vercel at build time)
+async function getGeistMonoTTF(): Promise<ArrayBuffer> {
+  if (_geistMonoTTF) return _geistMonoTTF;
   try {
-    const css = await fetch(
-      "https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap",
-      { headers: { "User-Agent": "Mozilla/5.0" } }
-    ).then((r) => r.text());
-    const url = css.match(/src: url\((.+?)\) format\('woff2'\)/)?.[1];
-    if (!url) throw new Error("Font URL not found");
-    const fontData = await fetch(url).then((r) => r.arrayBuffer());
-    return fontData;
+    _geistMonoTTF = await fetchTTFFromGoogleFonts("Geist Mono");
+    return _geistMonoTTF;
   } catch {
-    // Fallback to local Liberation Serif Bold
+    // Fallback: use the Noto Sans TTF that next/og ships with (stable path)
+    const ttfPath = require.resolve(
+      "next/dist/compiled/@vercel/og/noto-sans-v27-latin-regular.ttf"
+    );
+    const buf = readFileSync(ttfPath);
+    _geistMonoTTF = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+    return _geistMonoTTF;
+  }
+}
+
+async function getSerifTTF(): Promise<ArrayBuffer> {
+  if (_serifTTF) return _serifTTF;
+  try {
+    _serifTTF = await fetchTTFFromGoogleFonts("Instrument Serif");
+    return _serifTTF;
+  } catch {
+    // Fallback: local Liberation Serif Bold (TTF, already verified)
     const buf = readFileSync(
       join(process.cwd(), "public/fonts/LiberationSerif-Bold.ttf")
     );
-    return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+    _serifTTF = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
+    return _serifTTF;
   }
 }
 
@@ -54,9 +109,9 @@ export async function GET(
     day: "numeric",
   });
 
-  const [geistMono, instrumentSerif] = await Promise.all([
-    getGeistMonoFont(),
-    getInstrumentSerifFont(),
+  const [geistMono, serifFont] = await Promise.all([
+    getGeistMonoTTF(),
+    getSerifTTF(),
   ]);
 
   const title = page.data.name;
@@ -76,7 +131,7 @@ export async function GET(
           position: "relative",
         }}
       >
-        {/* Subtle horizontal rule below header area */}
+        {/* Hairline below header */}
         <div
           style={{
             position: "absolute",
@@ -88,7 +143,7 @@ export async function GET(
           }}
         />
 
-        {/* Bottom rule */}
+        {/* Hairline above footer */}
         <div
           style={{
             position: "absolute",
@@ -119,15 +174,7 @@ export async function GET(
               justifyContent: "space-between",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                fontFamily: "mono",
-              }}
-            >
-              {/* Logo square */}
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div
                 style={{
                   width: 32,
@@ -139,7 +186,7 @@ export async function GET(
               <span
                 style={{
                   fontSize: 22,
-                  fontWeight: 700,
+                  fontWeight: 400,
                   color: "#ffffff",
                   letterSpacing: "-0.02em",
                   fontFamily: "mono",
@@ -149,11 +196,10 @@ export async function GET(
               </span>
             </div>
 
-            {/* Category badge */}
             <span
               style={{
                 fontSize: 12,
-                fontWeight: 600,
+                fontWeight: 400,
                 color: "rgba(255,255,255,0.5)",
                 letterSpacing: "0.12em",
                 fontFamily: "mono",
@@ -163,14 +209,8 @@ export async function GET(
             </span>
           </div>
 
-          {/* Title block */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
+          {/* Title + description */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <h1
               style={{
                 fontSize: title.length > 50 ? 68 : 80,
@@ -249,7 +289,7 @@ export async function GET(
         },
         {
           name: "serif",
-          data: instrumentSerif,
+          data: serifFont,
           style: "normal",
           weight: 700,
         },
