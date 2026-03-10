@@ -65,11 +65,11 @@ async function getGeistMonoTTF(): Promise<ArrayBuffer> {
     _geistMonoTTF = await fetchTTFFromGoogleFonts("Geist Mono");
     return _geistMonoTTF;
   } catch {
-    // Fallback: use the Noto Sans TTF that next/og ships with (stable path)
-    const ttfPath = require.resolve(
-      "next/dist/compiled/@vercel/og/noto-sans-v27-latin-regular.ttf"
+    // Fallback: use the local Liberation Serif Bold TTF as a substitute
+    // (only TTF/OTF is accepted by Satori; Google Fonts fetch failed)
+    const buf = readFileSync(
+      join(process.cwd(), "public/fonts/LiberationSerif-Bold.ttf")
     );
-    const buf = readFileSync(ttfPath);
     _geistMonoTTF = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
     return _geistMonoTTF;
   }
