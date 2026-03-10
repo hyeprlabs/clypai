@@ -16,6 +16,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { RootProvider } from "fumadocs-ui/provider/next";
 
 export function Providers({ children }: { children: ReactNode }) {
   const router = useRouter()
@@ -27,6 +28,7 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      <RootProvider theme={{ enabled: false }} search={{ enabled: false }}>
       <AuthUIProvider
         authClient={authClient}
         navigate={router.push}
@@ -52,6 +54,7 @@ export function Providers({ children }: { children: ReactNode }) {
         <Analytics />
         <SpeedInsights />
       </AuthUIProvider>
+      </RootProvider>
     </ThemeProvider>
   );
 }
