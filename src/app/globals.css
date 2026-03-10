@@ -3,6 +3,7 @@
 @import "@daveyplate/better-auth-ui/css";
 @import "fumadocs-ui/css/shadcn.css";
 @import "fumadocs-ui/css/lib/base.css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -129,64 +130,40 @@
 }
 
 @layer components {
+  /* prose color tokens for blog articles — applied in addition to prose/prose-neutral/dark:prose-invert in JSX */
   .blog-prose {
-    @apply prose prose-neutral dark:prose-invert max-w-none;
+    --tw-prose-body: var(--color-foreground);
+    --tw-prose-headings: var(--color-foreground);
+    --tw-prose-lead: var(--color-muted-foreground);
+    --tw-prose-links: var(--color-foreground);
+    --tw-prose-bold: var(--color-foreground);
+    --tw-prose-counters: var(--color-muted-foreground);
+    --tw-prose-bullets: var(--color-muted-foreground);
+    --tw-prose-hr: var(--color-border);
+    --tw-prose-quotes: var(--color-foreground);
+    --tw-prose-quote-borders: var(--color-border);
+    --tw-prose-captions: var(--color-muted-foreground);
+    --tw-prose-code: var(--color-foreground);
+    --tw-prose-pre-code: var(--color-foreground);
+    --tw-prose-pre-bg: var(--color-card);
+    --tw-prose-th-borders: var(--color-border);
+    --tw-prose-td-borders: var(--color-border);
 
-    /* Color tokens */
-    --tw-prose-body: theme(colors.foreground / 0.8);
-    --tw-prose-headings: theme(colors.foreground);
-    --tw-prose-lead: theme(colors.muted.foreground);
-    --tw-prose-links: theme(colors.foreground);
-    --tw-prose-bold: theme(colors.foreground);
-    --tw-prose-counters: theme(colors.muted.foreground);
-    --tw-prose-bullets: theme(colors.muted.foreground);
-    --tw-prose-hr: theme(colors.border);
-    --tw-prose-quotes: theme(colors.foreground / 0.7);
-    --tw-prose-quote-borders: theme(colors.border);
-    --tw-prose-captions: theme(colors.muted.foreground);
-    --tw-prose-code: theme(colors.foreground);
-    --tw-prose-pre-code: theme(colors.foreground);
-    --tw-prose-pre-bg: theme(colors.card);
-    --tw-prose-th-borders: theme(colors.border);
-    --tw-prose-td-borders: theme(colors.border);
-
-    /* Headings */
-    @apply prose-headings:font-serif prose-headings:scroll-mt-24 prose-headings:tracking-tight;
-    @apply prose-h2:mt-12 prose-h2:mb-4;
-    @apply prose-h3:mt-8;
-    @apply prose-h4:mt-6;
-
-    /* Body text */
-    @apply prose-p:leading-relaxed;
-
-    /* Links */
-    @apply prose-a:text-foreground prose-a:underline prose-a:underline-offset-4;
-    @apply prose-a:decoration-foreground/30 prose-a:transition-colors prose-a:font-medium;
-
-    /* Inline code */
-    @apply prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5;
-    @apply prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none;
-
-    /* Code blocks */
-    @apply prose-pre:rounded-xl prose-pre:border prose-pre:border-border prose-pre:bg-card;
-    @apply prose-pre:p-4 prose-pre:text-sm prose-pre:leading-relaxed prose-pre:overflow-x-auto prose-pre:my-6;
-
-    /* Blockquotes */
-    @apply prose-blockquote:border-l-2 prose-blockquote:border-foreground/20;
-    @apply prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-6;
-
-    /* Lists */
-    @apply prose-ul:my-4 prose-ul:pl-5 prose-ol:my-4 prose-ol:pl-5 prose-li:my-1.5;
-
-    /* Tables */
-    @apply prose-thead:border-b prose-thead:border-border;
-    @apply prose-th:py-2 prose-th:px-3 prose-th:font-semibold prose-th:text-left;
-    @apply prose-td:py-2 prose-td:px-3 prose-td:border-b prose-td:border-border/50;
-
-    /* Misc */
-    @apply prose-hr:border-border prose-hr:my-8;
-    @apply prose-img:rounded-xl prose-img:border prose-img:border-border;
-    @apply prose-figure:my-8;
-    @apply prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-muted-foreground;
+    --tw-prose-invert-body: var(--color-foreground);
+    --tw-prose-invert-headings: var(--color-foreground);
+    --tw-prose-invert-lead: var(--color-muted-foreground);
+    --tw-prose-invert-links: var(--color-foreground);
+    --tw-prose-invert-bold: var(--color-foreground);
+    --tw-prose-invert-counters: var(--color-muted-foreground);
+    --tw-prose-invert-bullets: var(--color-muted-foreground);
+    --tw-prose-invert-hr: var(--color-border);
+    --tw-prose-invert-quotes: var(--color-foreground);
+    --tw-prose-invert-quote-borders: var(--color-border);
+    --tw-prose-invert-captions: var(--color-muted-foreground);
+    --tw-prose-invert-code: var(--color-foreground);
+    --tw-prose-invert-pre-code: var(--color-foreground);
+    --tw-prose-invert-pre-bg: var(--color-card);
+    --tw-prose-invert-th-borders: var(--color-border);
+    --tw-prose-invert-td-borders: var(--color-border);
   }
 }
