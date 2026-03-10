@@ -126,7 +126,7 @@ export default async function Page({
               </div>
             )}
 
-            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20 prose-headings:text-foreground prose-p:text-foreground/80 prose-a:text-foreground prose-a:underline-offset-4 prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-card prose-pre:border prose-blockquote:border-l-foreground/20 prose-blockquote:text-muted-foreground prose-li:text-foreground/80 prose-hr:border-border">
+            <article className="blog-prose">
               <MDX components={components} />
             </article>
           </div>
