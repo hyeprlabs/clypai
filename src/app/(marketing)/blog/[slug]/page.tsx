@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CallToAction } from "@/components/marketing/call-to-action";
 import { useMDXComponents } from "@/mdx-components";
-import { InlineTOC } from "fumadocs-ui/components/inline-toc";
+import { TocDropdown } from "@/components/blog/toc-dropdown";
 
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
@@ -121,27 +121,29 @@ export default async function Page({
             </header>
 
             {toc.length > 0 && (
-              <div className="mb-10 rounded-xl border bg-card/50 backdrop-blur-sm">
-                <InlineTOC items={toc} />
+              <div className="mb-10 flex items-center gap-3">
+                <TocDropdown items={toc} />
               </div>
             )}
 
-            <article className={[
-              "blog-prose",
-              "prose prose-neutral dark:prose-invert max-w-none",
-              "prose-headings:font-serif prose-headings:scroll-mt-24 prose-headings:tracking-tight",
-              "prose-h2:mt-12 prose-h2:mb-4 prose-h3:mt-8 prose-h4:mt-6",
-              "prose-p:leading-relaxed",
-              "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-foreground/30 prose-a:transition-colors prose-a:font-medium",
-              "prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none",
-              "prose-pre:rounded-xl prose-pre:border prose-pre:border-border prose-pre:bg-card prose-pre:p-4 prose-pre:text-sm prose-pre:leading-relaxed prose-pre:overflow-x-auto prose-pre:my-6",
-              "prose-blockquote:border-l-2 prose-blockquote:border-foreground/20 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-6",
-              "prose-ul:my-4 prose-ul:pl-5 prose-ol:my-4 prose-ol:pl-5 prose-li:my-1.5",
-              "prose-thead:border-b prose-thead:border-border prose-th:py-2 prose-th:px-3 prose-th:font-semibold prose-th:text-left prose-td:py-2 prose-td:px-3 prose-td:border-b prose-td:border-border/50",
-              "prose-hr:border-border prose-hr:my-8",
-              "prose-img:rounded-xl prose-img:border prose-img:border-border",
-              "prose-figure:my-8 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-muted-foreground",
-            ].join(" ")}>
+            <article
+              className={[
+                "blog-prose",
+                "prose prose-neutral dark:prose-invert max-w-none",
+                "prose-headings:font-serif prose-headings:scroll-mt-24 prose-headings:tracking-tight",
+                "prose-h2:mt-12 prose-h2:mb-4 prose-h3:mt-8 prose-h4:mt-6",
+                "prose-p:leading-relaxed",
+                "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-foreground/30 prose-a:transition-colors prose-a:font-medium",
+                "prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none",
+                "prose-pre:not-prose prose-pre:rounded-xl prose-pre:my-6",
+                "prose-blockquote:border-l-2 prose-blockquote:border-foreground/20 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-6",
+                "prose-ul:my-4 prose-ul:pl-5 prose-ol:my-4 prose-ol:pl-5 prose-li:my-1.5",
+                "prose-hr:border-border prose-hr:my-8",
+                "prose-img:rounded-xl prose-img:border prose-img:border-border",
+                "prose-figure:my-8 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-muted-foreground",
+                "[&_table]:not-prose",
+              ].join(" ")}
+            >
               <MDX components={components} />
             </article>
           </div>

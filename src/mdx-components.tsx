@@ -5,11 +5,22 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Card, Cards } from "fumadocs-ui/components/card";
 import { InlineTOC } from "fumadocs-ui/components/inline-toc";
-import { Callout } from "fumadocs-ui/components/callout";
+
+import { BlogCallout } from "@/components/blog/blog-callout";
+import {
+  MdxTable,
+  MdxThead,
+  MdxTbody,
+  MdxTr,
+  MdxTh,
+  MdxTd,
+} from "@/components/blog/mdx-table";
 
 export function useMDXComponents(): MDXComponents {
   return {
     ...defaultMdxComponents,
+
+    // fumadocs layout components
     Accordion,
     Accordions,
     Step,
@@ -19,6 +30,16 @@ export function useMDXComponents(): MDXComponents {
     Card,
     Cards,
     InlineTOC,
-    Callout,
+
+    // shadcn-based callout — replaces fumadocs Callout
+    Callout: BlogCallout,
+
+    // shadcn-based table elements
+    table: MdxTable,
+    thead: MdxThead,
+    tbody: MdxTbody,
+    tr: MdxTr,
+    th: MdxTh,
+    td: MdxTd,
   };
 }
