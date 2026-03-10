@@ -84,7 +84,7 @@ export default async function Page({
                 </time>
               </p>
 
-              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
+              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
                 {post.data.name}
               </h1>
 
@@ -130,14 +130,15 @@ export default async function Page({
               className={[
                 "blog-prose",
                 "prose prose-neutral dark:prose-invert max-w-none",
-                "prose-headings:font-serif prose-headings:scroll-mt-24 prose-headings:tracking-tight",
+                "prose-headings:font-sans prose-headings:scroll-mt-24 prose-headings:tracking-tight",
                 "prose-h2:mt-12 prose-h2:mb-4 prose-h3:mt-8 prose-h4:mt-6",
-                "prose-p:leading-relaxed",
+                "prose-p:font-mono prose-p:leading-relaxed",
+                "prose-li:font-mono prose-li:my-1.5",
                 "prose-a:text-foreground prose-a:underline prose-a:underline-offset-4 prose-a:decoration-foreground/30 prose-a:transition-colors prose-a:font-medium",
                 "prose-code:rounded-md prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none",
                 "prose-pre:not-prose prose-pre:rounded-xl prose-pre:my-6",
-                "prose-blockquote:border-l-2 prose-blockquote:border-foreground/20 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-6",
-                "prose-ul:my-4 prose-ul:pl-5 prose-ol:my-4 prose-ol:pl-5 prose-li:my-1.5",
+                "prose-blockquote:font-mono prose-blockquote:border-l-2 prose-blockquote:border-foreground/20 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-blockquote:my-6",
+                "prose-ul:my-4 prose-ul:pl-5 prose-ol:my-4 prose-ol:pl-5",
                 "prose-hr:border-border prose-hr:my-8",
                 "prose-img:rounded-xl prose-img:border prose-img:border-border",
                 "prose-figure:my-8 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-muted-foreground",
