@@ -1,20 +1,12 @@
 import { blog, getPageImage } from "@/lib/source";
-
 import { notFound } from "next/navigation";
-
 import { Metadata } from "next";
-
 import { BackgroundGlow } from "@/components/marketing/background-glow";
-
 import { Badge } from "@/components/ui/badge";
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from "@/components/ui/avatar";
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CallToAction } from "@/components/marketing/call-to-action";
+import { useMDXComponents } from "@/mdx-components";
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
@@ -25,11 +17,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-
-  const { slug } = await params
-
+  const { slug } = await params;
   const post = blog.getPage([slug]);
 
   if (!post) return notFound();
@@ -38,7 +28,24 @@ export async function generateMetadata({
     title: post.data.name,
     description: post.data.description,
     openGraph: {
-      images: getPageImage(post).url,
+      title: post.data.name,
+      description: post.data.description,
+      type: "article",
+      publishedTime: new Date(post.data.date).toISOString(),
+      images: [
+        {
+          url: getPageImage(post).url,
+          width: 1200,
+          height: 630,
+          alt: post.data.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.data.name,
+      description: post.data.description,
+      images: [getPageImage(post).url],
     },
   };
 }
@@ -46,21 +53,20 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-
+  const { slug } = await params;
   const post = blog.getPage([slug]);
 
   if (!post) notFound();
 
-  const { body: MDX } = await post.data.load();
+  const { body: MDX, toc } = await post.data.load();
+  const components = useMDXComponents();
 
   return (
     <main className="overflow-hidden">
-
       <BackgroundGlow />
-      
+
       <section>
         <div className="relative pt-16 sm:pt-24 md:pt-36 pb-12 sm:pb-16 md:pb-24">
           <div
@@ -69,34 +75,44 @@ export default async function Page({
           />
 
           <div className="container max-w-3xl mx-auto px-4 sm:px-6">
-
-            <header className="flex flex-col items-center mb-12 text-center">
+            <header className="flex flex-col items-center mb-10 text-center">
               <p className="text-muted-foreground text-sm leading-[1.6] font-mono mt-6 text-center">
                 <time dateTime={new Date(post.data.date).toISOString()}>
-                  {new Date(post.data.date).toLocaleDateString(undefined, {dateStyle: "long"})}
+                  {new Date(post.data.date).toLocaleDateString(undefined, {
+                    dateStyle: "long",
+                  })}
                 </time>
               </p>
 
               <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
                 {post.data.name}
               </h1>
-              
+
               <p className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-sm sm:text-base text-muted-foreground font-mono px-4 sm:px-0">
                 {post.data.description}
               </p>
 
               <div className="flex items-center gap-2 my-4">
                 <Avatar className="size-6">
-                  <AvatarImage src={post.data.author.avatar.src} alt={post.data.author.avatar.alt} />
+                  <AvatarImage
+                    src={post.data.author.avatar.src}
+                    alt={post.data.author.avatar.alt}
+                  />
                   <AvatarFallback>{post.data.author.name[0]}</AvatarFallback>
                 </Avatar>
-                <span className="text-sm font-medium">{post.data.author.name}</span>
+                <span className="text-sm font-medium">
+                  {post.data.author.name}
+                </span>
               </div>
 
               {post.data.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 justify-center">
                   {post.data.tags.map((tag) => (
-                    <Badge variant="outline" className="rounded-full bg-linear-to-br from-background to-card" key={tag}>
+                    <Badge
+                      variant="outline"
+                      className="rounded-full bg-linear-to-br from-background to-card"
+                      key={tag}
+                    >
                       {tag}
                     </Badge>
                   ))}
@@ -104,15 +120,20 @@ export default async function Page({
               )}
             </header>
 
-            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20">
-              <MDX />
+            {toc.length > 0 && (
+              <div className="mb-10 rounded-xl border bg-card/50 backdrop-blur-sm">
+                <InlineTOC items={toc} />
+              </div>
+            )}
+
+            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20 prose-headings:text-foreground prose-p:text-foreground/80 prose-a:text-foreground prose-a:underline-offset-4 prose-strong:text-foreground prose-code:text-foreground prose-pre:bg-card prose-pre:border prose-blockquote:border-l-foreground/20 prose-blockquote:text-muted-foreground prose-li:text-foreground/80 prose-hr:border-border">
+              <MDX components={components} />
             </article>
           </div>
         </div>
       </section>
 
       <CallToAction />
-
     </main>
   );
 }

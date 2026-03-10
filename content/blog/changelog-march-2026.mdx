@@ -1,0 +1,164 @@
+---
+name: "ClypAI Changelog: What's New in March 2026"
+description: "A detailed look at the newest features shipping this month—including smarter clip detection, multi-platform export presets, and the brand new Caption Designer."
+slug: "changelog-march-2026"
+author:
+  name: "Hyepr Labs"
+  avatar:
+    src: "/hyeprlabs.png"
+    alt: "Hyepr Labs"
+date: 2026-03-05
+tags: ["Changelog", "Product Update", "New Features"]
+category: "company"
+image:
+  src: "/posts/getting-started.png"
+  alt: "ClypAI product interface showing new features"
+---
+
+March is a big month for ClypAI. We've been building in response to your feedback, and we're shipping several features that address the most-requested improvements from the community.
+
+Here's everything that's new.
+
+---
+
+## Caption Designer
+
+<Callout type="success" title="Most-Requested Feature — Now Shipping">
+  Caption Designer was the #1 requested feature since our launch. Today it's live for all users.
+</Callout>
+
+The Caption Designer gives you full control over how your captions look—not just the text, but the typography, positioning, animation, and styling that make your content instantly recognizable.
+
+### What's included:
+
+- **Font selection** with 40+ premium fonts optimized for video readability
+- **Color + stroke** controls for text, background fill, and outline weight
+- **Animation presets** including word-by-word reveal, fade-in, and bounce
+- **Positioning templates** for TikTok, Reels, Shorts, and LinkedIn natively
+- **Brand kit** — save your style once, apply to every clip automatically
+
+Caption styles are saved per-project and can be set as account defaults. Once you set your brand kit, your captions are automatically styled on every new clip—no configuration required.
+
+---
+
+## Enhanced Clip Detection v2
+
+Our AI model for identifying high-value moments has been significantly upgraded.
+
+### What improved:
+
+**Multi-speaker accuracy** — v2 handles two or more speakers significantly better. When two hosts are talking, the model now correctly attributes enthusiasm and emotional spikes to the right speaker rather than averaging across the audio channel.
+
+**Technical content** — Clips from developer streams, coding tutorials, and educational content now surface more relevant moments. The model has been trained on a broader corpus that includes domain-specific delivery patterns.
+
+**Silence-to-spike recognition** — The pause before a punchline is a strong signal for a clip's starting point. v2 is significantly better at recognizing and using this pattern.
+
+**Benchmark improvements:**
+
+| Metric | v1 | v2 | Improvement |
+|--------|----|----|-------------|
+| User acceptance rate | 67% | 84% | +25% |
+| First-clip selection | 43% | 61% | +42% |
+| Multi-speaker accuracy | 71% | 89% | +25% |
+| Technical content quality | 58% | 79% | +36% |
+
+---
+
+## Platform Export Presets
+
+Exporting to multiple platforms used to require manual configuration for each one. Not anymore.
+
+Platform Export Presets are intelligent templates that know exactly what each platform needs:
+
+<Tabs items={["TikTok", "Instagram", "YouTube", "LinkedIn"]}>
+  <Tab>
+    ### TikTok Export Preset
+    - **Resolution:** 1080 × 1920 (9:16)
+    - **Frame rate:** 30fps
+    - **Duration optimization:** Auto-trims to 15–60s for algorithmic favor
+    - **Caption format:** Bold centered, word-by-word reveal
+    - **Audio:** Normalized to TikTok's preferred -14 LUFS
+    - **Cover frame:** Auto-selected from highest-motion first 3 seconds
+  </Tab>
+  <Tab>
+    ### Instagram Reels Preset
+    - **Resolution:** 1080 × 1920 (9:16)
+    - **Frame rate:** 30fps
+    - **Duration:** Optimized for 15–30s completion rate
+    - **Caption format:** Bottom-third, clean sans-serif
+    - **Audio:** Mixed for sound-off assumption (visual content carries meaning)
+    - **Thumbnail:** Auto-selected from static clear face frame
+  </Tab>
+  <Tab>
+    ### YouTube Shorts Preset
+    - **Resolution:** 1080 × 1920 (9:16)
+    - **Frame rate:** 60fps option for gaming/action content
+    - **Duration:** Loop-optimized for 15–60s
+    - **Caption format:** YouTube native captions OR burned-in
+    - **Title card:** Auto-generated from clip title for thumbnail
+    - **Loop point:** Seamless loop detection and optimization
+  </Tab>
+  <Tab>
+    ### LinkedIn Preset
+    - **Resolution:** 1080 × 1080 (1:1) or 1920 × 1080 (16:9)
+    - **Duration:** 30–90 seconds (LinkedIn optimal range)
+    - **Caption format:** Subtitles file (.srt) included for native upload
+    - **Tone:** Auto-selects clips with professional delivery
+    - **Cover:** Static thumbnail with title text overlay
+  </Tab>
+</Tabs>
+
+---
+
+## Batch Processing
+
+You can now queue multiple videos for processing simultaneously. Upload a week's worth of recordings at once, and ClypAI processes them in parallel in the background.
+
+**Batch processing limits by plan:**
+
+| Plan | Concurrent Videos | Queue Depth |
+|------|------------------|-------------|
+| Starter | 2 | 10 |
+| Pro | 5 | Unlimited |
+| Studio | 10 | Unlimited |
+
+---
+
+## Archive Import
+
+Connect your YouTube channel, Twitch, or podcast RSS feed and ClypAI will automatically scan your back catalog for high-value clip candidates.
+
+Your archives—months or years of recordings—are an untapped content library. Archive Import surfaces the best moments from your past that are worth rediscovering.
+
+---
+
+## Bug Fixes & Improvements
+
+<Accordions>
+  <Accordion title="Fixed: Caption sync drift on longer videos">
+    Captions were occasionally drifting out of sync on videos longer than 45 minutes. This has been corrected with an updated sync algorithm that recalibrates at chapter boundaries.
+  </Accordion>
+  <Accordion title="Fixed: Smart reframe losing subject on rapid camera movement">
+    Fast camera pans were causing the smart reframe to temporarily lose the primary subject. The tracking model now handles velocity changes more gracefully.
+  </Accordion>
+  <Accordion title="Improved: Export speed">
+    Average export times have been reduced by 40% through infrastructure improvements. A 60-second clip now exports in under 8 seconds on average.
+  </Accordion>
+  <Accordion title="Improved: Mobile web experience">
+    The review and approval flow is now fully functional on mobile browsers. Review your AI-identified clips from your phone, approve or reject, and export—without touching a desktop.
+  </Accordion>
+</Accordions>
+
+---
+
+## What's Coming Next
+
+We're currently building:
+
+- **Multi-clip series detection** — AI that identifies when multiple clips form a natural series and suggests a posting sequence
+- **Collaboration workflows** — Invite team members with role-based permissions
+- **Analytics dashboard** — Cross-platform performance data in a single view
+
+Stay tuned. The roadmap is moving fast.
+
+Have feedback on any of these features? Drop it in our Discord or hit **Feedback** inside the app.

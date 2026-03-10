@@ -1,6 +1,7 @@
 // source.config.ts
 import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import lastModified from "fumadocs-mdx/plugins/last-modified";
+import { remarkAdmonition } from "fumadocs-core/mdx-plugins";
 import * as z from "zod";
 var blog = defineCollections({
   type: "doc",
@@ -37,7 +38,13 @@ var legal = defineCollections({
   })
 });
 var source_config_default = defineConfig({
-  plugins: [lastModified()]
+  plugins: [lastModified()],
+  mdxOptions: {
+    remarkPlugins: [[remarkAdmonition]],
+    remarkHeadingOptions: {
+      generateToc: true
+    }
+  }
 });
 export {
   blog,

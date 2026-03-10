@@ -1,0 +1,170 @@
+---
+name: "Behind the Build: How We Trained ClypAI's Moment Detection Model"
+description: "A technical look at the machine learning pipeline behind ClypAI's core AI feature—how we built it, what we learned, and where we're taking it next."
+slug: "behind-the-build-moment-detection-model"
+author:
+  name: "Hyepr Labs"
+  avatar:
+    src: "/hyeprlabs.png"
+    alt: "Hyepr Labs"
+date: 2026-02-20
+tags: ["AI", "Machine Learning", "Engineering", "Product"]
+category: "company"
+image:
+  src: "/posts/getting-started.png"
+  alt: "Neural network visualization for video analysis"
+---
+
+Building an AI that reliably identifies "the best moments" in any video is harder than it sounds. Human intuition about what makes a clip engaging is deeply contextual, often unconscious, and notoriously difficult to operationalize.
+
+This is the story of how we built ours.
+
+## The Problem Definition
+
+Before writing any code, we spent two weeks trying to answer one question precisely: **What does "a good clip" actually mean?**
+
+Early answers were too vague ("it's engaging," "you want to watch it again") or too narrow ("it's funny," "it makes a strong point"). Neither approach would generalize across the diversity of content we were planning to support.
+
+We eventually landed on a working definition that could be tested:
+
+> A good clip is a self-contained moment that has sufficient context to be understood without the surrounding content, delivers clear value (information, entertainment, emotion, or insight), and creates a desire to engage further with the creator or topic.
+
+This definition has four measurable components:
+1. **Self-containment** — does the viewer need context they don't have?
+2. **Value delivery** — is something being communicated that has standalone worth?
+3. **Engagement trigger** — does it create curiosity, desire, or resonance?
+4. **Creator association** — does the viewer connect the moment to a human presence?
+
+## Building the Training Dataset
+
+The most important decision in any ML project is what goes in the training data. For moment detection, we faced a hard problem: what's "good" is partially subjective.
+
+### The Human Annotation Pipeline
+
+We built a two-stage annotation process:
+
+<Steps>
+  <Step>
+    **Stage 1: Crowdsourced ratings.** We paid raters to watch 5-second video segments and rate them on a 1–5 scale across four dimensions (self-containment, value, engagement trigger, creator association). Each segment was rated by 5 independent raters.
+  </Step>
+  <Step>
+    **Stage 2: Expert review.** High-variance segments (where rater agreement was low) went to a second pool of expert raters—experienced content creators and video editors with established track records.
+  </Step>
+  <Step>
+    **Stage 3: Outcome correlation.** We cross-referenced high-rated segments against actual engagement data from public videos. This helped us calibrate the annotation rubric against real-world performance rather than theoretical judgments.
+  </Step>
+</Steps>
+
+After 6 months of annotation work, we had approximately 2.8 million labeled 5-second video segments across 15,000+ source videos.
+
+### Dataset Diversity
+
+We were deliberate about content diversity:
+
+<Tabs items={["Content Types", "Creator Demographics", "Technical Specs"]}>
+  <Tab>
+    **Content distribution:**
+    - Podcasts and interviews: 28%
+    - Educational/tutorial content: 22%
+    - Live streams (gaming, talk, music): 18%
+    - Motivational/commentary: 15%
+    - News and analysis: 10%
+    - Other (cooking, fitness, craft): 7%
+
+    Genre balance was critical because "engaging" means different things in different content contexts. A viral cooking moment looks nothing like a viral business insight.
+  </Tab>
+  <Tab>
+    **Creator demographics:**
+    We explicitly over-sampled for:
+    - Non-native English speakers (23% of dataset)
+    - Creators with regional accents (31% of dataset)
+    - Female creators (48% of dataset)
+    - Creators of color (54% of dataset)
+
+    Early models trained on non-diverse datasets systematically underperformed for underrepresented groups. We caught this in internal audits and corrected the training distribution before launch.
+  </Tab>
+  <Tab>
+    **Technical characteristics:**
+    - Audio quality range: 48kbps to 320kbps
+    - Video quality range: 360p to 4K
+    - Lighting conditions: Professional studio to natural/poor lighting
+    - Recording environments: Studio, home office, outdoors, events
+    - Microphone types: Lavalier, condenser, dynamic, built-in
+
+    Real-world content is messy. Training only on high-quality recordings produces models that fail on typical creator setups.
+  </Tab>
+</Tabs>
+
+## The Model Architecture
+
+Our moment detection model is a multi-modal transformer that processes audio and video streams simultaneously.
+
+### Input Processing
+
+**Audio features extracted:**
+- Mel-frequency cepstral coefficients (MFCCs) for tone/timbre
+- Pitch and energy contours for prosody
+- Speech rate via forced alignment
+- Noise floor and signal-to-noise ratio
+- Laughter/applause detection via specialized sub-classifier
+
+**Visual features extracted:**
+- Facial action unit activations (via MediaPipe Holistic)
+- Optical flow for motion quantification
+- Scene change detection
+- Text detection (existing captions, lower-thirds)
+- Speaker presence and gaze direction
+
+### The Fusion Strategy
+
+Fusing audio and video signals is an active research area. We evaluated three approaches:
+
+| Fusion Type | Approach | Our Finding |
+|-------------|----------|-------------|
+| Early fusion | Concatenate features before processing | Underfit—too much noise |
+| Late fusion | Process modalities separately, combine predictions | Better, but missed cross-modal signals |
+| Cross-attention fusion | Allow modalities to attend to each other | Best performance, our current approach |
+
+The cross-attention approach lets the model recognize when audio and visual signals reinforce each other (a speaker leaning forward while making an emphatic statement), which is a much stronger signal than either modality alone.
+
+## The Hardest Problems
+
+<Accordions>
+  <Accordion title="The Cold Start Problem">
+    Moment detection is heavily context-dependent. A punchline only lands if you've heard the setup. But we're analyzing rolling 5-second windows—how do we incorporate context?
+
+    Our solution: we feed each 5-second window with 30 seconds of preceding context (encoded as a summary vector). The model learns to assess whether the 5-second window "completes" something that the context established—a key signal for self-containment.
+  </Accordion>
+  <Accordion title="The Subjective Quality Floor">
+    Some clips are objectively low quality regardless of the moment they capture—poor audio, extreme motion blur, broken encoding artifacts. The model needed to learn to distinguish "this is a bad-quality capture of a good moment" from "this is a good-quality capture of a bad moment."
+
+    We added a separate quality assessment head to the model that scores technical quality independently from moment quality. This lets the system flag good moments in poor-quality recordings for potential enhancement before user review.
+  </Accordion>
+  <Accordion title="Cultural Context Signals">
+    What's funny, inspiring, or insightful is deeply cultural. A moment that's high-energy in one cultural context might be neutral or even negative in another.
+
+    We addressed this imperfectly—it's an ongoing area of improvement. Current approach: we use language detection and, where content is non-English, route to specialized models trained on that language's content corpus. We're expanding language coverage and cultural context modeling actively.
+  </Accordion>
+</Accordions>
+
+## Results and Ongoing Improvement
+
+Our current model (v2) shows:
+
+- **84% user acceptance rate** — users keep the AI-suggested clips without modification at this rate
+- **Under 3 seconds** average processing time per minute of source video
+- **91% accuracy** on held-out test set for multi-speaker content
+
+The model continues to improve through a human-in-the-loop pipeline: every time a user rejects a clip or accepts a moment we scored low, that signal feeds back into ongoing fine-tuning.
+
+<Callout type="info" title="The Model Gets Better With Use">
+  Every session processed by ClypAI makes the model incrementally smarter. We don't use individual user data for training—we use aggregate patterns, with privacy-preserving techniques, to continuously improve detection across all users.
+</Callout>
+
+## What's Next
+
+The most exciting near-term work is in **series detection**: identifying when multiple clips from a single source form a natural narrative arc that could be posted as a series. This requires the model to reason across entire sessions, not just individual windows.
+
+We're also working on **topic threading**—automatically identifying which clips cover the same conceptual ground across different sessions, enabling creators to build topical series across months of content.
+
+The hard problems are still hard. But the model keeps getting better. And that's the point.
