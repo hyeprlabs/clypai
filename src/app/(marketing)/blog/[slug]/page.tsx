@@ -20,6 +20,8 @@ import { CallToAction } from "@/components/marketing/call-to-action";
 
 import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 
+import { useMDXComponents } from "@/mdx-components";
+
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
     slug: page.data.slug,
@@ -59,6 +61,8 @@ export default async function Page({
   if (!post) notFound();
 
   const { body: MDX, toc } = await post.data.load();
+
+  const mdxComponents = useMDXComponents();
 
   return (
     <main className="overflow-hidden">
@@ -123,7 +127,7 @@ export default async function Page({
               "prose-p:leading-relaxed prose-p:text-base prose-p:font-mono prose-li:leading-relaxed",
               "prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border"
             )}>
-              <MDX />
+              <MDX components={mdxComponents} />
             </article>
           </div>
         </div>
