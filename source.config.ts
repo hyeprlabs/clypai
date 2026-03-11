@@ -19,7 +19,7 @@ export const blog = defineCollections({
     }),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
-    category: z.enum(["company", "product", "community"]).optional(),
+    category: z.enum(["company", "product", "community", "ai-news"]).optional(),
     image: z.object({
       src: z.url().or(z.string().regex(/^\//, "Path must be absolute (start with /)")),
       alt: z.string(),

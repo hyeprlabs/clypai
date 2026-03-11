@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 
 export const revalidate = false;
 
-/** Titles longer than this threshold use a smaller font size */
+/** Titles with 50+ characters use a smaller font size for better fit */
 const TITLE_LENGTH_THRESHOLD = 50;
 
 export async function GET(_req: Request, { params }: { params: Promise<{ slug: string[] }> }) {

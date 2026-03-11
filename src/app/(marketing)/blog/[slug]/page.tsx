@@ -81,7 +81,7 @@ export default async function Page({
                 </time>
               </p>
 
-              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
+              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
                 {post.data.name}
               </h1>
               

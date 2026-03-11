@@ -1,0 +1,118 @@
+---
+name: "Smart Reframing Explained: How AI Converts Horizontal Video to Vertical Without Cropping Heads"
+description: "The technical deep-dive into how AI-powered smart reframing works — and why it produces better vertical video than manual cropping ever could."
+slug: "smart-reframing-ai-vertical-video-explained"
+author:
+  name: "Jordan Wright"
+  avatar:
+    src: "/avatars/jordan-wright.png"
+    alt: "Jordan Wright"
+date: 2026-02-10
+tags: ["Smart Reframing", "Vertical Video", "AI", "9:16", "Technical"]
+category: "product"
+image:
+  src: "/posts/getting-started.png"
+  alt: "AI smart reframing converting horizontal video to vertical"
+---
+
+## The Vertical-First World Demands a New Approach
+
+TikTok. Instagram Reels. YouTube Shorts. Every major growth platform is vertical-first — 9:16 aspect ratio. Most professional video, however, is still recorded in landscape: 16:9 widescreen.
+
+The naive solution is a center-crop: cut the sides off and hope the subject stays centered. The result is predictable — cut-off heads, awkward compositions, important graphics disappearing off-frame.
+
+**Smart reframing solves this.** Here's how it actually works.
+
+## The Core Problem: A Moving Subject in a Static Frame
+
+The fundamental challenge of horizontal-to-vertical conversion is that subjects *move*. A podcast guest leans forward. A gaming streamer gestures at the screen. A presenter walks to a whiteboard. A center-crop that looks perfect at second 0 looks terrible at second 30.
+
+A static crop isn't reframing — it's just a less-bad version of the same problem.
+
+## How AI Smart Reframing Works
+
+<Steps>
+  <Step>
+    ### Subject Detection
+
+    The AI first identifies all subjects in the frame — typically human faces and bodies — using a multi-frame object detection model. It tracks each subject's position across every frame of the video.
+
+    For talking-head content, this means continuously tracking the speaker's face bounding box throughout the entire clip.
+  </Step>
+  <Step>
+    ### Saliency Mapping
+
+    Beyond subjects, the AI builds a **saliency map** for each frame — a heat map of where a human viewer's eyes would naturally be drawn. This captures:
+
+    - Text overlays and graphics on screen
+    - High-contrast visual elements
+    - Motion vectors (where action is happening)
+    - Point-of-gaze directions (where a speaker is looking)
+  </Step>
+  <Step>
+    ### Optimal Crop Path Generation
+
+    The AI calculates the optimal crop window position for each frame — not just where the subject *is*, but where they're *headed*. This creates a smooth, anticipatory camera motion that feels natural rather than reactive.
+
+    The algorithm simultaneously optimizes for:
+    - Subject centered in frame
+    - Smooth camera motion (no jarring jumps)
+    - Important secondary elements in frame
+    - Rule-of-thirds composition
+  </Step>
+  <Step>
+    ### Motion Smoothing
+
+    Raw per-frame crop calculations produce jittery, uncomfortable motion. A smoothing pass applies temporal filtering — similar to optical image stabilization — to create fluid camera movement between positions.
+  </Step>
+  <Step>
+    ### Quality Verification
+
+    A final pass checks for edge cases: frames where the crop window would extend beyond the source video's boundaries, moments where two subjects are too far apart to fit in the vertical frame, and scenes with rapid subject switches.
+  </Step>
+</Steps>
+
+<Callout type="info">
+  ClypAI's smart reframing processes at approximately 2× real-time speed — meaning a 60-second clip is reframed in about 30 seconds of compute time, all in the cloud.
+</Callout>
+
+## Multi-Speaker Handling
+
+The hardest case for smart reframing is a conversation between two people in the same frame. When both speakers are in the shot, the AI must make intelligent decisions about focus.
+
+<Tabs items={["Active Speaker Mode", "Wide Shot Mode", "Split Frame Mode"]}>
+  <Tab value="Active Speaker Mode">
+    The crop window actively follows whoever is speaking, detected via audio analysis. When Speaker A is talking, the crop centers on them. When Speaker B responds, the crop smoothly pans over.
+
+    **Best for:** Podcast-style interviews with clear audio separation.
+  </Tab>
+  <Tab value="Wide Shot Mode">
+    When speakers are close enough to fit in a vertical frame together, the AI maintains a wide crop that keeps both visible, only tightening when one speaker is significantly further from the other.
+
+    **Best for:** Side-by-side interview setups.
+  </Tab>
+  <Tab value="Split Frame Mode">
+    For remote interviews (both faces in separate windows), the AI detects the dual-window layout and intelligently selects only the active speaker's window to fill the vertical frame.
+
+    **Best for:** Zoom-style remote podcast recordings.
+  </Tab>
+</Tabs>
+
+## The Quality Difference Is Visible
+
+<Alert variant="info">
+  <AlertTitle>Before and After Smart Reframing</AlertTitle>
+  <AlertDescription>
+    Center-crop: static, often cuts heads, misses gestures, loses graphics. Smart reframing: follows action, maintains composition, preserves all visual information — like a virtual camera operator who re-shot the content natively vertical.
+  </AlertDescription>
+</Alert>
+
+## When to Use Smart Reframing vs. Native Vertical Recording
+
+<Callout type="warn">
+  Smart reframing is not a replacement for native vertical recording when you have control over the shoot. If you're recording specifically for Reels/TikTok, shoot vertical-first. Smart reframing is for converting your existing horizontal library to vertical platforms — and it does that job exceptionally well.
+</Callout>
+
+The most efficient creator workflow in 2026: **record horizontal for your primary platform, use smart reframing to extract vertical clips for all secondary platforms**. You shoot once; ClypAI handles the rest.
+
+[**See smart reframing in action — try ClypAI free →**](https://clyp.ai)

@@ -1,0 +1,160 @@
+---
+name: "The Science of the Hook: How ClypAI's AI Detects Your Most Shareable Moments"
+description: "What makes a moment clip-worthy? We go deep on the signals ClypAI's AI analyzes to identify the best hooks from your content — and the psychology behind why they work."
+slug: "science-of-the-hook-clypai-ai-detection"
+author:
+  name: "Jordan Wright"
+  avatar:
+    src: "/avatars/jordan-wright.png"
+    alt: "Jordan Wright"
+date: 2026-01-16
+tags: ["AI", "Hook Detection", "Algorithm", "Technical", "Content Science"]
+category: "company"
+image:
+  src: "/posts/getting-started.png"
+  alt: "The science behind ClypAI hook detection AI algorithm"
+---
+
+## What Is a "Hook" and Why Does It Matter?
+
+A hook is any moment in your content that would make a new viewer stop scrolling, watch to the end, and want more. It's the 3-second window that determines whether your clip gets watched or skipped.
+
+Hooks aren't just a TikTok phenomenon. Every high-performing short-form clip — regardless of platform — has a strong hook at the start. The platforms' algorithms are literally optimized to distribute content with good hooks more widely.
+
+<Callout type="info">
+  Platform data consistently shows that videos with top-quartile hook completion rates (viewers who watch past the first 3 seconds) receive 4–8× more algorithmic distribution than videos with average hooks. The hook is the single highest-leverage element in short-form content.
+</Callout>
+
+## The 6 Signals ClypAI Analyzes
+
+ClypAI's AI doesn't guess which moments are compelling. It analyzes six distinct signal categories to score every potential clip candidate:
+
+<Steps>
+  <Step>
+    ### Linguistic Surprise Score
+
+    Moments where the speaker says something unexpected, counterintuitive, or provocative score highly. The model is trained to recognize:
+
+    - Contrarian statements ("Most people think X, but actually...")
+    - Revelation structures ("And then we realized...")
+    - Bold claims ("This is the biggest mistake creators make")
+    - Numerical specificity ("94% of creators who do this fail within 6 months")
+
+    These linguistic patterns reliably drive curiosity and watch-through.
+  </Step>
+  <Step>
+    ### Emotional Energy Detection
+
+    Voice analysis measures pitch variance, speaking pace, and volume to identify emotional peaks. A speaker who suddenly speeds up and increases pitch is usually saying something they care about — and that energy is contagious on screen.
+
+    The model distinguishes between:
+    - Natural energy peaks (genuine enthusiasm, laughter, emphasis)
+    - Monotone sections (explanatory content, recaps, transitions)
+    - Emotional valleys (pauses, hesitations, filler sections)
+  </Step>
+  <Step>
+    ### Narrative Completeness Score
+
+    A clip that starts mid-thought and ends mid-sentence is confusing, regardless of how interesting the content is. ClypAI evaluates narrative completeness:
+
+    - **Strong start signal:** The clip begins with a clear subject introduction or hook phrase
+    - **Strong end signal:** The clip ends with a resolution, punchline, or clear conclusion
+    - Clips with both high start and end signals are prioritized as fully-formed standalone pieces
+  </Step>
+  <Step>
+    ### Semantic Importance Weighting
+
+    Using a large language model, ClypAI evaluates the *meaning* of what's being said — not just how it's being said. Segments that contain:
+
+    - Unique insights or data points
+    - Actionable advice
+    - Story resolution moments
+    - Core thesis statements
+
+    ...all receive higher semantic importance scores.
+  </Step>
+  <Step>
+    ### Visual Engagement Indicators
+
+    For video content (not just audio), the visual layer adds additional signals:
+
+    - Camera movement or cutting → signals intentional emphasis
+    - Speaker's eye contact with camera → correlates with direct-address hooks
+    - Gesture frequency → physical movement correlates with energy and emphasis
+    - Screen content → if a speaker is pointing at a chart, they're probably making a key point
+  </Step>
+  <Step>
+    ### Historical Performance Learning
+
+    As you use ClypAI, the AI accumulates data on which of its suggestions you approve and reject. Over time, it learns your audience's specific preferences and your own editorial judgment.
+
+    A creator whose audience loves data-heavy clips will see those ranked higher. A creator whose audience responds to vulnerability will see personal story moments prioritized. The model personalizes to *you*.
+  </Step>
+</Steps>
+
+## The Composite Score
+
+These six signals are combined into a single composite score for each clip candidate, weighted by their historical predictive power for your specific content type:
+
+<Tabs items={["Podcast Content", "Stream Content", "Tutorial Content"]}>
+  <Tab value="Podcast Content">
+    | Signal | Weight |
+    |--------|--------|
+    | Linguistic Surprise | 30% |
+    | Emotional Energy | 25% |
+    | Semantic Importance | 25% |
+    | Narrative Completeness | 20% |
+    | Visual Indicators | 0% (audio-only) |
+
+    Podcasts are audio-dominant. Language and energy carry most of the weight.
+  </Tab>
+  <Tab value="Stream Content">
+    | Signal | Weight |
+    |--------|--------|
+    | Emotional Energy | 35% |
+    | Visual Indicators | 20% |
+    | Linguistic Surprise | 20% |
+    | Narrative Completeness | 15% |
+    | Semantic Importance | 10% |
+
+    Streams are reaction-driven. Energy and visual action matter most.
+  </Tab>
+  <Tab value="Tutorial Content">
+    | Signal | Weight |
+    |--------|--------|
+    | Semantic Importance | 35% |
+    | Narrative Completeness | 25% |
+    | Linguistic Surprise | 20% |
+    | Emotional Energy | 15% |
+    | Visual Indicators | 5% |
+
+    Tutorials are content-dense. The quality and clarity of information is the primary engagement driver.
+  </Tab>
+</Tabs>
+
+## What the AI Gets Wrong (and How We're Fixing It)
+
+<Alert variant="warning">
+  <AlertTitle>No AI Is Perfect at Hook Detection</AlertTitle>
+  <AlertDescription>
+    The model is excellent at pattern-matching for known hook structures. It struggles with highly niche or cultural content where the significance is contextually dependent — a moment that's hilarious to your specific community might appear neutral to the AI. Your feedback on rejected clips directly trains the model to improve on your content type.
+  </AlertDescription>
+</Alert>
+
+The most common false positives:
+- **Inside jokes** — High energy + surprise structure, but meaningless out of context
+- **Technical jargon peaks** — Rapid energy spikes during acronym-heavy explanations score well on energy but poorly on general audience appeal
+- **Cliffhangers mid-sentence** — High narrative setup score but poor completeness score; we're improving the resolution detection
+
+## The Result: Your Best Moments, Surfaced
+
+The bottom line is that ClypAI's hook detection isn't one trick — it's a multi-dimensional analysis of everything that makes a moment worth sharing. It's not perfect, but it consistently surfaces the top 20–30% of moments from any content — and that changes the economics of short-form production entirely.
+
+<Alert variant="info">
+  <AlertTitle>Your Feedback Makes It Smarter</AlertTitle>
+  <AlertDescription>
+    Every time you approve a clip, reject a suggestion, or manually trim a candidate, the model learns. The more you use ClypAI, the more precisely it understands what *your* audience finds compelling. It compounds over time.
+  </AlertDescription>
+</Alert>
+
+[**See the hook detector in action on your content — start free →**](https://clyp.ai)

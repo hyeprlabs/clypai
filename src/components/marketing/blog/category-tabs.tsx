@@ -15,6 +15,7 @@ export function CategoryTabs() {
     <Tabs value={category ?? "all"} onValueChange={(value) => setCategory(value)}>
       <TabsList className="bg-transparent">
         <TabsTrigger className="rounded-full" value="all">All</TabsTrigger>
+        <TabsTrigger className="rounded-full" value="ai-news">AI News</TabsTrigger>
         <TabsTrigger className="rounded-full" value="company">Company</TabsTrigger>
         <TabsTrigger className="rounded-full" value="product">Product</TabsTrigger>
         <TabsTrigger className="rounded-full" value="community">Community</TabsTrigger>
