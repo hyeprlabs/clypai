@@ -1,16 +1,14 @@
 "use client"
 
-import {
-  ArrowUpRightIcon,
-  CircleFadingPlusIcon,
-  FileInputIcon,
-  FolderPlusIcon,
-  SearchIcon,
-} from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 import * as React from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useRouter } from "next/navigation";
+
+import { useDocsSearch } from "fumadocs-core/search/client";
+import type { SortedResult } from "fumadocs-core/search";
 
 import {
   CommandDialog,
@@ -19,8 +17,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 
 import { Button } from "@/components/ui/button";
@@ -30,6 +26,9 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd";
 export function SearchBlogCommandDialog() {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
+  const router = useRouter();
+
+  const { search, setSearch, query } = useDocsSearch({ type: "fetch", api: "/api/search" });
 
   useHotkeys(
     ['ctrl+k', 'meta+k'],
@@ -40,6 +39,15 @@ export function SearchBlogCommandDialog() {
     [isMobile],
     { enabled: !isMobile }
   );
+
+  const results: SortedResult[] = query.data && query.data !== "empty"
+    ? query.data.filter((r) => r.type === "page")
+    : [];
+
+  function handleSelect(url: string) {
+    router.push(url);
+    setOpen(false);
+  }
 
   return (
     <>
@@ -58,65 +66,29 @@ export function SearchBlogCommandDialog() {
         </KbdGroup>
       </Button>
       <CommandDialog onOpenChange={setOpen} open={open}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput
+          placeholder="Search posts..."
+          value={search}
+          onValueChange={setSearch}
+        />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Quick start">
-            <CommandItem>
-              <FolderPlusIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>New folder</span>
-              <CommandShortcut className="justify-center">⌘N</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <FileInputIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Import document</span>
-              <CommandShortcut className="justify-center">⌘I</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CircleFadingPlusIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Add block</span>
-              <CommandShortcut className="justify-center">⌘B</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Navigation">
-            <CommandItem>
-              <ArrowUpRightIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Go to dashboard</span>
-            </CommandItem>
-            <CommandItem>
-              <ArrowUpRightIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Go to apps</span>
-            </CommandItem>
-            <CommandItem>
-              <ArrowUpRightIcon
-                aria-hidden="true"
-                className="opacity-60"
-                size={16}
-              />
-              <span>Go to connections</span>
-            </CommandItem>
-          </CommandGroup>
+          <CommandEmpty>
+            {query.isLoading ? "Searching…" : "No results found."}
+          </CommandEmpty>
+          {results.length > 0 && (
+            <CommandGroup heading="Posts">
+              {results.map((result) => (
+                <CommandItem
+                  key={result.id}
+                  value={result.url}
+                  onSelect={() => handleSelect(result.url)}
+                >
+                  <SearchIcon className="opacity-60" size={16} aria-hidden />
+                  <span>{result.content}</span>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          )}
         </CommandList>
       </CommandDialog>
     </>

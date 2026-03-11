@@ -20,54 +20,113 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        letterSpacing: '-.02em',
-        fontWeight: 700,
-        background: 'white',
+        flexDirection: 'column',
+        gap: 24,
+        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0f0f0f 70%, #050505 100%)',
+        fontFamily: 'sans-serif',
       }}
     >
+      {/* Top branding bar */}
       <div
         style={{
-          left: 42,
-          top: 42,
           position: 'absolute',
+          top: 48,
+          left: 56,
           display: 'flex',
           alignItems: 'center',
+          gap: 10,
         }}
       >
-        <span
+        <div
           style={{
-            width: 24,
-            height: 24,
-            background: 'black',
+            width: 8,
+            height: 8,
+            borderRadius: '50%',
+            background: '#ffffff',
           }}
         />
         <span
           style={{
-            marginLeft: 8,
-            fontSize: 20,
+            fontSize: 16,
+            color: '#9ca3af',
+            fontWeight: 500,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
           }}
         >
           clypai.com
         </span>
       </div>
+
+      {/* Category badge */}
+      {page.data.category && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '6px 16px',
+            border: '1px solid #333333',
+            borderRadius: 9999,
+            fontSize: 13,
+            color: '#9ca3af',
+            fontWeight: 500,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+          }}
+        >
+          {page.data.category}
+        </div>
+      )}
+
+      {/* Title */}
       <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          padding: '20px 50px',
-          margin: '0 42px',
-          fontSize: 40,
-          width: 'auto',
-          maxWidth: 550,
+          padding: '0 80px',
+          fontSize: page.data.name.length > 50 ? 44 : 56,
+          fontWeight: 700,
+          color: '#ffffff',
           textAlign: 'center',
-          backgroundColor: 'black',
-          color: 'white',
-          lineHeight: 1.4,
+          lineHeight: 1.2,
+          letterSpacing: '-0.03em',
+          maxWidth: 900,
         }}
       >
         {page.data.name}
       </div>
+
+      {/* Author + date row */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 16,
+          marginTop: 8,
+        }}
+      >
+        <span style={{ fontSize: 15, color: '#6b7280' }}>
+          {page.data.author.name}
+        </span>
+        <span style={{ fontSize: 15, color: '#374151' }}>·</span>
+        <span style={{ fontSize: 15, color: '#6b7280' }}>
+          {new Date(page.data.date).toLocaleDateString('en-US', { dateStyle: 'long' })}
+        </span>
+      </div>
+
+      {/* Bottom bar */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 3,
+          background: 'linear-gradient(90deg, transparent, #333333 30%, #555555 50%, #333333 70%, transparent)',
+        }}
+      />
     </div>
   );
 }

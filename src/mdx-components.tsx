@@ -1,7 +1,24 @@
 import type { MDXComponents } from "mdx/types";
- 
-const components: MDXComponents = {}
- 
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { Callout } from "fumadocs-ui/components/callout";
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
+import { Card, Cards } from "fumadocs-ui/components/card";
+
 export function useMDXComponents(): MDXComponents {
-  return components
+  return {
+    ...defaultMdxComponents,
+    Accordion,
+    Accordions,
+    Step,
+    Steps,
+    Tab,
+    Tabs,
+    Callout,
+    InlineTOC,
+    Card,
+    Cards,
+  } as MDXComponents;
 }

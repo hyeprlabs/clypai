@@ -16,6 +16,8 @@ import {
 
 import { CallToAction } from "@/components/marketing/call-to-action";
 
+import { InlineTOC } from "fumadocs-ui/components/inline-toc";
+
 export async function generateStaticParams() {
   return blog.getPages().map((page) => ({
     slug: page.data.slug,
@@ -54,7 +56,7 @@ export default async function Page({
 
   if (!post) notFound();
 
-  const { body: MDX } = await post.data.load();
+  const { body: MDX, toc } = await post.data.load();
 
   return (
     <main className="overflow-hidden">
@@ -104,7 +106,21 @@ export default async function Page({
               )}
             </header>
 
-            <article className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-serif prose-headings:scroll-mt-20">
+            {toc.length > 0 && (
+              <div className="mb-10">
+                <InlineTOC items={toc} />
+              </div>
+            )}
+
+            <article className={[
+              "prose prose-neutral dark:prose-invert max-w-none",
+              "prose-headings:font-serif prose-headings:scroll-mt-20",
+              "prose-h1:text-3xl prose-h1:font-semibold prose-h1:leading-tight prose-h1:tracking-tight",
+              "prose-h2:text-2xl prose-h2:font-semibold prose-h2:leading-snug prose-h2:tracking-tight prose-h2:mt-10 prose-h2:mb-4",
+              "prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:mt-8 prose-h3:mb-3",
+              "prose-p:leading-relaxed prose-p:text-base prose-li:leading-relaxed",
+              "prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border",
+            ].join(" ")}>
               <MDX />
             </article>
           </div>
