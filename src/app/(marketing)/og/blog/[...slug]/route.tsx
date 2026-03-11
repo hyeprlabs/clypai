@@ -41,6 +41,22 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
       >
         {page.data.name}
       </span>
+      {page.data.category && (
+        <span
+          style={{
+            position: 'absolute',
+            bottom: 40,
+            right: 60,
+            fontSize: 18,
+            fontWeight: 500,
+            color: 'rgba(255,255,255,0.5)',
+            textTransform: 'capitalize',
+            letterSpacing: '0.04em',
+          }}
+        >
+          {page.data.category}
+        </span>
+      )}
     </div>
   );
 }

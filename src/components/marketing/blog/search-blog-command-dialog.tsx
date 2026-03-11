@@ -7,7 +7,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useRouter } from "next/navigation";
 
-import { useDocsSearch } from "fumadocs-core/search/client";
 import { blog } from "@/lib/source";
 
 import {
@@ -23,32 +22,35 @@ import { Button } from "@/components/ui/button";
 
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
+const allPosts = blog.getPages().map((page) => ({
+  id: page.data.slug,
+  url: `/blog/${page.data.slug}`,
+  title: page.data.name,
+  description: page.data.description ?? "",
+  author: page.data.author.name,
+  category: page.data.category ?? "",
+  tags: page.data.tags ?? [],
+}));
+
+function matchesQuery(post: (typeof allPosts)[number], query: string): boolean {
+  const q = query.toLowerCase();
+  return (
+    post.title.toLowerCase().includes(q) ||
+    post.description.toLowerCase().includes(q) ||
+    post.author.toLowerCase().includes(q) ||
+    post.category.toLowerCase().includes(q) ||
+    post.tags.some((t) => t.toLowerCase().includes(q))
+  );
+}
+
 export function SearchBlogCommandDialog() {
   const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
   const isMobile = useIsMobile();
   const router = useRouter();
 
-  const { search, setSearch, query } = useDocsSearch({
-    type: "fetch",
-    api: "/api/search",
-    allowEmpty: true,
-  });
-
-  // Stable list of all posts for the default (empty-query) state.
-  // blog.getPages() reads static/build-time content; no dynamic updates expected.
-  const allPosts = React.useMemo(
-    () =>
-      blog.getPages().map((page) => ({
-        id: page.data.slug,
-        url: `/blog/${page.data.slug}`,
-        title: page.data.name,
-        author: page.data.author.name,
-      })),
-    []
-  );
-
   useHotkeys(
-    ['ctrl+k', 'meta+k'],
+    ["ctrl+k", "meta+k"],
     (e) => {
       e.preventDefault();
       setOpen((o) => !o);
@@ -57,28 +59,13 @@ export function SearchBlogCommandDialog() {
     { enabled: !isMobile }
   );
 
-  // When user is typing, show fumadocs search results (page-level hits only).
-  // Author metadata is not returned by the fumadocs search index, so we fall
-  // back to looking up the page from blog.getPage() by URL.
-  const isSearching = search.trim().length > 0;
-  const searchResults = React.useMemo(() => {
-    if (!isSearching || !query.data || query.data === "empty") return null;
-    return query.data
-      .filter((r) => r.type === "page")
-      .map((r) => {
-        const slug = r.url.replace(/^\/blog\//, "");
-        const page = blog.getPage([slug]);
-        return {
-          id: r.id,
-          url: r.url,
-          title: typeof r.content === "string" ? r.content : r.url,
-          author: page?.data.author.name ?? "",
-        };
-      });
-  }, [isSearching, query.data]);
-
-  const displayItems = searchResults ?? allPosts;
-  const isEmpty = displayItems.length === 0;
+  const displayItems = React.useMemo(
+    () =>
+      search.trim()
+        ? allPosts.filter((p) => matchesQuery(p, search.trim()))
+        : allPosts,
+    [search]
+  );
 
   function handleSelect(url: string) {
     router.push(url);
@@ -109,7 +96,7 @@ export function SearchBlogCommandDialog() {
         }}
         open={open}
         title="Search blog posts"
-        description="Search through all posts by title or author."
+        description="Search by title, description, author, category, or tags."
       >
         <CommandInput
           placeholder="Search posts..."
@@ -117,12 +104,10 @@ export function SearchBlogCommandDialog() {
           onValueChange={setSearch}
         />
         <CommandList>
-          {isEmpty && (
-            <CommandEmpty>
-              {query.isLoading ? "Searching…" : "No results found."}
-            </CommandEmpty>
+          {displayItems.length === 0 && (
+            <CommandEmpty>No results found.</CommandEmpty>
           )}
-          {!isEmpty && (
+          {displayItems.length > 0 && (
             <CommandGroup heading="Posts">
               {displayItems.map((item) => (
                 <CommandItem

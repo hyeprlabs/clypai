@@ -44,7 +44,7 @@ export function BlogPosts() {
           
           <div className="space-y-3">
 
-            <h3 className="text-xl leading-tight">
+            <h3 className="text-xl leading-tight line-clamp-2">
               {post.data.name}
             </h3>
 
@@ -63,9 +63,9 @@ export function BlogPosts() {
 function Author({ author }: { author: { name: string; avatar: { src: string; alt: string } } }) {
   return (
     <div className="flex items-center gap-2 text-foreground">
-      <Avatar className="size-7">
+      <Avatar className="border border-border">
         <AvatarImage src={author.avatar.src} alt={author.avatar.alt} />
-        <AvatarFallback className="text-[10px]">{author.name[0]}</AvatarFallback>
+        <AvatarFallback className="bg-transparent text-xs">{author.name[0]}</AvatarFallback>
       </Avatar>
       <span className="font-medium text-xs">{author.name}</span>
     </div>

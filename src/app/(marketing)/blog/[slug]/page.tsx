@@ -94,9 +94,9 @@ export default async function Page({
               </p>
 
               <div className="flex items-center gap-2 my-4">
-                <Avatar className="size-9">
+                <Avatar className="border border-border">
                   <AvatarImage src={post.data.author.avatar.src} alt={post.data.author.avatar.alt} />
-                  <AvatarFallback className="text-xs">{post.data.author.name[0]}</AvatarFallback>
+                  <AvatarFallback className="bg-transparent text-xs">{post.data.author.name[0]}</AvatarFallback>
                 </Avatar>
                 <span className="text-sm font-medium">{post.data.author.name}</span>
               </div>
