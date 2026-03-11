@@ -31,7 +31,7 @@ export function BlogPosts() {
           className="group flex flex-col gap-4"
         >
           {post.data.image && (
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted border border-border">
               <Image
                 src={`/og/blog/${[...post.slugs, 'image.png'].join('/')}`}
                 alt={post.data.image.alt}

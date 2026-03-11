@@ -6,6 +6,7 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Callout } from "fumadocs-ui/components/callout";
 import { InlineTOC } from "fumadocs-ui/components/inline-toc";
 import { Card, Cards } from "fumadocs-ui/components/card";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 
 export function useMDXComponents(): MDXComponents {
   return {
@@ -20,5 +21,8 @@ export function useMDXComponents(): MDXComponents {
     InlineTOC,
     Card,
     Cards,
+    Alert,
+    AlertTitle,
+    AlertDescription,
   } as MDXComponents;
 }

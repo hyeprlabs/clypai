@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 
 import { Metadata } from "next";
 
+import { cn } from "@/lib/utils";
+
 import { BackgroundGlow } from "@/components/marketing/background-glow";
 
 import { Badge } from "@/components/ui/badge";
@@ -79,7 +81,7 @@ export default async function Page({
                 </time>
               </p>
 
-              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold font-serif bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
+              <h1 className="mx-auto mt-6 sm:mt-8 max-w-4xl text-balance text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-md:font-semibold bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/70 py-1">
                 {post.data.name}
               </h1>
               
@@ -112,15 +114,15 @@ export default async function Page({
               </div>
             )}
 
-            <article className={[
+            <article className={cn(
               "prose prose-neutral dark:prose-invert max-w-none",
-              "prose-headings:font-serif prose-headings:scroll-mt-20",
+              "prose-headings:font-sans prose-headings:scroll-mt-20",
               "prose-h1:text-3xl prose-h1:font-semibold prose-h1:leading-tight prose-h1:tracking-tight",
               "prose-h2:text-2xl prose-h2:font-semibold prose-h2:leading-snug prose-h2:tracking-tight prose-h2:mt-10 prose-h2:mb-4",
               "prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:mt-8 prose-h3:mb-3",
-              "prose-p:leading-relaxed prose-p:text-base prose-li:leading-relaxed",
-              "prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border",
-            ].join(" ")}>
+              "prose-p:leading-relaxed prose-p:text-base prose-p:font-mono prose-li:leading-relaxed",
+              "prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border"
+            )}>
               <MDX />
             </article>
           </div>
