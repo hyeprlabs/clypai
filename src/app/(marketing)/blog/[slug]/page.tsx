@@ -94,9 +94,9 @@ export default async function Page({
               </p>
 
               <div className="flex items-center gap-2 my-4">
-                <Avatar className="size-6">
+                <Avatar className="size-9">
                   <AvatarImage src={post.data.author.avatar.src} alt={post.data.author.avatar.alt} />
-                  <AvatarFallback>{post.data.author.name[0]}</AvatarFallback>
+                  <AvatarFallback className="text-xs">{post.data.author.name[0]}</AvatarFallback>
                 </Avatar>
                 <span className="text-sm font-medium">{post.data.author.name}</span>
               </div>
@@ -124,7 +124,7 @@ export default async function Page({
               "prose-h1:text-3xl prose-h1:font-semibold prose-h1:leading-tight prose-h1:tracking-tight",
               "prose-h2:text-2xl prose-h2:font-semibold prose-h2:leading-snug prose-h2:tracking-tight prose-h2:mt-10 prose-h2:mb-4",
               "prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:mt-8 prose-h3:mb-3",
-              "prose-p:leading-relaxed prose-p:text-base prose-p:font-mono prose-li:leading-relaxed",
+              "prose-p:leading-relaxed prose-p:text-base prose-li:leading-relaxed",
               "prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border"
             )}>
               <MDX components={mdxComponents} />

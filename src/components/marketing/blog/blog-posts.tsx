@@ -63,15 +63,12 @@ export function BlogPosts() {
 function Author({ author }: { author: { name: string; avatar: { src: string; alt: string } } }) {
   return (
     <div className="flex items-center gap-2 text-foreground">
-      <Avatar className="size-5">
-        <AvatarImage
-          src={author.avatar.src}
-          alt={author.avatar.alt}
-        />
-        <AvatarFallback>{author.name[0]}</AvatarFallback>
+      <Avatar className="size-7">
+        <AvatarImage src={author.avatar.src} alt={author.avatar.alt} />
+        <AvatarFallback className="text-[10px]">{author.name[0]}</AvatarFallback>
       </Avatar>
       <span className="font-medium text-xs">{author.name}</span>
-  </div>
+    </div>
   );
 }
 
