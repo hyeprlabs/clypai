@@ -4,6 +4,12 @@ import { withBotId } from "botid/next/config";
 import { createMDX } from "fumadocs-mdx/next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: [
+    "@ffmpeg-installer/ffmpeg",
+    "fluent-ffmpeg",
+    "@distube/ytdl-core",
+    "openai",
+  ],
   async redirects() {
     return [
       {

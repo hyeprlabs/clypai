@@ -11,6 +11,7 @@ import {
   Palette,
   Network,
   Settings,
+  Scissors,
 } from "lucide-react";
 
 import {
@@ -32,6 +33,11 @@ const data = {
       title: "Overview",
       url: "/overview",
       icon: Home,
+    },
+    {
+      title: "Create",
+      url: "/create",
+      icon: Scissors,
     },
     {
       title: "Projects",
