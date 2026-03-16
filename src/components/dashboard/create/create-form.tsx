@@ -41,7 +41,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { MAX_CLIP_COUNT, MIN_CLIP_COUNT } from "@/lib/constants";
+import { MAX_CLIP_COUNT, MIN_CLIP_COUNT, ALLOWED_VIDEO_TYPES, ALLOWED_VIDEO_EXTENSIONS, MAX_UPLOAD_SIZE_LABEL } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -365,7 +365,7 @@ export function CreateForm() {
                                 browse
                                 <input
                                   type="file"
-                                  accept="video/mp4,video/quicktime,video/webm,video/x-msvideo"
+                                  accept={ALLOWED_VIDEO_TYPES.join(",")}
                                   className="hidden"
                                   onChange={(e) => {
                                     const file = e.target.files?.[0];
@@ -375,7 +375,7 @@ export function CreateForm() {
                               </label>
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">
-                              MP4, MOV, WebM, AVI · Max 500 MB
+                              {ALLOWED_VIDEO_EXTENSIONS} · Max {MAX_UPLOAD_SIZE_LABEL}
                             </p>
                           </div>
                         </>

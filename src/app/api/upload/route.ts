@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseAdmin } from "@/lib/supabase";
+import { ALLOWED_VIDEO_TYPES, MAX_UPLOAD_SIZE, ALLOWED_VIDEO_EXTENSIONS, MAX_UPLOAD_SIZE_LABEL } from "@/lib/constants";
 import { randomUUID } from "crypto";
-
-const MAX_FILE_SIZE = 500 * 1024 * 1024; // 500 MB
-const ALLOWED_TYPES = ["video/mp4", "video/quicktime", "video/webm", "video/x-msvideo"];
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,20 +12,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    if (!ALLOWED_TYPES.includes(file.type)) {
+    if (!ALLOWED_VIDEO_TYPES.includes(file.type as (typeof ALLOWED_VIDEO_TYPES)[number])) {
       return NextResponse.json(
-        { error: "Invalid file type. Supported: MP4, MOV, WebM, AVI" },
+        { error: `Invalid file type. Supported: ${ALLOWED_VIDEO_EXTENSIONS}` },
         { status: 400 },
       );
     }
 
-    if (file.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: "File too large. Maximum 500 MB" }, { status: 400 });
+    if (file.size > MAX_UPLOAD_SIZE) {
+      return NextResponse.json({ error: `File too large. Maximum ${MAX_UPLOAD_SIZE_LABEL}` }, { status: 400 });
     }
 
     const supabase = createSupabaseAdmin();
     const fileId = randomUUID();
-    const ext = file.name.split(".").pop() ?? "mp4";
+    const extMap: Record<string, string> = {
+      "video/mp4": "mp4",
+      "video/quicktime": "mov",
+      "video/webm": "webm",
+      "video/x-msvideo": "avi",
+    };
+    const ext = extMap[file.type] ?? "mp4";
     const storagePath = `uploads/${fileId}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
 

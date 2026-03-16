@@ -35,6 +35,10 @@ export async function processVideoJob(data: VideoProcessingData): Promise<void> 
     language,
   } = data;
 
+  if (!existingPath && !youtubeUrl) {
+    throw new Error("Either a YouTube URL or an uploaded video is required");
+  }
+
   const storagePath = existingPath ?? (await downloadAndStoreVideo(projectId, youtubeUrl!, language));
   const transcript = await transcribeVideo(projectId, storagePath, language);
   const suggestions = await analyzeTranscript(projectId, transcript, clipCount);
@@ -347,8 +351,14 @@ async function createClip(
     const ffmpeg = (await import("fluent-ffmpeg")).default;
     ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-    const hexToAss = (hex: string) => {
+    const normalizeHex = (hex: string) => {
       const c = hex.replace("#", "");
+      if (c.length === 3) return c[0] + c[0] + c[1] + c[1] + c[2] + c[2];
+      return c;
+    };
+
+    const hexToAss = (hex: string) => {
+      const c = normalizeHex(hex);
       return `&H00${c.slice(4, 6)}${c.slice(2, 4)}${c.slice(0, 2)}`.toUpperCase();
     };
 
@@ -356,7 +366,7 @@ async function createClip(
       .toString(16)
       .padStart(2, "0")
       .toUpperCase();
-    const bgColor = captionStyle.backgroundColor?.replace("#", "") ?? "000000";
+    const bgColor = normalizeHex(captionStyle.backgroundColor ?? "#000000");
     const assBackColor = `&H${bgOpacityHex}${bgColor.slice(4, 6)}${bgColor.slice(2, 4)}${bgColor.slice(0, 2)}`.toUpperCase();
     const assFontColor = hexToAss(captionStyle.fontColor ?? "#ffffff");
 

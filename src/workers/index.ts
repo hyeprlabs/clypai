@@ -26,11 +26,11 @@ const contactWorker = new Worker<ContactJobData>(
 );
 
 videoWorker.on("failed", (job, err) => {
-  console.error(`[video-processing] Job ${job?.id} failed:`, err.message);
+  console.error(`[video-processing] Job ${job?.id} failed:`, err);
 });
 
 contactWorker.on("failed", (job, err) => {
-  console.error(`[contact] Job ${job?.id} failed:`, err.message);
+  console.error(`[contact] Job ${job?.id} failed:`, err);
 });
 
 console.log("Workers started: video-processing, contact");
