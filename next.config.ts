@@ -1,6 +1,4 @@
 import type { NextConfig } from "next";
-import { withWorkflow } from "workflow/next";
-import { withBotId } from "botid/next/config";
 import { createMDX } from "fumadocs-mdx/next";
 
 const nextConfig: NextConfig = {
@@ -9,6 +7,8 @@ const nextConfig: NextConfig = {
     "fluent-ffmpeg",
     "@distube/ytdl-core",
     "openai",
+    "bullmq",
+    "ioredis",
   ],
   async redirects() {
     return [
@@ -32,13 +32,10 @@ const nextConfig: NextConfig = {
         destination: "https://clypai.openstatus.dev/",
         permanent: true,
       },
-    ]
+    ];
   },
 };
 
-const withMDX = createMDX({
-  // customise the config file path
-  // configPath: "source.config.ts"
-});
+const withMDX = createMDX();
 
-export default withWorkflow(withBotId(withMDX(nextConfig)));
+export default withMDX(nextConfig);
