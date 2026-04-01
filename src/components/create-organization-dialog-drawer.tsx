@@ -77,11 +77,9 @@ function CreateOrganizationForm() {
   }, [watchedSlug]);
 
   async function onSubmit(data: z.infer<typeof schema>) {
-    const { data: session } = authClient.useSession();
     await authClient.organization.create({
       name: data.name,
       slug: data.slug,
-      userId: session?.user.id,
       keepCurrentActiveOrganization: false
     });
     toast.success("Organization created!", { description: data.name });
