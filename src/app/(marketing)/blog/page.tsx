@@ -4,17 +4,9 @@ import { Suspense } from "react";
 
 import { motion } from "motion/react";
 
-import { Bell } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-
 import { CategoryTabs } from "@/components/marketing/blog/category-tabs";
 
-import { SearchBlogCommandDialog } from "@/components/marketing/blog/search-blog-command-dialog";
-
 import { BackgroundGlow } from "@/components/marketing/background-glow";
-
-import { BlogPosts } from "@/components/marketing/blog/blog-posts";
 
 export default function Page() {
   return (
@@ -30,9 +22,8 @@ export default function Page() {
           />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <header className="mb-10 flex flex-col items-start gap-6 md:flex-row md:items-end md:justify-between">
-              
-              <motion.h1 
+            <header className="mb-10">
+              <motion.h1
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -40,19 +31,6 @@ export default function Page() {
               >
                 Blog
               </motion.h1>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-                className="flex items-center gap-3"
-              >
-                <SearchBlogCommandDialog />
-                <Button variant="outline" className="rounded-full" size="sm">
-                  <Bell className="text-muted-foreground mr-2" />
-                  Subscribe
-                </Button>
-              </motion.div>
             </header>
 
             <motion.div
@@ -65,17 +43,6 @@ export default function Page() {
                 <CategoryTabs />
               </Suspense>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            >
-              <Suspense>
-                <BlogPosts />
-              </Suspense>
-            </motion.div>
-            
           </div>
         </div>
       </section>

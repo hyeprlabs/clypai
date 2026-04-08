@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 import { withWorkflow } from "workflow/next";
 import { withBotId } from "botid/next/config";
-import { createMDX } from "fumadocs-mdx/next";
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -30,9 +29,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-const withMDX = createMDX({
-  // customise the config file path
-  // configPath: "source.config.ts"
-});
-
-export default withWorkflow(withBotId(withMDX(nextConfig)));
+export default withWorkflow(withBotId(nextConfig));
