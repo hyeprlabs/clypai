@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -16,7 +16,12 @@ import { toast } from "sonner";
 
 import slug from "slug";
 
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 
 import { Button } from "@/components/ui/button";
 
@@ -66,7 +71,10 @@ function CreateOrganizationForm() {
 
   React.useEffect(() => {
     if (!slugEdited) {
-      form.setValue("slug", slug(form.getValues("name"), { lower: true, trim: true }));
+      form.setValue(
+        "slug",
+        slug(form.getValues("name"), { lower: true, trim: true }),
+      );
     }
   }, [slugEdited, form, watchedName]);
 
@@ -80,7 +88,7 @@ function CreateOrganizationForm() {
     await authClient.organization.create({
       name: data.name,
       slug: data.slug,
-      keepCurrentActiveOrganization: false
+      keepCurrentActiveOrganization: false,
     });
     toast.success("Organization created!", { description: data.name });
     console.log("Organization created!", data.name);
@@ -94,7 +102,9 @@ function CreateOrganizationForm() {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
-              <FieldLabel className="text-muted-foreground font-normal">Name</FieldLabel>
+              <FieldLabel className="text-muted-foreground font-normal">
+                Name
+              </FieldLabel>
               <Input
                 {...field}
                 id="name"
@@ -111,14 +121,16 @@ function CreateOrganizationForm() {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
-              <FieldLabel className="text-muted-foreground font-normal">Slug</FieldLabel>
+              <FieldLabel className="text-muted-foreground font-normal">
+                Slug
+              </FieldLabel>
               <Input
                 {...field}
                 id="slug"
                 type="text"
                 placeholder="acme"
                 aria-invalid={fieldState.invalid}
-                onChange={e => {
+                onChange={(e) => {
                   field.onChange(e);
                   if (e.target.value === "") {
                     setSlugEdited(false);
@@ -140,16 +152,18 @@ function CreateOrganizationForm() {
   );
 }
 
-export function CreateOrganizationDialogDrawer({ children }: { children: React.ReactNode }) {
+export function CreateOrganizationDialogDrawer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
 
   if (!isMobile) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          {children}
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[375px] p-4 bg-linear-to-br from-background to-card">
           <DialogHeader>
             <DialogTitle>Create Organization</DialogTitle>
@@ -160,7 +174,9 @@ export function CreateOrganizationDialogDrawer({ children }: { children: React.R
           <CreateOrganizationForm />
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" className="w-full">Cancel</Button>
+              <Button variant="outline" className="w-full">
+                Cancel
+              </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
@@ -170,9 +186,7 @@ export function CreateOrganizationDialogDrawer({ children }: { children: React.R
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        {children}
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Create Organization</DrawerTitle>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { usePathname } from "next/navigation";
 
@@ -22,7 +22,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
-  const segments = usePathname().split("/").filter(Boolean)
+  const segments = usePathname().split("/").filter(Boolean);
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2">
@@ -70,5 +70,5 @@ export function SiteHeader() {
         </Button>
       </div>
     </header>
-  )
+  );
 }

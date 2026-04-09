@@ -57,7 +57,7 @@ export async function StatusWidget({ slug }: { slug: string }) {
   }
 
   const key = parsed.data.status;
-  
+
   const { label, color } = dictionary[key];
 
   return (

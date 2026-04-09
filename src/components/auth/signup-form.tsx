@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
@@ -10,12 +10,7 @@ import * as z from "zod";
 
 import { cn } from "@/lib/utils";
 
-import { 
-  Eye, 
-  EyeOff,
-  Github, 
-  LoaderCircle
-} from "lucide-react";
+import { Eye, EyeOff, Github, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -47,7 +42,7 @@ const schema = z.object({
     .string()
     .min(8, "Password must be at least 8 characters.")
     .max(64, "Password must be at most 64 characters."),
-})
+});
 
 export function SignupForm({
   className,
@@ -56,11 +51,11 @@ export function SignupForm({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [isGitHubLoading, setIsGitHubLoading] = useState(false);
-  
+
   // Toggle password visibility
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState);
-  
+
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -68,7 +63,7 @@ export function SignupForm({
       email: "",
       password: "",
     },
-  })
+  });
 
   // Signup with GitHub
   async function handleGitHub() {
@@ -85,19 +80,20 @@ export function SignupForm({
         },
         onSuccess: () => {
           setIsGitHubLoading(false);
-          toast.success("Signed up with GitHub!")
+          toast.success("Signed up with GitHub!");
           console.log("Signed up with GitHub!");
         },
         onError: (error) => {
           setIsGitHubLoading(false);
-          const message = error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
-            ? "Sign up disabled. Join Waitlist!"
-            : error.error.message;
+          const message =
+            error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
+              ? "Sign up disabled. Join Waitlist!"
+              : error.error.message;
           toast.error(message);
           console.error("Error signing up with GitHub! Error: ", error);
         },
-      }
-    )
+      },
+    );
   }
 
   // Sign up
@@ -107,25 +103,26 @@ export function SignupForm({
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL: "/overview"
+        callbackURL: "/overview",
       },
       {
         onRequest: () => {
           console.log("Signing up user: ", data.email);
         },
         onSuccess: () => {
-          toast.success("Signed up!")
+          toast.success("Signed up!");
           console.log("Signed up! User: ", data.email);
         },
         onError: (error) => {
-          const message = error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
-            ? "Sign up disabled. Join Waitlist!"
-            : error.error.message;
+          const message =
+            error.error.code === "EMAIL_AND_PASSWORD_SIGN_UP_IS_NOT_ENABLED"
+              ? "Sign up disabled. Join Waitlist!"
+              : error.error.message;
           toast.error(message);
           console.error("Error signing up! Error: ", error);
         },
-      }
-    )
+      },
+    );
   }
 
   return (
@@ -222,7 +219,11 @@ export function SignupForm({
             )}
           />
           <Field>
-            <Button type="submit" className="cursor-pointer" disabled={form.formState.isSubmitting}>
+            <Button
+              type="submit"
+              className="cursor-pointer"
+              disabled={form.formState.isSubmitting}
+            >
               {form.formState.isSubmitting && (
                 <LoaderCircle
                   aria-hidden="true"
@@ -236,14 +237,25 @@ export function SignupForm({
           <Field>
             <div className="flex items-center gap-3">
               <Separator className="flex-1" />
-              <span className="text-sm font-mono text-muted-foreground">OR</span>
+              <span className="text-sm font-mono text-muted-foreground">
+                OR
+              </span>
               <Separator className="flex-1" />
             </div>
           </Field>
           <Field>
-            <Button variant="outline" className="w-full cursor-pointer" onClick={handleGitHub} disabled={isGitHubLoading}>
+            <Button
+              variant="outline"
+              className="w-full cursor-pointer"
+              onClick={handleGitHub}
+              disabled={isGitHubLoading}
+            >
               {isGitHubLoading ? (
-                <LoaderCircle aria-hidden="true" className="-ms-1 me-2 animate-spin" size={16} />
+                <LoaderCircle
+                  aria-hidden="true"
+                  className="-ms-1 me-2 animate-spin"
+                  size={16}
+                />
               ) : (
                 <Github />
               )}
@@ -253,9 +265,10 @@ export function SignupForm({
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center font-mono">
-        By signing up, you agree to our <Link href="/legal/terms-of-service">Terms of Service</Link>{" "}
-        and <Link href="/legal/privacy-policy">Privacy Policy</Link>.
+        By signing up, you agree to our{" "}
+        <Link href="/legal/terms-of-service">Terms of Service</Link> and{" "}
+        <Link href="/legal/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Suspense } from "react";
 
@@ -13,7 +13,6 @@ import { PricingComparator } from "@/components/marketing/pricing/pricing-compar
 export default function Page() {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
 
       <section>
@@ -25,7 +24,6 @@ export default function Page() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-
               <motion.h1
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -41,9 +39,9 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
                 className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
               >
-                Simple, transparent pricing. Start for free and scale as you grow.
-                Choose the plan that fits your needs, from individual creators
-                to large organizations.
+                Simple, transparent pricing. Start for free and scale as you
+                grow. Choose the plan that fits your needs, from individual
+                creators to large organizations.
               </motion.p>
 
               <motion.div
@@ -52,7 +50,7 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                 className="mx-auto mt-12"
               >
-                <motion.div 
+                <motion.div
                   initial="rest"
                   whileHover="hover"
                   className="relative"
@@ -69,7 +67,7 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                 className="mx-auto mt-12"
               >
-                <motion.div 
+                <motion.div
                   initial="rest"
                   whileHover="hover"
                   className="relative"
@@ -79,12 +77,10 @@ export default function Page() {
                   </Suspense>
                 </motion.div>
               </motion.div>
-
             </div>
           </div>
         </div>
       </section>
-
     </main>
   );
 }

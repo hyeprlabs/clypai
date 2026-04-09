@@ -1,12 +1,8 @@
-"use client"
+"use client";
 
 import { useRouter, usePathname } from "next/navigation";
 
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function SettingsTabs() {
   const router = useRouter();

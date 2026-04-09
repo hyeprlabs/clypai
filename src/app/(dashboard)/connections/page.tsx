@@ -12,7 +12,7 @@ import { AddConnectionDialogDrawer } from "@/components/dashboard/connections/ad
 
 export const metadata: Metadata = {
   title: "Connections",
-}
+};
 
 const platforms = [
   {
@@ -21,8 +21,8 @@ const platforms = [
     slug: "tiktok",
     avatar: {
       src: "/avatars/tiktok.jpg",
-      alt: "TikTok Logo"
-    }
+      alt: "TikTok Logo",
+    },
   },
   {
     id: "2",
@@ -30,8 +30,8 @@ const platforms = [
     slug: "instagram",
     avatar: {
       src: "/avatars/instagram.jpg",
-      alt: "Instagram Logo"
-    }
+      alt: "Instagram Logo",
+    },
   },
   {
     id: "3",
@@ -39,8 +39,8 @@ const platforms = [
     slug: "youtube",
     avatar: {
       src: "/avatars/youtube.jpg",
-      alt: "YouTube Logo"
-    }
+      alt: "YouTube Logo",
+    },
   },
   {
     id: "4",
@@ -48,10 +48,10 @@ const platforms = [
     slug: "x",
     avatar: {
       src: "/avatars/x.jpg",
-      alt: "X/Twitter Logo"
-    }
+      alt: "X/Twitter Logo",
+    },
   },
-]
+];
 
 const connections = [
   {
@@ -59,37 +59,37 @@ const connections = [
     username: "john_doe",
     avatar: {
       src: "/avatars/john.jpg",
-      alt: "John Doe"
+      alt: "John Doe",
     },
     platform: "twitter",
     created_at: "2025-01-15T10:30:00Z",
-    updated_at: "2025-02-03T14:20:00Z"
+    updated_at: "2025-02-03T14:20:00Z",
   },
   {
     id: "conn_2",
     username: "jane_smith",
     avatar: {
       src: "/avatars/jane.jpg",
-      alt: "Jane Smith"
+      alt: "Jane Smith",
     },
     platform: "instagram",
     created_at: "2025-01-20T09:15:00Z",
-    updated_at: "2025-02-02T11:45:00Z"
+    updated_at: "2025-02-02T11:45:00Z",
   },
   {
     id: "conn_3",
     username: "mike_johnson",
     avatar: {
       src: "/avatars/mike.jpg",
-      alt: "Mike Johnson"
+      alt: "Mike Johnson",
     },
     platform: "instagram",
     created_at: "2025-02-01T08:00:00Z",
-    updated_at: "2025-02-04T16:30:00Z"
-  }
-]
+    updated_at: "2025-02-04T16:30:00Z",
+  },
+];
 
-const isEmpty = false
+const isEmpty = false;
 
 export default function Page() {
   return (
@@ -104,7 +104,12 @@ export default function Page() {
             <ConnectionItem key={connection.id} connection={connection} />
           ))}
           <AddConnectionDialogDrawer platforms={platforms}>
-            <Item variant="outline" size="sm" className="border-dashed cursor-pointer hover:bg-muted/50 transition-colors" asChild>
+            <Item
+              variant="outline"
+              size="sm"
+              className="border-dashed cursor-pointer hover:bg-muted/50 transition-colors"
+              asChild
+            >
               <div className="flex flex-row items-center justify-center w-full gap-2 text-muted-foreground">
                 <Plus className="size-4" />
                 <ItemTitle className="font-mono">Add Connection</ItemTitle>

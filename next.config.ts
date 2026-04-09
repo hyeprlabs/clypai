@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
         destination: "https://clypai.openstatus.dev/",
         permanent: true,
       },
-    ]
+    ];
   },
 };
 

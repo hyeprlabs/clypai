@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Suspense } from "react";
 
@@ -11,7 +11,6 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 export default function Page() {
   return (
     <main className="overflow-hidden">
-
       <BackgroundGlow />
 
       <section>

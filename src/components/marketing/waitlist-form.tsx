@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -13,10 +13,7 @@ import confetti from "canvas-confetti";
 
 import { Button } from "@/components/ui/button";
 
-import {
-  Field,
-  FieldError,
-} from "@/components/ui/field";
+import { Field, FieldError } from "@/components/ui/field";
 
 import { Input } from "@/components/ui/input";
 
@@ -27,76 +24,80 @@ const schema = z.object({
 // Confetti fireworks
 function ConfettiFireworks({ fire }: { fire: boolean }) {
   const handleFireworks = () => {
-    const duration = 5 * 1000
-    const animationEnd = Date.now() + duration
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
     const randomInRange = (min: number, max: number) =>
-      Math.random() * (max - min) + min
+      Math.random() * (max - min) + min;
 
     const interval = window.setInterval(() => {
-      const timeLeft = animationEnd - Date.now()
+      const timeLeft = animationEnd - Date.now();
 
       if (timeLeft <= 0) {
-        return window.clearInterval(interval)
+        return window.clearInterval(interval);
       }
 
-      const particleCount = 50 * (timeLeft / duration)
+      const particleCount = 50 * (timeLeft / duration);
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      })
+      });
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      })
-    }, 250)
-  }
+      });
+    }, 250);
+  };
 
   useEffect(() => {
     if (!fire) {
-      return
+      return;
     }
 
-    handleFireworks()
-  }, [fire])
+    handleFireworks();
+  }, [fire]);
 
-  return <div className="relative" />
+  return <div className="relative" />;
 }
 
 export function WaitlistForm() {
-  const [fire, setFire] = useState(false)
+  const [fire, setFire] = useState(false);
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
     },
-  })
+  });
 
   async function onSubmit(data: z.infer<typeof schema>) {
     const result = await authClient.waitlist.join({
       email: data.email,
-    })
+    });
 
     if (result.error) {
-      console.log(result.error)
-      toast.error(result.error.message)
-      return
+      console.log(result.error);
+      toast.error(result.error.message);
+      return;
     }
-    
-    console.log(result)
-    toast.success(`${result.data.email} requested Waitlist!`)
-    form.reset()
-    setFire(true)
-    window.setTimeout(() => setFire(false), 5 * 1000)
+
+    console.log(result);
+    toast.success(`${result.data.email} requested Waitlist!`);
+    form.reset();
+    setFire(true);
+    window.setTimeout(() => setFire(false), 5 * 1000);
   }
 
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
       <ConfettiFireworks fire={fire} />
-      <form id="waitlist" onSubmit={form.handleSubmit(onSubmit)} className="w-full sm:w-auto">
+      <form
+        id="waitlist"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full sm:w-auto"
+      >
         <Controller
           name="email"
           control={form.control}

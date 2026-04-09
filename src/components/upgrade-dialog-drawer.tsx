@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -12,7 +12,12 @@ import * as z from "zod";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 
-import { FieldError, FieldGroup, FieldSet, FieldLegend } from "@/components/ui/field";
+import {
+  FieldError,
+  FieldGroup,
+  FieldSet,
+  FieldLegend,
+} from "@/components/ui/field";
 
 import { Button } from "@/components/ui/button";
 
@@ -51,8 +56,8 @@ const products = [
       "Create unlimited projects.",
       "Add unlimited users and free viewers.",
       "Basic permissions.",
-      "Community support."
-    ]
+      "Community support.",
+    ],
   },
   {
     label: "Pro",
@@ -62,9 +67,9 @@ const products = [
       "Remove watermarks.",
       "Upload unlimited files.",
       "7-day money back guarantee.",
-      "Advanced permissions."
-    ]
-  }
+      "Advanced permissions.",
+    ],
+  },
 ];
 
 // Form schema
@@ -74,24 +79,26 @@ const schema = z.object({
 
 function UpgradeForm() {
   const { data: activeOrganization } = authClient.useActiveOrganization();
-  
+
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { product: products[0].slug },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   async function onSubmit(data: z.infer<typeof schema>) {
     const organizationId = activeOrganization?.id;
     await authClient.checkout({
       slug: data.product,
-      referenceId: organizationId
+      referenceId: organizationId,
     });
     console.log("Change product clicked", data.product);
   }
 
-  const watchedProduct = useWatch({ control: form.control, name: "product" }) || products[0].slug;
-  const selectedProduct = products.find(p => p.slug === watchedProduct) ?? products[0];
+  const watchedProduct =
+    useWatch({ control: form.control, name: "product" }) || products[0].slug;
+  const selectedProduct =
+    products.find((p) => p.slug === watchedProduct) ?? products[0];
 
   return (
     <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -122,7 +129,10 @@ function UpgradeForm() {
                     />
                     <div className="grid grow gap-1">
                       <Label htmlFor={`${product.slug}`}>{product.label}</Label>
-                      <p className="text-muted-foreground text-xs" id={`${product.slug}`}>
+                      <p
+                        className="text-muted-foreground text-xs"
+                        id={`${product.slug}`}
+                      >
                         {product.price}
                       </p>
                     </div>
@@ -140,7 +150,11 @@ function UpgradeForm() {
           <ul className="space-y-1 text-muted-foreground text-sm">
             {selectedProduct.features.map((feature) => (
               <li className="flex gap-2" key={feature}>
-                <CircleCheck aria-hidden="true" className="mt-0.5 shrink-0 text-blue-500" size={16} />
+                <CircleCheck
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-blue-500"
+                  size={16}
+                />
                 {feature}
               </li>
             ))}
@@ -155,30 +169,35 @@ function UpgradeForm() {
   );
 }
 
-export function UpgradeDialogDrawer({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = React.useState(false)
+export function UpgradeDialogDrawer({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
-  
+
   const { data: activeOrganization } = authClient.useActiveOrganization();
   const organizationName = activeOrganization?.name || "your organization";
 
   if (!isMobile) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          {children}
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[375px] p-4 bg-linear-to-br from-background to-card">
           <DialogHeader>
             <DialogTitle>Change your plan</DialogTitle>
             <DialogDescription>
-              Pick one of the following plans for <span className="font-semibold">{organizationName}</span>.
+              Pick one of the following plans for{" "}
+              <span className="font-semibold">{organizationName}</span>.
             </DialogDescription>
           </DialogHeader>
           <UpgradeForm />
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" className="w-full">Cancel</Button>
+              <Button variant="outline" className="w-full">
+                Cancel
+              </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
@@ -188,14 +207,13 @@ export function UpgradeDialogDrawer({ children }: { children: React.ReactNode })
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        {children}
-      </DrawerTrigger>
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>Change your plan</DrawerTitle>
           <DrawerDescription>
-            Pick one of the following plans for <span className="font-semibold">{organizationName}</span>.
+            Pick one of the following plans for{" "}
+            <span className="font-semibold">{organizationName}</span>.
           </DrawerDescription>
         </DrawerHeader>
         <div className="px-4">

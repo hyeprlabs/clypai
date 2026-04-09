@@ -4,10 +4,7 @@ import { auth } from "@/lib/auth";
 import { comingSoonFlag, maintenanceFlag } from "@/lib/flags";
 
 // Auth Pages
-const authPages = [
-  "/login",
-  "/signup",
-]
+const authPages = ["/login", "/signup"];
 
 // Dashboard Pages
 const dashboardPages = [
@@ -23,9 +20,8 @@ const dashboardPages = [
 ];
 
 export async function proxy(request: NextRequest) {
-
   const pathname = request.nextUrl.pathname;
-  const session = await auth.api.getSession({headers: await headers()});
+  const session = await auth.api.getSession({ headers: await headers() });
 
   if (!process.env.EDGE_CONFIG) {
     console.warn("EDGE_CONFIG .env variable is not set.");
@@ -44,7 +40,7 @@ export async function proxy(request: NextRequest) {
       console.log("Mode Active: Maintenance!");
       return NextResponse.rewrite(request.nextUrl);
     }
-    
+
     if (isComingSoonMode && pathname !== "/coming-soon") {
       request.nextUrl.pathname = "/coming-soon";
       console.log("Mode Active: Coming Soon!");
@@ -62,14 +58,16 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  const isAuthPage = authPages.some(page => pathname.startsWith(page));
+  const isAuthPage = authPages.some((page) => pathname.startsWith(page));
 
   if (session && isAuthPage) {
     console.log("Redirecting to /overview!");
     return NextResponse.redirect(new URL("/overview", request.url));
   }
 
-  const isDashboardPage = dashboardPages.some(page => pathname.startsWith(page));
+  const isDashboardPage = dashboardPages.some((page) =>
+    pathname.startsWith(page),
+  );
 
   if (!session && isDashboardPage) {
     console.log("Redirecting to /login!");

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -69,7 +69,7 @@ const HeaderActions = ({ isScrolled }: { isScrolled: boolean }) => {
           "flex items-center gap-3 transition-all duration-300 ease-in-out",
           isScrolled
             ? "pointer-events-none translate-x-1 opacity-0"
-            : "translate-x-0 opacity-100"
+            : "translate-x-0 opacity-100",
         )}
       >
         <Link href="/login">
@@ -89,7 +89,7 @@ const HeaderActions = ({ isScrolled }: { isScrolled: boolean }) => {
           "absolute right-0 transition-all duration-300 ease-in-out",
           isScrolled
             ? "translate-x-0 opacity-100"
-            : "pointer-events-none -translate-x-1 opacity-0"
+            : "pointer-events-none -translate-x-1 opacity-0",
         )}
       >
         <Link href="/signup">
@@ -103,7 +103,13 @@ const HeaderActions = ({ isScrolled }: { isScrolled: boolean }) => {
   );
 };
 
-const MenuButton = ({open, onClick}: {open: boolean; onClick: () => void}) => {
+const MenuButton = ({
+  open,
+  onClick,
+}: {
+  open: boolean;
+  onClick: () => void;
+}) => {
   return (
     <Button
       aria-expanded={open}
@@ -184,7 +190,6 @@ export const Header = () => {
             <HeaderActions isScrolled={isScrolled} />
 
             <MenuButton open={menu} onClick={() => setMenu(!menu)} />
-
           </div>
 
           <div
@@ -243,7 +248,6 @@ export const Header = () => {
                     </>
                   )}
                 </div>
-
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -20,7 +20,9 @@ const schema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.email("Please enter a valid email address"),
   message: z.string().min(10, "Message must be at least 10 characters"),
-  privacy: z.boolean().refine((val) => val === true, {message: "You must agree to the Privacy Policy"}),
+  privacy: z.boolean().refine((val) => val === true, {
+    message: "You must agree to the Privacy Policy",
+  }),
 });
 
 export function ContactForm() {
@@ -72,11 +74,7 @@ export function ContactForm() {
     >
       <div className="flex w-full flex-col gap-2">
         <Label htmlFor="name">Name</Label>
-        <Input
-          id="name"
-          placeholder="Joe Smith"
-          {...form.register("name")}
-        />
+        <Input id="name" placeholder="Joe Smith" {...form.register("name")} />
         {form.formState.errors.name && (
           <span className="text-sm text-destructive">
             {form.formState.errors.name.message}
@@ -129,7 +127,10 @@ export function ContactForm() {
           />
           <span className="text-sm font-normal">
             I agree to the{" "}
-            <Link href="/legal/privacy-policy" className="text-primary underline">
+            <Link
+              href="/legal/privacy-policy"
+              className="text-primary underline"
+            >
               Privacy Policy
             </Link>
           </span>
@@ -147,7 +148,9 @@ export function ContactForm() {
         data-loading={form.formState.isSubmitting || undefined}
         disabled={form.formState.isSubmitting}
       >
-        <span className="group-data-loading:text-transparent">Send message</span>
+        <span className="group-data-loading:text-transparent">
+          Send message
+        </span>
         {form.formState.isSubmitting && (
           <div className="absolute inset-0 flex items-center justify-center">
             <LoaderCircleIcon

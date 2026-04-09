@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Countdown from "react-countdown";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,10 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
 
 const Separator = () => <span className="text-xl md:text-3xl pb-4">:</span>;
 
-export function MaintenanceCountdown({ date, className }: MaintenanceCountdownProps) {
+export function MaintenanceCountdown({
+  date,
+  className,
+}: MaintenanceCountdownProps) {
   return (
     <Countdown
       date={new Date(date)}
@@ -29,7 +32,12 @@ export function MaintenanceCountdown({ date, className }: MaintenanceCountdownPr
         if (completed) return null;
 
         return (
-          <div className={cn("flex items-center gap-2 md:gap-4 font-mono text-muted-foreground", className)}>
+          <div
+            className={cn(
+              "flex items-center gap-2 md:gap-4 font-mono text-muted-foreground",
+              className,
+            )}
+          >
             <TimeUnit value={days} label="Days" />
             <Separator />
             <TimeUnit value={hours} label="Hrs" />

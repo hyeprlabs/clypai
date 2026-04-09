@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useForm } from "@tanstack/react-form";
 import * as z from "zod";
@@ -15,12 +15,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { SidebarInput } from "@/components/ui/sidebar"
+} from "@/components/ui/card";
+import { SidebarInput } from "@/components/ui/sidebar";
 
 const schema = z.object({
   email: z.email("Please enter a valid email address."),
-})
+});
 
 export function SidebarOptInForm() {
   const form = useForm({
@@ -31,8 +31,8 @@ export function SidebarOptInForm() {
       onSubmit: schema,
     },
     onSubmit: async ({ value }) => {
-      console.log("Opt-in request submitted! Email:", value)
-      toast.success("Thank you for opting in! We'll be in touch soon.")
+      console.log("Opt-in request submitted! Email:", value);
+      toast.success("Thank you for opting in! We'll be in touch soon.");
     },
     onSubmitInvalid: ({ formApi }) => {
       const errors = formApi.state.errors;
@@ -41,7 +41,7 @@ export function SidebarOptInForm() {
         for (const fieldErrors of Object.values(errors)) {
           if (Array.isArray(fieldErrors)) {
             for (const error of fieldErrors) {
-              if (error && typeof error === 'object' && 'message' in error) {
+              if (error && typeof error === "object" && "message" in error) {
                 errorMessages.push(String(error.message));
               }
             }
@@ -52,28 +52,27 @@ export function SidebarOptInForm() {
         }
       }
     },
-  })
+  });
 
   return (
     <Card className="gap-2 py-4 shadow-none py-3">
       <CardHeader className="px-3">
         <CardTitle className="text-sm">Become a Beta Tester</CardTitle>
         <CardDescription>
-          Opt-in to request early access to new features and help us improve ClypAI.
+          Opt-in to request early access to new features and help us improve
+          ClypAI.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-3">
         <form
           id="sidebar-opt-in-form"
           onSubmit={(e) => {
-            e.preventDefault()
-            form.handleSubmit()
+            e.preventDefault();
+            form.handleSubmit();
           }}
         >
-          <form.Field
-            name="email"
-          >
-            {field => {
+          <form.Field name="email">
+            {(field) => {
               const isInvalid = !field.state.meta.isValid;
               return (
                 <div className="grid gap-2.5">
@@ -85,7 +84,7 @@ export function SidebarOptInForm() {
                       id={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
-                      onChange={e => field.handleChange(e.target.value)}
+                      onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       autoComplete="email"
                     />
@@ -108,5 +107,5 @@ export function SidebarOptInForm() {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }

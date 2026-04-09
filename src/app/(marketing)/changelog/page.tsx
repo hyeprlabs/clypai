@@ -7,7 +7,6 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 export default function Page() {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
 
       <section>
@@ -19,7 +18,6 @@ export default function Page() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-
               <motion.h1
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -35,16 +33,15 @@ export default function Page() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
                 className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
               >
-                This page is currently under development. Stay tuned for updates!
+                This page is currently under development. Stay tuned for
+                updates!
               </motion.p>
-
             </div>
           </div>
         </div>
       </section>
 
       <CallToAction />
-
     </main>
   );
 }

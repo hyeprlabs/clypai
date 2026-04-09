@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   MoreVerticalIcon,
@@ -33,7 +33,11 @@ interface Connection {
   updated_at: string;
 }
 
-export function ConnectionItemDropdown({ connection }: { connection: Connection }) {
+export function ConnectionItemDropdown({
+  connection,
+}: {
+  connection: Connection;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -49,7 +53,11 @@ export function ConnectionItemDropdown({ connection }: { connection: Connection 
       <DropdownMenuContent align="end">
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <RefreshCwIcon aria-hidden="true" className="opacity-60" size={16} />
+            <RefreshCwIcon
+              aria-hidden="true"
+              className="opacity-60"
+              size={16}
+            />
             <span>Reconnect</span>
           </DropdownMenuItem>
           <DropdownMenuItem>

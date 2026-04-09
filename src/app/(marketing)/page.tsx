@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 
@@ -19,9 +19,8 @@ import { WaitlistForm } from "@/components/marketing/waitlist-form";
 export default function Page() {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
-      
+
       <section>
         <div className="relative pt-16 sm:pt-24 md:pt-36">
           <motion.div
@@ -47,7 +46,6 @@ export default function Page() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-
               <Announcement />
 
               <motion.h1
@@ -76,7 +74,6 @@ export default function Page() {
                 transition={{ duration: 0.9 }}
                 className="mt-12 flex flex-col items-center justify-center gap-6"
               >
-                
                 <WaitlistForm />
               </motion.div>
             </div>
@@ -90,7 +87,6 @@ export default function Page() {
           >
             <div className="mask-b-from-55% relative mt-8 overflow-hidden px-2 sm:px-4 sm:mt-12 md:mt-20">
               <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-xl sm:rounded-2xl border p-2 sm:p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                
                 <Image
                   src="/mail2.webp"
                   alt="app screen"
@@ -112,7 +108,6 @@ export default function Page() {
                   size={300}
                   className="from-transparent via-foreground to-transparent"
                 />
-
               </div>
             </div>
           </motion.div>
@@ -136,7 +131,6 @@ export default function Page() {
       >
         <Platforms />
       </motion.div>
-
     </main>
   );
 }

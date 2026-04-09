@@ -11,7 +11,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function LegalDropdown({links,}: {links: { title: string; href: string }[]}) {
+export function LegalDropdown({
+  links,
+}: {
+  links: { title: string; href: string }[];
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -1,8 +1,4 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   Item,
@@ -28,19 +24,32 @@ interface Connection {
 }
 
 export function ConnectionItem({ connection }: { connection: Connection }) {
-  const date = new Date(connection.created_at).toLocaleDateString("en-US", {dateStyle: "medium",});
+  const date = new Date(connection.created_at).toLocaleDateString("en-US", {
+    dateStyle: "medium",
+  });
 
   return (
-    <Item variant="outline" size="sm" className="bg-linear-to-br from-background to-card">
+    <Item
+      variant="outline"
+      size="sm"
+      className="bg-linear-to-br from-background to-card"
+    >
       <ItemMedia>
         <Avatar className="size-10">
-          <AvatarImage src={connection.avatar.src} alt={connection.avatar.alt} />
-          <AvatarFallback className="bg-background border border-dashed">{connection.username[0].toUpperCase()}</AvatarFallback>
+          <AvatarImage
+            src={connection.avatar.src}
+            alt={connection.avatar.alt}
+          />
+          <AvatarFallback className="bg-background border border-dashed">
+            {connection.username[0].toUpperCase()}
+          </AvatarFallback>
         </Avatar>
       </ItemMedia>
       <ItemContent>
         <ItemTitle>{connection.username}</ItemTitle>
-        <ItemDescription className="capitalize">{connection.platform} · {date}</ItemDescription>
+        <ItemDescription className="capitalize">
+          {connection.platform} · {date}
+        </ItemDescription>
       </ItemContent>
       <ItemActions>
         <ConnectionItemDropdown connection={connection} />

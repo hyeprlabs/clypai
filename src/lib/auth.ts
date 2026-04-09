@@ -27,7 +27,7 @@ if (!process.env.RESEND_API_KEY) {
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
-  server: "sandbox"
+  server: "sandbox",
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -35,11 +35,13 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const auth = betterAuth({
   appName: "ClypAI",
   trustedOrigins: [
-	  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
-	  process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : "",
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
+    process.env.VERCEL_BRANCH_URL
+      ? `https://${process.env.VERCEL_BRANCH_URL}`
+      : "",
     "https://*.clypai.com",
     "https://*.clyp.ai",
-	  "https://clypai.com"
+    "https://clypai.com",
   ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -55,14 +57,14 @@ export const auth = betterAuth({
           products: [
             {
               productId: "3ec54eb9-420c-433f-9500-bf36e2f65f4a",
-              slug: "pro"
-            }
+              slug: "pro",
+            },
           ],
           successUrl: process.env.POLAR_SUCCESS_URL,
-          authenticatedUsersOnly: true
+          authenticatedUsersOnly: true,
         }),
         portal(),
-        usage()
+        usage(),
       ],
     }),
     admin(),
@@ -78,7 +80,7 @@ export const auth = betterAuth({
       },
       rateLimit: {
         maxAttempts: 5,
-        windowMs: 10 * 60 * 1000,  // 10 minutes
+        windowMs: 10 * 60 * 1000, // 10 minutes
         max: 10,
       },
       onStatusChange: async (entry) => {
@@ -117,7 +119,13 @@ export const auth = betterAuth({
     enabled: true,
     disableSignUp: true,
     emailVerification: {
-      sendVerificationEmail: async ({ user, token }: { user: { email: string }; token: string }) => {
+      sendVerificationEmail: async ({
+        user,
+        token,
+      }: {
+        user: { email: string };
+        token: string;
+      }) => {
         await resend.emails.send({
           to: user.email,
           template: {
@@ -126,8 +134,8 @@ export const auth = betterAuth({
               token: token,
               requested_from: user.email,
               requested_at: new Date().toISOString(),
-            }
-          }
+            },
+          },
         });
       },
     },

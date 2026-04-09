@@ -9,14 +9,14 @@ const sizeClasses: Record<NonNullable<SystemBannerProps["size"]>, string> = {
   xs: "text-[10px] px-1 py-0.5",
   sm: "text-xs px-2 py-0.5",
   md: "text-sm px-3 py-1",
-  lg: "text-base px-4 py-1.5"
+  lg: "text-base px-4 py-1.5",
 };
 
 export function SystemBanner({
   text = "Development Mode",
   color = "bg-orange-500",
   size = "xs",
-  show = true
+  show = true,
 }: SystemBannerProps) {
   if (!show) return null;
   return (

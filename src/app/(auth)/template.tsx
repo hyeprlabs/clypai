@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
 
       <section>
@@ -30,7 +29,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
             transition={{ delay: 0.2, duration: 0.4 }}
           >
             <Link href="/">
-              <Button variant="outline" size="sm" className="rounded-full cursor-pointer">
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full cursor-pointer"
+              >
                 <CircleArrowLeft className="mr-2" />
                 Home
               </Button>
@@ -45,7 +48,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
           >
             {children}
           </motion.div>
-
         </div>
       </section>
     </main>

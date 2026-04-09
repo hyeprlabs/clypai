@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as React from "react";
 import { Suspense } from "react";
@@ -22,7 +22,10 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavMain } from "@/components/nav-main";
-import { OrganizationSwitcher, OrganizationSwitcherSkeleton } from "@/components/organization-switcher";
+import {
+  OrganizationSwitcher,
+  OrganizationSwitcherSkeleton,
+} from "@/components/organization-switcher";
 import { SidebarOptInForm } from "@/components/sidebar-opt-in-form";
 import { NavUser, NavUserSkeleton } from "@/components/nav-user";
 
@@ -64,7 +67,7 @@ const data = {
       icon: Settings,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -87,5 +90,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

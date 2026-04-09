@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
@@ -10,12 +10,7 @@ import * as z from "zod";
 
 import { cn } from "@/lib/utils";
 
-import { 
-  Eye, 
-  EyeOff,
-  Github, 
-  LoaderCircle 
-} from "lucide-react";
+import { Eye, EyeOff, Github, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -48,7 +43,7 @@ const schema = z.object({
     .min(8, "Password must be at least 8 characters.")
     .max(64, "Password must be at most 64 characters."),
   rememberMe: z.boolean().optional().default(true),
-})
+});
 
 export function LoginForm({
   className,
@@ -61,7 +56,7 @@ export function LoginForm({
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible((prevState) => !prevState);
-  
+
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -69,7 +64,7 @@ export function LoginForm({
       password: "",
       rememberMe: true,
     },
-  })
+  });
 
   // Login with GitHub
   async function handleGitHub() {
@@ -86,7 +81,7 @@ export function LoginForm({
         },
         onSuccess: () => {
           setIsGitHubLoading(false);
-          toast.success("Logged in with GitHub!")
+          toast.success("Logged in with GitHub!");
           console.log("Logged in with GitHub!");
         },
         onError: (error) => {
@@ -94,8 +89,8 @@ export function LoginForm({
           toast.error(error.error.message);
           console.error("Error logging in with GitHub! Error: ", error);
         },
-      }
-    )
+      },
+    );
   }
 
   // Sign in
@@ -105,22 +100,22 @@ export function LoginForm({
         email: data.email,
         password: data.password,
         rememberMe: data.rememberMe,
-        callbackURL: "/overview"
+        callbackURL: "/overview",
       },
       {
         onRequest: () => {
           console.log("Logging in user: ", data.email);
         },
         onSuccess: () => {
-          toast.success("Logged in!")
+          toast.success("Logged in!");
           console.log("Logged in! User: ", data.email);
         },
         onError: (error) => {
           toast.error(error.error.message);
           console.error("Error logging in! Error: ", error);
         },
-      }
-    )
+      },
+    );
   }
 
   return (
@@ -215,7 +210,10 @@ export function LoginForm({
                       Remember me
                     </Label>
                   </div>
-                  <Link className="text-sm underline-offset-4 hover:underline" href="/forgot-password">
+                  <Link
+                    className="text-sm underline-offset-4 hover:underline"
+                    href="/forgot-password"
+                  >
                     Forgot password?
                   </Link>
                 </div>
@@ -223,7 +221,11 @@ export function LoginForm({
             )}
           />
           <Field>
-            <Button type="submit" className="cursor-pointer" disabled={form.formState.isSubmitting}>
+            <Button
+              type="submit"
+              className="cursor-pointer"
+              disabled={form.formState.isSubmitting}
+            >
               {form.formState.isSubmitting && (
                 <LoaderCircle
                   aria-hidden="true"
@@ -237,14 +239,25 @@ export function LoginForm({
           <Field>
             <div className="flex items-center gap-3">
               <Separator className="flex-1" />
-              <span className="text-sm font-mono text-muted-foreground">OR</span>
+              <span className="text-sm font-mono text-muted-foreground">
+                OR
+              </span>
               <Separator className="flex-1" />
             </div>
           </Field>
           <Field>
-            <Button variant="outline" className="w-full cursor-pointer" onClick={handleGitHub} disabled={isGitHubLoading}>
+            <Button
+              variant="outline"
+              className="w-full cursor-pointer"
+              onClick={handleGitHub}
+              disabled={isGitHubLoading}
+            >
               {isGitHubLoading ? (
-                <LoaderCircle aria-hidden="true" className="-ms-1 me-2 animate-spin" size={16} />
+                <LoaderCircle
+                  aria-hidden="true"
+                  className="-ms-1 me-2 animate-spin"
+                  size={16}
+                />
               ) : (
                 <Github />
               )}
@@ -254,9 +267,10 @@ export function LoginForm({
         </FieldGroup>
       </form>
       <FieldDescription className="px-6 text-center font-mono">
-        By logging in, you agree to our <Link href="/legal/terms-of-service">Terms of Service</Link>{" "}
-        and <Link href="/legal/privacy-policy">Privacy Policy</Link>.
+        By logging in, you agree to our{" "}
+        <Link href="/legal/terms-of-service">Terms of Service</Link> and{" "}
+        <Link href="/legal/privacy-policy">Privacy Policy</Link>.
       </FieldDescription>
     </div>
-  )
+  );
 }

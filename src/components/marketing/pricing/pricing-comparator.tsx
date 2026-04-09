@@ -18,7 +18,6 @@ const features = [
 ];
 
 export function PricingComparator() {
-
   return (
     <section className="@container py-24">
       <div className="mx-auto max-w-2xl px-6">
@@ -58,7 +57,9 @@ export function PricingComparator() {
                     <Minus className="text-muted-foreground/50 size-4" />
                   )
                 ) : (
-                  <span className="text-foreground font-mono">{feature.free}</span>
+                  <span className="text-foreground font-mono">
+                    {feature.free}
+                  </span>
                 )}
               </div>
               <div className="bg-primary/5 flex min-w-32 items-center justify-center border-l p-4 text-sm">

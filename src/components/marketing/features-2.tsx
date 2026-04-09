@@ -23,11 +23,10 @@ export function Features() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-8 my-24">
       <div className="mx-auto max-w-md text-balance text-center">
-        <h2 className="font-serif text-4xl">
-          Your Shortcut to the Feed.
-        </h2>
+        <h2 className="font-serif text-4xl">Your Shortcut to the Feed.</h2>
         <p className="text-muted-foreground mb-6 mt-4 text-balance font-mono text-sm">
-          Transform long-form depth into short-form impact instantly. Stop scrubbing, start trending.
+          Transform long-form depth into short-form impact instantly. Stop
+          scrubbing, start trending.
         </p>
       </div>
 

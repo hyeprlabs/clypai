@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { Monitor, MoonStar, Sun } from "lucide-react";
@@ -31,10 +31,7 @@ export const ThemeToggle = () => {
         <button
           key={value}
           onClick={() => setTheme(value)}
-          className={cn(
-            style,
-            theme === value && "border text-foreground",
-          )}
+          className={cn(style, theme === value && "border text-foreground")}
         >
           <Icon />
         </button>

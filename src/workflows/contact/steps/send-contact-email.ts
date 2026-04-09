@@ -3,37 +3,41 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendContactEmail(name: string, email: string, message: string) {
-  "use step"
-  
+export async function sendContactEmail(
+  name: string,
+  email: string,
+  message: string,
+) {
+  "use step";
+
   const { stepId } = getStepMetadata();
 
   const { error } = await resend.emails.send(
     {
       to: "clypai@hyeprlabs.com",
-      template: { 
+      template: {
         id: "contact",
         variables: {
           name: name,
-	        email: email,
+          email: email,
           message: message,
-        }
+        },
       },
     },
     {
       headers: {
         "Idempotency-Key": stepId,
       },
-    }
+    },
   );
 
   if (error) {
     if (error.statusCode === 429) {
-      throw new RetryableError(error.message, { 
+      throw new RetryableError(error.message, {
         retryAfter: "2m", // 2 minutes
-      }); 
+      });
     }
-  
+
     throw new FatalError(error.message);
   }
 }

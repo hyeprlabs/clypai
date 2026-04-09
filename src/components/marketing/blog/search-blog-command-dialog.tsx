@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   ArrowUpRightIcon,
@@ -32,13 +32,13 @@ export function SearchBlogCommandDialog() {
   const isMobile = useIsMobile();
 
   useHotkeys(
-    ['ctrl+k', 'meta+k'],
+    ["ctrl+k", "meta+k"],
     (e) => {
       e.preventDefault();
       setOpen((o) => !o);
     },
     [isMobile],
-    { enabled: !isMobile }
+    { enabled: !isMobile },
   );
 
   return (
@@ -49,7 +49,7 @@ export function SearchBlogCommandDialog() {
         variant="outline"
         className="text-muted-foreground hover:text-muted-foreground rounded-full"
       >
-        <SearchIcon/>
+        <SearchIcon />
         Search...
         <KbdGroup>
           <Kbd>Ctrl</Kbd>

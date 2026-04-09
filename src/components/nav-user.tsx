@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -67,7 +67,7 @@ export function NavUser() {
     "ctrl+m",
     () => setTheme(theme === "dark" ? "light" : "dark"),
     [theme, setTheme],
-    { enabled: !isMobile }
+    { enabled: !isMobile },
   );
 
   if (!session?.user) {
@@ -127,7 +127,7 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <UpgradeDialogDrawer>
-                <DropdownMenuItem onSelect={e => e.preventDefault()}>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                   <Crown className="text-blue-500" />
                   Upgrade to Pro
                 </DropdownMenuItem>
@@ -148,7 +148,7 @@ export function NavUser() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onSelect={e => e.preventDefault()}
+                onSelect={(e) => e.preventDefault()}
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
                 {theme === "dark" ? <Sun /> : <Moon />}

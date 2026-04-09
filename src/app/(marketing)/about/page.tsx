@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from "motion/react";
 import { CallToAction } from "@/components/marketing/call-to-action";
@@ -7,7 +7,6 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 export default function Page() {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
 
       <section>
@@ -19,7 +18,6 @@ export default function Page() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-
               <motion.h1
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -51,18 +49,16 @@ export default function Page() {
                 className="mx-auto mt-6 sm:mt-8 max-w-xl text-balance text-base sm:text-lg text-muted-foreground font-mono px-4 sm:px-0"
               >
                 ClypAI was born from the idea that technology should simplify
-                creativity, not complicate it. We&apos;re building smart tools that
-                understand content, find the most engaging moments, and prepare
-                them for any social platform with a single click.
+                creativity, not complicate it. We&apos;re building smart tools
+                that understand content, find the most engaging moments, and
+                prepare them for any social platform with a single click.
               </motion.p>
-
             </div>
           </div>
         </div>
       </section>
 
       <CallToAction />
-
     </main>
   );
 }

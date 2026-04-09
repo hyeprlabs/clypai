@@ -4,7 +4,7 @@ import { Footer } from "@/components/marketing/footer-2";
 export default function MarketingLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <main>
@@ -12,5 +12,5 @@ export default function MarketingLayout({
       {children}
       <Footer />
     </main>
-  )
+  );
 }

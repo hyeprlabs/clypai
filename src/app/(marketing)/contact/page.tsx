@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from "motion/react";
 import { ContactForm } from "@/components/marketing/contact-form";
@@ -8,7 +8,6 @@ import { BackgroundGlow } from "@/components/marketing/background-glow";
 export default function Page() {
   return (
     <main className="overflow-hidden">
-      
       <BackgroundGlow />
 
       <section>
@@ -20,7 +19,6 @@ export default function Page() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-              
               <motion.h1
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -29,7 +27,7 @@ export default function Page() {
               >
                 Contact Us
               </motion.h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -102,14 +100,12 @@ export default function Page() {
                   </a>
                 </div>
               </motion.div>
-
             </div>
           </div>
         </div>
       </section>
 
       <CallToAction />
-
     </main>
   );
 }

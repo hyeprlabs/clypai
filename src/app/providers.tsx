@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ReactNode } from "react";
 
@@ -12,13 +12,14 @@ import { authClient } from "@/lib/auth-client";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AuthUIProvider } from "@daveyplate/better-auth-ui";
 import { SystemBanner } from "@/components/ui/system-banner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export function Providers({ children }: { children: ReactNode }) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <ThemeProvider
@@ -33,7 +34,7 @@ export function Providers({ children }: { children: ReactNode }) {
         replace={router.replace}
         onSessionChange={() => {
           // Clear router cache (protected routes)
-          router.refresh()
+          router.refresh();
         }}
         Link={Link}
       >
@@ -43,12 +44,10 @@ export function Providers({ children }: { children: ReactNode }) {
           size="sm"
           show={false}
         />
-        <NuqsAdapter>
-          {children}
-        </NuqsAdapter>
-        <Toaster
-          position="bottom-center"
-        />
+        <TooltipProvider>
+          <NuqsAdapter>{children}</NuqsAdapter>
+        </TooltipProvider>
+        <Toaster position="bottom-center" />
         <Analytics />
         <SpeedInsights />
       </AuthUIProvider>

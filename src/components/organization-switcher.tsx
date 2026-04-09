@@ -1,17 +1,10 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
-import { 
-  ChevronsUpDown, 
-  Plus 
-} from "lucide-react";
+import { ChevronsUpDown, Plus } from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
@@ -45,23 +38,23 @@ export function OrganizationSwitcherSkeleton() {
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }
 
 export function OrganizationSwitcher() {
-  const { data: session } = authClient.useSession()
-  const { data: activeOrganization } = authClient.useActiveOrganization()
-  const { data: organizations = [] } = authClient.useListOrganizations()
+  const { data: session } = authClient.useSession();
+  const { data: activeOrganization } = authClient.useActiveOrganization();
+  const { data: organizations = [] } = authClient.useListOrganizations();
 
   const handleSetActiveOrganization = (organizationId: string) => async () => {
-    await authClient.organization.setActive({ organizationId })
-  }
+    await authClient.organization.setActive({ organizationId });
+  };
 
   if (!session?.user) {
-    return null
+    return null;
   }
   if (!activeOrganization) {
-    return null
+    return null;
   }
 
   return (
@@ -74,14 +67,21 @@ export function OrganizationSwitcher() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="size-8 rounded-lg">
-                <AvatarImage src={activeOrganization.logo || undefined} alt={activeOrganization.name} />
+                <AvatarImage
+                  src={activeOrganization.logo || undefined}
+                  alt={activeOrganization.name}
+                />
                 <AvatarFallback className="rounded-lg">
                   {activeOrganization.name.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{activeOrganization.name}</span>
-                <span className="truncate text-xs">{activeOrganization.metadata?.plan}</span>
+                <span className="truncate font-medium">
+                  {activeOrganization.name}
+                </span>
+                <span className="truncate text-xs">
+                  {activeOrganization.metadata?.plan}
+                </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
@@ -102,7 +102,10 @@ export function OrganizationSwitcher() {
                 className="gap-2 p-2"
               >
                 <Avatar className="size-6 rounded-md">
-                  <AvatarImage src={organization.logo || undefined} alt={organization.name} />
+                  <AvatarImage
+                    src={organization.logo || undefined}
+                    alt={organization.name}
+                  />
                   <AvatarFallback className="rounded-md">
                     {organization.name.substring(0, 2).toUpperCase()}
                   </AvatarFallback>
@@ -112,16 +115,21 @@ export function OrganizationSwitcher() {
             ))}
             <DropdownMenuSeparator />
             <CreateOrganizationDialogDrawer>
-              <DropdownMenuItem className="gap-2 p-2" onSelect={e => e.preventDefault()}>
+              <DropdownMenuItem
+                className="gap-2 p-2"
+                onSelect={(e) => e.preventDefault()}
+              >
                 <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
                   <Plus className="size-4" />
                 </div>
-                <div className="text-muted-foreground font-medium">Create Organization</div>
+                <div className="text-muted-foreground font-medium">
+                  Create Organization
+                </div>
               </DropdownMenuItem>
             </CreateOrganizationDialogDrawer>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

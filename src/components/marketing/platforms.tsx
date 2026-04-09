@@ -23,14 +23,18 @@ export function Platforms() {
             Connect Your Social-Media Platforms
           </h2>
           <p className="text-muted-foreground mb-6 mt-4 text-balance font-mono text-sm">
-            Seamlessly integrate with the social-media platforms you already use. Set up in
-            minutes, not days.
+            Seamlessly integrate with the social-media platforms you already
+            use. Set up in minutes, not days.
           </p>
           <p className="text-muted-foreground mb-6 mt-4 text-balance font-mono text-sm">
-            <span className="text-orange-500">Coming Soon:</span>{" "}LinkedIn, Snapchat and more!
+            <span className="text-orange-500">Coming Soon:</span> LinkedIn,
+            Snapchat and more!
           </p>
           <Link href="/features#platforms">
-            <Button variant="outline" className="rounded-full bg-linear-to-br from-background to-card font-mono cursor-pointer">
+            <Button
+              variant="outline"
+              className="rounded-full bg-linear-to-br from-background to-card font-mono cursor-pointer"
+            >
               Learn More
             </Button>
           </Link>
@@ -85,4 +89,4 @@ const PlatformsIllustration = () => {
       </div>
     </div>
   );
-}
+};

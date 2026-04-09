@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as React from "react";
 
@@ -48,17 +48,17 @@ export function LogoutAlertDialogDrawer() {
 
   const handleLogout = async () => {
     await authClient.signOut({
-	    fetchOptions: {
-		    onSuccess: () => {
-			    router.push("/");
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
           toast.success("Logged out!");
           console.log("Logged out! User: ", userName);
-		    },
+        },
         onError: (error) => {
           toast.error("Error logging out! Please try again.");
           console.error("Error logging out! Error: ", error);
         },
-	    },
+      },
     });
   };
 
@@ -66,7 +66,10 @@ export function LogoutAlertDialogDrawer() {
     return (
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
-          <DropdownMenuItem variant="destructive" onSelect={e => e.preventDefault()}>
+          <DropdownMenuItem
+            variant="destructive"
+            onSelect={(e) => e.preventDefault()}
+          >
             <LogOut />
             Log out
           </DropdownMenuItem>
@@ -75,13 +78,15 @@ export function LogoutAlertDialogDrawer() {
           <AlertDialogHeader>
             <AlertDialogTitle>Want to Log out?</AlertDialogTitle>
             <AlertDialogDescription>
-              Hey {userName}, sure you want to Log out? You&apos;ll need to enter your
-              credentials again.
+              Hey {userName}, sure you want to Log out? You&apos;ll need to
+              enter your credentials again.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleLogout}>Log out</AlertDialogAction>
+            <AlertDialogAction onClick={handleLogout}>
+              Log out
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -91,7 +96,10 @@ export function LogoutAlertDialogDrawer() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <DropdownMenuItem variant="destructive" onSelect={e => e.preventDefault()}>
+        <DropdownMenuItem
+          variant="destructive"
+          onSelect={(e) => e.preventDefault()}
+        >
           <LogOut />
           Log out
         </DropdownMenuItem>
@@ -100,15 +108,17 @@ export function LogoutAlertDialogDrawer() {
         <DrawerHeader className="text-left">
           <DrawerTitle>Want to Log out?</DrawerTitle>
           <DrawerDescription>
-            Hey {userName}, sure you want to Log out? You&apos;ll need to enter your
-            credentials again.
+            Hey {userName}, sure you want to Log out? You&apos;ll need to enter
+            your credentials again.
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
-          <Button variant="destructive" onClick={handleLogout}>Log out</Button>
+          <Button variant="destructive" onClick={handleLogout}>
+            Log out
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

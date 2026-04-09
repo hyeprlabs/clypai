@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -22,8 +22,8 @@ const links = [
   {
     title: "Privacy Policy",
     href: "/legal/privacy-policy",
-  }
-]
+  },
+];
 
 export function Footer() {
   const isMobile = useIsMobile();

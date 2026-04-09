@@ -6,9 +6,9 @@ import { BrandKitsEmpty } from "@/components/dashboard/brand-kits/brand-kits-emp
 
 export const metadata: Metadata = {
   title: "Brand Kits",
-}
+};
 
-const isEmpty = false
+const isEmpty = false;
 
 export default function Page() {
   return (

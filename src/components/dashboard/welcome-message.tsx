@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -28,11 +28,11 @@ export function WelcomeMessage() {
       break;
   }
 
-  if (!session) return null
+  if (!session) return null;
 
   return (
     <h1 className="text-xl text-muted-foreground">
       {greeting}, <span className="text-primary">{session.user.name}</span>
     </h1>
-  )
+  );
 }

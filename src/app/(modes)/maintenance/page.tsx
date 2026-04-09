@@ -39,18 +39,25 @@ export default async function Page() {
           </div>
 
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-serif">Under Maintenance</h1>
+            <h1 className="text-5xl md:text-7xl font-serif">
+              Under Maintenance
+            </h1>
             <p className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-muted-foreground md:text-xl">
-              We&apos;re currently performing scheduled maintenance to improve your experience. We&apos;ll be back soon.
+              We&apos;re currently performing scheduled maintenance to improve
+              your experience. We&apos;ll be back soon.
             </p>
           </div>
 
           <div className="space-y-1.5 border-t border-zinc-800 pt-4 flex flex-col items-center">
-            <p className="text-xs tracking-[0.2em] text-muted-foreground">BACK ONLINE</p>
+            <p className="text-xs tracking-[0.2em] text-muted-foreground">
+              BACK ONLINE
+            </p>
             {maintenanceUntil ? (
               <MaintenanceCountdown date={maintenanceUntil} className="mt-2" />
             ) : (
-              <p className="text-2xl font-light tracking-wider text-white">SOON</p>
+              <p className="text-2xl font-light tracking-wider text-white">
+                SOON
+              </p>
             )}
           </div>
         </div>

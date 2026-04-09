@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { Resend } from "resend";
 
@@ -8,7 +8,11 @@ if (!process.env.RESEND_API_KEY) {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendWaitlistStatusChangeEmail(entry: {id: string, email: string, status: string}) {
+export async function sendWaitlistStatusChangeEmail(entry: {
+  id: string;
+  email: string;
+  status: string;
+}) {
   const { data, error } = await resend.emails.send({
     to: entry.email,
     template: {
@@ -22,7 +26,10 @@ export async function sendWaitlistStatusChangeEmail(entry: {id: string, email: s
   });
 
   if (error) {
-    console.error(`Failed to send waitlist status change email to ${entry.email}:`, error);
+    console.error(
+      `Failed to send waitlist status change email to ${entry.email}:`,
+      error,
+    );
     throw new Error(`Email sending failed: ${error.message}`);
   }
 
@@ -30,7 +37,11 @@ export async function sendWaitlistStatusChangeEmail(entry: {id: string, email: s
   return { success: true, data };
 }
 
-export async function sendWaitlistJoinRequestEmail(request: {email: string, status: string, requestedAt: Date}) {
+export async function sendWaitlistJoinRequestEmail(request: {
+  email: string;
+  status: string;
+  requestedAt: Date;
+}) {
   const { data, error } = await resend.emails.send({
     to: request.email,
     template: {
@@ -45,7 +56,10 @@ export async function sendWaitlistJoinRequestEmail(request: {email: string, stat
   });
 
   if (error) {
-    console.error(`Failed to send waitlist join request email to ${request.email}:`, error);
+    console.error(
+      `Failed to send waitlist join request email to ${request.email}:`,
+      error,
+    );
     throw new Error(`Email sending failed: ${error.message}`);
   }
 

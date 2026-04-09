@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -71,45 +71,47 @@ export function PricingSection() {
             const period = frequency === "yearly" ? "/year" : "/month";
 
             return (
-            <Card
-              key={plan.name}
-              variant={plan.highlighted ? "default" : "mixed"}
-              className={cn(
-                "relative flex flex-col p-6 bg-linear-to-br from-background to-card",
-                plan.highlighted && "ring-primary",
-              )}
-            >
-              <div>
-                <h3 className="text-foreground font-mono text-start">{plan.name}</h3>
-                <p className="text-muted-foreground mt-1 text-sm text-start font-mono">
-                  {plan.description}
-                </p>
-              </div>
-              <div className="mt-6 text-start">
-                <span className="font-serif text-4xl font-medium">
-                  ${price}
-                </span>
-                <span className="text-muted-foreground">{period}</span>
-              </div>
-              <ul className="mt-6 flex-1 space-y-3">
-                {plan.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="text-muted-foreground flex items-start gap-2 text-sm font-mono"
-                  >
-                    <Check className="text-primary mt-0.5 size-4 shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                asChild
-                variant={plan.highlighted ? "default" : "outline"}
-                className="mt-8 w-full"
+              <Card
+                key={plan.name}
+                variant={plan.highlighted ? "default" : "mixed"}
+                className={cn(
+                  "relative flex flex-col p-6 bg-linear-to-br from-background to-card",
+                  plan.highlighted && "ring-primary",
+                )}
               >
-                <Link href="#link">{plan.cta}</Link>
-              </Button>
-            </Card>
+                <div>
+                  <h3 className="text-foreground font-mono text-start">
+                    {plan.name}
+                  </h3>
+                  <p className="text-muted-foreground mt-1 text-sm text-start font-mono">
+                    {plan.description}
+                  </p>
+                </div>
+                <div className="mt-6 text-start">
+                  <span className="font-serif text-4xl font-medium">
+                    ${price}
+                  </span>
+                  <span className="text-muted-foreground">{period}</span>
+                </div>
+                <ul className="mt-6 flex-1 space-y-3">
+                  {plan.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="text-muted-foreground flex items-start gap-2 text-sm font-mono"
+                    >
+                      <Check className="text-primary mt-0.5 size-4 shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  asChild
+                  variant={plan.highlighted ? "default" : "outline"}
+                  className="mt-8 w-full"
+                >
+                  <Link href="#link">{plan.cta}</Link>
+                </Button>
+              </Card>
             );
           })}
         </div>

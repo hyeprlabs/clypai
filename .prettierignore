@@ -1,3 +1,15 @@
 # Ignore artifacts:
 build
 coverage
+
+# Ignore:
+CLAUDE.md
+.agents
+.claude
+.next
+.swc
+.vercel
+node_modules
+pnpm-lock.yaml
+README.md
+src/app/.well-known
