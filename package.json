@@ -70,7 +70,6 @@
     "tailwind-merge": "^3.5.0",
     "ulid": "^3.0.2",
     "vaul": "^1.1.2",
-    "workflow": "4.1.0-beta.57",
     "zod": "^4.3.6"
   },
   "devDependencies": {
