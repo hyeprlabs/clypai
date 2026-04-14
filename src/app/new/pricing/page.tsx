@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/new/header"; // @efferd/header-2
-import { HeroSection } from "@/components/new/hero";
-import { LogosSection } from "@/components/new/logos-section";
-import { FeatureSection } from "@/components/new/feature-section";
-import { TestimonialsSection } from "@/components/new/testimonials-section";
-import { Integrations } from "@/components/new/integrations";
+import { Title } from "@/components/new/title";
+import { PricingSection } from "@/components/new/pricing/pricing-section";
+import { PricingTable } from "@/components/new/pricing/pricing-table";
+import { CreditsSection } from "@/components/new/pricing/credits";
 import { CallToAction } from "@/components/new/cta";
 import { Footer } from "@/components/new/footer";
 
@@ -20,11 +19,13 @@ export default function Page() {
           "after:absolute after:-inset-y-14 after:-right-px after:w-px after:bg-border",
         )}
       >
-        <HeroSection />
-        <LogosSection />
-        <FeatureSection />
-        <TestimonialsSection />
-        <Integrations />
+        <Title
+          heading="Simple, Transparent Pricing"
+          description="Choose the plan that fits your workflow. Scale up as your content grows."
+        />
+        <PricingSection />
+        <PricingTable />
+        <CreditsSection />
         <CallToAction />
         <Footer />
       </main>
