@@ -8,7 +8,7 @@ interface TitleProps {
 export function Title({ heading, description }: TitleProps) {
   return (
     <section className="mx-auto w-full max-w-4xl">
-      <div className="relative flex flex-col items-center justify-center gap-5 py-16 md:py-24">
+      <div className="relative flex flex-col items-center justify-center gap-3 md:gap-5 py-8 md:py-24">
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-1 size-full overflow-hidden"
@@ -28,7 +28,7 @@ export function Title({ heading, description }: TitleProps) {
           {heading}
         </h1>
 
-        <p className="fade-in slide-in-from-bottom-10 mx-auto max-w-md animate-in fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:text-lg md:text-xl">
+        <p className="fade-in slide-in-from-bottom-10 mx-auto w-full max-w-[34ch] px-3 animate-in fill-mode-backwards text-center text-base text-foreground/80 tracking-wider delay-200 duration-500 ease-out sm:max-w-[46ch] sm:px-0 sm:text-lg md:max-w-[52ch] md:text-xl">
           {description}
         </p>
       </div>
