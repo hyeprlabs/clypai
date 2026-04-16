@@ -1,10 +1,9 @@
 import { cn } from "@/lib/utils";
+import { name } from "@/lib/constants";
 import { Header } from "@/components/new/header";
 import { Title } from "@/components/new/title";
-import { StorySection } from "@/components/new/about/story-section";
-import { ValuesSection } from "@/components/new/about/values-section";
-import { FaqsSection } from "@/components/new/faqs";
-import { Contact } from "@/components/new/contact";
+import { ContactSection } from "@/components/new/contact/contact-section";
+import { TestimonialsSection } from "@/components/new/testimonials-section";
 import { CallToAction } from "@/components/new/cta";
 import { Footer } from "@/components/new/footer";
 
@@ -21,13 +20,11 @@ export default function Page() {
         )}
       >
         <Title
-          heading="About"
-          description="A clean, creator-first approach to turning long-form content into short-form impact."
+          heading="Contact"
+          description={`Contact the support team at ${name}.`}
         />
-        <StorySection />
-        <ValuesSection />
-        <FaqsSection />
-        <Contact />
+        <ContactSection />
+        <TestimonialsSection />
         <CallToAction />
         <Footer />
       </main>

@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/new/header";
 import { Title } from "@/components/new/title";
-import { StorySection } from "@/components/new/about/story-section";
-import { ValuesSection } from "@/components/new/about/values-section";
-import { FaqsSection } from "@/components/new/faqs";
-import { Contact } from "@/components/new/contact";
+import { ChangelogAlert } from "@/components/new/changelog/changelog-alert";
+import { ChangelogHighlightsSection } from "@/components/new/changelog/changelog-highlights-section";
+import { ChangelogListSection } from "@/components/new/changelog/changelog-list-section";
+import { ChangelogNoteSection } from "@/components/new/changelog/changelog-note-section";
 import { CallToAction } from "@/components/new/cta";
 import { Footer } from "@/components/new/footer";
 
@@ -21,13 +21,13 @@ export default function Page() {
         )}
       >
         <Title
-          heading="About"
-          description="A clean, creator-first approach to turning long-form content into short-form impact."
+          heading="Changelog"
+          description="Track what changed, what improved, and what is shipping next across the ClypAI product."
         />
-        <StorySection />
-        <ValuesSection />
-        <FaqsSection />
-        <Contact />
+        <ChangelogAlert />
+        <ChangelogHighlightsSection />
+        <ChangelogListSection />
+        <ChangelogNoteSection />
         <CallToAction />
         <Footer />
       </main>

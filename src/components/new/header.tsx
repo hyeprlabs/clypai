@@ -8,15 +8,19 @@ import { MobileNav } from "@/components/new/mobile-nav";
 export const navLinks = [
   {
     label: "Features",
-    href: "#",
+    href: "/new/features",
   },
   {
     label: "Pricing",
-    href: "#",
+    href: "/new/pricing",
   },
   {
     label: "About",
-    href: "#",
+    href: "/new/about",
+  },
+  {
+    label: "Contact",
+    href: "/new/contact",
   },
 ];
 
@@ -43,7 +47,7 @@ export function Header() {
       >
         <a
           className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
-          href="/"
+          href="/new"
         >
           <Logo className="h-4" />
         </a>

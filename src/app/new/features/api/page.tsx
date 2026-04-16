@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/new/header";
 import { Title } from "@/components/new/title";
-import { StorySection } from "@/components/new/about/story-section";
-import { ValuesSection } from "@/components/new/about/values-section";
-import { FaqsSection } from "@/components/new/faqs";
-import { Contact } from "@/components/new/contact";
+import { ApiAlert } from "@/components/new/features/api/api-alert";
+import { ApiIntroSection } from "@/components/new/features/api/intro";
+import { ApiEndpointsSection } from "@/components/new/features/api/endpoints";
+import { ApiQuickstartSection } from "@/components/new/features/api/quickstart";
 import { CallToAction } from "@/components/new/cta";
 import { Footer } from "@/components/new/footer";
 
@@ -21,13 +21,13 @@ export default function Page() {
         )}
       >
         <Title
-          heading="About"
-          description="A clean, creator-first approach to turning long-form content into short-form impact."
+          heading="ClypAI API"
+          description="One endpoint. Full AI pipeline. Zero infrastructure."
         />
-        <StorySection />
-        <ValuesSection />
-        <FaqsSection />
-        <Contact />
+        <ApiAlert />
+        <ApiIntroSection />
+        <ApiEndpointsSection />
+        <ApiQuickstartSection />
         <CallToAction />
         <Footer />
       </main>

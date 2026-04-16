@@ -3,7 +3,7 @@ import { FullWidthDivider } from "@/components/ui/full-width-divider";
 
 export function ValuesSection() {
   return (
-    <section className="relative mx-auto w-full max-w-4xl">
+    <section className="mb-12 lg:mb-24 relative mx-auto w-full max-w-4xl">
       <div className="relative">
         <DecorIcon className="size-4" position="top-left" />
         <DecorIcon className="size-4" position="top-right" />
