@@ -5,8 +5,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { AtIcon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import { AtSign, ArrowRightCircle } from "lucide-react";
 
 export function NewsletterCTA() {
   return (
@@ -15,7 +14,7 @@ export function NewsletterCTA() {
 
       <div className="space-y-1">
         <h2 className="text-center font-semibold text-2xl tracking-tight md:text-4xl">
-          Subscripe to our newsletter
+          Subscribe to our newsletter
         </h2>
         <p className="text-balance text-center text-muted-foreground text-sm md:text-base">
           Get the latest updates and insights delivered right to your inbox.
@@ -25,21 +24,13 @@ export function NewsletterCTA() {
         <InputGroup>
           <InputGroupInput placeholder="Enter your email" />
           <InputGroupAddon>
-            <HugeiconsIcon
-              icon={AtIcon}
-              strokeWidth={2}
-              data-icon="inline-start"
-            />
+            <AtSign />
           </InputGroupAddon>
         </InputGroup>
 
         <Button className="w-full sm:w-auto">
-          Subscribe{" "}
-          <HugeiconsIcon
-            icon={ArrowRight02Icon}
-            strokeWidth={2}
-            data-icon="inline-end"
-          />
+          Subscribe
+          <ArrowRightCircle />
         </Button>
       </div>
       <div className="flex items-center justify-center gap-2">
