@@ -89,7 +89,8 @@ export function Footer() {
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="flex max-w-4xl flex-col justify-between gap-2 py-4">
           <p className="text-center font-light text-muted-foreground text-xs font-mono">
-            &copy; {new Date().getFullYear()} {company_name}, All rights reserved
+            &copy; {new Date().getFullYear()} {company_name}, All rights
+            reserved
           </p>
         </div>
       </div>

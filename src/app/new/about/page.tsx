@@ -1,36 +1,29 @@
-import { cn } from "@/lib/utils";
-import { Header } from "@/components/new/header";
+import type { Metadata } from "next";
 import { Title } from "@/components/new/title";
 import { StorySection } from "@/components/new/about/story-section";
 import { ValuesSection } from "@/components/new/about/values-section";
 import { FaqsSection } from "@/components/new/faqs";
 import { Contact } from "@/components/new/contact";
 import { CallToAction } from "@/components/new/cta";
-import { Footer } from "@/components/new/footer";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn how ClypAI helps creators turn long-form content into short-form impact with a clean, creator-first workflow.",
+};
 
 export default function Page() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden px-4 supports-[overflow:clip]:overflow-clip">
-      <Header />
-      <main
-        className={cn(
-          "relative mx-auto max-w-4xl grow",
-          // X Borders
-          "before:absolute before:-inset-y-14 before:-left-px before:w-px before:bg-border",
-          "after:absolute after:-inset-y-14 after:-right-px after:w-px after:bg-border",
-        )}
-      >
-        <Title
-          heading="About"
-          description="A clean, creator-first approach to turning long-form content into short-form impact."
-        />
-        <StorySection />
-        <ValuesSection />
-        <FaqsSection />
-        <Contact />
-        <CallToAction />
-        <Footer />
-      </main>
-    </div>
+    <>
+      <Title
+        heading="About"
+        description="A clean, creator-first approach to turning long-form content into short-form impact."
+      />
+      <StorySection />
+      <ValuesSection />
+      <FaqsSection />
+      <Contact />
+      <CallToAction />
+    </>
   );
 }
