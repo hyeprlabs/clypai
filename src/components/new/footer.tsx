@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ClypAIWordmark } from "@/components/brand/logos";
-import { name } from "@/lib/constants";
+import { company_name } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -89,7 +89,7 @@ export function Footer() {
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="flex max-w-4xl flex-col justify-between gap-2 py-4">
           <p className="text-center font-light text-muted-foreground text-xs font-mono">
-            &copy; {new Date().getFullYear()} {name}, All rights reserved
+            &copy; {new Date().getFullYear()} {company_name}, All rights reserved
           </p>
         </div>
       </div>
