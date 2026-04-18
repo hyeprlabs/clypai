@@ -17,7 +17,7 @@ export function StorySection() {
         >
           <h2
             id="about-story-heading"
-            className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl"
+            className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl"
           >
             Our Mission: Accessible Video Creation For All
           </h2>

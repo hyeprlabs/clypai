@@ -21,7 +21,7 @@ export function Title({ heading, description }: TitleProps) {
 
         <h1
           className={cn(
-            "fade-in slide-in-from-bottom-10 animate-in text-balance fill-mode-backwards text-center text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
+            "font-heading fade-in slide-in-from-bottom-10 animate-in text-balance fill-mode-backwards text-center text-4xl tracking-tight delay-100 duration-500 ease-out md:text-5xl lg:text-6xl",
             "text-shadow-[0_0px_50px_theme(--color-foreground/.2)]",
           )}
         >

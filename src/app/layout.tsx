@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { GeistPixelSquare } from "geist/font/pixel";
 
 import "@/app/globals.css";
 
@@ -34,7 +35,7 @@ export default function Layout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${GeistPixelSquare.variable} antialiased`}
       >
         <Providers>{children}</Providers>
       </body>

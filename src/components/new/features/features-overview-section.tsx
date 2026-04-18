@@ -48,7 +48,7 @@ export function FeaturesOverviewSection() {
         <FullWidthDivider className="-top-px" />
 
         <div className="mx-auto max-w-3xl py-8 text-center">
-          <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
+          <h2 className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl">
             Built For Modern Creators
           </h2>
           <p className="mt-4 text-balance text-muted-foreground text-sm md:text-base">

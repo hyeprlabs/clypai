@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
+import Link from "next/link";
 import { Portal, PortalBackdrop } from "@/components/ui/portal";
 import { Button } from "@/components/ui/button";
 import { navLinks } from "@/components/new/header";
@@ -52,7 +53,7 @@ export function MobileNav() {
                   key={link.label}
                   variant="ghost"
                 >
-                  <a href={link.href}>{link.label}</a>
+                  <Link href={link.href}>{link.label}</Link>
                 </Button>
               ))}
             </div>

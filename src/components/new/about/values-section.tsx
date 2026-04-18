@@ -17,7 +17,7 @@ export function ValuesSection() {
         >
           <h2
             id="about-values-heading"
-            className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl"
+            className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl"
           >
             What Guides Us
           </h2>

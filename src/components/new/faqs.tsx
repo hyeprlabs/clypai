@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { name } from "@/lib/constants";
 
 import React from "react";
 import { FullWidthDivider } from "@/components/ui/full-width-divider";
@@ -50,11 +51,11 @@ export function FaqsSection() {
       <FullWidthDivider contained />
 
       <div className="px-4 py-16 lg:px-6">
-        <h1 className="mb-4 font-semibold text-3xl md:text-4xl">
+        <h1 className="font-heading mb-4 text-3xl md:text-4xl">
           Frequently Asked Questions
         </h1>
         <p className="mb-8 max-w-2xl text-muted-foreground">
-          Find answers to common questions about Efferd. Can't find what you're
+          Find answers to common questions about {name}. Can't find what you're
           looking for? Our support team is here to help.
         </p>
 
@@ -144,62 +145,69 @@ const faqs = [
     category: "getting-started",
     title: "How do I create my first project?",
     content:
-      'Click the "New Project" button in your dashboard, choose a template or start from scratch, customize your project name and settings, and you\'ll be ready to start building in seconds.',
+      "Upload your long-form video to ClypAI, give your project a name, and our AI will automatically detect the best clips. You'll have a set of short-form clips ready to review within minutes.",
   },
   {
     id: 2,
     category: "getting-started",
-    title: "What are the system requirements?",
+    title: "What video formats does ClypAI support?",
     content:
-      "Efferd works on any modern web browser including Chrome, Firefox, Safari, and Edge. No special software installation is required—just visit our platform and log in.",
+      "ClypAI works with any modern web browser — no software installation required. Simply log in and upload your video file directly from your device or a supported cloud source.",
   },
   {
     id: 3,
     category: "features",
-    title: "Can I use Efferd for team collaboration?",
+    title: "What is auto-clipping and how does it work?",
     content:
-      "Absolutely! Invite team members, set role-based permissions, leave comments on components, and track changes in real-time. Our collaboration features are built for teams of all sizes.",
+      "Auto-clipping uses advanced AI models to analyse your video for hooks, high-energy moments, and punchlines. It then extracts those moments as standalone short-form clips ready for social media.",
   },
   {
     id: 4,
     category: "features",
-    title: "Is there a component library?",
+    title: "Does ClypAI add captions automatically?",
     content:
-      "Yes, Efferd includes a comprehensive library of pre-built, customizable components. You can also create your own reusable components and share them across your projects.",
+      "Yes. ClypAI generates accurate, timed captions for every clip automatically. No manual typing or syncing — the captions are styled and platform-ready out of the box.",
   },
   {
     id: 5,
     category: "features",
-    title: "Do you support custom integrations?",
+    title: "Which social platforms can I publish to?",
     content:
-      "We support integrations with GitHub, GitLab, Figma, Slack, and major cloud providers. For custom integrations, contact our support team to discuss your needs.",
+      "ClypAI supports publishing to Instagram, TikTok, YouTube Shorts, and X/Twitter. LinkedIn and Snapchat are coming soon.",
   },
   {
     id: 6,
     category: "billing",
     title: "What payment methods do you accept?",
     content:
-      "We accept all major credit cards, PayPal, and bank transfers for annual plans. Invoicing is available for enterprise customers.",
+      "We accept all major credit cards. Additional credits can be purchased at any time from inside your account dashboard.",
   },
   {
     id: 7,
     category: "billing",
     title: "Can I change my plan anytime?",
     content:
-      "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate your billing accordingly.",
+      "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated accordingly.",
   },
   {
     id: 8,
-    category: "support",
-    title: "How do I report a bug?",
+    category: "billing",
+    title: "What is the free plan?",
     content:
-      "Use the in-app feedback button or email support@efferd.com with details about the issue. Our team typically responds within 24 hours.",
+      "The free plan includes 50 credits per month, 3 projects, 10 exports per month, and 720p export quality. It is free forever with no credit card required.",
   },
   {
     id: 9,
     category: "support",
-    title: "Do you offer training or onboarding?",
+    title: "How do I get help if something goes wrong?",
     content:
-      "We provide video tutorials, documentation, and live webinars. Premium plans include personalized onboarding sessions with our support team.",
+      "You can reach us by email at clypai@hyeprlabs.com. Pro plan users receive priority support with faster response times.",
+  },
+  {
+    id: 10,
+    category: "support",
+    title: "Is there onboarding for new users?",
+    content:
+      "We provide in-app guidance, documentation, and video walkthroughs. Pro plan users have access to personalised onboarding sessions with our team.",
   },
 ];

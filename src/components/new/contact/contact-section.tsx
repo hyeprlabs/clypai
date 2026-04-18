@@ -26,7 +26,7 @@ export function ContactSection() {
     <div className="mb-12 lg:mb-24 relative mx-auto w-full max-w-4xl border-y dark:bg-[radial-gradient(35%_80%_at_25%_0%,--theme(--color-foreground/.08),transparent)]">
       <div className="border-b px-6 py-8">
         <div className="mb-8 flex flex-col gap-2">
-          <h1 className="font-semibold text-xl md:text-2xl">Get in touch</h1>{" "}
+          <h1 className="font-heading text-xl md:text-2xl">Get in touch</h1>{" "}
           <p className="text-muted-foreground text-sm">
             Have a question, feedback, or want to collaborate? <br /> We'd love
             to hear from you.

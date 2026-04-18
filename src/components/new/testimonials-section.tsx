@@ -12,25 +12,23 @@ type Testimonial = {
 const testimonials: Testimonial[] = [
   {
     quote:
-      "Efferd is so polished I might just retire and become a full-time potato farmer. The ecosystem is in safe hands.",
-    name: "Shadcn",
-    role: "Founder",
-    company: "Shadcn UI",
+      "ClypAI turned a 3-hour podcast into 12 clips in under 10 minutes. We went from drowning in raw footage to posting every single day.",
+    name: "Jordan M.",
+    role: "Podcast Host",
+    company: "The Deep Dive Pod",
   },
   {
     quote:
-      "Efferd is why I still have hair. No more pulling it out over centering divs or fighting with CSS grid.",
-    name: "Guillermo Rauch",
-    role: "CEO",
-    company: "Vercel",
+      "I used to spend half my week on editing. ClypAI cut that down to nothing. The auto-captions alone saved my team hours of work.",
+    name: "Priya S.",
+    role: "Content Strategist",
+    company: "Elevate Media",
   },
-
   {
     quote:
-      "I tried to buy Efferd but they wouldn't sell. So I just bought Twitter instead to complain about it.",
-    name: "Elon Musk",
-    role: "CEO",
-    company: "X.com",
+      "We scaled our Twitch highlights to TikTok in one weekend. ClypAI found the moments I would have completely missed.",
+    name: "Alex T.",
+    role: "Streamer & Creator",
   },
 ];
 

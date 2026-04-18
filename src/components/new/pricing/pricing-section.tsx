@@ -64,7 +64,7 @@ export function PricingSection() {
             <p className="mb-6 text-muted-foreground text-sm uppercase tracking-wider">
               PRICING
             </p>
-            <h1 className="font-bold text-3xl leading-tight md:text-5xl">
+            <h1 className="font-heading text-3xl leading-tight md:text-5xl">
               Pricing that doesn't suck
             </h1>
           </div>

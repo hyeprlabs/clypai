@@ -21,11 +21,12 @@ export function FeatureSection() {
   return (
     <div className="mb-12 lg:mb-24 mx-auto w-full max-w-4xl border-t">
       <div className="mx-auto max-w-3xl text-center py-8">
-        <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
-          Power. Speed. Control.
+        <h2 className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl">
+          Your Shortcut to the Feed.
         </h2>
         <p className="mt-4 text-balance text-muted-foreground text-sm md:text-base">
-          Everything you need to build fast, secure, scalable apps.
+          Transform long-form depth into short-form impact instantly. Stop
+          scrubbing, start trending.
         </p>
       </div>
 
@@ -75,33 +76,39 @@ export function FeatureCard({
 
 const features: FeatureType[] = [
   {
-    title: "Faaast",
+    title: "Instant Clips",
     icon: <HugeiconsIcon icon={ZapIcon} strokeWidth={2} />,
-    description: "It supports an entire helping developers and innovate.",
+    description:
+      "Identify hooks and extract viral potential without scrubbing through hours of footage.",
   },
   {
-    title: "Powerful",
+    title: "Massive Scale",
     icon: <HugeiconsIcon icon={CpuIcon} strokeWidth={2} />,
-    description: "It supports an entire helping developers and businesses.",
+    description:
+      "Turn a single podcast or stream into a week's worth of engaging social media posts.",
   },
   {
-    title: "Security",
+    title: "Creator Focus",
     icon: <HugeiconsIcon icon={FingerPrintScanIcon} strokeWidth={2} />,
-    description: "It supports an helping developers businesses.",
+    description:
+      "Remove the grind of editing so you can focus on storytelling and making your voice heard.",
   },
   {
-    title: "Customization",
+    title: "Auto-Captions",
     icon: <HugeiconsIcon icon={PencilIcon} strokeWidth={2} />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Generate perfect subtitles automatically. No more typing, syncing, or manual transcription.",
   },
   {
-    title: "Control",
+    title: "Smart Reframing",
     icon: <HugeiconsIcon icon={SlidersHorizontalIcon} strokeWidth={2} />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Automatically reframe your landscape video for vertical screens like TikTok and Reels.",
   },
   {
-    title: "Built for AI",
+    title: "AI Curation",
     icon: <HugeiconsIcon icon={SparklesIcon} strokeWidth={2} />,
-    description: "It supports helping developers and businesses innovate.",
+    description:
+      "Let advanced AI models find the hidden gold nuggets and punchlines in your content.",
   },
 ];

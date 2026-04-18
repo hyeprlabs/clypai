@@ -55,7 +55,7 @@ export function CreditsSection({
       {...props}
     >
       <div className="mx-auto max-w-3xl text-center py-6 lg:py-12">
-        <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
+        <h2 className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl">
           Top up your credits
         </h2>
         <p className="mt-4 text-balance text-muted-foreground text-sm md:text-base">

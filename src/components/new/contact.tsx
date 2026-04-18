@@ -28,7 +28,7 @@ const data = [
 export function Contact() {
   return (
     <div className="mb-12 lg:mb-24 mx-auto max-w-4xl border-y dark:bg-[radial-gradient(35%_80%_at_25%_0%,--theme(--color-foreground/.08),transparent)]">
-      <h2 className="border-b p-6 font-medium text-center text-lg md:text-2xl">
+      <h2 className="font-heading border-b p-6 text-center text-lg md:text-2xl">
         Have Questions? Get in Touch!
       </h2>
       <div className="grid gap-px overflow-hidden bg-border md:grid-cols-3">

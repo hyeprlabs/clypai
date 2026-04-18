@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/new/logo";
+import Link from "next/link";
+import { ClypAIWordmark } from "@/components/brand/logos";
+import { name } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Facebook01Icon,
-  GithubIcon,
+  NewTwitterIcon,
   InstagramIcon,
-  Linkedin01Icon,
-  YoutubeIcon,
+  TiktokIcon,
 } from "@hugeicons/core-free-icons";
 
 export function Footer() {
@@ -21,12 +21,12 @@ export function Footer() {
       >
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="grid max-w-5xl grid-cols-6 gap-6 p-4">
-          <div className="col-span-6 flex flex-col gap-4 pt-5 md:col-span-4">
-            <a className="w-max" href="#">
-              <Logo className="h-5" />
-            </a>
+          <div className="col-span-6 flex flex-col gap-4 pt-5 md:col-span-3">
+            <Link className="w-max" href="/new">
+              <ClypAIWordmark className="h-5 w-auto" />
+            </Link>
             <p className="max-w-sm text-balance text-muted-foreground text-sm">
-              Beautify your app with efferd.
+              #1 AI video clipping &amp; editing tool.
             </p>
             <div className="flex gap-2">
               {socialLinks.map((item, index) => (
@@ -47,13 +47,13 @@ export function Footer() {
             <span className="text-muted-foreground text-xs">Resources</span>
             <div className="mt-2 flex flex-col gap-2">
               {resources.map(({ href, title }) => (
-                <a
+                <Link
                   className="w-max text-sm hover:underline"
                   href={href}
                   key={title}
                 >
                   {title}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -61,21 +61,35 @@ export function Footer() {
             <span className="text-muted-foreground text-xs">Company</span>
             <div className="mt-2 flex flex-col gap-2">
               {company.map(({ href, title }) => (
-                <a
+                <Link
                   className="w-max text-sm hover:underline"
                   href={href}
                   key={title}
                 >
                   {title}
-                </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="col-span-3 w-full md:col-span-1">
+            <span className="text-muted-foreground text-xs">Legal</span>
+            <div className="mt-2 flex flex-col gap-2">
+              {legal.map(({ href, title }) => (
+                <Link
+                  className="w-max text-sm hover:underline"
+                  href={href}
+                  key={title}
+                >
+                  {title}
+                </Link>
               ))}
             </div>
           </div>
         </div>
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="flex max-w-4xl flex-col justify-between gap-2 py-4">
-          <p className="text-center font-light text-muted-foreground text-sm">
-            &copy; {new Date().getFullYear()} efferd, All rights reserved
+          <p className="text-center font-light text-muted-foreground text-xs font-mono">
+            &copy; {new Date().getFullYear()} {name}, All rights reserved
           </p>
         </div>
       </div>
@@ -83,88 +97,66 @@ export function Footer() {
   );
 }
 
-const company = [
+const resources = [
   {
-    title: "About Us",
-    href: "#",
+    title: "Features",
+    href: "/new/features",
   },
   {
-    title: "Careers",
-    href: "#",
+    title: "Pricing",
+    href: "/new/pricing",
   },
   {
-    title: "Brand assets",
-    href: "#",
+    title: "Blog",
+    href: "/new/blog",
   },
   {
-    title: "Privacy Policy",
-    href: "#",
-  },
-  {
-    title: "Terms of Service",
-    href: "#",
+    title: "Changelog",
+    href: "/new/changelog",
   },
 ];
 
-const resources = [
+const company = [
   {
-    title: "Blog",
-    href: "#",
+    title: "About Us",
+    href: "/new/about",
   },
   {
-    title: "Help Center",
-    href: "#",
+    title: "Manifesto",
+    href: "/new/why",
   },
   {
-    title: "Contact Support",
-    href: "#",
+    title: "Contact",
+    href: "/new/contact",
+  },
+];
+
+const legal = [
+  {
+    title: "Imprint",
+    href: "/legal/imprint",
   },
   {
-    title: "Community",
-    href: "#",
+    title: "Privacy Policy",
+    href: "/legal/privacy-policy",
   },
   {
-    title: "Security",
-    href: "#",
+    title: "Terms of Service",
+    href: "/legal/terms-of-service",
   },
 ];
 
 const socialLinks = [
   {
-    icon: <HugeiconsIcon icon={Facebook01Icon} strokeWidth={2} />,
-    link: "#",
-  },
-  {
-    icon: <HugeiconsIcon icon={GithubIcon} strokeWidth={2} />,
-    link: "#",
+    icon: <HugeiconsIcon icon={NewTwitterIcon} strokeWidth={2} />,
+    link: "/x",
   },
   {
     icon: <HugeiconsIcon icon={InstagramIcon} strokeWidth={2} />,
-    link: "#",
+    link: "/instagram",
   },
   {
-    icon: <HugeiconsIcon icon={Linkedin01Icon} strokeWidth={2} />,
-    link: "#",
-  },
-  {
-    icon: <XIcon />,
-    link: "#",
-  },
-  {
-    icon: <HugeiconsIcon icon={YoutubeIcon} strokeWidth={2} />,
-    link: "#",
+    icon: <HugeiconsIcon icon={TiktokIcon} strokeWidth={2} />,
+    link: "/tiktok",
   },
 ];
-
-function XIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path d="m18.9,1.153h3.682l-8.042,9.189,9.46,12.506h-7.405l-5.804-7.583-6.634,7.583H.469l8.6-9.831L0,1.153h7.593l5.241,6.931,6.065-6.931Zm-1.293,19.494h2.039L6.482,3.239h-2.19l13.314,17.408Z" />
-    </svg>
-  );
-}

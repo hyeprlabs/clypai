@@ -61,7 +61,7 @@ export function ApiQuickstartSection({
         <FullWidthDivider className="-top-px" />
 
         <div className="mx-auto max-w-3xl py-6 text-center">
-          <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
+          <h2 className="font-heading text-balance text-2xl md:text-4xl lg:text-5xl">
             Quick start
           </h2>
         </div>

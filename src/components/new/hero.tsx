@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { DecorIcon } from "@/components/ui/decor-icon";
 import { FullWidthDivider } from "@/components/ui/full-width-divider";
-import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight02Icon, Call02Icon } from "@hugeicons/core-free-icons";
+import { ArrowRight02Icon } from "@hugeicons/core-free-icons";
+import { HeroCta } from "@/components/new/hero-cta";
+import { name } from "@/lib/constants";
 
 export function HeroSection() {
   return (
     <section>
-      <div className="relative flex flex-col items-center justify-center gap-5 px-4 py-12 md:px-4 md:py-24 lg:py-28">
+      <div className="relative flex flex-col items-center justify-center gap-5 px-4 py-12 md:px-4 md:py-16 lg:py-20">
         {/* X Faded Borders & Shades */}
         <div
           aria-hidden="true"
@@ -26,20 +28,19 @@ export function HeroSection() {
           <div className="absolute inset-y-0 left-8 w-px bg-linear-to-b from-transparent via-border/50 to-border/50 md:left-12" />
           <div className="absolute inset-y-0 right-8 w-px bg-linear-to-b from-transparent via-border/50 to-border/50 md:right-12" />
         </div>
-        <a
+
+        <Link
           className={cn(
             "group mx-auto flex w-fit items-center gap-3 rounded-full border bg-card p-1 shadow",
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
-          href="#link"
+          href="/new/why"
         >
           <div className="rounded-full border bg-card px-1.5 py-0.5 shadow-sm">
-            <p className="font-mono text-xs">NOW</p>
+            <p className="font-mono text-xs">MANIFESTO</p>
           </div>
-
-          <span className="text-xs">accepting new client projects</span>
+          <span className="text-xs">Why {name}?</span>
           <span className="block h-5 border-l" />
-
           <div className="pr-1">
             <HugeiconsIcon
               icon={ArrowRight02Icon}
@@ -47,15 +48,15 @@ export function HeroSection() {
               className="size-3 -translate-x-0.5 duration-150 ease-out group-hover:translate-x-0.5"
             />
           </div>
-        </a>
+        </Link>
 
         <h1
           className={cn(
-            "max-w-2xl text-balance text-center text-3xl text-foreground md:text-5xl lg:text-6xl",
+            "font-heading max-w-2xl text-balance text-center text-3xl text-foreground md:text-5xl lg:text-6xl",
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-100 duration-500 ease-out",
           )}
         >
-          Building Digital Experiences That Drive Growth
+          From Raw Video to Viral Clips in One Click.
         </h1>
 
         <p
@@ -64,53 +65,46 @@ export function HeroSection() {
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-200 duration-500 ease-out",
           )}
         >
-          We help brands scale faster through design, <br /> development and
-          strategic execution.
+          Automate your short-form content. ClypAI finds the hooks, adds
+          captions, <br /> and crops for social, cutting your editing time 90%.
         </p>
-
-        <div className="fade-in slide-in-from-bottom-10 flex w-fit animate-in items-center justify-center gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
-          <Button variant="outline">
-            <HugeiconsIcon
-              icon={Call02Icon}
-              strokeWidth={2}
-              data-icon="inline-start"
-            />{" "}
-            Book a Call
-          </Button>
-          <Button>
-            Get started{" "}
-            <HugeiconsIcon
-              icon={ArrowRight02Icon}
-              strokeWidth={2}
-              data-icon="inline-end"
-            />
-          </Button>
-        </div>
       </div>
-      <div className="relative">
-        <DecorIcon className="size-4" position="top-left" />
-        <DecorIcon className="size-4" position="top-right" />
-        <DecorIcon className="size-4" position="bottom-left" />
-        <DecorIcon className="size-4" position="bottom-right" />
 
-        <FullWidthDivider className="-top-px" />
-        <div className="overflow-hidden *:pointer-events-none *:aspect-video *:select-none">
-          <img
-            alt="light app screen"
-            className="dark:hidden"
-            height="auto"
-            src="https://storage.efferd.com/screen/dashboard-light.webp"
-            width="auto"
-          />
-          <img
-            alt="dark app screen"
-            className="hidden dark:block"
-            height="auto"
-            src="https://storage.efferd.com/screen/dashboard-dark.webp"
-            width="auto"
-          />
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-1 overflow-hidden"
+        >
+          <div className="absolute inset-y-0 left-8 w-px bg-linear-to-b from-transparent via-border/50 to-border/50 md:left-12" />
+          <div className="absolute inset-y-0 right-8 w-px bg-linear-to-b from-transparent via-border/50 to-border/50 md:right-12" />
         </div>
-        <FullWidthDivider className="-bottom-px" />
+
+        <HeroCta />
+
+        <div className="relative">
+          <DecorIcon className="size-4" position="top-left" />
+          <DecorIcon className="size-4" position="top-right" />
+          <DecorIcon className="size-4" position="bottom-left" />
+          <DecorIcon className="size-4" position="bottom-right" />
+          <FullWidthDivider className="-top-px" />
+          <div className="overflow-hidden *:pointer-events-none *:aspect-video *:select-none">
+            <img
+              alt="light app screen"
+              className="dark:hidden"
+              height="auto"
+              src="https://storage.efferd.com/screen/dashboard-light.webp"
+              width="auto"
+            />
+            <img
+              alt="dark app screen"
+              className="hidden dark:block"
+              height="auto"
+              src="https://storage.efferd.com/screen/dashboard-dark.webp"
+              width="auto"
+            />
+          </div>
+          <FullWidthDivider className="-bottom-px" />
+        </div>
       </div>
     </section>
   );

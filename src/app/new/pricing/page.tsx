@@ -20,7 +20,7 @@ export default function Page() {
         )}
       >
         <Title
-          heading="Simple, Transparent Pricing"
+          heading="Pricing"
           description="Choose the plan that fits your workflow. Scale up as your content grows."
         />
         <PricingSection />
