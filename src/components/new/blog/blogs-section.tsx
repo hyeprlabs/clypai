@@ -1,41 +1,40 @@
-import { cn } from "@/lib/utils";
 import { FullWidthDivider } from "@/components/ui/full-width-divider";
+import { basehub } from "basehub";
 
-const blogs = [
-  {
-    title: "The New Design",
-    date: "May 20 2025",
-    description:
-      "What everyone new to the field should know, and how we can help.",
-    href: "#",
+const BLOG_QUERY = {
+  blog: {
+    __args: { first: 5, orderBy: "_sys_createdAt__DESC" as const },
+    items: {
+      slug: true,
+      _title: true,
+      _sys: { createdAt: true },
+      description: true,
+    },
   },
-  {
-    title: "Letter Club",
-    date: "Aug 14 2025",
-    description: "An ode to the slow web.",
-    href: "#",
-  },
-  {
-    title: "Have the Coffee",
-    date: "Sep 19 2025",
-    description: "Carve space out for oppurtunity.",
-    href: "#",
-  },
-  {
-    title: "Shadcn UI",
-    date: "Oct 12 2025",
-    description: "Building modern applications with reusable components.",
-    href: "#",
-  },
-  {
-    title: "Fesgin",
-    date: "Nov 23 2025",
-    description: "Exploring the intersection of design and development.",
-    href: "#",
-  },
-];
+};
 
-export function BlogsSection() {
+function formatDate(date?: string | null) {
+  if (!date) return "";
+
+  const parsed = new Date(date);
+  return Number.isNaN(parsed.getTime())
+    ? ""
+    : new Intl.DateTimeFormat("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }).format(parsed);
+}
+
+async function getPosts() {
+  const { blog } = await basehub().query(BLOG_QUERY);
+
+  return blog?.items ?? [];
+}
+
+export async function BlogsSection() {
+  const posts = await getPosts();
+
   return (
     <div className="mb-12 lg:mb-24 mx-auto flex w-full max-w-4xl flex-col justify-start border-t">
       <div className="space-y-2 px-4 py-8 md:py-12">
@@ -51,8 +50,14 @@ export function BlogsSection() {
       <div className="relative">
         <FullWidthDivider contained />
         <div className="divide-y">
-          {blogs.map((blog) => (
-            <BlogCard {...blog} key={blog.title} />
+          {posts.map((post) => (
+            <BlogCard
+              key={post.slug}
+              title={post._title}
+              date={formatDate(post._sys?.createdAt)}
+              description={post.description ?? ""}
+              href={`/new/blog/${post.slug}`}
+            />
           ))}
         </div>
         <FullWidthDivider contained />
@@ -65,23 +70,20 @@ function BlogCard({
   title,
   date,
   description,
-  className,
-  ...props
-}: React.ComponentProps<"a"> & {
+  href,
+}: {
   title: string;
   date: string;
   description: string;
+  href: string;
 }) {
   return (
     <a
-      className={cn(
-        "group flex h-24 w-full flex-col justify-center gap-y-1 p-4 hover:cursor-pointer hover:bg-accent/30 active:bg-accent dark:active:bg-accent/50",
-        className,
-      )}
-      {...props}
+      className="group flex min-h-24 w-full flex-col justify-center gap-y-1 p-4 hover:cursor-pointer hover:bg-accent/30 active:bg-accent dark:active:bg-accent/50"
+      href={href}
     >
       <div className="relative flex items-end justify-center gap-2">
-        <h3 className="whitespace-nowrap font-medium text-foreground text-lg md:text-xl">
+        <h3 className="whitespace-nowrap font-medium text-foreground text-lg smd:text-xl truncate">
           {title}
         </h3>
         <span className="mb-[6px] w-full border-b-2 border-dashed" />
@@ -89,7 +91,7 @@ function BlogCard({
           {date}
         </span>
       </div>
-      <div className="max-w-sm text-muted-foreground text-sm group-hover:text-foreground md:max-w-full md:text-base">
+      <div className="max-w-sm line-clamp-2 break-words text-muted-foreground text-sm group-hover:text-foreground md:max-w-full md:text-base">
         {description}
       </div>
     </a>
