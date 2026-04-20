@@ -1,6 +1,9 @@
 import { cn } from "@/lib/utils";
 import type React from "react";
 import { LegalTabs } from "@/components/new/legal/legal-tabs";
+import { LegalContact } from "@/components/new/legal/legal-contact";
+import { DecorIcon } from "@/components/ui/decor-icon";
+import { FullWidthDivider } from "@/components/ui/full-width-divider";
 
 type LegalArticleItem = {
   title: string;
@@ -13,8 +16,6 @@ type LegalArticleProps = React.ComponentProps<"article"> & {
   description: string;
   updatedAt: string;
   items: LegalArticleItem[];
-  contactHref: string;
-  contactLabel: string;
 };
 
 export function LegalArticle({
@@ -22,8 +23,6 @@ export function LegalArticle({
   description,
   updatedAt,
   items,
-  contactHref,
-  contactLabel,
   className,
   ...props
 }: LegalArticleProps) {
@@ -35,30 +34,34 @@ export function LegalArticle({
       )}
       {...props}
     >
-      <LegalTabs />
-
-      <header className="mx-auto max-w-3xl text-center py-6 md:py-8">
+      <header className="mx-auto max-w-3xl px-2 py-6 text-left md:px-0 md:py-8">
         <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
           {title}
         </h2>
-        <p className="mt-4 text-balance text-muted-foreground text-sm md:text-base">
+        <p className="mt-4 max-w-2xl text-muted-foreground text-sm md:text-base">
           {description} Last updated: {updatedAt}.
         </p>
+
+        <LegalTabs className="mt-5" />
       </header>
 
-      <section className="mx-auto max-w-3xl space-y-8 px-2 pb-8 md:space-y-10 md:px-0">
-        {items.map((item) => (
-          <LegalItemSection item={item} key={item.title} />
-        ))}
+      <div className="relative">
+        <DecorIcon className="size-4" position="top-left" />
+        <DecorIcon className="size-4" position="top-right" />
+        <DecorIcon className="size-4" position="bottom-left" />
+        <DecorIcon className="size-4" position="bottom-right" />
+        <FullWidthDivider className="-top-px" />
 
-        <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
-          For legal inquiries, contact us at{" "}
-          <a className="underline underline-offset-2" href={contactHref}>
-            {contactLabel}
-          </a>
-          .
-        </p>
-      </section>
+        <section className="mx-auto max-w-3xl space-y-8 px-3 py-6 md:space-y-10 md:px-0 md:py-8">
+          {items.map((item) => (
+            <LegalItemSection item={item} key={item.title} />
+          ))}
+        </section>
+
+        <FullWidthDivider className="-bottom-px" />
+      </div>
+
+      <LegalContact />
     </article>
   );
 }

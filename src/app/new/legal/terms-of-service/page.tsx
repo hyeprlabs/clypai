@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { email, name } from "@/lib/constants";
 import {
   LegalArticle,
   type LegalArticleItem,
@@ -18,8 +17,6 @@ export default function Page() {
       description="These terms govern use of the ClypAI website, applications, and services."
       updatedAt="April 20, 2026"
       items={termsItems}
-      contactHref={`mailto:${email}`}
-      contactLabel={`Contact ${name}`}
     />
   );
 }

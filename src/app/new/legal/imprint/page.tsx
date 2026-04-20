@@ -18,8 +18,6 @@ export default function Page() {
       description="Legal provider information for operating this website and platform."
       updatedAt="April 20, 2026"
       items={imprintItems}
-      contactHref={`mailto:${email}`}
-      contactLabel={`Contact ${name}`}
     />
   );
 }

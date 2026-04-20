@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { email, name } from "@/lib/constants";
+import { email } from "@/lib/constants";
 import {
   LegalArticle,
   type LegalArticleItem,
@@ -18,8 +18,6 @@ export default function Page() {
       description="This policy explains what data we collect and how we use and protect it."
       updatedAt="April 20, 2026"
       items={privacyItems}
-      contactHref={`mailto:${email}`}
-      contactLabel={`Contact ${name}`}
     />
   );
 }
