@@ -9,22 +9,22 @@ import {
   CheckmarkCircle02Icon,
 } from "@hugeicons/core-free-icons";
 
-type LegalDocumentItem = {
+type LegalArticleItem = {
   title: string;
   description: string;
   points?: string[];
 };
 
-type LegalDocumentSectionProps = React.ComponentProps<"section"> & {
+type LegalArticleProps = React.ComponentProps<"article"> & {
   title: string;
   description: string;
   updatedAt: string;
-  items: LegalDocumentItem[];
+  items: LegalArticleItem[];
   contactHref: string;
   contactLabel: string;
 };
 
-export function LegalDocumentSection({
+export function LegalArticle({
   title,
   description,
   updatedAt,
@@ -33,23 +33,23 @@ export function LegalDocumentSection({
   contactLabel,
   className,
   ...props
-}: LegalDocumentSectionProps) {
+}: LegalArticleProps) {
   return (
-    <section
+    <article
       className={cn(
         "mb-12 lg:mb-24 relative mx-auto w-full max-w-4xl",
         className,
       )}
       {...props}
     >
-      <div className="mx-auto max-w-3xl text-center py-8">
+      <header className="mx-auto max-w-3xl text-center py-8">
         <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
           {title}
         </h2>
         <p className="mt-4 text-balance text-muted-foreground text-sm md:text-base">
           {description} Last updated: {updatedAt}.
         </p>
-      </div>
+      </header>
 
       <div className="relative">
         <DecorIcon className="size-4" position="top-left" />
@@ -58,15 +58,17 @@ export function LegalDocumentSection({
         <DecorIcon className="size-4" position="bottom-right" />
         <FullWidthDivider className="-top-px" />
 
-        <div className="overflow-hidden border border-x-0">
-          <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2">
-            {items.map((item) => (
-              <LegalItemCard item={item} key={item.title} />
-            ))}
-          </div>
+        <div className="overflow-hidden border border-x-0 bg-background">
+          {items.map((item, index) => (
+            <LegalItemSection
+              className={cn(index > 0 && "border-t")}
+              item={item}
+              key={item.title}
+            />
+          ))}
         </div>
 
-        <div className="flex flex-col gap-4 border border-x-0 border-t-0 bg-background p-4 md:flex-row md:items-center md:justify-between md:p-8">
+        <section className="flex flex-col gap-4 border border-x-0 border-t-0 bg-background p-4 md:flex-row md:items-center md:justify-between md:p-8">
           <p className="text-muted-foreground text-sm md:text-base">
             Questions about this document? Reach out to our team.
           </p>
@@ -80,38 +82,47 @@ export function LegalDocumentSection({
               />
             </a>
           </Button>
-        </div>
+        </section>
 
         <FullWidthDivider className="-bottom-px" />
       </div>
-    </section>
+    </article>
   );
 }
 
-function LegalItemCard({
+function LegalItemSection({
   item,
   className,
   ...props
-}: React.ComponentProps<"div"> & { item: LegalDocumentItem }) {
+}: React.ComponentProps<"section"> & { item: LegalArticleItem }) {
   return (
-    <div
+    <section
       className={cn(
         "relative overflow-hidden bg-background p-4 md:p-8",
         className,
       )}
       {...props}
     >
-      <div className="[&_svg]:size-6 [&_svg]:text-foreground/75">
-        <HugeiconsIcon icon={CheckmarkCircle02Icon} strokeWidth={2} />
+      <div className="flex items-start gap-3">
+        <HugeiconsIcon
+          aria-hidden="true"
+          className="mt-0.5 size-5 shrink-0 text-foreground/75"
+          icon={CheckmarkCircle02Icon}
+          strokeWidth={2}
+        />
+        <h3 className="text-base md:text-md">{item.title}</h3>
       </div>
-      <h3 className="mt-10 text-base md:text-md">{item.title}</h3>
-      <p className="relative z-20 mt-2 text-muted-foreground text-sm">
+
+      <p className="relative z-20 mt-4 max-w-3xl text-muted-foreground text-sm md:text-base">
         {item.description}
       </p>
       {item.points?.length ? (
         <ul className="mt-4 space-y-2">
           {item.points.map((point) => (
-            <li className="flex items-start gap-2 text-sm" key={point}>
+            <li
+              className="flex items-start gap-2 text-sm md:text-base"
+              key={point}
+            >
               <HugeiconsIcon
                 aria-hidden="true"
                 className="mt-0.5 size-4 shrink-0 text-foreground/75"
@@ -123,8 +134,8 @@ function LegalItemCard({
           ))}
         </ul>
       ) : null}
-    </div>
+    </section>
   );
 }
 
-export type { LegalDocumentItem };
+export type { LegalArticleItem };

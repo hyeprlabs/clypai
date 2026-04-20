@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { email, name } from "@/lib/constants";
 import {
-  LegalDocumentSection,
-  type LegalDocumentItem,
-} from "@/components/new/legal-document-section";
+  LegalArticle,
+  type LegalArticleItem,
+} from "@/components/new/legal/legal-article";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <LegalDocumentSection
+    <LegalArticle
       title="Terms of Service"
       description="These terms govern use of the ClypAI website, applications, and services."
       updatedAt="April 20, 2026"
@@ -24,11 +24,11 @@ export default function Page() {
   );
 }
 
-const termsItems: LegalDocumentItem[] = [
+const termsItems: LegalArticleItem[] = [
   {
     title: "Agreement to Terms",
     description:
-      "By accessing or using ClypAI, you agree to these terms and the policies referenced here.",
+      "By accessing or using ClypAI, you agree to these Terms of Service and incorporated policies.",
     points: [
       "You must be at least 18 or the age of majority in your jurisdiction.",
       "You are responsible for activity performed with your account credentials.",
@@ -36,17 +36,17 @@ const termsItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Subscriptions and Billing",
+    title: "Accounts, Plans, and Billing",
     description:
-      "Paid subscriptions renew automatically unless canceled before the next billing cycle.",
+      "Paid subscriptions renew automatically unless canceled before the next billing date.",
     points: [
       "Current plan details and limits are listed on the pricing page.",
       "Failed payments may result in reduced access or service suspension.",
-      "Credits and usage limits follow the plan selected at purchase time.",
+      "Credits, overages, and usage limits follow the plan selected at purchase time.",
     ],
   },
   {
-    title: "Acceptable Use",
+    title: "Acceptable Use and Restrictions",
     description:
       "You may not use ClypAI for unlawful, infringing, abusive, or deceptive activities.",
     points: [
@@ -56,7 +56,7 @@ const termsItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Intellectual Property",
+    title: "Intellectual Property and Licenses",
     description:
       "You keep rights to your content, while ClypAI retains rights to its software and branding.",
     points: [
@@ -66,13 +66,23 @@ const termsItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Liability Limits",
+    title: "Disclaimers and Liability Limits",
     description:
       "To the extent permitted by law, ClypAI is not liable for indirect or consequential damages.",
     points: [
       "The platform is provided on an as-available basis.",
       "You are responsible for keeping backups of source files.",
       "Where enforceable, liability is limited to fees paid in the prior 12 months.",
+    ],
+  },
+  {
+    title: "Termination and Governing Terms",
+    description:
+      "We may suspend or terminate accounts for material violations, legal requirements, or security risk.",
+    points: [
+      "You may stop using the service at any time.",
+      "Termination does not remove obligations accrued before termination.",
+      "Governing law and venue are applied as required by enforceable local law.",
     ],
   },
 ];

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { company_name, email, name } from "@/lib/constants";
 import {
-  LegalDocumentSection,
-  type LegalDocumentItem,
-} from "@/components/new/legal-document-section";
+  LegalArticle,
+  type LegalArticleItem,
+} from "@/components/new/legal/legal-article";
 
 export const metadata: Metadata = {
   title: "Imprint",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <LegalDocumentSection
+    <LegalArticle
       title="Imprint"
       description="Legal provider information for operating this website and platform."
       updatedAt="April 20, 2026"
@@ -24,44 +24,44 @@ export default function Page() {
   );
 }
 
-const imprintItems: LegalDocumentItem[] = [
+const imprintItems: LegalArticleItem[] = [
   {
-    title: "Service Provider",
-    description: `${company_name} operates ${name} and is responsible for this service.`,
+    title: "Provider Identification",
+    description: `${company_name} is the service provider and operator of ${name}.`,
     points: [
       `${company_name}`,
-      "Registered business details are available upon verified request.",
-      "Primary business address is shared for legal and regulatory matters.",
+      "Commercial contact: clypai@hyeprlabs.com",
+      "Registered entity details and business address are provided in legally required communications.",
     ],
   },
   {
-    title: "Primary Contact",
+    title: "Responsible Contact",
     description:
-      "For legal notices, complaints, or compliance inquiries, use the official contact channel below.",
+      "For legal notices, compliance questions, and rights requests, use the official channel below.",
     points: [
       `Email: ${email}`,
-      "Requests are reviewed in the order they are received.",
-      "Typical response time is within two business days.",
+      "Notices are processed in the order received.",
+      "Typical first response is within two business days.",
     ],
   },
   {
-    title: "Content Responsibility",
+    title: "Editorial and Platform Responsibility",
     description:
-      "The provider is responsible for first-party content on this site under applicable law.",
+      "The provider is responsible for first-party website and platform content under applicable law.",
     points: [
-      "Editorial and product content is maintained by the internal team.",
-      "External links are reviewed at the time of publication.",
-      "If unlawful content is identified, notify us for prompt review.",
+      "Product and editorial content is maintained by the internal team.",
+      "External references are reviewed when published.",
+      "Potentially unlawful content can be reported for prompt review and action.",
     ],
   },
   {
-    title: "Dispute Process",
+    title: "Regulatory and Dispute Handling",
     description:
-      "Where required, we cooperate with recognized dispute channels and competent authorities.",
+      "Where required, we cooperate with competent authorities and recognized dispute channels.",
     points: [
-      "Consumer complaints may be submitted using the contact address above.",
-      "Each claim is assessed in good faith and with status updates.",
-      "Further legal terms are defined in the Terms of Service.",
+      "Consumer complaints can be submitted via the contact address above.",
+      "Claims are assessed in good faith and updated through the contact thread.",
+      "Additional contractual details are provided in the Terms of Service.",
     ],
   },
 ];

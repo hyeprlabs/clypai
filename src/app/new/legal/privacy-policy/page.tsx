@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { email, name } from "@/lib/constants";
 import {
-  LegalDocumentSection,
-  type LegalDocumentItem,
-} from "@/components/new/legal-document-section";
+  LegalArticle,
+  type LegalArticleItem,
+} from "@/components/new/legal/legal-article";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <LegalDocumentSection
+    <LegalArticle
       title="Privacy Policy"
       description="This policy explains what data we collect and how we use and protect it."
       updatedAt="April 20, 2026"
@@ -24,7 +24,7 @@ export default function Page() {
   );
 }
 
-const privacyItems: LegalDocumentItem[] = [
+const privacyItems: LegalArticleItem[] = [
   {
     title: "Data We Collect",
     description:
@@ -36,7 +36,7 @@ const privacyItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "How We Use Data",
+    title: "Purposes of Processing",
     description:
       "Personal data is used to provide product features, secure accounts, process billing, and support users.",
     points: [
@@ -46,7 +46,7 @@ const privacyItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Data Sharing",
+    title: "Data Sharing and Processors",
     description:
       "We share personal data only with providers needed to operate ClypAI under contractual safeguards.",
     points: [
@@ -56,7 +56,7 @@ const privacyItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Retention and Security",
+    title: "Retention and Security Controls",
     description:
       "Data is retained only for operational, legal, and dispute-resolution needs, then deleted or de-identified.",
     points: [
@@ -66,13 +66,24 @@ const privacyItems: LegalDocumentItem[] = [
     ],
   },
   {
-    title: "Your Privacy Rights",
+    title: "International Transfers and Rights",
     description:
       "Depending on your location, you may have rights to access, correct, export, or delete personal data.",
     points: [
+      "If data is transferred across borders, we apply contractual and technical safeguards.",
       `Requests can be sent to ${email}.`,
       "Identity verification may be required before request fulfillment.",
       "You may also file complaints with your local data authority.",
+    ],
+  },
+  {
+    title: "Children and Policy Updates",
+    description:
+      "The service is not directed to children under 13, and policy updates will be posted with a revised date.",
+    points: [
+      "If we learn that child data was submitted unlawfully, we will delete it.",
+      "Material policy changes are communicated through product or website notices.",
+      `Questions about this policy can be sent to ${email}.`,
     ],
   },
 ];
