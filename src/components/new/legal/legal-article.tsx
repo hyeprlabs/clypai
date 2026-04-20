@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import type React from "react";
 import { LegalTabs } from "@/components/new/legal/legal-tabs";
-import { LegalContact } from "@/components/new/legal/legal-contact";
+import { Contact } from "@/components/new/contact";
 import { DecorIcon } from "@/components/ui/decor-icon";
 import { FullWidthDivider } from "@/components/ui/full-width-divider";
 
@@ -34,7 +34,7 @@ export function LegalArticle({
       )}
       {...props}
     >
-      <header className="mx-auto max-w-3xl px-2 py-6 text-left md:px-0 md:py-8">
+      <header className="mx-auto max-w-3xl px-2 py-6 text-left md:py-8">
         <h2 className="text-balance font-medium text-2xl md:text-4xl lg:text-5xl">
           {title}
         </h2>
@@ -52,7 +52,7 @@ export function LegalArticle({
         <DecorIcon className="size-4" position="bottom-right" />
         <FullWidthDivider className="-top-px" />
 
-        <section className="mx-auto max-w-3xl space-y-8 px-3 py-6 md:space-y-10 md:px-0 md:py-8">
+        <section className="mx-auto max-w-3xl space-y-8 px-2 py-6 md:space-y-10 md:py-8">
           {items.map((item) => (
             <LegalItemSection item={item} key={item.title} />
           ))}
@@ -61,7 +61,7 @@ export function LegalArticle({
         <FullWidthDivider className="-bottom-px" />
       </div>
 
-      <LegalContact />
+      <Contact />
     </article>
   );
 }

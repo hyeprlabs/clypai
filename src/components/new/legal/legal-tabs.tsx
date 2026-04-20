@@ -25,7 +25,7 @@ export function LegalTabs({
   return (
     <nav
       aria-label="Legal navigation"
-      className={cn("mb-6 flex justify-start md:mb-8", className)}
+      className={cn("mb-6 flex justify-start", className)}
       {...props}
     >
       <Tabs
@@ -33,9 +33,16 @@ export function LegalTabs({
         onValueChange={(value) => router.push(value)}
         value={current}
       >
-        <TabsList variant="line">
+        <TabsList
+          className="h-auto flex-wrap gap-1 rounded-full p-1"
+          variant="default"
+        >
           {legalTabs.map((tab) => (
-            <TabsTrigger key={tab.href} value={tab.href}>
+            <TabsTrigger
+              className="rounded-full px-3 py-1"
+              key={tab.href}
+              value={tab.href}
+            >
               {tab.title}
             </TabsTrigger>
           ))}
