@@ -10,7 +10,10 @@ type LegalTab = {
   href: string;
 };
 
-export function LegalTabs({ className, ...props }: React.ComponentProps<"nav">) {
+export function LegalTabs({
+  className,
+  ...props
+}: React.ComponentProps<"nav">) {
   const pathname = usePathname();
   const router = useRouter();
 
