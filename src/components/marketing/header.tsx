@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 
 import { ClypAIWordmark } from "@/components/brand/logos";
 
-import { UserDropdown } from "@/components/marketing/user-dropdown";
+import { UserDropdown } from "@/components/new/user-dropdown";
 
 const items = [
   {

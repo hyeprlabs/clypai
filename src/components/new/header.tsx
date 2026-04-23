@@ -4,6 +4,7 @@ import { ClypAIWordmark } from "@/components/brand/logos";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/new/mobile-nav";
+import { HeaderActions } from "@/components/new/header-actions";
 import Link from "next/link";
 
 export const navLinks = [
@@ -48,7 +49,7 @@ export function Header() {
       >
         <Link
           className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
-          href="/new"
+          href="/"
         >
           <ClypAIWordmark className="h-4 w-auto" />
         </Link>
@@ -60,12 +61,7 @@ export function Header() {
               </Button>
             ))}
           </div>
-          <Button asChild size="sm" variant="outline">
-            <Link href="/login">Sign In</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/signup">Get Started</Link>
-          </Button>
+          <HeaderActions />
         </div>
         <MobileNav />
       </nav>
