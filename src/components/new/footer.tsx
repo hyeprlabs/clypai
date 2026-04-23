@@ -22,7 +22,7 @@ export function Footer() {
         <div className="absolute inset-x-0 h-px w-full bg-border" />
         <div className="grid max-w-5xl grid-cols-6 gap-6 p-4">
           <div className="col-span-6 flex flex-col gap-4 pt-5 md:col-span-3">
-            <Link className="w-max" href="/new">
+            <Link className="w-max" href="/">
               <ClypAIWordmark className="h-5 w-auto" />
             </Link>
             <p className="max-w-sm text-balance text-muted-foreground text-sm">
@@ -101,49 +101,49 @@ export function Footer() {
 const resources = [
   {
     title: "Features",
-    href: "/new/features",
+    href: "/features",
   },
   {
     title: "Pricing",
-    href: "/new/pricing",
+    href: "/pricing",
   },
   {
     title: "Blog",
-    href: "/new/blog",
+    href: "/blog",
   },
   {
     title: "Changelog",
-    href: "/new/changelog",
+    href: "/changelog",
   },
 ];
 
 const company = [
   {
     title: "About Us",
-    href: "/new/about",
+    href: "/about",
   },
   {
     title: "Manifesto",
-    href: "/new/why",
+    href: "/why",
   },
   {
     title: "Contact",
-    href: "/new/contact",
+    href: "/contact",
   },
 ];
 
 const legal = [
   {
     title: "Imprint",
-    href: "/new/legal/imprint",
+    href: "/legal/imprint",
   },
   {
     title: "Privacy Policy",
-    href: "/new/legal/privacy-policy",
+    href: "/legal/privacy-policy",
   },
   {
     title: "Terms of Service",
-    href: "/new/legal/terms-of-service",
+    href: "/legal/terms-of-service",
   },
 ];
 

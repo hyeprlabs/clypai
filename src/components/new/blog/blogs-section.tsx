@@ -56,7 +56,7 @@ export async function BlogsSection() {
               title={post._title}
               date={formatDate(post._sys?.createdAt)}
               description={post.description ?? ""}
-              href={`/new/blog/${post.slug}`}
+              href={`/blog/${post.slug}`}
             />
           ))}
         </div>

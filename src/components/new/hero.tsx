@@ -34,7 +34,7 @@ export function HeroSection() {
             "group mx-auto flex w-fit items-center gap-3 rounded-full border bg-card p-1 shadow",
             "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards transition-all delay-500 duration-500 ease-out",
           )}
-          href="/new/why"
+          href="/why"
         >
           <div className="rounded-full border bg-card px-1.5 py-0.5 shadow-sm">
             <p className="font-mono text-xs">MANIFESTO</p>
