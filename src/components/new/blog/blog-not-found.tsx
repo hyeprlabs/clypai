@@ -27,7 +27,7 @@ export function BlogNotFound() {
             <EmptyContent>
               <div className="flex gap-2">
                 <Button asChild>
-                  <Link href="/new/blog">
+                  <Link href="/blog">
                     <ArrowLeftCircle />
                     All Posts
                   </Link>
