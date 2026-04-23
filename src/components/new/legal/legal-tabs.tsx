@@ -55,14 +55,14 @@ export function LegalTabs({
 const legalTabs: LegalTab[] = [
   {
     title: "Imprint",
-    href: "/new/legal/imprint",
+    href: "/legal/imprint",
   },
   {
     title: "Terms of Service",
-    href: "/new/legal/terms-of-service",
+    href: "/legal/terms-of-service",
   },
   {
     title: "Privacy Policy",
-    href: "/new/legal/privacy-policy",
+    href: "/legal/privacy-policy",
   },
 ];

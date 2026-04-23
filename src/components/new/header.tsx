@@ -9,19 +9,19 @@ import Link from "next/link";
 export const navLinks = [
   {
     label: "Features",
-    href: "/new/features",
+    href: "/features",
   },
   {
     label: "Pricing",
-    href: "/new/pricing",
+    href: "/pricing",
   },
   {
     label: "About",
-    href: "/new/about",
+    href: "/about",
   },
   {
     label: "Contact",
-    href: "/new/contact",
+    href: "/contact",
   },
 ];
 
@@ -48,7 +48,7 @@ export function Header() {
       >
         <Link
           className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
-          href="/new"
+          href="/"
         >
           <ClypAIWordmark className="h-4 w-auto" />
         </Link>
@@ -60,10 +60,12 @@ export function Header() {
               </Button>
             ))}
           </div>
-          <Button size="sm" variant="outline">
-            Sign In
+          <Button asChild size="sm" variant="outline">
+            <Link href="/login">Sign In</Link>
           </Button>
-          <Button size="sm">Get Started</Button>
+          <Button asChild size="sm">
+            <Link href="/signup">Get Started</Link>
+          </Button>
         </div>
         <MobileNav />
       </nav>

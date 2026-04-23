@@ -23,7 +23,7 @@ export function PostTitle({
     <section className="mx-auto w-full max-w-4xl">
       <div className="relative flex flex-col items-start justify-center gap-2 py-5 text-left sm:items-center sm:gap-2.5 sm:py-7 sm:text-center md:gap-3 md:py-10 lg:py-12">
         <Button asChild size="sm" variant="outline">
-          <Link href="/new/blog">
+          <Link href="/blog">
             <ArrowLeftCircle />
             All Posts
           </Link>
