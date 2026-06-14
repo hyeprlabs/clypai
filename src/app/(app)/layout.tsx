@@ -4,10 +4,10 @@ import { GeistPixelSquare } from "geist/font/pixel";
 import "@/app/globals.css";
 
 // Metadata
-import { metadata } from "@/app/metadata";
+import { metadata } from "@/app/(app)/metadata";
 
 // Providers
-import { Providers } from "@/app/providers";
+import { Providers } from "@/app/(app)/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
