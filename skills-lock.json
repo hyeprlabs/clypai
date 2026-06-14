@@ -16,6 +16,12 @@
       "sourceType": "github",
       "computedHash": "d3a48eada4dbae95856d643a0c9c54a38974ee7896a4d34f93aead13d26c343a"
     },
+    "payload": {
+      "source": "payloadcms/payload",
+      "sourceType": "github",
+      "skillPath": "tools/claude-plugin/skills/payload/SKILL.md",
+      "computedHash": "580a7f579df2e9821dd65011098f7547e94c769f006a8fd5f62083b48abc4b80"
+    },
     "remotion": {
       "source": "vercel-labs/json-render",
       "sourceType": "github",
