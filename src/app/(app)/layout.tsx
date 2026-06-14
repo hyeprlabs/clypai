@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { GeistPixelSquare } from "geist/font/pixel";
 
+// Ignore missing type declarations for side-effect CSS import
+// @ts-ignore
 import "@/app/globals.css";
 
 // Metadata
