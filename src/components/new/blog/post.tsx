@@ -1,12 +1,10 @@
 import { DecorIcon } from "@/components/ui/decor-icon";
 import { CopyUrlButton } from "@/components/new/blog/copy-url-button";
 import { BookOpenText } from "lucide-react";
-import { RichText, type RichTextNode } from "basehub/react-rich-text";
 
 type PostProps = {
   createdAt?: string | null;
-  content?: RichTextNode[];
-  readingTime?: number | null;
+  contentHtml?: string | null;
 };
 
 const EMPTY_POST_CONTENT = "This post does not have published content yet.";
@@ -55,7 +53,26 @@ function PostMeta({
   );
 }
 
-export function Post({ createdAt, content, readingTime }: PostProps) {
+function estimateReadingTime(contentHtml?: string | null) {
+  if (!contentHtml) {
+    return null;
+  }
+
+  const words = contentHtml
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean).length;
+
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+export function Post({ createdAt, contentHtml }: PostProps) {
+  const fallbackReadingTime = estimateReadingTime(contentHtml);
+  const resolvedContentHtml = contentHtml ?? "";
+
   return (
     <div className="relative p-4">
       <DecorIcon className="size-4" position="top-left" />
@@ -63,11 +80,11 @@ export function Post({ createdAt, content, readingTime }: PostProps) {
       <DecorIcon className="size-4" position="bottom-left" />
       <DecorIcon className="size-4" position="bottom-right" />
 
-      <PostMeta createdAt={createdAt} readingTime={readingTime} />
+      <PostMeta createdAt={createdAt} readingTime={fallbackReadingTime} />
 
       <div className={CONTENT_CLASS_NAME}>
-        {content?.length ? (
-          <RichText content={content} />
+        {resolvedContentHtml ? (
+          <div dangerouslySetInnerHTML={{ __html: resolvedContentHtml }} />
         ) : (
           <p>{EMPTY_POST_CONTENT}</p>
         )}

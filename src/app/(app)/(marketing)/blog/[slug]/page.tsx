@@ -1,55 +1,85 @@
 import type { Metadata } from "next";
-import { basehub } from "basehub";
 import { notFound } from "next/navigation";
 import { FullWidthDivider } from "@/components/ui/full-width-divider";
 import { PostTitle } from "@/components/new/blog/post-title";
 import { NewsletterCTA } from "@/components/new/blog/newsletter-cta";
 import { Post } from "@/components/new/blog/post";
+import config from "@payload-config";
+import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
+import { getPayload } from "payload";
 
-const BLOG_POST_QUERY = {
-  blog: {
-    __args: {
-      first: 1,
-    },
-    item: {
-      _title: true,
-      _sys: {
-        createdAt: true,
-      },
-      author: {
-        name: true,
-        untitled: {
-          url: true,
-          alt: true,
-        },
-      },
-      content: {
-        json: {
-          content: true,
-        },
-        readingTime: true,
-      },
-      description: true,
-    },
-  },
+type BlogPost = {
+  createdAt?: string | null;
+  updatedAt?: string | null;
+  publishedAt?: string | null;
+  title: string;
+  slug: string;
+  description: string;
+  authorName?: string | null;
+  authorImage?: {
+    url?: string | null;
+    alt?: string | null;
+  } | null;
+  content?: {
+    root?: unknown;
+  } | null;
 };
 
-async function getPost(slug: string) {
-  const { blog } = await basehub().query({
-    blog: {
-      __args: {
-        first: 1,
-        filter: {
-          slug: {
-            eq: slug,
-          },
-        },
+function formatBlogContent(content?: BlogPost["content"]) {
+  if (!content || typeof content !== "object") {
+    return "";
+  }
+
+  return convertLexicalToHTML({
+    data: content as Parameters<typeof convertLexicalToHTML>[0]["data"],
+  });
+}
+
+async function getPublishedBlogPosts() {
+  const payload: any = await getPayload({ config });
+  const result = await payload.find({
+    collection: "posts",
+    depth: 1,
+    overrideAccess: false,
+    pagination: false,
+    sort: "-publishedAt",
+    where: {
+      _status: {
+        equals: "published",
       },
-      item: BLOG_POST_QUERY.blog.item,
     },
   });
 
-  return blog?.item ?? null;
+  return result.docs as BlogPost[];
+}
+
+async function getPublishedBlogPostBySlug(slug: string) {
+  const payload: any = await getPayload({ config });
+  const result = await payload.find({
+    collection: "posts",
+    depth: 1,
+    limit: 1,
+    overrideAccess: false,
+    pagination: false,
+    where: {
+      _status: {
+        equals: "published",
+      },
+      slug: {
+        equals: slug,
+      },
+    },
+  });
+
+  return (result.docs[0] as BlogPost | undefined) ?? null;
+}
+
+export async function generateStaticParams() {
+  const posts = await getPublishedBlogPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export async function generateMetadata({
@@ -58,12 +88,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPublishedBlogPostBySlug(slug);
 
   if (!post) notFound();
 
   return {
-    title: post._title,
+    title: post.title,
     description: post.description ?? undefined,
   };
 }
@@ -74,7 +104,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getPublishedBlogPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -86,20 +116,19 @@ export default async function Page({
         <div className="relative">
           <div className="px-4 py-8 md:py-12">
             <PostTitle
-              heading={post._title}
+              heading={post.title}
               description={post.description}
-              authorName={post.author?.name}
-              authorImageUrl={post.author?.untitled?.url}
-              authorImageAlt={post.author?.untitled?.alt}
+              authorName={post.authorName}
+              authorImageUrl={post.authorImage?.url}
+              authorImageAlt={post.authorImage?.alt}
             />
           </div>
 
           <FullWidthDivider contained />
 
           <Post
-            createdAt={post._sys?.createdAt}
-            content={post.content?.json?.content}
-            readingTime={post.content?.readingTime}
+            createdAt={post.publishedAt ?? post.createdAt}
+            contentHtml={formatBlogContent(post.content)}
           />
 
           <FullWidthDivider contained />
