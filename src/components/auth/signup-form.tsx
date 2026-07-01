@@ -10,7 +10,8 @@ import * as z from "zod";
 
 import { cn } from "@/lib/utils";
 
-import { Eye, EyeOff, Github, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { SiGithub } from "@icons-pack/react-simple-icons";
 
 import { Button } from "@/components/ui/button";
 
@@ -257,7 +258,7 @@ export function SignupForm({
                   size={16}
                 />
               ) : (
-                <Github />
+                <SiGithub size={16} className="me-2" />
               )}
               Continue with GitHub
             </Button>
