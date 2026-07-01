@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "build",
+    "coverage",
+    "CLAUDE.md",
+    ".agents",
+    ".claude",
+    ".next",
+    ".swc",
+    ".vercel",
+    "node_modules",
+    "pnpm-lock.yaml",
+    "README.md",
+    "src/app/.well-known"
+  ]
+}
