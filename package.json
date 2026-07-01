@@ -6,7 +6,8 @@
     "dev": "basehub dev & next dev --turbo",
     "build": "next build --turbo",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "email:dev": "email dev"
   },
   "dependencies": {
@@ -89,8 +90,7 @@
     "@types/pg": "^8.20.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^10.5.0",
-    "eslint-config-next": "16.2.9",
+    "oxlint": "^1.72.0",
     "prettier": "3.8.4",
     "react-email": "6.6.0",
     "tailwindcss": "^4.3.1",

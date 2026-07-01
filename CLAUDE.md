@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 pnpm dev          # Development server with Turbopack
 pnpm build        # Production build with Turbopack
 pnpm start        # Production server
-pnpm lint         # ESLint
+pnpm lint         # Oxlint
 pnpm email:dev    # React Email preview server
 ```
 

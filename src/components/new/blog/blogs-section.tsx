@@ -44,7 +44,7 @@ async function getPosts(): Promise<BlogPostSummary[]> {
     }));
   } catch (err) {
     // Fail gracefully and return empty list if payload is unavailable
-    // eslint-disable-next-line no-console
+    // oxlint-disable-next-line no-console
     console.warn("Failed to load posts", err);
     return [];
   }
