@@ -3,15 +3,10 @@ import { username, organization, admin } from "better-auth/plugins";
 import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
-import { waitlist } from "better-auth-waitlist";
 import { Resend } from "resend";
 import { ulid } from "ulid";
 import { headers } from "next/headers";
 
-import {
-  sendWaitlistJoinRequestEmail,
-  sendWaitlistStatusChangeEmail,
-} from "@/actions/send";
 
 if (!process.env.DATABASE_URL) {
   throw new Error("Missing DATABASE_URL .env variable!");
@@ -68,28 +63,6 @@ export const auth = betterAuth({
       ],
     }),
     admin(),
-    waitlist({
-      enabled: true,
-      maximumWaitlistParticipants: 1000,
-      disableSignInAndSignUp: false,
-      notifications: {
-        enabled: true,
-        onJoin: true,
-        onAccept: true,
-        onReject: true,
-      },
-      rateLimit: {
-        maxAttempts: 5,
-        windowMs: 10 * 60 * 1000, // 10 minutes
-        max: 10,
-      },
-      onStatusChange: async (entry) => {
-        await sendWaitlistStatusChangeEmail(entry);
-      },
-      onJoinRequest: async ({ request }) => {
-        await sendWaitlistJoinRequestEmail(request);
-      },
-    }),
   ],
   databaseHooks: {
     user: {

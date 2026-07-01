@@ -1,5 +1,4 @@
 import { ClypAIWordmark } from "@/components/brand/logos";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
 
 export default function Page() {
   return (
@@ -32,7 +31,7 @@ export default function Page() {
             </p>
           </div>
 
-          <WaitlistForm />
+          
 
           <div className="space-y-1.5 border-t border-zinc-800 pt-4">
             <p className="text-xs tracking-[0.2em] text-muted-foreground">

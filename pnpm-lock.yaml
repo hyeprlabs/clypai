@@ -184,9 +184,6 @@ importers:
       better-auth:
         specifier: ^1.6.23
         version: 1.6.23(drizzle-kit@0.31.7)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0))(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(pg@8.22.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      better-auth-waitlist:
-        specifier: ^3.0.1
-        version: 3.0.1(better-auth@1.6.23(drizzle-kit@0.31.7)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0))(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(pg@8.22.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       botid:
         specifier: ^1.5.11
         version: 1.5.11(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(react@19.2.7)
@@ -3333,12 +3330,6 @@ packages:
     resolution: {integrity: sha512-BSSLZ9/Cjjv7Gtj5B68ZzXcXUg8iOf3fme+FCuh8rC/Go+Kmh8cox7M3A8dolou16s64QjLPOSdngh7GxXvkSw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-
-  better-auth-waitlist@3.0.1:
-    resolution: {integrity: sha512-M6SbxZeVJVuD76TQbwNlionZFI1rkWRlR5RoMNUDvgDrHFa55/xwNGpQ/IdwjtoZ2RzEqKqWw+xMECuVUqbsXQ==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      better-auth: ^1.3.4
 
   better-auth@1.6.23:
     resolution: {integrity: sha512-4vOaRd9UiKGKm9R+ej0jjU1es3MiJIiNc9Qq3VCnYqOZ4/nb5272QqTxWYoDxyUXl5x6A2x2we5KZKQO9teTQQ==}
@@ -9310,11 +9301,6 @@ snapshots:
       - supports-color
 
   baseline-browser-mapping@2.10.40: {}
-
-  better-auth-waitlist@3.0.1(better-auth@1.6.23(drizzle-kit@0.31.7)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0))(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(pg@8.22.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
-    dependencies:
-      better-auth: 1.6.23(drizzle-kit@0.31.7)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0))(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(pg@8.22.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      zod: 3.25.76
 
   better-auth@1.6.23(drizzle-kit@0.31.7)(drizzle-orm@0.45.2(@types/pg@8.20.0)(kysely@0.29.2)(pg@8.22.0))(next@16.2.9(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.77.4))(pg@8.22.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:

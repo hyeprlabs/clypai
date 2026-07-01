@@ -20,7 +20,7 @@ declare module "basehub" {
   export interface Scalars extends _Scalars {}
 }
 
-import type { Transaction } from "basehub/api-transaction";
+import type { Transaction } from 'basehub/api-transaction'
 
 interface _Query extends Query {}
 interface _QueryGenqlSelection extends QueryGenqlSelection {}
@@ -30,1721 +30,1409 @@ interface _FragmentsMap extends FragmentsMap {}
 interface _Scalars extends Scalars {}
 
 export interface Scalars {
-  BSHBEventSchema: ({
-    name: string;
-    required: boolean;
-    placeholder?: string;
-    defaultValue?: string;
-    helpText?: string;
-  } & {
-    id: string;
-    label: string;
-  } & (
-      | {
-          type:
-            | "text"
-            | "textarea"
-            | "number"
-            | "date"
-            | "datetime"
-            | "email"
-            | "checkbox"
-            | "hidden";
-        }
-      | {
-          type: "select" | "radio";
-          options: string[];
-          multiple: boolean;
-        }
-      | {
-          type: "file";
-        }
-    ))[];
-  BSHBRichTextContentSchema: RichTextNode[];
-  BSHBRichTextTOCSchema: RichTextTocNode[];
-  Boolean: boolean;
-  CodeSnippetLanguage: B_Language;
-  DateTime: any;
-  Float: number;
-  ID: string;
-  Int: number;
-  JSON: any;
-  String: string;
+    BSHBEventSchema: ({
+  name: string;
+  required: boolean;
+  placeholder?: string;
+  defaultValue?: string;
+  helpText?: string
+} & {
+  id: string;
+  label: string
+} & ({
+  type: "text" | "textarea" | "number" | "date" | "datetime" | "email" | "checkbox" | "hidden"
+} | {
+  type: "select" | "radio";
+  options: string[];
+  multiple: boolean
+} | {
+  type: "file"
+}))[],
+    BSHBRichTextContentSchema: RichTextNode[],
+    BSHBRichTextTOCSchema: RichTextTocNode[],
+    Boolean: boolean,
+    CodeSnippetLanguage: B_Language,
+    DateTime: any,
+    Float: number,
+    ID: string,
+    Int: number,
+    JSON: any,
+    String: string,
 }
 
-export type AnalyticsKeyScope = "query" | "send";
+export type AnalyticsKeyScope = 'query' | 'send'
 
 export interface AuthorComponent {
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  /** Array of search highlight information with field names and HTML markup */
-  _highlight: SearchHighlight[] | null;
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  name: Scalars["String"] | null;
-  untitled: BlockImage | null;
-  __typename: "AuthorComponent";
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight: (SearchHighlight[] | null)
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    name: (Scalars['String'] | null)
+    untitled: (BlockImage | null)
+    __typename: 'AuthorComponent'
 }
 
-export type AuthorComponentOrderByEnum =
-  | "_sys_createdAt__ASC"
-  | "_sys_createdAt__DESC"
-  | "_sys_hash__ASC"
-  | "_sys_hash__DESC"
-  | "_sys_id__ASC"
-  | "_sys_id__DESC"
-  | "_sys_lastModifiedAt__ASC"
-  | "_sys_lastModifiedAt__DESC"
-  | "_sys_slug__ASC"
-  | "_sys_slug__DESC"
-  | "_sys_title__ASC"
-  | "_sys_title__DESC"
-  | "name__ASC"
-  | "name__DESC"
-  | "untitled_1__ASC"
-  | "untitled_1__DESC"
-  | "untitled__ASC"
-  | "untitled__DESC";
+export type AuthorComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'name__ASC' | 'name__DESC' | 'untitled_1__ASC' | 'untitled_1__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface BaseRichTextJson {
-  blocks: Scalars["String"];
-  content: Scalars["BSHBRichTextContentSchema"];
-  toc: Scalars["BSHBRichTextTOCSchema"];
-  __typename: "BaseRichTextJson";
+    blocks: Scalars['String']
+    content: Scalars['BSHBRichTextContentSchema']
+    toc: Scalars['BSHBRichTextTOCSchema']
+    __typename: 'BaseRichTextJson'
 }
 
 export interface BlockAudio {
-  /** The duration of the audio in seconds. If the duration is not available, it will be estimated based on the file size. */
-  duration: Scalars["Float"];
-  fileName: Scalars["String"];
-  fileSize: Scalars["Int"];
-  lastModified: Scalars["Float"];
-  mimeType: Scalars["String"];
-  url: Scalars["String"];
-  __typename: "BlockAudio";
+    /** The duration of the audio in seconds. If the duration is not available, it will be estimated based on the file size. */
+    duration: Scalars['Float']
+    fileName: Scalars['String']
+    fileSize: Scalars['Int']
+    lastModified: Scalars['Float']
+    mimeType: Scalars['String']
+    url: Scalars['String']
+    __typename: 'BlockAudio'
 }
 
 export interface BlockCodeSnippet {
-  allowedLanguages: Scalars["CodeSnippetLanguage"][];
-  code: Scalars["String"];
-  /** @deprecated Figuring out the correct api. */
-  html: Scalars["String"];
-  language: Scalars["CodeSnippetLanguage"];
-  __typename: "BlockCodeSnippet";
+    allowedLanguages: Scalars['CodeSnippetLanguage'][]
+    code: Scalars['String']
+    /** @deprecated Figuring out the correct api. */
+    html: Scalars['String']
+    language: Scalars['CodeSnippetLanguage']
+    __typename: 'BlockCodeSnippet'
 }
 
 export interface BlockColor {
-  b: Scalars["Int"];
-  g: Scalars["Int"];
-  hex: Scalars["String"];
-  hsl: Scalars["String"];
-  r: Scalars["Int"];
-  rgb: Scalars["String"];
-  __typename: "BlockColor";
+    b: Scalars['Int']
+    g: Scalars['Int']
+    hex: Scalars['String']
+    hsl: Scalars['String']
+    r: Scalars['Int']
+    rgb: Scalars['String']
+    __typename: 'BlockColor'
 }
 
-export type BlockDocument = (
-  | AuthorComponent
-  | Blog
-  | BlogItem
-  | _AgentStart
-  | _AgentUntitled
-  | authorComponent_AsList
-  | blogItem_AsList
-) & { __isUnion?: true };
+export type BlockDocument = (AuthorComponent | Blog | BlogItem | _AgentStart | _AgentUntitled | authorComponent_AsList | blogItem_AsList) & { __isUnion?: true }
 
 export interface BlockDocumentSys {
-  apiNamePath: Scalars["String"];
-  createdAt: Scalars["String"];
-  hash: Scalars["String"];
-  id: Scalars["ID"];
-  idPath: Scalars["String"];
-  lastModifiedAt: Scalars["String"];
-  slug: Scalars["String"];
-  slugPath: Scalars["String"];
-  title: Scalars["String"];
-  __typename: "BlockDocumentSys";
+    apiNamePath: Scalars['String']
+    createdAt: Scalars['String']
+    hash: Scalars['String']
+    id: Scalars['ID']
+    idPath: Scalars['String']
+    lastModifiedAt: Scalars['String']
+    slug: Scalars['String']
+    slugPath: Scalars['String']
+    title: Scalars['String']
+    __typename: 'BlockDocumentSys'
 }
 
 export interface BlockFile {
-  fileName: Scalars["String"];
-  fileSize: Scalars["Int"];
-  lastModified: Scalars["Float"];
-  mimeType: Scalars["String"];
-  url: Scalars["String"];
-  __typename: "BlockFile";
+    fileName: Scalars['String']
+    fileSize: Scalars['Int']
+    lastModified: Scalars['Float']
+    mimeType: Scalars['String']
+    url: Scalars['String']
+    __typename: 'BlockFile'
 }
 
 export interface BlockImage {
-  alt: Scalars["String"] | null;
-  aspectRatio: Scalars["String"];
-  blurDataURL: Scalars["String"];
-  fileName: Scalars["String"];
-  fileSize: Scalars["Int"];
-  height: Scalars["Int"];
-  lastModified: Scalars["Float"];
-  mimeType: Scalars["String"];
-  /** @deprecated Renamed to `blurDataURL` to match Next.js Image's naming convention. */
-  placeholderURL: Scalars["String"];
-  /** @deprecated Use `url` instead. */
-  rawUrl: Scalars["String"];
-  thumbhash: Scalars["String"];
-  /**
-   * This field is used to generate the image URL with the provided options. The options are passed as arguments. For example, if you want to resize the image to 200x200 pixels, you can use the following query:
-   *
-   * ```graphql
-   * {
-   *   imageBlock {
-   *     url(width: 200, height: 200)
-   *   }
-   * }
-   * ```
-   *
-   * This will return the URL with the width and height set to 200 pixels.
-   *
-   * BaseHub uses Cloudflare for image resizing. Check out [all available options in their docs](https://developers.cloudflare.com/images/transform-images/transform-via-workers/#fetch-options).
-   *
-   */
-  url: Scalars["String"];
-  width: Scalars["Int"];
-  __typename: "BlockImage";
+    alt: (Scalars['String'] | null)
+    aspectRatio: Scalars['String']
+    blurDataURL: Scalars['String']
+    fileName: Scalars['String']
+    fileSize: Scalars['Int']
+    height: Scalars['Int']
+    lastModified: Scalars['Float']
+    mimeType: Scalars['String']
+    /** @deprecated Renamed to `blurDataURL` to match Next.js Image's naming convention. */
+    placeholderURL: Scalars['String']
+    /** @deprecated Use `url` instead. */
+    rawUrl: Scalars['String']
+    thumbhash: Scalars['String']
+    /**
+     * This field is used to generate the image URL with the provided options. The options are passed as arguments. For example, if you want to resize the image to 200x200 pixels, you can use the following query:
+     * 
+     * ```graphql
+     * {
+     *   imageBlock {
+     *     url(width: 200, height: 200)
+     *   }
+     * }
+     * ```
+     * 
+     * This will return the URL with the width and height set to 200 pixels.
+     * 
+     * BaseHub uses Cloudflare for image resizing. Check out [all available options in their docs](https://developers.cloudflare.com/images/transform-images/transform-via-workers/#fetch-options).
+     * 
+     */
+    url: Scalars['String']
+    width: Scalars['Int']
+    __typename: 'BlockImage'
 }
 
-export type BlockList = (Blog | authorComponent_AsList | blogItem_AsList) & {
-  __isUnion?: true;
-};
+export type BlockList = (Blog | authorComponent_AsList | blogItem_AsList) & { __isUnion?: true }
 
 export interface BlockOgImage {
-  height: Scalars["Int"];
-  url: Scalars["String"];
-  width: Scalars["Int"];
-  __typename: "BlockOgImage";
+    height: Scalars['Int']
+    url: Scalars['String']
+    width: Scalars['Int']
+    __typename: 'BlockOgImage'
 }
 
+
 /** Rich text block */
-export type BlockRichText = Content & { __isUnion?: true };
+export type BlockRichText = (Content) & { __isUnion?: true }
 
 export interface BlockVideo {
-  aspectRatio: Scalars["String"];
-  /** The duration of the video in seconds. If the duration is not available, it will be estimated based on the file size. */
-  duration: Scalars["Float"];
-  fileName: Scalars["String"];
-  fileSize: Scalars["Int"];
-  height: Scalars["Int"];
-  lastModified: Scalars["Float"];
-  mimeType: Scalars["String"];
-  url: Scalars["String"];
-  width: Scalars["Int"];
-  __typename: "BlockVideo";
+    aspectRatio: Scalars['String']
+    /** The duration of the video in seconds. If the duration is not available, it will be estimated based on the file size. */
+    duration: Scalars['Float']
+    fileName: Scalars['String']
+    fileSize: Scalars['Int']
+    height: Scalars['Int']
+    lastModified: Scalars['Float']
+    mimeType: Scalars['String']
+    url: Scalars['String']
+    width: Scalars['Int']
+    __typename: 'BlockVideo'
 }
 
 export interface Blog {
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _meta: ListMeta;
-  /** The key used to search from the frontend. */
-  _searchKey: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item: BlogItem | null;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items: BlogItem[];
-  __typename: "Blog";
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _meta: ListMeta
+    /** The key used to search from the frontend. */
+    _searchKey: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item: (BlogItem | null)
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items: BlogItem[]
+    __typename: 'Blog'
 }
 
 export interface BlogItem {
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  /** Array of search highlight information with field names and HTML markup */
-  _highlight: SearchHighlight[] | null;
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  author: AuthorComponent;
-  content: Content | null;
-  description: Scalars["String"] | null;
-  slug: Scalars["String"] | null;
-  __typename: "BlogItem";
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight: (SearchHighlight[] | null)
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    author: AuthorComponent
+    content: (Content | null)
+    description: (Scalars['String'] | null)
+    slug: (Scalars['String'] | null)
+    __typename: 'BlogItem'
 }
 
-export type BlogItemOrderByEnum =
-  | "_sys_createdAt__ASC"
-  | "_sys_createdAt__DESC"
-  | "_sys_hash__ASC"
-  | "_sys_hash__DESC"
-  | "_sys_id__ASC"
-  | "_sys_id__DESC"
-  | "_sys_lastModifiedAt__ASC"
-  | "_sys_lastModifiedAt__DESC"
-  | "_sys_slug__ASC"
-  | "_sys_slug__DESC"
-  | "_sys_title__ASC"
-  | "_sys_title__DESC"
-  | "author__ASC"
-  | "author__DESC"
-  | "content__ASC"
-  | "content__DESC"
-  | "description__ASC"
-  | "description__DESC"
-  | "slug__ASC"
-  | "slug__DESC";
+export type BlogItemOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'author__ASC' | 'author__DESC' | 'content__ASC' | 'content__DESC' | 'description__ASC' | 'description__DESC' | 'slug__ASC' | 'slug__DESC'
 
 export interface Content {
-  html: Scalars["String"];
-  json: ContentRichText;
-  markdown: Scalars["String"];
-  plainText: Scalars["String"];
-  readingTime: Scalars["Int"];
-  __typename: "Content";
+    html: Scalars['String']
+    json: ContentRichText
+    markdown: Scalars['String']
+    plainText: Scalars['String']
+    readingTime: Scalars['Int']
+    __typename: 'Content'
 }
 
 export interface ContentRichText {
-  content: Scalars["BSHBRichTextContentSchema"];
-  toc: Scalars["BSHBRichTextTOCSchema"];
-  __typename: "ContentRichText";
+    content: Scalars['BSHBRichTextContentSchema']
+    toc: Scalars['BSHBRichTextTOCSchema']
+    __typename: 'ContentRichText'
 }
 
 export interface GetUploadSignedURL {
-  signedURL: Scalars["String"];
-  uploadURL: Scalars["String"];
-  __typename: "GetUploadSignedURL";
+    signedURL: Scalars['String']
+    uploadURL: Scalars['String']
+    __typename: 'GetUploadSignedURL'
 }
 
 export interface ListMeta {
-  /** Number of items after applying filters but before pagination */
-  filteredCount: Scalars["Int"];
-  /** Total number of items in collection before any filtering/pagination */
-  totalCount: Scalars["Int"];
-  __typename: "ListMeta";
+    /** Number of items after applying filters but before pagination */
+    filteredCount: Scalars['Int']
+    /** Total number of items in collection before any filtering/pagination */
+    totalCount: Scalars['Int']
+    __typename: 'ListMeta'
 }
 
-export type MediaBlock = (BlockAudio | BlockFile | BlockImage | BlockVideo) & {
-  __isUnion?: true;
-};
+export type MediaBlock = (BlockAudio | BlockFile | BlockImage | BlockVideo) & { __isUnion?: true }
 
-export type MediaBlockUnion = (
-  | BlockAudio
-  | BlockFile
-  | BlockImage
-  | BlockVideo
-) & { __isUnion?: true };
+export type MediaBlockUnion = (BlockAudio | BlockFile | BlockImage | BlockVideo) & { __isUnion?: true }
 
 export interface Mutation {
-  /**
-   * Returns a signed url and an upload url so that you can upload files into your repository.
-   *
-   * Example usage with JavaScript:
-   * ```js
-   * async function handleUpload(file: File) {
-   *   const { getUploadSignedURL } = await basehub().mutation({
-   *     getUploadSignedURL: {
-   *       __args: { fileName: file.name },
-   *       signedURL: true,
-   *       uploadURL: true,
-   *     }
-   *   })
-   *
-   *   const { signedURL, uploadURL } = getUploadSignedURL
-   *
-   *   await fetch(signedURL, { method: 'PUT', body: file })
-   *
-   *   // done! do something with the uploadURL now
-   * }
-   * ```
-   *
-   */
-  getUploadSignedURL: GetUploadSignedURL;
-  /** Start a job that can be awaited and the result given directly. Under the hood, it runs `transactionAsync` and polls for the result until it is available. You can pass a `timeout` argument, the default being 30_000ms. */
-  transaction: TransactionStatus;
-  /** Start an asynchronous job to mutate BaseHub data. Returns a transaction ID which you can use to get the result of the job. */
-  transactionAsync: Scalars["String"];
-  transactionStatus: TransactionStatus;
-  __typename: "Mutation";
+    /**
+     * Returns a signed url and an upload url so that you can upload files into your repository.
+     * 
+     * Example usage with JavaScript:
+     * ```js
+     * async function handleUpload(file: File) {
+     *   const { getUploadSignedURL } = await basehub().mutation({
+     *     getUploadSignedURL: {
+     *       __args: { fileName: file.name },
+     *       signedURL: true,
+     *       uploadURL: true,
+     *     }
+     *   })
+     * 
+     *   const { signedURL, uploadURL } = getUploadSignedURL
+     * 
+     *   await fetch(signedURL, { method: 'PUT', body: file })
+     * 
+     *   // done! do something with the uploadURL now
+     * }
+     * ```
+     * 
+     */
+    getUploadSignedURL: GetUploadSignedURL
+    /** Start a job that can be awaited and the result given directly. Under the hood, it runs `transactionAsync` and polls for the result until it is available. You can pass a `timeout` argument, the default being 30_000ms. */
+    transaction: TransactionStatus
+    /** Start an asynchronous job to mutate BaseHub data. Returns a transaction ID which you can use to get the result of the job. */
+    transactionAsync: Scalars['String']
+    transactionStatus: TransactionStatus
+    __typename: 'Mutation'
 }
 
 export interface Query {
-  _agent: _AgentStart | null;
-  /** Query across the custom AI agents in the repository. */
-  _agents: _agents;
-  /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
-  _componentInstances: _components;
-  /** The diff between the current branch and the head commit. */
-  _diff: Scalars["JSON"];
-  /** The structure of the repository. Used by START. */
-  _structure: Scalars["JSON"];
-  _sys: RepoSys;
-  blog: Blog;
-  __typename: "Query";
+    _agent: (_AgentStart | null)
+    /** Query across the custom AI agents in the repository. */
+    _agents: _agents
+    /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
+    _componentInstances: _components
+    /** The diff between the current branch and the head commit. */
+    _diff: Scalars['JSON']
+    /** The structure of the repository. Used by START. */
+    _structure: Scalars['JSON']
+    _sys: RepoSys
+    blog: Blog
+    __typename: 'Query'
 }
 
 export interface RepoSys {
-  branches: _Branches;
-  dashboardUrl: Scalars["String"];
-  forkUrl: Scalars["String"];
-  hash: Scalars["String"];
-  id: Scalars["ID"];
-  playgroundInfo: _PlaygroundInfo | null;
-  slug: Scalars["String"];
-  title: Scalars["String"];
-  __typename: "RepoSys";
+    branches: _Branches
+    dashboardUrl: Scalars['String']
+    forkUrl: Scalars['String']
+    hash: Scalars['String']
+    id: Scalars['ID']
+    playgroundInfo: (_PlaygroundInfo | null)
+    slug: Scalars['String']
+    title: Scalars['String']
+    __typename: 'RepoSys'
 }
 
-export type RichTextJson = (BaseRichTextJson | ContentRichText) & {
-  __isUnion?: true;
-};
+export type RichTextJson = (BaseRichTextJson | ContentRichText) & { __isUnion?: true }
 
 export interface SearchHighlight {
-  /** The field/path that was matched (e.g., "title", "body.content") */
-  by: Scalars["String"];
-  /** HTML snippet with <mark> tags around the matched terms */
-  snippet: Scalars["String"];
-  __typename: "SearchHighlight";
+    /** The field/path that was matched (e.g., "title", "body.content") */
+    by: Scalars['String']
+    /** HTML snippet with <mark> tags around the matched terms */
+    snippet: Scalars['String']
+    __typename: 'SearchHighlight'
 }
 
 export interface TransactionStatus {
-  /** Duration in milliseconds. */
-  duration: Scalars["Int"] | null;
-  endedAt: Scalars["String"] | null;
-  id: Scalars["String"];
-  message: Scalars["String"] | null;
-  startedAt: Scalars["String"];
-  status: TransactionStatusEnum;
-  __typename: "TransactionStatus";
+    /** Duration in milliseconds. */
+    duration: (Scalars['Int'] | null)
+    endedAt: (Scalars['String'] | null)
+    id: Scalars['String']
+    message: (Scalars['String'] | null)
+    startedAt: Scalars['String']
+    status: TransactionStatusEnum
+    __typename: 'TransactionStatus'
 }
 
-export type TransactionStatusEnum =
-  | "Cancelled"
-  | "Completed"
-  | "Failed"
-  | "Running"
-  | "Scheduled";
+export type TransactionStatusEnum = 'Cancelled' | 'Completed' | 'Failed' | 'Running' | 'Scheduled'
 
 export interface Variant {
-  apiName: Scalars["String"];
-  color: Scalars["String"];
-  id: Scalars["String"];
-  isDefault: Scalars["Boolean"];
-  label: Scalars["String"];
-  __typename: "Variant";
+    apiName: Scalars['String']
+    color: Scalars['String']
+    id: Scalars['String']
+    isDefault: Scalars['Boolean']
+    label: Scalars['String']
+    __typename: 'Variant'
 }
 
 export interface _AgentStart {
-  _agentKey: Scalars["String"];
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  accent: Scalars["String"];
-  avatar: Scalars["String"];
-  chatUrl: Scalars["String"];
-  commit: Scalars["Boolean"];
-  description: Scalars["String"];
-  edit: Scalars["Boolean"];
-  embedUrl: Scalars["String"];
-  getUserInfo: Scalars["Boolean"];
-  grayscale: Scalars["String"];
-  manageBranches: Scalars["Boolean"];
-  mcpUrl: Scalars["String"];
-  model: Scalars["String"];
-  openRouterKey: Scalars["String"] | null;
-  searchTheWeb: Scalars["Boolean"];
-  slackInstallUrl: Scalars["String"];
-  systemPrompt: Scalars["String"];
-  __typename: "_AgentStart";
+    _agentKey: Scalars['String']
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    accent: Scalars['String']
+    avatar: Scalars['String']
+    chatUrl: Scalars['String']
+    commit: Scalars['Boolean']
+    description: Scalars['String']
+    edit: Scalars['Boolean']
+    embedUrl: Scalars['String']
+    getUserInfo: Scalars['Boolean']
+    grayscale: Scalars['String']
+    manageBranches: Scalars['Boolean']
+    mcpUrl: Scalars['String']
+    model: Scalars['String']
+    openRouterKey: (Scalars['String'] | null)
+    searchTheWeb: Scalars['Boolean']
+    slackInstallUrl: Scalars['String']
+    systemPrompt: Scalars['String']
+    __typename: '_AgentStart'
 }
 
 export interface _AgentUntitled {
-  _agentKey: Scalars["String"];
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  accent: Scalars["String"];
-  avatar: Scalars["String"];
-  chatUrl: Scalars["String"];
-  commit: Scalars["Boolean"];
-  description: Scalars["String"];
-  edit: Scalars["Boolean"];
-  embedUrl: Scalars["String"];
-  getUserInfo: Scalars["Boolean"];
-  grayscale: Scalars["String"];
-  manageBranches: Scalars["Boolean"];
-  mcpUrl: Scalars["String"];
-  model: Scalars["String"];
-  openRouterKey: Scalars["String"] | null;
-  searchTheWeb: Scalars["Boolean"];
-  slackInstallUrl: Scalars["String"];
-  systemPrompt: Scalars["String"];
-  __typename: "_AgentUntitled";
+    _agentKey: Scalars['String']
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    accent: Scalars['String']
+    avatar: Scalars['String']
+    chatUrl: Scalars['String']
+    commit: Scalars['Boolean']
+    description: Scalars['String']
+    edit: Scalars['Boolean']
+    embedUrl: Scalars['String']
+    getUserInfo: Scalars['Boolean']
+    grayscale: Scalars['String']
+    manageBranches: Scalars['Boolean']
+    mcpUrl: Scalars['String']
+    model: Scalars['String']
+    openRouterKey: (Scalars['String'] | null)
+    searchTheWeb: Scalars['Boolean']
+    slackInstallUrl: Scalars['String']
+    systemPrompt: Scalars['String']
+    __typename: '_AgentUntitled'
 }
 
 export interface _BranchInfo {
-  archivedAt: Scalars["String"] | null;
-  archivedBy: Scalars["String"] | null;
-  authorId: Scalars["String"] | null;
-  contributors: Scalars["String"][] | null;
-  createdAt: Scalars["String"];
-  description: Scalars["String"] | null;
-  git: _GitInfo | null;
-  headCommit: _CommitInfo | null;
-  headCommitId: Scalars["String"] | null;
-  id: Scalars["ID"];
-  inlineSuggestionAppliedAt: Scalars["String"] | null;
-  isDefault: Scalars["Boolean"];
-  isInlineSuggestion: Scalars["Boolean"] | null;
-  name: Scalars["String"];
-  playgroundId: Scalars["String"] | null;
-  rollbackCommitId: Scalars["String"] | null;
-  rollbackIsoDate: Scalars["String"] | null;
-  sourceBranchId: Scalars["String"] | null;
-  updatedAt: Scalars["String"] | null;
-  workingRootBlockId: Scalars["String"] | null;
-  __typename: "_BranchInfo";
+    archivedAt: (Scalars['String'] | null)
+    archivedBy: (Scalars['String'] | null)
+    authorId: (Scalars['String'] | null)
+    contributors: (Scalars['String'][] | null)
+    createdAt: Scalars['String']
+    description: (Scalars['String'] | null)
+    git: (_GitInfo | null)
+    headCommit: (_CommitInfo | null)
+    headCommitId: (Scalars['String'] | null)
+    id: Scalars['ID']
+    inlineSuggestionAppliedAt: (Scalars['String'] | null)
+    isDefault: Scalars['Boolean']
+    isInlineSuggestion: (Scalars['Boolean'] | null)
+    name: Scalars['String']
+    playgroundId: (Scalars['String'] | null)
+    rollbackCommitId: (Scalars['String'] | null)
+    rollbackIsoDate: (Scalars['String'] | null)
+    sourceBranchId: (Scalars['String'] | null)
+    updatedAt: (Scalars['String'] | null)
+    workingRootBlockId: (Scalars['String'] | null)
+    __typename: '_BranchInfo'
 }
 
 export interface _Branches {
-  _meta: ListMeta;
-  items: _BranchInfo[];
-  __typename: "_Branches";
+    _meta: ListMeta
+    items: _BranchInfo[]
+    __typename: '_Branches'
 }
 
 export interface _CommitInfo {
-  authorId: Scalars["String"];
-  branchId: Scalars["String"];
-  contributors: Scalars["String"][] | null;
-  createdAt: Scalars["String"];
-  hash: Scalars["String"];
-  id: Scalars["String"];
-  mergeParentCommitId: Scalars["String"] | null;
-  message: Scalars["String"];
-  parentCommitId: Scalars["String"] | null;
-  /** Whether this commit is from a playground branch. */
-  playgroundId: Scalars["String"] | null;
-  repoId: Scalars["String"];
-  rootBlockId: Scalars["String"];
-  __typename: "_CommitInfo";
+    authorId: Scalars['String']
+    branchId: Scalars['String']
+    contributors: (Scalars['String'][] | null)
+    createdAt: Scalars['String']
+    hash: Scalars['String']
+    id: Scalars['String']
+    mergeParentCommitId: (Scalars['String'] | null)
+    message: Scalars['String']
+    parentCommitId: (Scalars['String'] | null)
+    /** Whether this commit is from a playground branch. */
+    playgroundId: (Scalars['String'] | null)
+    repoId: Scalars['String']
+    rootBlockId: Scalars['String']
+    __typename: '_CommitInfo'
 }
 
 export interface _GitInfo {
-  branch: Scalars["String"];
-  deploymentUrl: Scalars["String"] | null;
-  __typename: "_GitInfo";
+    branch: Scalars['String']
+    deploymentUrl: (Scalars['String'] | null)
+    __typename: '_GitInfo'
 }
 
 export interface _PlaygroundInfo {
-  claimUrl: Scalars["String"] | null;
-  editUrl: Scalars["String"];
-  expiresAt: Scalars["String"] | null;
-  id: Scalars["String"] | null;
-  __typename: "_PlaygroundInfo";
+    claimUrl: (Scalars['String'] | null)
+    editUrl: Scalars['String']
+    expiresAt: (Scalars['String'] | null)
+    id: (Scalars['String'] | null)
+    __typename: '_PlaygroundInfo'
 }
 
-export type _ResolveTargetsWithEnum = "id" | "objectName";
+export type _ResolveTargetsWithEnum = 'id' | 'objectName'
 
-export type _StructureFormatEnum = "json" | "xml";
+export type _StructureFormatEnum = 'json' | 'xml'
 
 export interface _agents {
-  start: _AgentStart;
-  untitled: _AgentUntitled;
-  __typename: "_agents";
+    start: _AgentStart
+    untitled: _AgentUntitled
+    __typename: '_agents'
 }
 
 export interface _components {
-  author: authorComponent_AsList;
-  blogItem: blogItem_AsList;
-  __typename: "_components";
+    author: authorComponent_AsList
+    blogItem: blogItem_AsList
+    __typename: '_components'
 }
 
 export interface authorComponent_AsList {
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _meta: ListMeta;
-  /** The key used to search from the frontend. */
-  _searchKey: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item: AuthorComponent | null;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items: AuthorComponent[];
-  __typename: "authorComponent_AsList";
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _meta: ListMeta
+    /** The key used to search from the frontend. */
+    _searchKey: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item: (AuthorComponent | null)
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items: AuthorComponent[]
+    __typename: 'authorComponent_AsList'
 }
 
 export interface blogItem_AsList {
-  _analyticsKey: Scalars["String"];
-  _dashboardUrl: Scalars["String"];
-  _id: Scalars["String"];
-  _idPath: Scalars["String"];
-  _meta: ListMeta;
-  /** The key used to search from the frontend. */
-  _searchKey: Scalars["String"];
-  _slug: Scalars["String"];
-  _slugPath: Scalars["String"];
-  _sys: BlockDocumentSys;
-  _title: Scalars["String"];
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item: BlogItem | null;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items: BlogItem[];
-  __typename: "blogItem_AsList";
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _meta: ListMeta
+    /** The key used to search from the frontend. */
+    _searchKey: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item: (BlogItem | null)
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items: BlogItem[]
+    __typename: 'blogItem_AsList'
 }
 
-export interface AuthorComponentGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  /** Array of search highlight information with field names and HTML markup */
-  _highlight?: SearchHighlightGenqlSelection;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  name?: boolean | number;
-  untitled?: BlockImageGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "AuthorComponent";
+export interface AuthorComponentGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight?: SearchHighlightGenqlSelection
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    name?: boolean | number
+    untitled?: BlockImageGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "AuthorComponent"
 }
 
-export interface AuthorComponentFilterInput {
-  AND?: AuthorComponentFilterInput | null;
-  OR?: AuthorComponentFilterInput | null;
-  _id?: StringFilter | null;
-  _slug?: StringFilter | null;
-  _sys_apiNamePath?: StringFilter | null;
-  _sys_createdAt?: DateFilter | null;
-  _sys_hash?: StringFilter | null;
-  _sys_id?: StringFilter | null;
-  _sys_idPath?: StringFilter | null;
-  _sys_lastModifiedAt?: DateFilter | null;
-  _sys_slug?: StringFilter | null;
-  _sys_slugPath?: StringFilter | null;
-  _sys_title?: StringFilter | null;
-  _title?: StringFilter | null;
-  name?: StringFilter | null;
-}
+export interface AuthorComponentFilterInput {AND?: (AuthorComponentFilterInput | null),OR?: (AuthorComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),name?: (StringFilter | null)}
 
 export interface AuthorComponentSearchInput {
-  /** Searchable fields for query */
-  by?: Scalars["String"][] | null;
-  /** Search query */
-  q?: Scalars["String"] | null;
+/** Searchable fields for query */
+by?: (Scalars['String'][] | null),
+/** Search query */
+q?: (Scalars['String'] | null)}
+
+export interface BaseRichTextJsonGenqlSelection{
+    blocks?: boolean | number
+    content?: boolean | number
+    toc?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BaseRichTextJson"
 }
 
-export interface BaseRichTextJsonGenqlSelection {
-  blocks?: boolean | number;
-  content?: boolean | number;
-  toc?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BaseRichTextJson";
+export interface BlockAudioGenqlSelection{
+    /** The duration of the audio in seconds. If the duration is not available, it will be estimated based on the file size. */
+    duration?: boolean | number
+    fileName?: boolean | number
+    fileSize?: boolean | number
+    lastModified?: boolean | number
+    mimeType?: boolean | number
+    url?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockAudio"
 }
 
-export interface BlockAudioGenqlSelection {
-  /** The duration of the audio in seconds. If the duration is not available, it will be estimated based on the file size. */
-  duration?: boolean | number;
-  fileName?: boolean | number;
-  fileSize?: boolean | number;
-  lastModified?: boolean | number;
-  mimeType?: boolean | number;
-  url?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockAudio";
+export interface BlockCodeSnippetGenqlSelection{
+    allowedLanguages?: boolean | number
+    code?: boolean | number
+    /** @deprecated Figuring out the correct api. */
+    html?: { __args: {
+    /** Theme for the code snippet */
+    theme?: (Scalars['String'] | null)} } | boolean | number
+    language?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockCodeSnippet"
 }
 
-export interface BlockCodeSnippetGenqlSelection {
-  allowedLanguages?: boolean | number;
-  code?: boolean | number;
-  /** @deprecated Figuring out the correct api. */
-  html?:
-    | {
-        __args: {
-          /** Theme for the code snippet */
-          theme?: Scalars["String"] | null;
-        };
-      }
-    | boolean
-    | number;
-  language?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockCodeSnippet";
+export interface BlockColorGenqlSelection{
+    b?: boolean | number
+    g?: boolean | number
+    hex?: boolean | number
+    hsl?: boolean | number
+    r?: boolean | number
+    rgb?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockColor"
 }
 
-export interface BlockColorGenqlSelection {
-  b?: boolean | number;
-  g?: boolean | number;
-  hex?: boolean | number;
-  hsl?: boolean | number;
-  r?: boolean | number;
-  rgb?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockColor";
+export interface BlockDocumentGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    on_AuthorComponent?: AuthorComponentGenqlSelection
+    on_Blog?: BlogGenqlSelection
+    on_BlogItem?: BlogItemGenqlSelection
+    on__AgentStart?: _AgentStartGenqlSelection
+    on__AgentUntitled?: _AgentUntitledGenqlSelection
+    on_authorComponent_AsList?: authorComponent_AsListGenqlSelection
+    on_blogItem_AsList?: blogItem_AsListGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "BlockDocument"
 }
 
-export interface BlockDocumentGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  on_AuthorComponent?: AuthorComponentGenqlSelection;
-  on_Blog?: BlogGenqlSelection;
-  on_BlogItem?: BlogItemGenqlSelection;
-  on__AgentStart?: _AgentStartGenqlSelection;
-  on__AgentUntitled?: _AgentUntitledGenqlSelection;
-  on_authorComponent_AsList?: authorComponent_AsListGenqlSelection;
-  on_blogItem_AsList?: blogItem_AsListGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockDocument";
+export interface BlockDocumentSysGenqlSelection{
+    apiNamePath?: boolean | number
+    createdAt?: boolean | number
+    hash?: boolean | number
+    id?: boolean | number
+    idPath?: boolean | number
+    lastModifiedAt?: boolean | number
+    slug?: boolean | number
+    slugPath?: boolean | number
+    title?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockDocumentSys"
 }
 
-export interface BlockDocumentSysGenqlSelection {
-  apiNamePath?: boolean | number;
-  createdAt?: boolean | number;
-  hash?: boolean | number;
-  id?: boolean | number;
-  idPath?: boolean | number;
-  lastModifiedAt?: boolean | number;
-  slug?: boolean | number;
-  slugPath?: boolean | number;
-  title?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockDocumentSys";
+export interface BlockFileGenqlSelection{
+    fileName?: boolean | number
+    fileSize?: boolean | number
+    lastModified?: boolean | number
+    mimeType?: boolean | number
+    url?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockFile"
 }
 
-export interface BlockFileGenqlSelection {
-  fileName?: boolean | number;
-  fileSize?: boolean | number;
-  lastModified?: boolean | number;
-  mimeType?: boolean | number;
-  url?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockFile";
+export interface BlockImageGenqlSelection{
+    alt?: boolean | number
+    aspectRatio?: boolean | number
+    blurDataURL?: boolean | number
+    fileName?: boolean | number
+    fileSize?: boolean | number
+    height?: boolean | number
+    lastModified?: boolean | number
+    mimeType?: boolean | number
+    /** @deprecated Renamed to `blurDataURL` to match Next.js Image's naming convention. */
+    placeholderURL?: boolean | number
+    /** @deprecated Use `url` instead. */
+    rawUrl?: boolean | number
+    thumbhash?: boolean | number
+    /**
+     * This field is used to generate the image URL with the provided options. The options are passed as arguments. For example, if you want to resize the image to 200x200 pixels, you can use the following query:
+     * 
+     * ```graphql
+     * {
+     *   imageBlock {
+     *     url(width: 200, height: 200)
+     *   }
+     * }
+     * ```
+     * 
+     * This will return the URL with the width and height set to 200 pixels.
+     * 
+     * BaseHub uses Cloudflare for image resizing. Check out [all available options in their docs](https://developers.cloudflare.com/images/transform-images/transform-via-workers/#fetch-options).
+     * 
+     */
+    url?: { __args: {anim?: (Scalars['String'] | null), background?: (Scalars['String'] | null), blur?: (Scalars['Int'] | null), border?: (Scalars['String'] | null), brightness?: (Scalars['Int'] | null), compression?: (Scalars['String'] | null), contrast?: (Scalars['Int'] | null), dpr?: (Scalars['Int'] | null), fit?: (Scalars['String'] | null), format?: (Scalars['String'] | null), gamma?: (Scalars['String'] | null), gravity?: (Scalars['String'] | null), height?: (Scalars['Int'] | null), metadata?: (Scalars['String'] | null), quality?: (Scalars['Int'] | null), rotate?: (Scalars['String'] | null), sharpen?: (Scalars['String'] | null), trim?: (Scalars['String'] | null), width?: (Scalars['Int'] | null)} } | boolean | number
+    width?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockImage"
 }
 
-export interface BlockImageGenqlSelection {
-  alt?: boolean | number;
-  aspectRatio?: boolean | number;
-  blurDataURL?: boolean | number;
-  fileName?: boolean | number;
-  fileSize?: boolean | number;
-  height?: boolean | number;
-  lastModified?: boolean | number;
-  mimeType?: boolean | number;
-  /** @deprecated Renamed to `blurDataURL` to match Next.js Image's naming convention. */
-  placeholderURL?: boolean | number;
-  /** @deprecated Use `url` instead. */
-  rawUrl?: boolean | number;
-  thumbhash?: boolean | number;
-  /**
-   * This field is used to generate the image URL with the provided options. The options are passed as arguments. For example, if you want to resize the image to 200x200 pixels, you can use the following query:
-   *
-   * ```graphql
-   * {
-   *   imageBlock {
-   *     url(width: 200, height: 200)
-   *   }
-   * }
-   * ```
-   *
-   * This will return the URL with the width and height set to 200 pixels.
-   *
-   * BaseHub uses Cloudflare for image resizing. Check out [all available options in their docs](https://developers.cloudflare.com/images/transform-images/transform-via-workers/#fetch-options).
-   *
-   */
-  url?:
-    | {
-        __args: {
-          anim?: Scalars["String"] | null;
-          background?: Scalars["String"] | null;
-          blur?: Scalars["Int"] | null;
-          border?: Scalars["String"] | null;
-          brightness?: Scalars["Int"] | null;
-          compression?: Scalars["String"] | null;
-          contrast?: Scalars["Int"] | null;
-          dpr?: Scalars["Int"] | null;
-          fit?: Scalars["String"] | null;
-          format?: Scalars["String"] | null;
-          gamma?: Scalars["String"] | null;
-          gravity?: Scalars["String"] | null;
-          height?: Scalars["Int"] | null;
-          metadata?: Scalars["String"] | null;
-          quality?: Scalars["Int"] | null;
-          rotate?: Scalars["String"] | null;
-          sharpen?: Scalars["String"] | null;
-          trim?: Scalars["String"] | null;
-          width?: Scalars["Int"] | null;
-        };
-      }
-    | boolean
-    | number;
-  width?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockImage";
+export interface BlockListGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    on_Blog?: BlogGenqlSelection
+    on_authorComponent_AsList?: authorComponent_AsListGenqlSelection
+    on_blogItem_AsList?: blogItem_AsListGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "BlockList"
 }
 
-export interface BlockListGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _meta?: ListMetaGenqlSelection;
-  /** The key used to search from the frontend. */
-  _searchKey?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  on_Blog?: BlogGenqlSelection;
-  on_authorComponent_AsList?: authorComponent_AsListGenqlSelection;
-  on_blogItem_AsList?: blogItem_AsListGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockList";
+export interface BlockOgImageGenqlSelection{
+    height?: boolean | number
+    url?: boolean | number
+    width?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockOgImage"
 }
 
-export interface BlockOgImageGenqlSelection {
-  height?: boolean | number;
-  url?: boolean | number;
-  width?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockOgImage";
-}
 
 /** Rich text block */
-export interface BlockRichTextGenqlSelection {
-  html?:
-    | {
-        __args: {
-          /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
-          slugs?: Scalars["Boolean"] | null;
-          /** Inserts a table of contents at the beginning of the HTML. */
-          toc?: Scalars["Boolean"] | null;
-        };
-      }
-    | boolean
-    | number;
-  json?: RichTextJsonGenqlSelection;
-  markdown?: boolean | number;
-  plainText?: boolean | number;
-  readingTime?:
-    | {
-        __args: {
-          /** Words per minute, defaults to average 183wpm */
-          wpm?: Scalars["Int"] | null;
-        };
-      }
-    | boolean
-    | number;
-  on_Content?: ContentGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockRichText";
+export interface BlockRichTextGenqlSelection{
+    html?: { __args: {
+    /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
+    slugs?: (Scalars['Boolean'] | null), 
+    /** Inserts a table of contents at the beginning of the HTML. */
+    toc?: (Scalars['Boolean'] | null)} } | boolean | number
+    json?: RichTextJsonGenqlSelection
+    markdown?: boolean | number
+    plainText?: boolean | number
+    readingTime?: { __args: {
+    /** Words per minute, defaults to average 183wpm */
+    wpm?: (Scalars['Int'] | null)} } | boolean | number
+    on_Content?: ContentGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "BlockRichText"
 }
 
-export interface BlockVideoGenqlSelection {
-  aspectRatio?: boolean | number;
-  /** The duration of the video in seconds. If the duration is not available, it will be estimated based on the file size. */
-  duration?: boolean | number;
-  fileName?: boolean | number;
-  fileSize?: boolean | number;
-  height?: boolean | number;
-  lastModified?: boolean | number;
-  mimeType?: boolean | number;
-  url?: boolean | number;
-  width?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlockVideo";
+export interface BlockVideoGenqlSelection{
+    aspectRatio?: boolean | number
+    /** The duration of the video in seconds. If the duration is not available, it will be estimated based on the file size. */
+    duration?: boolean | number
+    fileName?: boolean | number
+    fileSize?: boolean | number
+    height?: boolean | number
+    lastModified?: boolean | number
+    mimeType?: boolean | number
+    url?: boolean | number
+    width?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlockVideo"
 }
 
-export interface BlogGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _meta?: ListMetaGenqlSelection;
-  /** The key used to search from the frontend. */
-  _searchKey?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item?: BlogItemGenqlSelection;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items?: BlogItemGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "Blog";
+export interface BlogGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item?: BlogItemGenqlSelection
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items?: BlogItemGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "Blog"
 }
 
-export interface BlogItemGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  /** Array of search highlight information with field names and HTML markup */
-  _highlight?: SearchHighlightGenqlSelection;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  author?: AuthorComponentGenqlSelection;
-  content?: ContentGenqlSelection;
-  description?: boolean | number;
-  slug?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "BlogItem";
+export interface BlogItemGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight?: SearchHighlightGenqlSelection
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    author?: AuthorComponentGenqlSelection
+    content?: ContentGenqlSelection
+    description?: boolean | number
+    slug?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "BlogItem"
 }
 
-export interface BlogItemFilterInput {
-  AND?: BlogItemFilterInput | null;
-  OR?: BlogItemFilterInput | null;
-  _id?: StringFilter | null;
-  _slug?: StringFilter | null;
-  _sys_apiNamePath?: StringFilter | null;
-  _sys_createdAt?: DateFilter | null;
-  _sys_hash?: StringFilter | null;
-  _sys_id?: StringFilter | null;
-  _sys_idPath?: StringFilter | null;
-  _sys_lastModifiedAt?: DateFilter | null;
-  _sys_slug?: StringFilter | null;
-  _sys_slugPath?: StringFilter | null;
-  _sys_title?: StringFilter | null;
-  _title?: StringFilter | null;
-  author?: BlogItemFilterInput__author | null;
-  description?: StringFilter | null;
-  slug?: StringFilter | null;
-}
+export interface BlogItemFilterInput {AND?: (BlogItemFilterInput | null),OR?: (BlogItemFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),author?: (BlogItemFilterInput__author | null),description?: (StringFilter | null),slug?: (StringFilter | null)}
 
-export interface BlogItemFilterInput__author {
-  _id?: StringFilter | null;
-  _slug?: StringFilter | null;
-  _sys_apiNamePath?: StringFilter | null;
-  _sys_createdAt?: DateFilter | null;
-  _sys_hash?: StringFilter | null;
-  _sys_id?: StringFilter | null;
-  _sys_idPath?: StringFilter | null;
-  _sys_lastModifiedAt?: DateFilter | null;
-  _sys_slug?: StringFilter | null;
-  _sys_slugPath?: StringFilter | null;
-  _sys_title?: StringFilter | null;
-  _title?: StringFilter | null;
-  name?: StringFilter | null;
-}
+export interface BlogItemFilterInput__author {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),name?: (StringFilter | null)}
 
 export interface BlogItemSearchInput {
-  /** Searchable fields for query */
-  by?: Scalars["String"][] | null;
-  /** Search query */
-  q?: Scalars["String"] | null;
+/** Searchable fields for query */
+by?: (Scalars['String'][] | null),
+/** Search query */
+q?: (Scalars['String'] | null)}
+
+export interface ContentGenqlSelection{
+    html?: { __args: {
+    /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
+    slugs?: (Scalars['Boolean'] | null), 
+    /** Inserts a table of contents at the beginning of the HTML. */
+    toc?: (Scalars['Boolean'] | null)} } | boolean | number
+    json?: ContentRichTextGenqlSelection
+    markdown?: boolean | number
+    plainText?: boolean | number
+    readingTime?: { __args: {
+    /** Words per minute, defaults to average 183wpm */
+    wpm?: (Scalars['Int'] | null)} } | boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "Content"
 }
 
-export interface ContentGenqlSelection {
-  html?:
-    | {
-        __args: {
-          /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
-          slugs?: Scalars["Boolean"] | null;
-          /** Inserts a table of contents at the beginning of the HTML. */
-          toc?: Scalars["Boolean"] | null;
-        };
-      }
-    | boolean
-    | number;
-  json?: ContentRichTextGenqlSelection;
-  markdown?: boolean | number;
-  plainText?: boolean | number;
-  readingTime?:
-    | {
-        __args: {
-          /** Words per minute, defaults to average 183wpm */
-          wpm?: Scalars["Int"] | null;
-        };
-      }
-    | boolean
-    | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "Content";
+export interface ContentRichTextGenqlSelection{
+    content?: boolean | number
+    toc?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "ContentRichText"
 }
 
-export interface ContentRichTextGenqlSelection {
-  content?: boolean | number;
-  toc?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "ContentRichText";
+export interface DateFilter {eq?: (Scalars['DateTime'] | null),isAfter?: (Scalars['DateTime'] | null),isBefore?: (Scalars['DateTime'] | null),isNull?: (Scalars['Boolean'] | null),neq?: (Scalars['DateTime'] | null),onOrAfter?: (Scalars['DateTime'] | null),onOrBefore?: (Scalars['DateTime'] | null)}
+
+export interface GetUploadSignedURLGenqlSelection{
+    signedURL?: boolean | number
+    uploadURL?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "GetUploadSignedURL"
 }
 
-export interface DateFilter {
-  eq?: Scalars["DateTime"] | null;
-  isAfter?: Scalars["DateTime"] | null;
-  isBefore?: Scalars["DateTime"] | null;
-  isNull?: Scalars["Boolean"] | null;
-  neq?: Scalars["DateTime"] | null;
-  onOrAfter?: Scalars["DateTime"] | null;
-  onOrBefore?: Scalars["DateTime"] | null;
+export interface ListFilter {isEmpty?: (Scalars['Boolean'] | null),length?: (Scalars['Int'] | null)}
+
+export interface ListMetaGenqlSelection{
+    /** Number of items after applying filters but before pagination */
+    filteredCount?: boolean | number
+    /** Total number of items in collection before any filtering/pagination */
+    totalCount?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "ListMeta"
 }
 
-export interface GetUploadSignedURLGenqlSelection {
-  signedURL?: boolean | number;
-  uploadURL?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "GetUploadSignedURL";
+export interface MediaBlockGenqlSelection{
+    fileName?: boolean | number
+    fileSize?: boolean | number
+    lastModified?: boolean | number
+    mimeType?: boolean | number
+    url?: boolean | number
+    on_BlockAudio?: BlockAudioGenqlSelection
+    on_BlockFile?: BlockFileGenqlSelection
+    on_BlockImage?: BlockImageGenqlSelection
+    on_BlockVideo?: BlockVideoGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "MediaBlock"
 }
 
-export interface ListFilter {
-  isEmpty?: Scalars["Boolean"] | null;
-  length?: Scalars["Int"] | null;
+export interface MediaBlockUnionGenqlSelection{
+    on_BlockAudio?:BlockAudioGenqlSelection,
+    on_BlockFile?:BlockFileGenqlSelection,
+    on_BlockImage?:BlockImageGenqlSelection,
+    on_BlockVideo?:BlockVideoGenqlSelection,
+    on_MediaBlock?: MediaBlockGenqlSelection,
+    __typename?: boolean | number,
+    __fragmentOn?: "MediaBlockUnion"
 }
 
-export interface ListMetaGenqlSelection {
-  /** Number of items after applying filters but before pagination */
-  filteredCount?: boolean | number;
-  /** Total number of items in collection before any filtering/pagination */
-  totalCount?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "ListMeta";
+export interface MutationGenqlSelection{
+    /**
+     * Returns a signed url and an upload url so that you can upload files into your repository.
+     * 
+     * Example usage with JavaScript:
+     * ```js
+     * async function handleUpload(file: File) {
+     *   const { getUploadSignedURL } = await basehub().mutation({
+     *     getUploadSignedURL: {
+     *       __args: { fileName: file.name },
+     *       signedURL: true,
+     *       uploadURL: true,
+     *     }
+     *   })
+     * 
+     *   const { signedURL, uploadURL } = getUploadSignedURL
+     * 
+     *   await fetch(signedURL, { method: 'PUT', body: file })
+     * 
+     *   // done! do something with the uploadURL now
+     * }
+     * ```
+     * 
+     */
+    getUploadSignedURL?: (GetUploadSignedURLGenqlSelection & { __args: {
+    /** SHA256 hash of the file. Used for reusing existing files. */
+    fileHash?: (Scalars['String'] | null), 
+    /** The file name */
+    fileName: Scalars['String']} })
+    /** Start a job that can be awaited and the result given directly. Under the hood, it runs `transactionAsync` and polls for the result until it is available. You can pass a `timeout` argument, the default being 30_000ms. */
+    transaction?: (TransactionStatusGenqlSelection & { __args: {
+    /** The ID of the author of the transaction. If not provided, the API Token will be used. */
+    authorId?: (Scalars['String'] | null), 
+    /** Auto make a commit in your Repo with the specified message. */
+    autoCommit?: (Scalars['String'] | null), 
+    /** Transaction data. */
+    data: Transaction | Scalars['String'], 
+    /** Skip running workflows and event subscribers. Defaults to false. */
+    skipWorkflows?: (Scalars['Boolean'] | null), 
+    /** Timeout in milliseconds. */
+    timeout?: (Scalars['Int'] | null)} })
+    /** Start an asynchronous job to mutate BaseHub data. Returns a transaction ID which you can use to get the result of the job. */
+    transactionAsync?: { __args: {
+    /** The ID of the author of the transaction. If not provided, the API Token will be used. */
+    authorId?: (Scalars['String'] | null), 
+    /** Auto make a commit in your Repo with the specified message. */
+    autoCommit?: (Scalars['String'] | null), 
+    /** Transaction data. */
+    data: Scalars['String'], 
+    /** Skip running workflows and event subscribers. Defaults to false. */
+    skipWorkflows?: (Scalars['Boolean'] | null)} }
+    transactionStatus?: (TransactionStatusGenqlSelection & { __args: {
+    /** Transaction ID */
+    id: Scalars['String']} })
+    __typename?: boolean | number
+    __fragmentOn?: "Mutation"
 }
 
-export interface MediaBlockGenqlSelection {
-  fileName?: boolean | number;
-  fileSize?: boolean | number;
-  lastModified?: boolean | number;
-  mimeType?: boolean | number;
-  url?: boolean | number;
-  on_BlockAudio?: BlockAudioGenqlSelection;
-  on_BlockFile?: BlockFileGenqlSelection;
-  on_BlockImage?: BlockImageGenqlSelection;
-  on_BlockVideo?: BlockVideoGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "MediaBlock";
+export interface NumberFilter {eq?: (Scalars['Float'] | null),gt?: (Scalars['Float'] | null),gte?: (Scalars['Float'] | null),isNull?: (Scalars['Boolean'] | null),lt?: (Scalars['Float'] | null),lte?: (Scalars['Float'] | null),neq?: (Scalars['Float'] | null)}
+
+export interface QueryGenqlSelection{
+    _agent?: (_AgentStartGenqlSelection & { __args: {
+    /** The ID of the agent. */
+    id: Scalars['String']} })
+    /** Query across the custom AI agents in the repository. */
+    _agents?: _agentsGenqlSelection
+    /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
+    _componentInstances?: _componentsGenqlSelection
+    /** The diff between the current branch and the head commit. */
+    _diff?: { __args: {
+    /** Simplified diff returns only the items array showing statuses. */
+    simplified?: (Scalars['Boolean'] | null)} } | boolean | number
+    /** The structure of the repository. Used by START. */
+    _structure?: { __args: {
+    /** The format of the structure. */
+    format?: (_StructureFormatEnum | null), 
+    /** The format of the structure. */
+    resolveTargetsWith?: (_ResolveTargetsWithEnum | null), 
+    /** A target block to forcefully resolve in the schema. */
+    targetBlock?: (TargetBlock | null), 
+    /** Whether to include constraints in the structure. */
+    withConstraints?: (Scalars['Boolean'] | null), 
+    /** Whether to include IDs in the structure. */
+    withIDs?: (Scalars['Boolean'] | null), 
+    /** Whether to include type options in the structure. */
+    withTypeOptions?: (Scalars['Boolean'] | null)} } | boolean | number
+    _sys?: RepoSysGenqlSelection
+    blog?: (BlogGenqlSelection & { __args?: {
+    /** Filter by a field. */
+    filter?: (BlogItemFilterInput | null), 
+    /** Limit the number of items returned. Defaults to 500. */
+    first?: (Scalars['Int'] | null), 
+    /** Order by a field. */
+    orderBy?: (BlogItemOrderByEnum | null), 
+    /** Search configuration */
+    search?: (BlogItemSearchInput | null), 
+    /** Skip the first n items. */
+    skip?: (Scalars['Int'] | null)} })
+    __typename?: boolean | number
+    __fragmentOn?: "Query"
 }
 
-export interface MediaBlockUnionGenqlSelection {
-  on_BlockAudio?: BlockAudioGenqlSelection;
-  on_BlockFile?: BlockFileGenqlSelection;
-  on_BlockImage?: BlockImageGenqlSelection;
-  on_BlockVideo?: BlockVideoGenqlSelection;
-  on_MediaBlock?: MediaBlockGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "MediaBlockUnion";
+export interface RepoSysGenqlSelection{
+    branches?: (_BranchesGenqlSelection & { __args?: {limit?: (Scalars['Int'] | null), offset?: (Scalars['Int'] | null)} })
+    dashboardUrl?: boolean | number
+    forkUrl?: boolean | number
+    hash?: boolean | number
+    id?: boolean | number
+    playgroundInfo?: _PlaygroundInfoGenqlSelection
+    slug?: boolean | number
+    title?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "RepoSys"
 }
 
-export interface MutationGenqlSelection {
-  /**
-   * Returns a signed url and an upload url so that you can upload files into your repository.
-   *
-   * Example usage with JavaScript:
-   * ```js
-   * async function handleUpload(file: File) {
-   *   const { getUploadSignedURL } = await basehub().mutation({
-   *     getUploadSignedURL: {
-   *       __args: { fileName: file.name },
-   *       signedURL: true,
-   *       uploadURL: true,
-   *     }
-   *   })
-   *
-   *   const { signedURL, uploadURL } = getUploadSignedURL
-   *
-   *   await fetch(signedURL, { method: 'PUT', body: file })
-   *
-   *   // done! do something with the uploadURL now
-   * }
-   * ```
-   *
-   */
-  getUploadSignedURL?: GetUploadSignedURLGenqlSelection & {
-    __args: {
-      /** SHA256 hash of the file. Used for reusing existing files. */
-      fileHash?: Scalars["String"] | null;
-      /** The file name */
-      fileName: Scalars["String"];
-    };
-  };
-  /** Start a job that can be awaited and the result given directly. Under the hood, it runs `transactionAsync` and polls for the result until it is available. You can pass a `timeout` argument, the default being 30_000ms. */
-  transaction?: TransactionStatusGenqlSelection & {
-    __args: {
-      /** The ID of the author of the transaction. If not provided, the API Token will be used. */
-      authorId?: Scalars["String"] | null;
-      /** Auto make a commit in your Repo with the specified message. */
-      autoCommit?: Scalars["String"] | null;
-      /** Transaction data. */
-      data: Transaction | Scalars["String"];
-      /** Skip running workflows and event subscribers. Defaults to false. */
-      skipWorkflows?: Scalars["Boolean"] | null;
-      /** Timeout in milliseconds. */
-      timeout?: Scalars["Int"] | null;
-    };
-  };
-  /** Start an asynchronous job to mutate BaseHub data. Returns a transaction ID which you can use to get the result of the job. */
-  transactionAsync?: {
-    __args: {
-      /** The ID of the author of the transaction. If not provided, the API Token will be used. */
-      authorId?: Scalars["String"] | null;
-      /** Auto make a commit in your Repo with the specified message. */
-      autoCommit?: Scalars["String"] | null;
-      /** Transaction data. */
-      data: Scalars["String"];
-      /** Skip running workflows and event subscribers. Defaults to false. */
-      skipWorkflows?: Scalars["Boolean"] | null;
-    };
-  };
-  transactionStatus?: TransactionStatusGenqlSelection & {
-    __args: {
-      /** Transaction ID */
-      id: Scalars["String"];
-    };
-  };
-  __typename?: boolean | number;
-  __fragmentOn?: "Mutation";
+export interface RichTextJsonGenqlSelection{
+    content?: boolean | number
+    toc?: boolean | number
+    on_BaseRichTextJson?: BaseRichTextJsonGenqlSelection
+    on_ContentRichText?: ContentRichTextGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "RichTextJson"
 }
 
-export interface NumberFilter {
-  eq?: Scalars["Float"] | null;
-  gt?: Scalars["Float"] | null;
-  gte?: Scalars["Float"] | null;
-  isNull?: Scalars["Boolean"] | null;
-  lt?: Scalars["Float"] | null;
-  lte?: Scalars["Float"] | null;
-  neq?: Scalars["Float"] | null;
+export interface SearchHighlightGenqlSelection{
+    /** The field/path that was matched (e.g., "title", "body.content") */
+    by?: boolean | number
+    /** HTML snippet with <mark> tags around the matched terms */
+    snippet?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "SearchHighlight"
 }
 
-export interface QueryGenqlSelection {
-  _agent?: _AgentStartGenqlSelection & {
-    __args: {
-      /** The ID of the agent. */
-      id: Scalars["String"];
-    };
-  };
-  /** Query across the custom AI agents in the repository. */
-  _agents?: _agentsGenqlSelection;
-  /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
-  _componentInstances?: _componentsGenqlSelection;
-  /** The diff between the current branch and the head commit. */
-  _diff?:
-    | {
-        __args: {
-          /** Simplified diff returns only the items array showing statuses. */
-          simplified?: Scalars["Boolean"] | null;
-        };
-      }
-    | boolean
-    | number;
-  /** The structure of the repository. Used by START. */
-  _structure?:
-    | {
-        __args: {
-          /** The format of the structure. */
-          format?: _StructureFormatEnum | null;
-          /** The format of the structure. */
-          resolveTargetsWith?: _ResolveTargetsWithEnum | null;
-          /** A target block to forcefully resolve in the schema. */
-          targetBlock?: TargetBlock | null;
-          /** Whether to include constraints in the structure. */
-          withConstraints?: Scalars["Boolean"] | null;
-          /** Whether to include IDs in the structure. */
-          withIDs?: Scalars["Boolean"] | null;
-          /** Whether to include type options in the structure. */
-          withTypeOptions?: Scalars["Boolean"] | null;
-        };
-      }
-    | boolean
-    | number;
-  _sys?: RepoSysGenqlSelection;
-  blog?: BlogGenqlSelection & {
-    __args?: {
-      /** Filter by a field. */
-      filter?: BlogItemFilterInput | null;
-      /** Limit the number of items returned. Defaults to 500. */
-      first?: Scalars["Int"] | null;
-      /** Order by a field. */
-      orderBy?: BlogItemOrderByEnum | null;
-      /** Search configuration */
-      search?: BlogItemSearchInput | null;
-      /** Skip the first n items. */
-      skip?: Scalars["Int"] | null;
-    };
-  };
-  __typename?: boolean | number;
-  __fragmentOn?: "Query";
+export interface SelectFilter {excludes?: (Scalars['String'] | null),excludesAll?: (Scalars['String'][] | null),includes?: (Scalars['String'] | null),includesAll?: (Scalars['String'][] | null),includesAny?: (Scalars['String'][] | null),isEmpty?: (Scalars['Boolean'] | null)}
+
+export interface StringFilter {contains?: (Scalars['String'] | null),endsWith?: (Scalars['String'] | null),eq?: (Scalars['String'] | null),in?: (Scalars['String'][] | null),isNull?: (Scalars['Boolean'] | null),matches?: (StringMatchesFilter | null),notEq?: (Scalars['String'] | null),notIn?: (Scalars['String'][] | null),startsWith?: (Scalars['String'] | null)}
+
+export interface StringMatchesFilter {caseSensitive?: (Scalars['Boolean'] | null),pattern: Scalars['String']}
+
+export interface TargetBlock {focus?: (Scalars['Boolean'] | null),id: Scalars['String'],label: Scalars['String']}
+
+export interface TransactionStatusGenqlSelection{
+    /** Duration in milliseconds. */
+    duration?: boolean | number
+    endedAt?: boolean | number
+    id?: boolean | number
+    message?: boolean | number
+    startedAt?: boolean | number
+    status?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "TransactionStatus"
 }
 
-export interface RepoSysGenqlSelection {
-  branches?: _BranchesGenqlSelection & {
-    __args?: { limit?: Scalars["Int"] | null; offset?: Scalars["Int"] | null };
-  };
-  dashboardUrl?: boolean | number;
-  forkUrl?: boolean | number;
-  hash?: boolean | number;
-  id?: boolean | number;
-  playgroundInfo?: _PlaygroundInfoGenqlSelection;
-  slug?: boolean | number;
-  title?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "RepoSys";
+export interface VariantGenqlSelection{
+    apiName?: boolean | number
+    color?: boolean | number
+    id?: boolean | number
+    isDefault?: boolean | number
+    label?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "Variant"
 }
 
-export interface RichTextJsonGenqlSelection {
-  content?: boolean | number;
-  toc?: boolean | number;
-  on_BaseRichTextJson?: BaseRichTextJsonGenqlSelection;
-  on_ContentRichText?: ContentRichTextGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "RichTextJson";
+export interface _AgentStartGenqlSelection{
+    _agentKey?: boolean | number
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    accent?: boolean | number
+    avatar?: boolean | number
+    chatUrl?: boolean | number
+    commit?: boolean | number
+    description?: boolean | number
+    edit?: boolean | number
+    embedUrl?: boolean | number
+    getUserInfo?: boolean | number
+    grayscale?: boolean | number
+    manageBranches?: boolean | number
+    mcpUrl?: boolean | number
+    model?: boolean | number
+    openRouterKey?: boolean | number
+    searchTheWeb?: boolean | number
+    slackInstallUrl?: boolean | number
+    systemPrompt?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_AgentStart"
 }
 
-export interface SearchHighlightGenqlSelection {
-  /** The field/path that was matched (e.g., "title", "body.content") */
-  by?: boolean | number;
-  /** HTML snippet with <mark> tags around the matched terms */
-  snippet?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "SearchHighlight";
+export interface _AgentUntitledGenqlSelection{
+    _agentKey?: boolean | number
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    accent?: boolean | number
+    avatar?: boolean | number
+    chatUrl?: boolean | number
+    commit?: boolean | number
+    description?: boolean | number
+    edit?: boolean | number
+    embedUrl?: boolean | number
+    getUserInfo?: boolean | number
+    grayscale?: boolean | number
+    manageBranches?: boolean | number
+    mcpUrl?: boolean | number
+    model?: boolean | number
+    openRouterKey?: boolean | number
+    searchTheWeb?: boolean | number
+    slackInstallUrl?: boolean | number
+    systemPrompt?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_AgentUntitled"
 }
 
-export interface SelectFilter {
-  excludes?: Scalars["String"] | null;
-  excludesAll?: Scalars["String"][] | null;
-  includes?: Scalars["String"] | null;
-  includesAll?: Scalars["String"][] | null;
-  includesAny?: Scalars["String"][] | null;
-  isEmpty?: Scalars["Boolean"] | null;
+export interface _BranchInfoGenqlSelection{
+    archivedAt?: boolean | number
+    archivedBy?: boolean | number
+    authorId?: boolean | number
+    contributors?: boolean | number
+    createdAt?: boolean | number
+    description?: boolean | number
+    git?: _GitInfoGenqlSelection
+    headCommit?: _CommitInfoGenqlSelection
+    headCommitId?: boolean | number
+    id?: boolean | number
+    inlineSuggestionAppliedAt?: boolean | number
+    isDefault?: boolean | number
+    isInlineSuggestion?: boolean | number
+    name?: boolean | number
+    playgroundId?: boolean | number
+    rollbackCommitId?: boolean | number
+    rollbackIsoDate?: boolean | number
+    sourceBranchId?: boolean | number
+    updatedAt?: boolean | number
+    workingRootBlockId?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_BranchInfo"
 }
 
-export interface StringFilter {
-  contains?: Scalars["String"] | null;
-  endsWith?: Scalars["String"] | null;
-  eq?: Scalars["String"] | null;
-  in?: Scalars["String"][] | null;
-  isNull?: Scalars["Boolean"] | null;
-  matches?: StringMatchesFilter | null;
-  notEq?: Scalars["String"] | null;
-  notIn?: Scalars["String"][] | null;
-  startsWith?: Scalars["String"] | null;
+export interface _BranchesGenqlSelection{
+    _meta?: ListMetaGenqlSelection
+    items?: _BranchInfoGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "_Branches"
 }
 
-export interface StringMatchesFilter {
-  caseSensitive?: Scalars["Boolean"] | null;
-  pattern: Scalars["String"];
+export interface _CommitInfoGenqlSelection{
+    authorId?: boolean | number
+    branchId?: boolean | number
+    contributors?: boolean | number
+    createdAt?: boolean | number
+    hash?: boolean | number
+    id?: boolean | number
+    mergeParentCommitId?: boolean | number
+    message?: boolean | number
+    parentCommitId?: boolean | number
+    /** Whether this commit is from a playground branch. */
+    playgroundId?: boolean | number
+    repoId?: boolean | number
+    rootBlockId?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_CommitInfo"
 }
 
-export interface TargetBlock {
-  focus?: Scalars["Boolean"] | null;
-  id: Scalars["String"];
-  label: Scalars["String"];
+export interface _GitInfoGenqlSelection{
+    branch?: boolean | number
+    deploymentUrl?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_GitInfo"
 }
 
-export interface TransactionStatusGenqlSelection {
-  /** Duration in milliseconds. */
-  duration?: boolean | number;
-  endedAt?: boolean | number;
-  id?: boolean | number;
-  message?: boolean | number;
-  startedAt?: boolean | number;
-  status?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "TransactionStatus";
+export interface _PlaygroundInfoGenqlSelection{
+    claimUrl?: boolean | number
+    editUrl?: boolean | number
+    expiresAt?: boolean | number
+    id?: boolean | number
+    __typename?: boolean | number
+    __fragmentOn?: "_PlaygroundInfo"
 }
 
-export interface VariantGenqlSelection {
-  apiName?: boolean | number;
-  color?: boolean | number;
-  id?: boolean | number;
-  isDefault?: boolean | number;
-  label?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "Variant";
+export interface _agentsGenqlSelection{
+    start?: _AgentStartGenqlSelection
+    untitled?: _AgentUntitledGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "_agents"
 }
 
-export interface _AgentStartGenqlSelection {
-  _agentKey?: boolean | number;
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  accent?: boolean | number;
-  avatar?: boolean | number;
-  chatUrl?: boolean | number;
-  commit?: boolean | number;
-  description?: boolean | number;
-  edit?: boolean | number;
-  embedUrl?: boolean | number;
-  getUserInfo?: boolean | number;
-  grayscale?: boolean | number;
-  manageBranches?: boolean | number;
-  mcpUrl?: boolean | number;
-  model?: boolean | number;
-  openRouterKey?: boolean | number;
-  searchTheWeb?: boolean | number;
-  slackInstallUrl?: boolean | number;
-  systemPrompt?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_AgentStart";
+export interface _componentsGenqlSelection{
+    author?: (authorComponent_AsListGenqlSelection & { __args?: {
+    /** Filter by a field. */
+    filter?: (AuthorComponentFilterInput | null), 
+    /** Limit the number of items returned. Defaults to 500. */
+    first?: (Scalars['Int'] | null), 
+    /** Order by a field. */
+    orderBy?: (AuthorComponentOrderByEnum | null), 
+    /** Search configuration */
+    search?: (AuthorComponentSearchInput | null), 
+    /** Skip the first n items. */
+    skip?: (Scalars['Int'] | null)} })
+    blogItem?: (blogItem_AsListGenqlSelection & { __args?: {
+    /** Filter by a field. */
+    filter?: (BlogItemFilterInput | null), 
+    /** Limit the number of items returned. Defaults to 500. */
+    first?: (Scalars['Int'] | null), 
+    /** Order by a field. */
+    orderBy?: (BlogItemOrderByEnum | null), 
+    /** Search configuration */
+    search?: (BlogItemSearchInput | null), 
+    /** Skip the first n items. */
+    skip?: (Scalars['Int'] | null)} })
+    __typename?: boolean | number
+    __fragmentOn?: "_components"
 }
 
-export interface _AgentUntitledGenqlSelection {
-  _agentKey?: boolean | number;
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  accent?: boolean | number;
-  avatar?: boolean | number;
-  chatUrl?: boolean | number;
-  commit?: boolean | number;
-  description?: boolean | number;
-  edit?: boolean | number;
-  embedUrl?: boolean | number;
-  getUserInfo?: boolean | number;
-  grayscale?: boolean | number;
-  manageBranches?: boolean | number;
-  mcpUrl?: boolean | number;
-  model?: boolean | number;
-  openRouterKey?: boolean | number;
-  searchTheWeb?: boolean | number;
-  slackInstallUrl?: boolean | number;
-  systemPrompt?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_AgentUntitled";
+export interface authorComponent_AsListGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item?: AuthorComponentGenqlSelection
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items?: AuthorComponentGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "authorComponent_AsList"
 }
 
-export interface _BranchInfoGenqlSelection {
-  archivedAt?: boolean | number;
-  archivedBy?: boolean | number;
-  authorId?: boolean | number;
-  contributors?: boolean | number;
-  createdAt?: boolean | number;
-  description?: boolean | number;
-  git?: _GitInfoGenqlSelection;
-  headCommit?: _CommitInfoGenqlSelection;
-  headCommitId?: boolean | number;
-  id?: boolean | number;
-  inlineSuggestionAppliedAt?: boolean | number;
-  isDefault?: boolean | number;
-  isInlineSuggestion?: boolean | number;
-  name?: boolean | number;
-  playgroundId?: boolean | number;
-  rollbackCommitId?: boolean | number;
-  rollbackIsoDate?: boolean | number;
-  sourceBranchId?: boolean | number;
-  updatedAt?: boolean | number;
-  workingRootBlockId?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_BranchInfo";
-}
-
-export interface _BranchesGenqlSelection {
-  _meta?: ListMetaGenqlSelection;
-  items?: _BranchInfoGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "_Branches";
-}
-
-export interface _CommitInfoGenqlSelection {
-  authorId?: boolean | number;
-  branchId?: boolean | number;
-  contributors?: boolean | number;
-  createdAt?: boolean | number;
-  hash?: boolean | number;
-  id?: boolean | number;
-  mergeParentCommitId?: boolean | number;
-  message?: boolean | number;
-  parentCommitId?: boolean | number;
-  /** Whether this commit is from a playground branch. */
-  playgroundId?: boolean | number;
-  repoId?: boolean | number;
-  rootBlockId?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_CommitInfo";
-}
-
-export interface _GitInfoGenqlSelection {
-  branch?: boolean | number;
-  deploymentUrl?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_GitInfo";
-}
-
-export interface _PlaygroundInfoGenqlSelection {
-  claimUrl?: boolean | number;
-  editUrl?: boolean | number;
-  expiresAt?: boolean | number;
-  id?: boolean | number;
-  __typename?: boolean | number;
-  __fragmentOn?: "_PlaygroundInfo";
-}
-
-export interface _agentsGenqlSelection {
-  start?: _AgentStartGenqlSelection;
-  untitled?: _AgentUntitledGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "_agents";
-}
-
-export interface _componentsGenqlSelection {
-  author?: authorComponent_AsListGenqlSelection & {
-    __args?: {
-      /** Filter by a field. */
-      filter?: AuthorComponentFilterInput | null;
-      /** Limit the number of items returned. Defaults to 500. */
-      first?: Scalars["Int"] | null;
-      /** Order by a field. */
-      orderBy?: AuthorComponentOrderByEnum | null;
-      /** Search configuration */
-      search?: AuthorComponentSearchInput | null;
-      /** Skip the first n items. */
-      skip?: Scalars["Int"] | null;
-    };
-  };
-  blogItem?: blogItem_AsListGenqlSelection & {
-    __args?: {
-      /** Filter by a field. */
-      filter?: BlogItemFilterInput | null;
-      /** Limit the number of items returned. Defaults to 500. */
-      first?: Scalars["Int"] | null;
-      /** Order by a field. */
-      orderBy?: BlogItemOrderByEnum | null;
-      /** Search configuration */
-      search?: BlogItemSearchInput | null;
-      /** Skip the first n items. */
-      skip?: Scalars["Int"] | null;
-    };
-  };
-  __typename?: boolean | number;
-  __fragmentOn?: "_components";
-}
-
-export interface authorComponent_AsListGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _meta?: ListMetaGenqlSelection;
-  /** The key used to search from the frontend. */
-  _searchKey?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item?: AuthorComponentGenqlSelection;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items?: AuthorComponentGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "authorComponent_AsList";
-}
-
-export interface blogItem_AsListGenqlSelection {
-  _analyticsKey?:
-    | {
-        __args: {
-          /**
-           * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-           *
-           * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-           */
-          scope?: AnalyticsKeyScope | null;
-        };
-      }
-    | boolean
-    | number;
-  _dashboardUrl?: boolean | number;
-  _id?: boolean | number;
-  _idPath?: boolean | number;
-  _meta?: ListMetaGenqlSelection;
-  /** The key used to search from the frontend. */
-  _searchKey?: boolean | number;
-  _slug?: boolean | number;
-  _slugPath?: boolean | number;
-  _sys?: BlockDocumentSysGenqlSelection;
-  _title?: boolean | number;
-  /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-  item?: BlogItemGenqlSelection;
-  /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-  items?: BlogItemGenqlSelection;
-  __typename?: boolean | number;
-  __fragmentOn?: "blogItem_AsList";
+export interface blogItem_AsListGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item?: BlogItemGenqlSelection
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items?: BlogItemGenqlSelection
+    __typename?: boolean | number
+    __fragmentOn?: "blogItem_AsList"
 }
 
 export interface FragmentsMap {
   AuthorComponent: {
-    root: AuthorComponent;
-    selection: AuthorComponentGenqlSelection;
-  };
+    root: AuthorComponent,
+    selection: AuthorComponentGenqlSelection,
+}
   BaseRichTextJson: {
-    root: BaseRichTextJson;
-    selection: BaseRichTextJsonGenqlSelection;
-  };
+    root: BaseRichTextJson,
+    selection: BaseRichTextJsonGenqlSelection,
+}
   BlockAudio: {
-    root: BlockAudio;
-    selection: BlockAudioGenqlSelection;
-  };
+    root: BlockAudio,
+    selection: BlockAudioGenqlSelection,
+}
   BlockCodeSnippet: {
-    root: BlockCodeSnippet;
-    selection: BlockCodeSnippetGenqlSelection;
-  };
+    root: BlockCodeSnippet,
+    selection: BlockCodeSnippetGenqlSelection,
+}
   BlockColor: {
-    root: BlockColor;
-    selection: BlockColorGenqlSelection;
-  };
+    root: BlockColor,
+    selection: BlockColorGenqlSelection,
+}
   BlockDocument: {
-    root: BlockDocument;
-    selection: BlockDocumentGenqlSelection;
-  };
+    root: BlockDocument,
+    selection: BlockDocumentGenqlSelection,
+}
   BlockDocumentSys: {
-    root: BlockDocumentSys;
-    selection: BlockDocumentSysGenqlSelection;
-  };
+    root: BlockDocumentSys,
+    selection: BlockDocumentSysGenqlSelection,
+}
   BlockFile: {
-    root: BlockFile;
-    selection: BlockFileGenqlSelection;
-  };
+    root: BlockFile,
+    selection: BlockFileGenqlSelection,
+}
   BlockImage: {
-    root: BlockImage;
-    selection: BlockImageGenqlSelection;
-  };
+    root: BlockImage,
+    selection: BlockImageGenqlSelection,
+}
   BlockList: {
-    root: BlockList;
-    selection: BlockListGenqlSelection;
-  };
+    root: BlockList,
+    selection: BlockListGenqlSelection,
+}
   BlockOgImage: {
-    root: BlockOgImage;
-    selection: BlockOgImageGenqlSelection;
-  };
+    root: BlockOgImage,
+    selection: BlockOgImageGenqlSelection,
+}
   BlockRichText: {
-    root: BlockRichText;
-    selection: BlockRichTextGenqlSelection;
-  };
+    root: BlockRichText,
+    selection: BlockRichTextGenqlSelection,
+}
   BlockVideo: {
-    root: BlockVideo;
-    selection: BlockVideoGenqlSelection;
-  };
+    root: BlockVideo,
+    selection: BlockVideoGenqlSelection,
+}
   Blog: {
-    root: Blog;
-    selection: BlogGenqlSelection;
-  };
+    root: Blog,
+    selection: BlogGenqlSelection,
+}
   BlogItem: {
-    root: BlogItem;
-    selection: BlogItemGenqlSelection;
-  };
+    root: BlogItem,
+    selection: BlogItemGenqlSelection,
+}
   Content: {
-    root: Content;
-    selection: ContentGenqlSelection;
-  };
+    root: Content,
+    selection: ContentGenqlSelection,
+}
   ContentRichText: {
-    root: ContentRichText;
-    selection: ContentRichTextGenqlSelection;
-  };
+    root: ContentRichText,
+    selection: ContentRichTextGenqlSelection,
+}
   GetUploadSignedURL: {
-    root: GetUploadSignedURL;
-    selection: GetUploadSignedURLGenqlSelection;
-  };
+    root: GetUploadSignedURL,
+    selection: GetUploadSignedURLGenqlSelection,
+}
   ListMeta: {
-    root: ListMeta;
-    selection: ListMetaGenqlSelection;
-  };
+    root: ListMeta,
+    selection: ListMetaGenqlSelection,
+}
   MediaBlock: {
-    root: MediaBlock;
-    selection: MediaBlockGenqlSelection;
-  };
+    root: MediaBlock,
+    selection: MediaBlockGenqlSelection,
+}
   Mutation: {
-    root: Mutation;
-    selection: MutationGenqlSelection;
-  };
+    root: Mutation,
+    selection: MutationGenqlSelection,
+}
   Query: {
-    root: Query;
-    selection: QueryGenqlSelection;
-  };
+    root: Query,
+    selection: QueryGenqlSelection,
+}
   RepoSys: {
-    root: RepoSys;
-    selection: RepoSysGenqlSelection;
-  };
+    root: RepoSys,
+    selection: RepoSysGenqlSelection,
+}
   RichTextJson: {
-    root: RichTextJson;
-    selection: RichTextJsonGenqlSelection;
-  };
+    root: RichTextJson,
+    selection: RichTextJsonGenqlSelection,
+}
   SearchHighlight: {
-    root: SearchHighlight;
-    selection: SearchHighlightGenqlSelection;
-  };
+    root: SearchHighlight,
+    selection: SearchHighlightGenqlSelection,
+}
   TransactionStatus: {
-    root: TransactionStatus;
-    selection: TransactionStatusGenqlSelection;
-  };
+    root: TransactionStatus,
+    selection: TransactionStatusGenqlSelection,
+}
   Variant: {
-    root: Variant;
-    selection: VariantGenqlSelection;
-  };
+    root: Variant,
+    selection: VariantGenqlSelection,
+}
   _AgentStart: {
-    root: _AgentStart;
-    selection: _AgentStartGenqlSelection;
-  };
+    root: _AgentStart,
+    selection: _AgentStartGenqlSelection,
+}
   _AgentUntitled: {
-    root: _AgentUntitled;
-    selection: _AgentUntitledGenqlSelection;
-  };
+    root: _AgentUntitled,
+    selection: _AgentUntitledGenqlSelection,
+}
   _BranchInfo: {
-    root: _BranchInfo;
-    selection: _BranchInfoGenqlSelection;
-  };
+    root: _BranchInfo,
+    selection: _BranchInfoGenqlSelection,
+}
   _Branches: {
-    root: _Branches;
-    selection: _BranchesGenqlSelection;
-  };
+    root: _Branches,
+    selection: _BranchesGenqlSelection,
+}
   _CommitInfo: {
-    root: _CommitInfo;
-    selection: _CommitInfoGenqlSelection;
-  };
+    root: _CommitInfo,
+    selection: _CommitInfoGenqlSelection,
+}
   _GitInfo: {
-    root: _GitInfo;
-    selection: _GitInfoGenqlSelection;
-  };
+    root: _GitInfo,
+    selection: _GitInfoGenqlSelection,
+}
   _PlaygroundInfo: {
-    root: _PlaygroundInfo;
-    selection: _PlaygroundInfoGenqlSelection;
-  };
+    root: _PlaygroundInfo,
+    selection: _PlaygroundInfoGenqlSelection,
+}
   _agents: {
-    root: _agents;
-    selection: _agentsGenqlSelection;
-  };
+    root: _agents,
+    selection: _agentsGenqlSelection,
+}
   _components: {
-    root: _components;
-    selection: _componentsGenqlSelection;
-  };
+    root: _components,
+    selection: _componentsGenqlSelection,
+}
   authorComponent_AsList: {
-    root: authorComponent_AsList;
-    selection: authorComponent_AsListGenqlSelection;
-  };
+    root: authorComponent_AsList,
+    selection: authorComponent_AsListGenqlSelection,
+}
   blogItem_AsList: {
-    root: blogItem_AsList;
-    selection: blogItem_AsListGenqlSelection;
-  };
+    root: blogItem_AsList,
+    selection: blogItem_AsListGenqlSelection,
+}
 }
