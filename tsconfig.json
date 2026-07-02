@@ -29,9 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    "basehub-types.d.ts",
-    "basehub.config.ts"
+    "**/*.mts"
   ],
   "exclude": ["node_modules"]
 }
