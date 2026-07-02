@@ -20,7 +20,7 @@
       "source": "payloadcms/payload",
       "sourceType": "github",
       "skillPath": "tools/claude-plugin/skills/payload/SKILL.md",
-      "computedHash": "580a7f579df2e9821dd65011098f7547e94c769f006a8fd5f62083b48abc4b80"
+      "computedHash": "43a46b1dfbd8c0b7950adda2672eef4c471176073d8a9582e70bad337fd40a7f"
     },
     "remotion": {
       "source": "vercel-labs/json-render",
