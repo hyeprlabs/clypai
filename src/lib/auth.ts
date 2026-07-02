@@ -7,7 +7,6 @@ import { Resend } from "resend";
 import { ulid } from "ulid";
 import { headers } from "next/headers";
 
-
 if (!process.env.DATABASE_URL) {
   throw new Error("Missing DATABASE_URL .env variable!");
 }

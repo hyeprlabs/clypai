@@ -31,8 +31,6 @@ export default function Page() {
             </p>
           </div>
 
-          
-
           <div className="space-y-1.5 border-t border-zinc-800 pt-4">
             <p className="text-xs tracking-[0.2em] text-muted-foreground">
               LAUNCHING
