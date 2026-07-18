@@ -40,6 +40,9 @@ async function getPublishedBlogPosts() {
   const result = await payload.find({
     collection: "posts",
     depth: 1,
+    select: {
+      slug: true,
+    },
     overrideAccess: false,
     pagination: false,
     sort: "-publishedAt",
@@ -59,6 +62,16 @@ async function getPublishedBlogPostBySlug(slug: string) {
     collection: "posts",
     depth: 1,
     limit: 1,
+    select: {
+      title: true,
+      slug: true,
+      description: true,
+      authorName: true,
+      authorImage: true,
+      content: true,
+      publishedAt: true,
+      createdAt: true,
+    },
     overrideAccess: false,
     pagination: false,
     where: {

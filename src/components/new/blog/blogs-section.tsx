@@ -28,6 +28,13 @@ async function getPosts(): Promise<BlogPostSummary[]> {
     const result = await payload.find({
       collection: "posts",
       depth: 0,
+      select: {
+        slug: true,
+        title: true,
+        description: true,
+        createdAt: true,
+        publishedAt: true,
+      },
       overrideAccess: false,
       pagination: false,
       sort: "-publishedAt",

@@ -30,7 +30,11 @@ export const Posts: CollectionConfig = {
         if (!data) return data;
 
         const nextStatus = data._status ?? originalDoc?._status;
-        if (nextStatus === "published" && !originalDoc?.publishedAt) {
+        if (
+          nextStatus === "published" &&
+          !data.publishedAt &&
+          !originalDoc?.publishedAt
+        ) {
           data.publishedAt = new Date().toISOString();
         }
 
