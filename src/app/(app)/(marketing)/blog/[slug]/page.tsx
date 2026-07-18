@@ -36,55 +36,63 @@ function formatBlogContent(content?: BlogPost["content"]) {
 }
 
 async function getPublishedBlogPosts() {
-  const payload: any = await getPayload({ config });
-  const result = await payload.find({
-    collection: "posts",
-    depth: 1,
-    select: {
-      slug: true,
-    },
-    overrideAccess: false,
-    pagination: false,
-    sort: "-publishedAt",
-    where: {
-      _status: {
-        equals: "published",
+  try {
+    const payload: any = await getPayload({ config });
+    const result = await payload.find({
+      collection: "posts",
+      depth: 1,
+      select: {
+        slug: true,
       },
-    },
-  });
+      overrideAccess: false,
+      pagination: false,
+      sort: "-publishedAt",
+    });
 
-  return result.docs as BlogPost[];
+    const docs = Array.isArray(result?.docs) ? result.docs : [];
+    return docs as Array<{ slug: string }>;
+  } catch (err) {
+    // Avoid failing static generation when the posts table is not available yet.
+    // oxlint-disable-next-line no-console
+    console.warn("Failed to load blog slugs for static params", err);
+    return [];
+  }
 }
 
 async function getPublishedBlogPostBySlug(slug: string) {
-  const payload: any = await getPayload({ config });
-  const result = await payload.find({
-    collection: "posts",
-    depth: 1,
-    limit: 1,
-    select: {
-      title: true,
-      slug: true,
-      description: true,
-      authorName: true,
-      authorImage: true,
-      content: true,
-      publishedAt: true,
-      createdAt: true,
-    },
-    overrideAccess: false,
-    pagination: false,
-    where: {
-      _status: {
-        equals: "published",
+  try {
+    const payload: any = await getPayload({ config });
+    const result = await payload.find({
+      collection: "posts",
+      depth: 1,
+      limit: 1,
+      select: {
+        title: true,
+        slug: true,
+        description: true,
+        authorName: true,
+        authorImage: true,
+        content: true,
+        publishedAt: true,
+        createdAt: true,
       },
-      slug: {
-        equals: slug,
+      overrideAccess: false,
+      pagination: false,
+      where: {
+        slug: {
+          equals: slug,
+        },
       },
-    },
-  });
+    });
 
-  return (result.docs[0] as BlogPost | undefined) ?? null;
+    const docs = Array.isArray(result?.docs) ? result.docs : [];
+    return (docs[0] as BlogPost | undefined) ?? null;
+  } catch (err) {
+    // Fail gracefully so missing tables or transient DB issues don't crash rendering.
+    // oxlint-disable-next-line no-console
+    console.warn(`Failed to load blog post for slug: ${slug}`, err);
+    return null;
+  }
 }
 
 export async function generateStaticParams() {

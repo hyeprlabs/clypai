@@ -38,7 +38,6 @@ async function getPosts(): Promise<BlogPostSummary[]> {
       overrideAccess: false,
       pagination: false,
       sort: "-publishedAt",
-      where: { _status: { equals: "published" } },
     });
 
     const docs = Array.isArray(result?.docs) ? result.docs : [];
