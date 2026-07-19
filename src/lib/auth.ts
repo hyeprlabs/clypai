@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { dash } from "@better-auth/infra";
 import { username, organization, admin } from "better-auth/plugins";
 import { Pool } from "pg";
 import { polar, checkout, portal, usage } from "@polar-sh/better-auth";
@@ -41,6 +42,7 @@ export const auth = betterAuth({
     connectionString: process.env.DATABASE_URL,
   }),
   plugins: [
+    dash(),
     username(),
     organization(),
     polar({

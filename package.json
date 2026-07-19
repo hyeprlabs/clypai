@@ -13,6 +13,7 @@
     "email:dev": "email dev"
   },
   "dependencies": {
+    "@better-auth/infra": "^0.3.6",
     "@daveyplate/better-auth-ui": "^3.4.0",
     "@hookform/resolvers": "^5.4.0",
     "@hugeicons/core-free-icons": "^4.2.2",
