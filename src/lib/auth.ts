@@ -37,6 +37,7 @@ export const auth = betterAuth({
     "https://*.clypai.com",
     "https://*.clyp.ai",
     "https://clypai.com",
+    "https://clypai.localhost",
   ].filter(Boolean),
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
