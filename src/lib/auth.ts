@@ -92,26 +92,20 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     disableSignUp: true,
-    emailVerification: {
-      sendVerificationEmail: async ({
-        user,
-        token,
-      }: {
-        user: { email: string };
-        token: string;
-      }) => {
-        await resend.emails.send({
-          to: user.email,
-          template: {
-            id: "verification-code",
-            variables: {
-              token: token,
-              requested_from: user.email,
-              requested_at: new Date().toISOString(),
-            },
+  },
+  emailVerification: {
+    sendVerificationEmail: async ({ user, token }) => {
+      await resend.emails.send({
+        to: user.email,
+        template: {
+          id: "verification-code",
+          variables: {
+            token: token,
+            requested_from: user.email,
+            requested_at: new Date().toISOString(),
           },
-        });
-      },
+        },
+      });
     },
   },
   socialProviders: {
