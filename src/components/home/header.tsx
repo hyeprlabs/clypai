@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/home/logo";
+import Link from "next/link";
+import { ClypAIWordmark } from "@/components/brand/logos";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/home/mobile-nav";
@@ -41,12 +42,12 @@ export function Header() {
           },
         )}
       >
-        <a
-          className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
-          href="#"
+        <Link
+          className="flex h-8 items-center rounded-full px-3 hover:bg-muted dark:hover:bg-muted/50"
+          href="/"
         >
-          <Logo className="h-4" />
-        </a>
+          <ClypAIWordmark className="h-4 w-auto" />
+        </Link>
         <div className="hidden items-center gap-2 md:flex">
           <div>
             {navLinks.map((link) => (
