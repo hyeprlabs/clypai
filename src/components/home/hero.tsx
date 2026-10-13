@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { FullWidthDivider } from "@/components/home/full-width-divider";
+import { name } from "@/lib/constants";
 import { ArrowRightIcon, PhoneCallIcon } from "lucide-react";
 
 export function HeroSection() {
@@ -27,15 +28,13 @@ export function HeroSection() {
               "group mx-auto flex w-fit max-w-[90vw] items-center gap-2 rounded-sm border bg-card p-1 shadow sm:gap-3",
               "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards transition-all delay-500 duration-500 ease-out",
             )}
-            href="#link"
+            href="/why"
           >
             <div className="shrink-0 rounded-xs border bg-card px-1.5 py-0.5 shadow-sm">
-              <p className="font-mono text-xs">NOW</p>
+              <p className="font-mono text-xs">MANIFESTO</p>
             </div>
 
-            <span className="truncate text-xs">
-              accepting new client projects
-            </span>
+            <span className="truncate text-xs">Why {name}?</span>
             <span className="block h-5 shrink-0 border-l" />
 
             <div className="shrink-0 pr-1">
@@ -49,7 +48,7 @@ export function HeroSection() {
               "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-100 duration-500 ease-out",
             )}
           >
-            Building Digital Experiences That Drive Growth
+            From Raw Video to Viral Clips in One Click.
           </h1>
 
           <p
@@ -58,8 +57,9 @@ export function HeroSection() {
               "fade-in slide-in-from-bottom-10 animate-in fill-mode-backwards delay-200 duration-500 ease-out",
             )}
           >
-            We help brands scale faster through design, <br /> development and
-            strategic execution.
+            Automate your short-form content. ClypAI finds the hooks, adds
+            captions, <br /> and crops for social, cutting your editing time
+            90%.
           </p>
 
           <div className="fade-in slide-in-from-bottom-10 flex w-fit flex-wrap animate-in items-center justify-center gap-3 fill-mode-backwards pt-2 delay-300 duration-500 ease-out">
