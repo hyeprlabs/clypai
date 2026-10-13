@@ -3,12 +3,13 @@ import { Header } from "@/components/home/header"; // @efferd/header-2
 import { HeroSection, HeroShowcase } from "@/components/home/hero";
 import { LogoCloud } from "@/components/logo-cloud"; // @efferd/logo-cloud-4
 import { LogosSection } from "@/components/home/logos-section";
+import { Footer } from "@/components/home/footer";
 
 export default function page() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden px-4 supports-[overflow:clip]:overflow-clip">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-[oklch(0.99_0.006_75)] px-4 supports-[overflow:clip]:overflow-clip">
       <Header />
-      <main className="relative mx-auto w-full max-w-4xl grow">
+      <main className="relative mx-auto w-full max-w-5xl grow">
         <HeroSection />
         <div
           className={cn(
@@ -21,6 +22,7 @@ export default function page() {
           <LogoCloud />
           <HeroShowcase />
           <LogosSection />
+          <Footer />
         </div>
       </main>
     </div>
