@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Portal, PortalBackdrop } from "@/components/home/portal";
 import { navLinks } from "@/components/home/header";
@@ -43,15 +44,17 @@ export function MobileNav() {
                   key={link.label}
                   variant="ghost"
                 >
-                  <a href={link.href}>{link.label}</a>
+                  <Link href={link.href}>{link.label}</Link>
                 </Button>
               ))}
             </div>
             <div className="mt-12 flex flex-col gap-2">
-              <Button className="w-full" variant="outline">
-                Sign In
+              <Button asChild className="w-full" variant="outline">
+                <Link href="/login">Login</Link>
               </Button>
-              <Button className="w-full">Get Started</Button>
+              <Button asChild className="w-full">
+                <Link href="/signup">Get Started</Link>
+              </Button>
             </div>
           </div>
         </Portal>

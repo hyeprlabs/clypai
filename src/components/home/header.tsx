@@ -5,24 +5,15 @@ import { ClypAIWordmark } from "@/components/brand/logos";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/home/mobile-nav";
+import { HeaderActions } from "@/components/new/header-actions";
+import { navLinks } from "@/components/new/header";
+import { authClient } from "@/lib/auth-client";
 
-export const navLinks = [
-  {
-    label: "Features",
-    href: "#",
-  },
-  {
-    label: "Pricing",
-    href: "#",
-  },
-  {
-    label: "About",
-    href: "#",
-  },
-];
+export { navLinks } from "@/components/new/header";
 
 export function Header() {
   const scrolled = useScroll(10);
+  const { isPending } = authClient.useSession();
 
   return (
     <header
@@ -52,19 +43,20 @@ export function Header() {
         >
           <ClypAIWordmark className="h-4 w-auto" />
         </Link>
-        <div className="hidden items-center gap-2 md:flex">
-          <div>
-            {navLinks.map((link) => (
-              <Button asChild key={link.label} size="sm" variant="ghost">
-                <a href={link.href}>{link.label}</a>
-              </Button>
-            ))}
+        {!isPending && (
+          <div className="hidden items-center gap-2 md:flex">
+            <div className="fill-mode-both duration-300 ease-out animate-in fade-in motion-safe:blur-in-4">
+              {navLinks.map((link) => (
+                <Button asChild key={link.label} size="sm" variant="ghost">
+                  <Link href={link.href}>{link.label}</Link>
+                </Button>
+              ))}
+            </div>
+            <div className="fill-mode-both delay-[60ms] duration-300 ease-out animate-in fade-in motion-safe:blur-in-4">
+              <HeaderActions />
+            </div>
           </div>
-          <Button size="sm" variant="outline">
-            Sign In
-          </Button>
-          <Button size="sm">Get Started</Button>
-        </div>
+        )}
         <MobileNav />
       </nav>
     </header>
