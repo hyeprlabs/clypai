@@ -3,6 +3,7 @@ import { Header } from "@/components/home/header"; // @efferd/header-2
 import { HeroSection, HeroShowcase } from "@/components/home/hero";
 import { LogoCloud } from "@/components/logo-cloud"; // @efferd/logo-cloud-4
 import { LogosSection } from "@/components/home/logos-section";
+import { FlowSection } from "@/components/home/flow-section";
 import { Footer } from "@/components/home/footer";
 
 export default function page() {
@@ -22,6 +23,7 @@ export default function page() {
           <LogoCloud />
           <HeroShowcase />
           <LogosSection />
+          <FlowSection />
           <Footer />
         </div>
       </main>
