@@ -1,26 +1,28 @@
 import { FullWidthDivider } from "@/components/home/full-width-divider";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
-// https://motion-primitives.com/docs/progressive-blur
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 
 export function LogoCloud() {
   return (
-    <div className="relative mb-24 bg-linear-to-r from-secondary via-transparent to-secondary py-6 lg:mb-48">
+    <Reveal className="relative mb-24 bg-linear-to-r from-secondary via-transparent to-secondary py-6 lg:mb-48">
       <FullWidthDivider position="top" />
       <FullWidthDivider position="bottom" />
-      <InfiniteSlider gap={42} reverse speed={60} speedOnHover={20}>
-        {logos.map((logo) => (
-          <img
-            alt={logo.alt}
-            className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
-            height="auto"
-            key={`logo-${logo.alt}`}
-            loading="lazy"
-            src={logo.src}
-            width="auto"
-          />
-        ))}
-      </InfiniteSlider>
+      <RevealItem>
+        <InfiniteSlider gap={42} reverse speed={60} speedOnHover={20}>
+          {logos.map((logo) => (
+            <img
+              alt={logo.alt}
+              className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
+              height="auto"
+              key={`logo-${logo.alt}`}
+              loading="lazy"
+              src={logo.src}
+              width="auto"
+            />
+          ))}
+        </InfiniteSlider>
+      </RevealItem>
 
       <ProgressiveBlur
         blurIntensity={1}
@@ -32,7 +34,7 @@ export function LogoCloud() {
         className="pointer-events-none absolute top-0 right-0 h-full w-[100px] md:w-[160px]"
         direction="right"
       />
-    </div>
+    </Reveal>
   );
 }
 

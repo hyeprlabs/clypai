@@ -20,10 +20,10 @@ export function Header() {
       className={cn(
         "sticky top-0 z-50 mx-auto w-full max-w-4xl border-transparent border-b",
         "md:rounded-full md:border",
-        "md:transition-[top,max-width,background-color,border-color,box-shadow,backdrop-filter] md:duration-300 md:ease-out-strong",
-        "md:motion-reduce:transition-[background-color,border-color,box-shadow,backdrop-filter] md:motion-reduce:duration-150 md:motion-reduce:ease-out",
+        "md:transition-[translate,max-width,background-color,border-color,box-shadow] md:duration-300 md:ease-out-strong",
+        "md:motion-reduce:transition-[background-color,border-color,box-shadow] md:motion-reduce:duration-150",
         {
-          "border-border bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/50 md:top-2 md:max-w-3xl md:shadow":
+          "border-border bg-background/95 backdrop-blur-sm supports-backdrop-filter:bg-background/50 md:translate-y-2 md:max-w-3xl md:shadow":
             scrolled,
         },
       )}
@@ -31,28 +31,28 @@ export function Header() {
       <nav
         className={cn(
           "flex h-14 w-full items-center justify-between px-4 md:h-12",
-          "md:transition-[padding] md:duration-300 md:ease-out-strong md:motion-reduce:duration-150 md:motion-reduce:ease-out",
+          "md:transition-[padding] md:duration-300 md:ease-out-strong md:motion-reduce:transition-none",
           {
             "md:px-2": scrolled,
           },
         )}
       >
         <Link
-          className="flex h-8 items-center rounded-full px-3 hover:bg-muted dark:hover:bg-muted/50"
+          className="flex h-8 items-center rounded-full px-3 transition-colors hover:bg-muted dark:hover:bg-muted/50"
           href="/"
         >
           <ClypAIWordmark className="h-4 w-auto" />
         </Link>
         {!isPending && (
           <div className="hidden items-center gap-2 md:flex">
-            <div className="fill-mode-both duration-300 ease-out animate-in fade-in motion-safe:blur-in-4">
+            <div className="animate-in fade-in duration-300 ease-out-strong">
               {navLinks.map((link) => (
                 <Button asChild key={link.label} size="sm" variant="ghost">
                   <Link href={link.href}>{link.label}</Link>
                 </Button>
               ))}
             </div>
-            <div className="fill-mode-both delay-[60ms] duration-300 ease-out animate-in fade-in motion-safe:blur-in-4">
+            <div className="animate-in fade-in fill-mode-backwards delay-60 duration-300 ease-out-strong">
               <HeaderActions />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { DecorIcon } from "@/components/home/decor-icon";
+import { RevealItem } from "@/components/ui/reveal";
 
 type Logo = {
   src: string;
@@ -96,13 +97,15 @@ function LogoCard({ logo, className, children, ...props }: LogoCardProps) {
       )}
       {...props}
     >
-      <img
-        alt={logo.alt}
-        className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
-        height="auto"
-        src={logo.src}
-        width="auto"
-      />
+      <RevealItem>
+        <img
+          alt={logo.alt}
+          className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
+          height="auto"
+          src={logo.src}
+          width="auto"
+        />
+      </RevealItem>
       {children}
     </div>
   );

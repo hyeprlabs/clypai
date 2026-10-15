@@ -4,6 +4,7 @@ import { InstagramIcon } from "@/components/home/icons/instagram-icon";
 import { XIcon } from "@/components/home/icons/x-icon";
 import { YoutubeIcon } from "@/components/home/icons/youtube-icon";
 import { ArrowRightIcon } from "lucide-react";
+import { Reveal, RevealItem } from "@/components/ui/reveal";
 
 export function Footer() {
   return (
@@ -14,7 +15,7 @@ export function Footer() {
       )}
     >
       <div className="relative mx-auto">
-        <div className="relative grid grid-cols-1 md:grid-cols-4 md:divide-x">
+        <Reveal className="relative grid grid-cols-1 md:grid-cols-4 md:divide-x">
           <div>
             <SocialCard
               className="border-t-0"
@@ -73,14 +74,18 @@ export function Footer() {
               title="Press"
             />
           </div>
-        </div>
+        </Reveal>
       </div>
-      <p
+      <Reveal
         aria-hidden="true"
-        className="hidden h-[10.5vw] select-none overflow-hidden border-t text-center font-bold text-[14vw] text-[oklch(0.92_0.012_75)] leading-none md:block"
+        className="hidden h-[10.5vw] select-none justify-center overflow-hidden border-t font-bold text-[14vw] text-[oklch(0.92_0.012_75)] leading-none md:flex"
       >
-        ClypAI
-      </p>
+        {"ClypAI".split("").map((letter, i) => (
+          <RevealItem key={i} offset="100%">
+            {letter}
+          </RevealItem>
+        ))}
+      </Reveal>
       <div className="flex justify-center border-t p-3">
         <p className="text-muted-foreground text-xs">
           &copy; {new Date().getFullYear()} efferd, All rights reserved
@@ -96,7 +101,7 @@ type LinksGroupProps = {
 };
 function LinksGroup({ title, links }: LinksGroupProps) {
   return (
-    <div className="p-2">
+    <RevealItem className="p-2">
       <h3 className="font-heading mt-2 mb-3 font-light text-[10px] text-muted-foreground uppercase tracking-wider">
         {title}
       </h3>
@@ -104,7 +109,7 @@ function LinksGroup({ title, links }: LinksGroupProps) {
         {links.map((link) => (
           <li key={link.title}>
             <a
-              className="text-muted-foreground text-sm hover:text-foreground"
+              className="text-muted-foreground text-sm transition-colors hover:text-foreground"
               href={link.href}
             >
               {link.title}
@@ -112,7 +117,7 @@ function LinksGroup({ title, links }: LinksGroupProps) {
           </li>
         ))}
       </ul>
-    </div>
+    </RevealItem>
   );
 }
 
@@ -128,7 +133,7 @@ function SocialCard({
   return (
     <a
       className={cn(
-        "flex items-center justify-between border-y p-2 text-sm hover:bg-muted md:border-t-0 dark:hover:bg-muted/50",
+        "group flex items-center justify-between border-y p-2 text-sm transition-colors hover:bg-muted md:border-t-0 dark:hover:bg-muted/50",
         className,
       )}
       href={href}
@@ -137,7 +142,7 @@ function SocialCard({
         {icon}
         {title}
       </span>
-      <ArrowRightIcon className="size-4" />
+      <ArrowRightIcon className="size-4 transition-transform motion-safe:group-hover:translate-x-0.5" />
     </a>
   );
 }

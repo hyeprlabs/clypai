@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -29,13 +28,7 @@ export function MobileNav() {
       {open && (
         <Portal className="top-14" id="mobile-menu">
           <PortalBackdrop />
-          <div
-            className={cn(
-              "data-[slot=open]:zoom-in-97 ease-out data-[slot=open]:animate-in",
-              "size-full p-4",
-            )}
-            data-slot={open ? "open" : "closed"}
-          >
+          <div className="size-full origin-top animate-in fade-in p-4 duration-200 ease-out-strong motion-safe:zoom-in-97">
             <div className="grid gap-y-2">
               {navLinks.map((link) => (
                 <Button
