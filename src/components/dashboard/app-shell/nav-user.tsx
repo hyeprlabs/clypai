@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
+import { authClient } from "@/lib/auth-client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -10,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   UserIcon,
   BellIcon,
@@ -17,33 +22,42 @@ import {
   LifeBuoyIcon,
   GraduationCapIcon,
   CreditCardIcon,
-  LogOutIcon,
 } from "lucide-react";
 
-const user = {
-  name: "Shaban Haider",
-  email: "shaban@efferd.com",
-  avatar: "https://github.com/shabanhr.png",
-};
+import { UpgradeDialogDrawer } from "@/components/upgrade-dialog-drawer";
+import { LogoutAlertDialogDrawer } from "@/components/logout-alert-dialog-drawer";
 
 export function NavUser() {
+  const { data: session, isPending } = authClient.useSession();
+
+  if (isPending) {
+    return <Skeleton className="size-8 rounded-full" />;
+  }
+
+  if (!session?.user) {
+    return null;
+  }
+
+  const user = session.user;
+  const name = user.displayUsername || user.name;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="size-8">
-          <AvatarImage src={user.avatar} />
-          <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+          <AvatarImage src={user.image || undefined} alt={name} />
+          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
         <DropdownMenuGroup>
           <DropdownMenuLabel className="pointer-events-none flex items-center gap-2">
             <Avatar className="isolate size-8">
-              <AvatarImage src={user.avatar} />
-              <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+              <AvatarImage src={user.image || undefined} alt={name} />
+              <AvatarFallback>{name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div>
-              <span className="font-medium text-foreground">{user.name}</span>{" "}
+              <span className="font-medium text-foreground">{name}</span>{" "}
               <br />
               <div className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-muted-foreground text-xs">
                 {user.email}
@@ -53,16 +67,20 @@ export function NavUser() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <UserIcon />
-            Profile
+          <DropdownMenuItem asChild>
+            <Link href="/profile">
+              <UserIcon />
+              Profile
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <BellIcon />
-            Notifications
+          <DropdownMenuItem asChild>
+            <Link href="/settings/notifications">
+              <BellIcon />
+              Notifications
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <CommandIcon />
@@ -82,17 +100,16 @@ export function NavUser() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <CreditCardIcon />
-            Subscription
-          </DropdownMenuItem>
+          <UpgradeDialogDrawer>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <CreditCardIcon />
+              Subscription
+            </DropdownMenuItem>
+          </UpgradeDialogDrawer>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem variant="destructive">
-            <LogOutIcon />
-            Log out
-          </DropdownMenuItem>
+          <LogoutAlertDialogDrawer />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
