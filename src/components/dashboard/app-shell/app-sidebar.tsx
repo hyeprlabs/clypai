@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/components/home/logo";
+import { ClypAIMark } from "@/components/brand/logos";
 import { Button } from "@/components/ui/button";
 import {
   Sidebar,
@@ -16,6 +16,7 @@ import {
   navGroups,
 } from "@/components/dashboard/app-shell/app-shared";
 import { LatestChange } from "@/components/dashboard/app-shell/latest-change";
+import { OrganizationSwitcher } from "@/components/dashboard/organization-switcher";
 import { PlusIcon, SearchIcon } from "lucide-react";
 
 export function AppSidebar() {
@@ -24,8 +25,8 @@ export function AppSidebar() {
       <SidebarHeader className="h-14 justify-center">
         <SidebarMenuButton asChild>
           <a href="#link">
-            <LogoIcon />
-            <span className="font-medium">Efferd</span>
+            <ClypAIMark height={20} />
+            <span className="font-medium">ClypAI</span>
           </a>
         </SidebarMenuButton>
       </SidebarHeader>
@@ -73,6 +74,7 @@ export function AppSidebar() {
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
+        <OrganizationSwitcher />
       </SidebarFooter>
     </Sidebar>
   );

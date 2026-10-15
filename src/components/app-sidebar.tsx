@@ -25,7 +25,7 @@ import { NavMain } from "@/components/nav-main";
 import {
   OrganizationSwitcher,
   OrganizationSwitcherSkeleton,
-} from "@/components/organization-switcher";
+} from "@/components/dashboard/organization-switcher";
 import { SidebarOptInForm } from "@/components/sidebar-opt-in-form";
 import { NavUser, NavUserSkeleton } from "@/components/nav-user";
 
