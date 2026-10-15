@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils";
-import { Header } from "@/components/home/header"; // @efferd/header-2
-import { HeroSection, HeroShowcase } from "@/components/home/hero";
-import { LogoCloud } from "@/components/logo-cloud"; // @efferd/logo-cloud-4
-import { LogosSection } from "@/components/home/logos-section";
+import { Header } from "@/components/home/header";
+import { HeroSection } from "@/components/home/hero";
+import { LogoCloud } from "@/components/home/logos-section";
 import { FlowSection } from "@/components/home/flow-section";
 import { IntegrationsSection } from "@/components/home/integrations-section";
 import { PricingSection } from "@/components/home/pricing-section";
@@ -23,8 +22,6 @@ export default function page() {
           )}
         >
           <LogoCloud />
-          <HeroShowcase />
-          <LogosSection />
           <FlowSection />
           <IntegrationsSection />
           <PricingSection />

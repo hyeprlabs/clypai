@@ -1,28 +1,74 @@
-import { LogoCloud } from "@/components/home/logo-cloud"; // @efferd/logo-cloud-2
-import { DecorIcon } from "@/components/home/decor-icon";
 import { FullWidthDivider } from "@/components/home/full-width-divider";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { Reveal, RevealItem } from "@/components/ui/reveal";
 
-export function LogosSection() {
+export function LogoCloud() {
   return (
-    <section className="mb-12">
-      <Reveal>
-        <RevealItem>
-          <h2 className="font-heading py-6 text-center font-medium text-lg text-muted-foreground tracking-tight md:text-xl">
-            Trusted by <span className="text-foreground">experts</span>
-          </h2>
-        </RevealItem>
-        <div className="relative *:border-0">
-          <DecorIcon className="size-4" position="top-left" />
-          <DecorIcon className="size-4" position="top-right" />
-          <DecorIcon className="size-4" position="bottom-left" />
-          <DecorIcon className="size-4" position="bottom-right" />
+    <Reveal className="relative mb-24 bg-linear-to-r from-secondary via-transparent to-secondary py-6 lg:mb-48">
+      <FullWidthDivider position="top" />
+      <FullWidthDivider position="bottom" />
+      <RevealItem>
+        <InfiniteSlider gap={42} reverse speed={60} speedOnHover={20}>
+          {logos.map((logo) => (
+            <img
+              alt={logo.alt}
+              className="pointer-events-none h-4 select-none md:h-5 dark:brightness-0 dark:invert"
+              height="auto"
+              key={`logo-${logo.alt}`}
+              loading="lazy"
+              src={logo.src}
+              width="auto"
+            />
+          ))}
+        </InfiniteSlider>
+      </RevealItem>
 
-          <FullWidthDivider className="-top-px" />
-          <LogoCloud />
-          <FullWidthDivider className="-bottom-px" />
-        </div>
-      </Reveal>
-    </section>
+      <ProgressiveBlur
+        blurIntensity={1}
+        className="pointer-events-none absolute top-0 left-0 h-full w-[100px] md:w-[160px]"
+        direction="left"
+      />
+      <ProgressiveBlur
+        blurIntensity={1}
+        className="pointer-events-none absolute top-0 right-0 h-full w-[100px] md:w-[160px]"
+        direction="right"
+      />
+    </Reveal>
   );
 }
+
+const logos = [
+  {
+    src: "https://storage.efferd.com/logo/nvidia-wordmark.svg",
+    alt: "Nvidia Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/supabase-wordmark.svg",
+    alt: "Supabase Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/openai-wordmark.svg",
+    alt: "OpenAI Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/turso-wordmark.svg",
+    alt: "Turso Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/vercel-wordmark.svg",
+    alt: "Vercel Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/github-wordmark.svg",
+    alt: "GitHub Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/claude-wordmark.svg",
+    alt: "Claude AI Logo",
+  },
+  {
+    src: "https://storage.efferd.com/logo/clerk-wordmark.svg",
+    alt: "Clerk Logo",
+  },
+];

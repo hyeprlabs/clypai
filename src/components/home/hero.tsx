@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { FullWidthDivider } from "@/components/home/full-width-divider";
 import { name } from "@/lib/constants";
-import { Reveal, RevealItem } from "@/components/ui/reveal";
 import { ArrowRightIcon, PhoneCallIcon } from "lucide-react";
 
 export function HeroSection() {
@@ -83,26 +81,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-export function HeroShowcase() {
-  return (
-    <Reveal className="relative">
-      <FullWidthDivider className="-top-px" />
-      <RevealItem className="overflow-hidden *:pointer-events-none *:aspect-video *:select-none">
-        <img
-          alt="light app screen"
-          className="h-auto w-full dark:hidden"
-          src="https://storage.efferd.com/screen/dashboard-light.webp"
-        />
-        <img
-          alt="dark app screen"
-          className="hidden h-auto w-full dark:block"
-          src="https://storage.efferd.com/screen/dashboard-dark.webp"
-        />
-      </RevealItem>
-      <FullWidthDivider className="-bottom-px" />
-    </Reveal>
   );
 }
