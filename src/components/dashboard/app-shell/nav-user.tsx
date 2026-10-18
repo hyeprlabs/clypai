@@ -28,6 +28,7 @@ import {
 
 import { UpgradeDialogDrawer } from "@/components/upgrade-dialog-drawer";
 import { LogoutAlertDialogDrawer } from "@/components/logout-alert-dialog-drawer";
+import { ThemeDropdown } from "@/components/dashboard/app-shell/theme-dropdown";
 
 export function NavUser() {
   const { data: session, isPending } = authClient.useSession();
@@ -102,6 +103,10 @@ export function NavUser() {
             <GraduationCapIcon />
             Agent training
           </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <ThemeDropdown />
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
