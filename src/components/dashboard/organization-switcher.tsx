@@ -2,15 +2,18 @@
 
 import { authClient } from "@/lib/auth-client";
 
-import { ChevronsUpDown, Plus } from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FallbackAvatar from "@/components/ui/fallback-avatar";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -23,33 +26,28 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { CreateOrganizationDialogDrawer } from "@/components/create-organization-dialog-drawer";
+import { CreateOrganizationDialogDrawer } from "@/components/dashboard/create-organization-dialog-drawer";
 
 export function OrganizationSwitcherSkeleton() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton size="lg" className="pointer-events-none">
-          <Skeleton className="size-8 rounded-lg" />
-          <div className="grid flex-1 text-left text-sm leading-tight">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="mt-1 h-3 w-16" />
-          </div>
-        </SidebarMenuButton>
+        <Skeleton className="h-8 w-full rounded-lg" />
       </SidebarMenuItem>
     </SidebarMenu>
   );
 }
 
 export function OrganizationSwitcher() {
-  const { data: session } = authClient.useSession();
-  const { data: activeOrganization } = authClient.useActiveOrganization();
+  const { data: session, isPending: isSessionPending } =
+    authClient.useSession();
+  const { data: activeOrganization, isPending: isActiveOrganizationPending } =
+    authClient.useActiveOrganization();
   const { data: organizations = [] } = authClient.useListOrganizations();
 
-  const handleSetActiveOrganization = (organizationId: string) => async () => {
-    await authClient.organization.setActive({ organizationId });
-  };
-
+  if (isSessionPending || isActiveOrganizationPending) {
+    return <OrganizationSwitcherSkeleton />;
+  }
   if (!session?.user) {
     return null;
   }
@@ -63,27 +61,22 @@ export function OrganizationSwitcher() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size="sm"
+              className="group/org-trigger data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="size-8 rounded-lg">
+              <Avatar size="sm" className="size-5">
                 <AvatarImage
                   src={activeOrganization.logo || undefined}
                   alt={activeOrganization.name}
                 />
-                <AvatarFallback className="rounded-lg">
-                  {activeOrganization.name.substring(0, 2).toUpperCase()}
+                <AvatarFallback>
+                  <FallbackAvatar name={activeOrganization.name} size={20} />
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">
-                  {activeOrganization.name}
-                </span>
-                <span className="truncate text-xs">
-                  {activeOrganization.metadata?.plan}
-                </span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
+              <span className="min-w-0 flex-1 truncate font-medium">
+                {activeOrganization.name}
+              </span>
+              <ChevronDown className="ml-auto size-3.5 shrink-0 text-muted-foreground transition-transform duration-150 ease-out-strong motion-reduce:transition-none group-data-[state=open]/org-trigger:rotate-180" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -95,36 +88,45 @@ export function OrganizationSwitcher() {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Organizations
             </DropdownMenuLabel>
-            {organizations?.map((organization) => (
-              <DropdownMenuItem
-                key={organization.id}
-                onClick={handleSetActiveOrganization(organization.id)}
-                className="gap-2 p-2"
-              >
-                <Avatar className="size-6 rounded-md">
-                  <AvatarImage
-                    src={organization.logo || undefined}
-                    alt={organization.name}
-                  />
-                  <AvatarFallback className="rounded-md">
-                    {organization.name.substring(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                {organization.name}
-              </DropdownMenuItem>
-            ))}
+            <DropdownMenuRadioGroup
+              value={activeOrganization.id}
+              onValueChange={(organizationId) =>
+                authClient.organization.setActive({ organizationId })
+              }
+            >
+              {(organizations ?? []).map((organization) => (
+                <DropdownMenuRadioItem
+                  key={organization.id}
+                  value={organization.id}
+                  className="gap-2 py-1.5 pl-1.5"
+                >
+                  <Avatar size="sm" className="size-5">
+                    <AvatarImage
+                      src={organization.logo || undefined}
+                      alt={organization.name}
+                    />
+                    <AvatarFallback>
+                      <FallbackAvatar name={organization.name} size={20} />
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="min-w-0 flex-1 truncate text-sm">
+                    {organization.name}
+                  </span>
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
             <DropdownMenuSeparator />
             <CreateOrganizationDialogDrawer>
               <DropdownMenuItem
-                className="gap-2 p-2"
+                className="gap-2 py-1.5 pl-1.5"
                 onSelect={(e) => e.preventDefault()}
               >
-                <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                  <Plus className="size-4" />
+                <div className="flex size-5 shrink-0 items-center justify-center rounded-md border bg-transparent">
+                  <Plus className="size-3.5" />
                 </div>
-                <div className="text-muted-foreground font-medium">
+                <span className="text-muted-foreground font-medium text-sm">
                   Create Organization
-                </div>
+                </span>
               </DropdownMenuItem>
             </CreateOrganizationDialogDrawer>
           </DropdownMenuContent>
