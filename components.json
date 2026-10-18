@@ -25,6 +25,7 @@
     "@magicui": "https://magicui.design/r/{name}",
     "@tailark": "https://tailark.com/r/{name}.json",
     "@efferd": "https://efferd.com/r/{name}.json",
-    "@motion-primitives": "https://motion-primitives.com/c/{name}.json"
+    "@motion-primitives": "https://motion-primitives.com/c/{name}.json",
+    "@spell": "https://spell.sh/r/{name}.json"
   }
 }

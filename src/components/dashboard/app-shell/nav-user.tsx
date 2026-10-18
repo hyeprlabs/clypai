@@ -5,6 +5,8 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FallbackAvatar from "@/components/ui/fallback-avatar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,7 +48,9 @@ export function NavUser() {
       <DropdownMenuTrigger asChild>
         <Avatar className="size-8">
           <AvatarImage src={user.image || undefined} alt={name} />
-          <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+          <AvatarFallback>
+            <FallbackAvatar name={name} size={32} />
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-60">
@@ -54,11 +58,12 @@ export function NavUser() {
           <DropdownMenuLabel className="pointer-events-none flex items-center gap-2">
             <Avatar className="isolate size-8">
               <AvatarImage src={user.image || undefined} alt={name} />
-              <AvatarFallback>{name.charAt(0)}</AvatarFallback>
+              <AvatarFallback>
+                <FallbackAvatar name={name} size={32} />
+              </AvatarFallback>
             </Avatar>
             <div>
-              <span className="font-medium text-foreground">{name}</span>{" "}
-              <br />
+              <span className="font-medium text-foreground">{name}</span> <br />
               <div className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-muted-foreground text-xs">
                 {user.email}
               </div>

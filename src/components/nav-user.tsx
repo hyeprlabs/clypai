@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import FallbackAvatar from "@/components/ui/fallback-avatar";
 
 import {
   DropdownMenu,
@@ -90,7 +91,12 @@ export function NavUser() {
                   src={user.image || undefined}
                   alt={user.displayUsername || user.name}
                 />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  <FallbackAvatar
+                    name={user.displayUsername || user.name}
+                    size={32}
+                  />
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
@@ -114,7 +120,12 @@ export function NavUser() {
                     src={user.image || undefined}
                     alt={user.displayUsername || user.name}
                   />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">
+                    <FallbackAvatar
+                      name={user.displayUsername || user.name}
+                      size={32}
+                    />
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
