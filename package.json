@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt",
-    "format:check": "oxfmt --check",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "email:dev": "email dev"
   },
   "dependencies": {
