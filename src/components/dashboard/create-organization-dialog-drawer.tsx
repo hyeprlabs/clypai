@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 
 import * as React from "react";
 
-import { PlusCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, useWatch } from "react-hook-form";
@@ -32,19 +32,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose,
-  DialogFooter,
 } from "@/components/ui/dialog";
 
 import {
   Drawer,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-  DrawerClose,
 } from "@/components/ui/drawer";
 
 import { Input } from "@/components/ui/input";
@@ -58,7 +54,13 @@ const schema = z.object({
     .regex(/^[a-zA-Z0-9-]+$/, "Only letters, numbers and hyphens are allowed."),
 });
 
-function CreateOrganizationForm() {
+function CreateOrganizationForm({
+  onSuccess,
+  onCancel,
+}: {
+  onSuccess: () => void;
+  onCancel: () => void;
+}) {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", slug: "" },
@@ -85,24 +87,39 @@ function CreateOrganizationForm() {
   }, [watchedSlug]);
 
   async function onSubmit(data: z.infer<typeof schema>) {
-    await authClient.organization.create({
+    const { error } = await authClient.organization.create({
       name: data.name,
       slug: data.slug,
       keepCurrentActiveOrganization: false,
     });
+
+    if (error) {
+      if (error.code === "ORGANIZATION_SLUG_ALREADY_TAKEN") {
+        form.setError("slug", {
+          message: "This slug is already taken.",
+        });
+        return;
+      }
+      toast.error("Couldn't create organization", {
+        description: error.message,
+      });
+      return;
+    }
+
     toast.success("Organization created!", { description: data.name });
-    console.log("Organization created!", data.name);
+    form.reset();
+    onSuccess();
   }
 
   return (
-    <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-      <FieldGroup className="flex flex-col gap-4">
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <FieldGroup>
         <Controller
           name="name"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
-              <FieldLabel className="text-muted-foreground font-normal">
+              <FieldLabel htmlFor="name" className="text-muted-foreground">
                 Name
               </FieldLabel>
               <Input
@@ -110,9 +127,14 @@ function CreateOrganizationForm() {
                 id="name"
                 type="text"
                 placeholder="Acme Corp."
+                autoFocus
+                className="rounded-md"
                 aria-invalid={fieldState.invalid}
+                aria-describedby={fieldState.invalid ? "name-error" : undefined}
               />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              {fieldState.invalid && (
+                <FieldError id="name-error" errors={[fieldState.error]} />
+              )}
             </Field>
           )}
         />
@@ -121,7 +143,7 @@ function CreateOrganizationForm() {
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid} className="gap-1">
-              <FieldLabel className="text-muted-foreground font-normal">
+              <FieldLabel htmlFor="slug" className="text-muted-foreground">
                 Slug
               </FieldLabel>
               <Input
@@ -129,7 +151,9 @@ function CreateOrganizationForm() {
                 id="slug"
                 type="text"
                 placeholder="acme"
+                className="rounded-md"
                 aria-invalid={fieldState.invalid}
+                aria-describedby={fieldState.invalid ? "slug-error" : undefined}
                 onChange={(e) => {
                   field.onChange(e);
                   if (e.target.value === "") {
@@ -139,15 +163,29 @@ function CreateOrganizationForm() {
                   }
                 }}
               />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              {fieldState.invalid && (
+                <FieldError id="slug-error" errors={[fieldState.error]} />
+              )}
             </Field>
           )}
         />
       </FieldGroup>
-      <Button className="w-full" type="submit">
-        <PlusCircle />
-        Create Organization
-      </Button>
+      <div className="mt-6 flex justify-end gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={onCancel}
+          disabled={form.formState.isSubmitting}
+        >
+          Cancel
+        </Button>
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting && (
+            <LoaderCircle aria-hidden="true" className="animate-spin" />
+          )}
+          Create
+        </Button>
+      </div>
     </form>
   );
 }
@@ -166,19 +204,17 @@ export function CreateOrganizationDialogDrawer({
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-[375px] p-4 bg-linear-to-br from-background to-card">
           <DialogHeader>
-            <DialogTitle>Create Organization</DialogTitle>
+            <DialogTitle className="font-sans text-lg font-semibold tracking-tight">
+              Create Organization
+            </DialogTitle>
             <DialogDescription>
               Set up a new organization for your workspace.
             </DialogDescription>
           </DialogHeader>
-          <CreateOrganizationForm />
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline" className="w-full">
-                Cancel
-              </Button>
-            </DialogClose>
-          </DialogFooter>
+          <CreateOrganizationForm
+            onSuccess={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+          />
         </DialogContent>
       </Dialog>
     );
@@ -189,19 +225,19 @@ export function CreateOrganizationDialogDrawer({
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Create Organization</DrawerTitle>
+          <DrawerTitle className="font-sans text-lg font-semibold tracking-tight">
+            Create Organization
+          </DrawerTitle>
           <DrawerDescription>
             Set up a new organization for your workspace.
           </DrawerDescription>
         </DrawerHeader>
-        <div className="px-4">
-          <CreateOrganizationForm />
+        <div className="px-4 pb-4">
+          <CreateOrganizationForm
+            onSuccess={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+          />
         </div>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
